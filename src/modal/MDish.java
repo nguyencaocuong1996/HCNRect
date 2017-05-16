@@ -11,21 +11,21 @@ import database.Database;
  *
  * @author WINDNCC
  */
-public class Dish extends Model{
+public class MDish extends Model{
     protected static final String TABLE_NAME = "mon_an";
     private int id;
     private String name;
     private Float price;
     private String imageUrl;
 
-    public Dish(int id, String name, Float price, String imageUrl) {
+    public MDish(int id, String name, Float price, String imageUrl) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.imageUrl = imageUrl;
     }
     
-    public Dish(String name, Float price, String imageUrl) {
+    public MDish(String name, Float price, String imageUrl) {
         this.name = name;
         this.price = price;
         this.imageUrl = imageUrl;

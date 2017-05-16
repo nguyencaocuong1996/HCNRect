@@ -7,14 +7,20 @@ package database;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modal.InsertData;
+import view.ViewData;
+import view.ViewItem;
 
 /**
  *
@@ -41,7 +47,10 @@ public class Database {
               USER = "windncc_cuongdt";
               PASS = "db123456";
 //            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+            TimeZone timeZone = TimeZone.getTimeZone("Asia/Saigon");
+            TimeZone.setDefault(timeZone);
             conn = (Connection) DriverManager.getConnection(URL, USER, PASS);
+            
         } catch(SQLException ex) {
              Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -72,6 +81,7 @@ public class Database {
         try {
             Statement stmt = (Statement) con.createStatement();
             int row = stmt.executeUpdate(sql);
+            closeConnection();
         } catch (SQLException e) {
             System.out.println(e.toString());
         }
@@ -97,6 +107,7 @@ public static void update(String tableName, HashMap updateData, String condition
         try {
             Statement stmt = (Statement) con.createStatement();
             stmt.executeUpdate(sql);
+            closeConnection();
         } catch (SQLException e) {
             System.out.println(e.toString());
         }
@@ -109,8 +120,31 @@ public static void delete(String tableName, String conditionStr){
         try {
             Statement stmt = (Statement) con.createStatement();
             stmt.executeUpdate(sql);
+            closeConnection();
         } catch (SQLException e) {
             System.out.println(e.toString());
+        }
+}
+
+public static ViewData viewSelect(String query) throws SQLException{
+        ViewData resViewData = new ViewData();
+        Connection con = Database.getConnection();
+        try {
+            Statement stmt = (Statement) con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int columnCount = rsmd.getColumnCount();
+            while(rs.next()){
+                ViewItem item = new ViewItem();
+                for (int i = 1; i <= columnCount; i++) {
+                    item.put(rsmd.getColumnName(i), rs.getObject(rsmd.getColumnName(i)));
+                }
+                resViewData.add(item);
+            }
+            closeConnection();
+            return resViewData;
+        } catch (SQLException e) {
+            throw e;
         }
 }
     

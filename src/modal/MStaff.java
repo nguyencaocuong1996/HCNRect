@@ -12,7 +12,7 @@ import java.util.HashMap;
  *
  * @author WINDNCC
  */
-public class Staff extends Model{
+public class MStaff extends Model{
     protected static final String TABLE_NAME = "nhan_vien";
     protected int id;
     protected String name;

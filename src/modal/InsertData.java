@@ -7,9 +7,9 @@ package modal;
 
 import database.Database;
 import java.util.HashMap;
-import modal.Dish;
-import modal.Material;
-import modal.Provider;
+import modal.MDish;
+import modal.MMaterial;
+import modal.MProvider;
 
 /**
  *
@@ -19,20 +19,20 @@ public class InsertData {
     protected HashMap data = new HashMap();
     protected String tableName;
 
-    public InsertData(Dish dish) {
+    public InsertData(MDish dish) {
         tableName = "mon_an";
         this.data.put("TenMA", dish.getName());
         this.data.put("GiaMA", dish.getPrice());
         this.data.put("DiaChiAnhMA", dish.getImageUrl());
     }
-    public InsertData(Material material) {
+    public InsertData(MMaterial material) {
         tableName = "nguyen_lieu";
         this.data.put("TenNL", material.getName());
         this.data.put("SoLuongTon", material.getInStock());
         this.data.put("DonVi", material.getUnit());
         this.data.put("MucToiThieu", material.getMinInStock());
     }
-    public InsertData(Provider provider) {
+    public InsertData(MProvider provider) {
         tableName = "nha_cung_cap";
         this.data.put("TenNCC", provider.getName());
         this.data.put("SDTNCC", provider.getPhone());

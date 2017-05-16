@@ -12,7 +12,10 @@ import java.awt.Dimension;
  *
  * @author WINDNCC
  */
-abstract class Config {
-    public static final Dimension MAIN_FRAME_SIZE = new Dimension(1024, 600);
+abstract class SizeConst {
+    public static final Dimension MAIN_FRAME_SIZE = new Dimension(1024, 640);
     public static final Dimension LOGIN_FRAME_SIZE = new Dimension(800, 600);
+    public static final Dimension MF_SIDE_BAR_SIZE = new Dimension(250, 600);
+    public static final Dimension MF_HEADER_SIZE = new Dimension(800, 80);
+    public static final Dimension MF_CONTENT_SIZE = new Dimension(800, 600);
 }

@@ -6,18 +6,16 @@
 package view;
 
 import java.util.ArrayList;
-import modal.MCustomer;
-import modal.MDish;
-import modal.MStaff;
+import java.util.HashMap;
 
 /**
  *
  * @author WINDNCC
  */
-public class VBill {
-    protected int billId;
-    protected MCustomer customer;
-    protected MStaff staff;
-    protected ArrayList<MDish> listDish;
-    protected float invoiceValue;
+public abstract class View {
+    ViewData data;
+    
+    public ViewData getData() {
+        return data;
+    }
 }

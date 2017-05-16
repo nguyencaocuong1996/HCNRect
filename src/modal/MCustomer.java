@@ -9,7 +9,7 @@ package modal;
  *
  * @author WINDNCC
  */
-public class Customer extends Model{
+public class MCustomer extends Model{
 
     @Override
     void insert() {

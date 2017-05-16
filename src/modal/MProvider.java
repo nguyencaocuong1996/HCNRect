@@ -9,14 +9,14 @@ package modal;
  *
  * @author WINDNCC
  */
-public class Provider {
+public class MProvider {
     protected int id;
     protected String name;
     protected String phone;
     protected String address;
     protected String description;
 
-    public Provider(int id, String name, String phone, String address, String description) {
+    public MProvider(int id, String name, String phone, String address, String description) {
         this.id = id;
         this.name = name;
         this.phone = phone;
@@ -24,7 +24,7 @@ public class Provider {
         this.description = description;
     }
 
-    public Provider(String name, String phone, String address, String description) {
+    public MProvider(String name, String phone, String address, String description) {
         this.name = name;
         this.phone = phone;
         this.address = address;

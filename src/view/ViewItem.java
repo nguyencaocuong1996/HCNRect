@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package restaurant;
+package view;
 
-public class Restaurant {
-    
-    public static void main(String[] args) {
-        MainFrame mf = new MainFrame();
-        mf.setVisible(true);
-    }
+import java.util.HashMap;
+
+/**
+ *
+ * @author WINDNCC
+ */
+public class ViewItem extends HashMap<String, Object>{
     
 }

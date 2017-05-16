@@ -41,7 +41,6 @@ public class JPanelSidebar extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         JPanelSidebarHeader = new javax.swing.JPanel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -75,7 +74,6 @@ public class JPanelSidebar extends javax.swing.JPanel {
         add(JPanelSidebarHeader);
 
         jPanelSidebarContent.setBackground(new java.awt.Color(70, 92, 139));
-        jPanelSidebarContent.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Menu", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 24), new java.awt.Color(255, 255, 51))); // NOI18N
         jPanelSidebarContent.setMaximumSize(new java.awt.Dimension(250, 520));
         jPanelSidebarContent.setMinimumSize(new java.awt.Dimension(250, 520));
         jPanelSidebarContent.setPreferredSize(new java.awt.Dimension(250, 520));

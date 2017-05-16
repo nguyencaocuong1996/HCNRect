@@ -12,7 +12,7 @@ import java.util.HashMap;
  *
  * @author WINDNCC
  */
-public class Material extends Model{
+public class MMaterial extends Model{
     protected static final String TABLE_NAME = "nguyen_lieu";
     protected int id;
     protected String Name;
@@ -20,12 +20,12 @@ public class Material extends Model{
     protected String unit;
     protected float minInStock;
 
-    public Material() {
+    public MMaterial() {
     }
     
     
     
-    public Material(int id, String Name, float inStock, String unit, float minInStock) {
+    public MMaterial(int id, String Name, float inStock, String unit, float minInStock) {
         this.id = id;
         this.Name = Name;
         this.inStock = inStock;
@@ -33,7 +33,7 @@ public class Material extends Model{
         this.minInStock = minInStock;
     }
 
-    public Material(String Name, float inStock, String unit, float minInStock) {
+    public MMaterial(String Name, float inStock, String unit, float minInStock) {
         this.Name = Name;
         this.inStock = inStock;
         this.unit = unit;

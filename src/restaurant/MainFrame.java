@@ -7,6 +7,7 @@ package restaurant;
 
 import restaurant.panel.menu.JPanelMenuItem;
 import assets.images.icons.IconResources;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Iterator;
 import restaurant.panel.JPanelSidebar;
@@ -28,6 +29,12 @@ public class MainFrame extends javax.swing.JFrame {
     private void initSidebarComponents(){
         
     }
+
+    @Override
+    public Dimension getPreferredSize() {
+        return SizeConst.MAIN_FRAME_SIZE;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,13 +50,13 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(102, 255, 102));
-        setMaximumSize(new java.awt.Dimension(1020, 637));
-        setMinimumSize(new java.awt.Dimension(1020, 637));
-        setPreferredSize(new java.awt.Dimension(1020, 637));
+        setMaximumSize(getPreferredSize());
+        setMinimumSize(getPreferredSize());
+        setPreferredSize(getPreferredSize());
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelHeader.setBackground(new java.awt.Color(147, 193, 120));
-        jPanelHeader.setPreferredSize(new java.awt.Dimension(770, 80));
+        jPanelHeader.setPreferredSize(SizeConst.MF_HEADER_SIZE);
 
         javax.swing.GroupLayout jPanelHeaderLayout = new javax.swing.GroupLayout(jPanelHeader);
         jPanelHeader.setLayout(jPanelHeaderLayout);
@@ -62,25 +69,16 @@ public class MainFrame extends javax.swing.JFrame {
             .addGap(0, 80, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanelHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 770, -1));
+        getContentPane().add(jPanelHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 770, 80));
 
         JPanelSideBar.setBackground(new java.awt.Color(51, 255, 0));
-        JPanelSideBar.setPreferredSize(new java.awt.Dimension(250, 600));
-
-        javax.swing.GroupLayout JPanelSideBarLayout = new javax.swing.GroupLayout(JPanelSideBar);
-        JPanelSideBar.setLayout(JPanelSideBarLayout);
-        JPanelSideBarLayout.setHorizontalGroup(
-            JPanelSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 250, Short.MAX_VALUE)
-        );
-        JPanelSideBarLayout.setVerticalGroup(
-            JPanelSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(JPanelSideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        JPanelSideBar.setMinimumSize(restaurant.SizeConst.MF_SIDE_BAR_SIZE);
+        JPanelSideBar.setPreferredSize(SizeConst.MF_SIDE_BAR_SIZE);
+        JPanelSideBar.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 0));
+        getContentPane().add(JPanelSideBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 250, 600));
 
         jPanelContent.setBackground(new java.awt.Color(204, 204, 255));
+        jPanelContent.setPreferredSize(SizeConst.MF_CONTENT_SIZE);
 
         javax.swing.GroupLayout jPanelContentLayout = new javax.swing.GroupLayout(jPanelContent);
         jPanelContent.setLayout(jPanelContentLayout);
@@ -128,7 +126,7 @@ public class MainFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainFrame().setVisible(true);
+                new MainFrame();
             }
         });
     }

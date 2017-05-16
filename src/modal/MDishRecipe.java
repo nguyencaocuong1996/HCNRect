@@ -12,14 +12,14 @@ import java.util.HashMap;
  *
  * @author WINDNCC
  */
-public class DishRecipe extends Model{
+public class MDishRecipe extends Model{
     protected static final String TABLE_NAME = "cong_thuc";
     protected String dishId;
     protected String materialId;
     protected String qty;
     protected String note;
 
-    public DishRecipe(String dishId, String materialId, String qty, String note) {
+    public MDishRecipe(String dishId, String materialId, String qty, String note) {
         this.dishId = dishId;
         this.materialId = materialId;
         this.qty = qty;

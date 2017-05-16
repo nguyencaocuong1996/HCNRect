@@ -6,18 +6,12 @@
 package view;
 
 import java.util.ArrayList;
-import modal.MCustomer;
-import modal.MDish;
-import modal.MStaff;
 
 /**
  *
  * @author WINDNCC
  */
-public class VBill {
-    protected int billId;
-    protected MCustomer customer;
-    protected MStaff staff;
-    protected ArrayList<MDish> listDish;
-    protected float invoiceValue;
+public class ViewData extends ArrayList<ViewItem>{
+
+
 }
