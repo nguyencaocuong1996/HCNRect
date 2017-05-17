@@ -17,7 +17,7 @@ public class JPanelTable extends javax.swing.JPanel {
     public JPanelTable(String tableName, int status) {
         initComponents();
         jLabelName.setText(tableName);
-        CFont.setStyleFont(jLabelName, 20, Color.black);
+        CFont.setStyleFont(jLabelName, 19, Color.black);
         jLabelIcon.setIcon(IconResources.TABLE_BLACK_X50);
         
         switch (status){

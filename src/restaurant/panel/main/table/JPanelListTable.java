@@ -111,18 +111,23 @@ public class JPanelListTable extends javax.swing.JPanel {
         jTableListPanel.setLayout(new java.awt.GridLayout(5, 7, 15, 0));
         jScrollPane1.setViewportView(jTableListPanel);
 
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         jComboboxFilterByStatus.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jComboboxFilterByStatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboboxFilterByStatusActionPerformed(evt);
             }
         });
+        jPanel1.add(jComboboxFilterByStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 156, 29));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Trạng thái");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 3, 94, 32));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Tìm theo tên");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
 
         jTextFieldFilterByName.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jTextFieldFilterByName.addActionListener(new java.awt.event.ActionListener() {
@@ -135,70 +140,28 @@ public class JPanelListTable extends javax.swing.JPanel {
                 jTextFieldFilterByNameKeyReleased(evt);
             }
         });
+        jPanel1.add(jTextFieldFilterByName, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 160, 29));
 
-        jLabel3.setText("Rảnh: ");
+        jLabel3.setText("Rảnh ");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, -1, -1));
 
         jLabelNumFreeTable.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabelNumFreeTable.setText("0");
+        jPanel1.add(jLabelNumFreeTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 40, -1, -1));
 
-        jLabel23.setText("Đang sử dụng: ");
+        jLabel23.setText("Đang sử dụng");
+        jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, -1, -1));
 
-        jLabel233.setText("Đã đặt trước: ");
+        jLabel233.setText("Đã đặt trước");
+        jPanel1.add(jLabel233, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, -1, -1));
 
         jLabelNumUsingTable.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabelNumUsingTable.setText("0");
+        jPanel1.add(jLabelNumUsingTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 40, -1, -1));
 
         jLabelNumOrderTable.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabelNumOrderTable.setText("0");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboboxFilterByStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextFieldFilterByName, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelNumFreeTable)
-                        .addGap(58, 58, 58)
-                        .addComponent(jLabel23)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelNumUsingTable)
-                        .addGap(76, 76, 76)
-                        .addComponent(jLabel233)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelNumOrderTable)))
-                .addContainerGap(229, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(3, 3, 3)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboboxFilterByStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldFilterByName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelNumFreeTable)
-                    .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelNumUsingTable)
-                    .addComponent(jLabel233, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelNumOrderTable)))
-        );
+        jPanel1.add(jLabelNumOrderTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 50, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -212,7 +175,7 @@ public class JPanelListTable extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
