@@ -49,9 +49,12 @@ public class VTable extends View{
     }
     
     public static VTable searchByName(String keyWord){
+        java.sql.Date curDate =  new java.sql.Date(System.currentTimeMillis());
+        String curDateString = curDate.toString();
+        System.out.println(curDateString);
         String sqlQuery = "SELECT b.MaBan, b.TenBan, ifnull(sum(ctdm.MaBan), 0) as SoMonDangDat, ifnull((pdb.MaBan), 0) as SoPhieuDatHomNayVaChuaToi FROM ban as b" +
                             " left join chi_tiet_dat_mon as ctdm on b.MaBan = ctdm.MaBan" +
-                            " left join phieu_dat_ban as pdb on pdb.MaBan = b.MaBan and date(pdb.NgayGioDatBan) = curdate() and pdb.TrangThai = 0" +
+                            " left join phieu_dat_ban as pdb on pdb.MaBan = b.MaBan and date(pdb.NgayGioDatBan) = '"+curDateString+"' and pdb.TrangThai = 0" +
                             " group by b.MaBan";
         System.out.println(sqlQuery);
         try{

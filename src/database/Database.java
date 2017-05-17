@@ -43,11 +43,11 @@ public class Database {
 //            URL = prop.getProperty("url");
 //            USER = prop.getProperty("user");
 //            PASS = prop.getProperty("password");
-              URL = "jdbc:mysql://johnny.heliohost.org:3306/windncc_restaurant?useUnicode=yes&characterEncoding=UTF-8";
+              URL = "jdbc:mysql://johnny.heliohost.org:3306/windncc_restaurant?useUnicode=yes&characterEncoding=UTF-8&serverTimezone=Asia/Saigon&useTimezone=yes";
               USER = "windncc_cuongdt";
               PASS = "db123456";
 //            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-            TimeZone timeZone = TimeZone.getTimeZone("Asia/Saigon");
+            TimeZone timeZone = TimeZone.getTimeZone("");
             TimeZone.setDefault(timeZone);
             conn = (Connection) DriverManager.getConnection(URL, USER, PASS);
             

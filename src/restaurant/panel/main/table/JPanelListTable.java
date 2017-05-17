@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import view.VTable;
+import view.ViewData;
 
 public class JPanelListTable extends javax.swing.JPanel {
 
@@ -11,15 +13,12 @@ public class JPanelListTable extends javax.swing.JPanel {
     
     public JPanelListTable() {
         initComponents();
-        JPanelTable jt = new JPanelTable("Bàn 1",0);
-        JPanelTable jt1 = new JPanelTable("Bàn 2",1);
-        JPanelTable jt2 = new JPanelTable("Bàn 3",2);
-        listTable.add(jt);
-        listTable.add(jt1);
-        listTable.add(jt2);
-        listTable.forEach((item)->{
-            jTableListPanel.add(item);
+        VTable vt = VTable.searchByName("k");
+        vt.getData().forEach((t) -> {
+            JPanelTable c = new JPanelTable((String)t.get("TenBan"), (Integer)t.get("TrangThai"));
+            jTableListPanel.add(c);
         });
+        
     }
     public static void main(String[] args) {
         JFrame jf = new JFrame();
