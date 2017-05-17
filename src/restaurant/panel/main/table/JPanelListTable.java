@@ -5,12 +5,13 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
 import view.VTable;
 
 public class JPanelListTable extends javax.swing.JPanel {
 
     public VTable listTable;
-    public GridLayout glMain = new GridLayout();
+    public FlowLayout mainLayout = new FlowLayout(FlowLayout.LEFT);
     public int numUsingTable = 0;
     public int numOrderTable = 0;
     public int numTable;
@@ -35,11 +36,19 @@ public class JPanelListTable extends javax.swing.JPanel {
         jLabelNumFreeTable.setText((numTable - numUsingTable - numOrderTable)+"");
         jLabelNumUsingTable.setText((numUsingTable)+"");
         jLabelNumOrderTable.setText((numOrderTable)+"");
-        glMain.setColumns(7);
-        glMain.setRows(numTable / 7 + 1);
-        glMain.setHgap(5);
-        glMain.setVgap(5);
-        jTableListPanel.setLayout(glMain);
+        int height = (numTable / 7 + 1) * 105 ;
+        jTableListPanel.setPreferredSize(new Dimension(760, height));
+        jTableListPanel.setLayout(mainLayout);
+        jScrollPane1.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+    }
+
+    @Override
+    public void revalidate() {
+        if(jTableListPanel != null){
+            int height = (numTable / 7 + 1) * 105 ;
+            jTableListPanel.setPreferredSize(new Dimension(760, height));
+        }
+        super.revalidate(); //To change body of generated methods, choose Tools | Templates.
     }
     
     public static void main(String[] args) {
