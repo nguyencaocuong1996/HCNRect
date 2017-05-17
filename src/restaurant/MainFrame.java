@@ -4,15 +4,9 @@
  * and open the template in the editor.
  */
 package restaurant;
-
-import restaurant.panel.menu.JPanelMenuItem;
-import assets.images.icons.IconResources;
 import java.awt.Dimension;
-import java.util.ArrayList;
-import java.util.Iterator;
 import restaurant.panel.JPanelSidebar;
-import restaurant.panel.menu.MouseListenerMenuItem;
-import restaurant.panel.menu.JPanelSubMenuItem;
+import restaurant.panel.main.table.JPanelListTable;
 /**
  *
  * @author WINDNCC
@@ -25,11 +19,8 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         JPanelSideBar.add(new JPanelSidebar());
+        jPanelContent.add(new JPanelListTable());
     }
-    private void initSidebarComponents(){
-        
-    }
-
     @Override
     public Dimension getPreferredSize() {
         return SizeConst.MAIN_FRAME_SIZE;
@@ -79,18 +70,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanelContent.setBackground(new java.awt.Color(204, 204, 255));
         jPanelContent.setPreferredSize(SizeConst.MF_CONTENT_SIZE);
-
-        javax.swing.GroupLayout jPanelContentLayout = new javax.swing.GroupLayout(jPanelContent);
-        jPanelContent.setLayout(jPanelContentLayout);
-        jPanelContentLayout.setHorizontalGroup(
-            jPanelContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 770, Short.MAX_VALUE)
-        );
-        jPanelContentLayout.setVerticalGroup(
-            jPanelContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 520, Short.MAX_VALUE)
-        );
-
+        jPanelContent.setLayout(new java.awt.GridLayout(1, 0, 15, 0));
         getContentPane().add(jPanelContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 770, 520));
 
         pack();
@@ -124,10 +104,8 @@ public class MainFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainFrame();
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new MainFrame().setVisible(true);
         });
     }
 

@@ -3,19 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
-
-import java.util.ArrayList;
-import java.util.HashMap;
+package core;
 
 /**
  *
  * @author WINDNCC
  */
-public abstract class View {
-    ViewData data;
-    protected static View instance;
-    public ViewData getData() {
-        return data;
-    }
+public class NewClass {
+    
 }

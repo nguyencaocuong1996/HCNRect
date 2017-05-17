@@ -17,7 +17,7 @@ import java.math.BigDecimal;
  * @author WINDNCC
  */
 public class VTable extends View{
-
+    ViewData filterData;
     public VTable() {
     }
 
@@ -45,7 +45,7 @@ public class VTable extends View{
             t.remove("SoMonDangDat");
             t.remove("SoPhieuDatHomNayVaChuaToi");
         });
-        System.out.println("aa");
+//        System.out.println("aa");
     }
     
     public static VTable searchByName(String keyWord){
@@ -54,9 +54,10 @@ public class VTable extends View{
         System.out.println(curDateString);
         String sqlQuery = "SELECT b.MaBan, b.TenBan, ifnull(sum(ctdm.MaBan), 0) as SoMonDangDat, ifnull((pdb.MaBan), 0) as SoPhieuDatHomNayVaChuaToi FROM ban as b" +
                             " left join chi_tiet_dat_mon as ctdm on b.MaBan = ctdm.MaBan" +
-                            " left join phieu_dat_ban as pdb on pdb.MaBan = b.MaBan and date(pdb.NgayGioDatBan) = '"+curDateString+"' and pdb.TrangThai = 0" +
-                            " group by b.MaBan";
-        System.out.println(sqlQuery);
+                            " left join phieu_dat_ban as pdb on pdb.MaBan = b.MaBan and date(pdb.NgayGioDatBan) = '"+curDateString+"' and pdb.TrangThai = 0";
+        if(!"".equals(keyWord)) sqlQuery += " WHERE b.TenBan LIKE '%" + keyWord + "%'";
+               sqlQuery +=  " group by b.MaBan";
+//        System.out.println(sqlQuery);
         try{
         return new VTable(Database.viewSelect(sqlQuery));
         } catch(SQLException e){
@@ -64,11 +65,50 @@ public class VTable extends View{
         }
         return new VTable();
     }
+    public static VTable getAllTable(){
+        return searchByName("");
+    }
     public static void main(String[] args) {
-        VTable vt = VTable.searchByName("bàn");
+        VTable vt = VTable.getAllTable();
         vt.data.forEach((ViewItem t) -> {
             String name = (String) t.get("TenBan");
             System.out.println(name);
         });
     }
+
+    public static VTable getInstance() {
+        if(instance == null){
+            instance = VTable.getAllTable();
+        }
+        return (VTable)instance;
+    }
+    
+    public VTable filterByStatus(int statusId){
+                filterData = (ViewData) data.clone();
+                if (statusId != 3) {
+                    filterData.removeIf((t) -> {
+                            ViewItem vi = (ViewItem) t;
+                            return ((int) vi.get("TrangThai")) != statusId;
+                        });
+                }
+        return this;
+    }
+    
+    public VTable filterByName(String name){
+                if(filterData == null){
+                    filterData = (ViewData) data.clone();
+                }
+                filterData.removeIf((t) -> {
+                    ViewItem vi = (ViewItem) t;
+                    String val = (String)vi.get("TenBan");
+                    return !val.contains(name);
+                });
+        return this;
+    }
+    public ViewData getFilterData() {
+        return filterData;
+    }
+    
+    
+    
 }

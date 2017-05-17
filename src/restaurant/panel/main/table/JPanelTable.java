@@ -5,6 +5,8 @@ import assets.images.icons.IconResources;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 
 public class JPanelTable extends javax.swing.JPanel {
@@ -23,8 +25,13 @@ public class JPanelTable extends javax.swing.JPanel {
             case 1: this.setBackground(Color.red); break;//bàn bận
             case 2: this.setBackground(Color.gray); break;//bàn đã đặt
         }
-        
-        
+        addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
+                    System.out.println(tableName);
+                }
+            });
     }
     public JPanelTable() {
         initComponents();
