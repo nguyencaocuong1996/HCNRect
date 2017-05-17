@@ -119,15 +119,15 @@ public class JPanelListTable extends javax.swing.JPanel {
                 jComboboxFilterByStatusActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboboxFilterByStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 156, 29));
+        jPanel1.add(jComboboxFilterByStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 160, 29));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Trạng thái");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 3, 94, 32));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 94, 32));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Tìm theo tên");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 110, -1));
 
         jTextFieldFilterByName.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jTextFieldFilterByName.addActionListener(new java.awt.event.ActionListener() {
@@ -140,14 +140,14 @@ public class JPanelListTable extends javax.swing.JPanel {
                 jTextFieldFilterByNameKeyReleased(evt);
             }
         });
-        jPanel1.add(jTextFieldFilterByName, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 160, 29));
+        jPanel1.add(jTextFieldFilterByName, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 160, 30));
 
         jLabel3.setText("Rảnh ");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, -1, -1));
 
         jLabelNumFreeTable.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabelNumFreeTable.setText("0");
-        jPanel1.add(jLabelNumFreeTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 40, -1, -1));
+        jPanel1.add(jLabelNumFreeTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, -1, -1));
 
         jLabel23.setText("Đang sử dụng");
         jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, -1, -1));
@@ -157,11 +157,11 @@ public class JPanelListTable extends javax.swing.JPanel {
 
         jLabelNumUsingTable.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabelNumUsingTable.setText("0");
-        jPanel1.add(jLabelNumUsingTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 40, -1, -1));
+        jPanel1.add(jLabelNumUsingTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 30, -1, -1));
 
         jLabelNumOrderTable.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabelNumOrderTable.setText("0");
-        jPanel1.add(jLabelNumOrderTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 50, -1, -1));
+        jPanel1.add(jLabelNumOrderTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 30, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -175,7 +175,7 @@ public class JPanelListTable extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

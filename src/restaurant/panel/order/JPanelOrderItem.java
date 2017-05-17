@@ -21,18 +21,18 @@ public class JPanelOrderItem extends javax.swing.JPanel {
 
     public JPanelOrderItem(String nameFood, int priceFood) {
         initComponents();
-        lblDown.setVisible(false);
-        txtQuantity.setHorizontalAlignment(SwingConstants.CENTER);
+        jLabelIconDown.setVisible(false);
+        jTextFieldQuantity.setHorizontalAlignment(SwingConstants.CENTER);
         
         this.nameFood = nameFood;
         this.priceFood = priceFood;
         
         
-        lblNameFood.setText(nameFood);
-        lblPriceFood.setText(priceFood + " VNĐ");
+        jLabelNameFood.setText(nameFood);
+        jLabelPriceFood.setText(priceFood + " VNĐ");
         
-        setStyleFont(lblNameFood, 24);
-        setStyleFont(lblPriceFood, 24);
+        setStyleFont(jLabelNameFood, 24);
+        setStyleFont(jLabelPriceFood, 24);
         
         
         
@@ -61,11 +61,11 @@ public class JPanelOrderItem extends javax.swing.JPanel {
     }
 
     public JLabel getLblPriceFood() {
-        return lblPriceFood;
+        return jLabelPriceFood;
     }
 
     public void setLblPriceFood(JLabel lblPriceFood) {
-        this.lblPriceFood = lblPriceFood;
+        this.jLabelPriceFood = lblPriceFood;
     }
     
     
@@ -74,64 +74,99 @@ public class JPanelOrderItem extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblNameFood = new javax.swing.JLabel();
-        txtQuantity = new javax.swing.JTextField();
-        lblUp = new javax.swing.JLabel();
-        lblDown = new javax.swing.JLabel();
-        lblPriceFood = new javax.swing.JLabel();
-        lblClose = new javax.swing.JLabel();
+        jLabelNameFood = new javax.swing.JLabel();
+        jTextFieldQuantity = new javax.swing.JTextField();
+        jLabelIconUp = new javax.swing.JLabel();
+        jLabelIconDown = new javax.swing.JLabel();
+        jLabelPriceFood = new javax.swing.JLabel();
+        jLabelIconClose = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 204));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setMinimumSize(new java.awt.Dimension(200, 50));
+        setPreferredSize(new java.awt.Dimension(200, 50));
 
-        lblNameFood.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        lblNameFood.setText("jLabel1");
-        add(lblNameFood, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 19, 170, 48));
+        jLabelNameFood.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabelNameFood.setText("jLabel1");
 
-        txtQuantity.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        txtQuantity.setText("1");
-        add(txtQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, 110, 50));
+        jTextFieldQuantity.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextFieldQuantity.setText("1");
 
-        lblUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_arrow_up_green_x32.png"))); // NOI18N
-        lblUp.setToolTipText("");
-        lblUp.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelIconUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_arrow_up_green_x32.png"))); // NOI18N
+        jLabelIconUp.setToolTipText("");
+        jLabelIconUp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblUpMouseClicked(evt);
+                jLabelIconUpMouseClicked(evt);
             }
         });
-        add(lblUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, -1, 50));
 
-        lblDown.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_arrow_down_red_x32.png"))); // NOI18N
-        lblDown.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelIconDown.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_arrow_down_red_x32.png"))); // NOI18N
+        jLabelIconDown.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblDownMouseClicked(evt);
+                jLabelIconDownMouseClicked(evt);
             }
         });
-        add(lblDown, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, -1, 50));
 
-        lblPriceFood.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        lblPriceFood.setText("jLabel4");
-        add(lblPriceFood, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 20, 160, 50));
+        jLabelPriceFood.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabelPriceFood.setText("jLabel4");
 
-        lblClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_close_red_x32.png"))); // NOI18N
-        lblClose.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelIconClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_close_red_x32.png"))); // NOI18N
+        jLabelIconClose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblCloseMouseClicked(evt);
+                jLabelIconCloseMouseClicked(evt);
             }
         });
-        add(lblClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 20, -1, -1));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabelNameFood, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelIconDown)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelIconUp)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelPriceFood, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelIconClose)
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabelNameFood)
+                                .addComponent(jLabelPriceFood))
+                            .addGap(17, 17, 17))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabelIconDown)
+                            .addGap(8, 8, 8)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelIconClose)
+                            .addComponent(jTextFieldQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelIconUp))
+                        .addContainerGap())))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lblUpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUpMouseClicked
-        lblDown.setVisible(true);
+    private void jLabelIconUpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelIconUpMouseClicked
+        jLabelIconDown.setVisible(true);
   
-        count = Integer.parseInt(txtQuantity.getText()) + 1;
+        count = Integer.parseInt(jTextFieldQuantity.getText()) + 1;
         price = getPriceFood() * count ;
         
-        txtQuantity.setText(count + "");
+        jTextFieldQuantity.setText(count + "");
         
         
-        lblPriceFood.setText(price + " VNĐ");
+        jLabelPriceFood.setText(price + " VNĐ");
         
 
         total += getPriceFood();
@@ -140,21 +175,21 @@ public class JPanelOrderItem extends javax.swing.JPanel {
         lblMustPay.setText(mustPay + " VNĐ");
         System.out.println("total: " + total);
         
-    }//GEN-LAST:event_lblUpMouseClicked
+    }//GEN-LAST:event_jLabelIconUpMouseClicked
 
-    private void lblDownMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDownMouseClicked
+    private void jLabelIconDownMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelIconDownMouseClicked
         
-        count = Integer.parseInt(txtQuantity.getText()) - 1;
+        count = Integer.parseInt(jTextFieldQuantity.getText()) - 1;
         price = getPriceFood() * count ;
         if( count == 1 )
         {
-            lblDown.setVisible(false);
+            jLabelIconDown.setVisible(false);
         }
         
         
-        txtQuantity.setText(count + "");
+        jTextFieldQuantity.setText(count + "");
         
-        lblPriceFood.setText(price + " VNĐ");
+        jLabelPriceFood.setText(price + " VNĐ");
         
 
         total -= getPriceFood();
@@ -163,23 +198,22 @@ public class JPanelOrderItem extends javax.swing.JPanel {
         lblTotal.setText(total + " VNĐ");
         lblMustPay.setText(mustPay + " VNĐ");
         
-        System.out.println("total: " + total);
-    }//GEN-LAST:event_lblDownMouseClicked
+        System.out.println("total: " + tjLabelNameFood        System.out.println("total: " + tjLabelNameFood}//GEN-LAST:event_jLabelIconDownMouseClicked
 
-    private void lblCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCloseMouseClicked
+    private void jLabelIconCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelIconCloseMouseClicked
         
        //this.setVisible(false);
        
        
-    }//GEN-LAST:event_lblCloseMouseClicked
+    }//GEN-LAST:event_jLabelIconCloseMouseClicked
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel lblClose;
-    private javax.swing.JLabel lblDown;
-    private javax.swing.JLabel lblNameFood;
-    private javax.swing.JLabel lblPriceFood;
-    private javax.swing.JLabel lblUp;
-    private javax.swing.JTextField txtQuantity;
+    private javax.swing.JLabel jLabelIconClose;
+    private javax.swing.JLabel jLabelIconDown;
+    private javax.swing.JLabel jLabelIconUp;
+    private javax.swing.JLabel jLabelNameFood;
+    private javax.swing.JLabel jLabelPriceFood;
+    private javax.swing.JTextField jTextFieldQuantity;
     // End of variables declaration//GEN-END:variables
 }
