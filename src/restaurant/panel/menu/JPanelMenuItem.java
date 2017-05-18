@@ -66,21 +66,18 @@ public class JPanelMenuItem extends javax.swing.JPanel {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setMinimumSize(new java.awt.Dimension(250, 50));
         setPreferredSize(new java.awt.Dimension(200, 50));
-        setLayout(new java.awt.GridLayout());
+        setLayout(new java.awt.GridLayout(1, 0));
 
         jPanel1.setBackground(new java.awt.Color(147, 193, 120));
-        jPanel1.setPreferredSize(new java.awt.Dimension(10, 10));
         jPanel1.setLayout(null);
         add(jPanel1);
 
-        jLabelIcon.setText("jLabel1");
         jLabelIcon.setMaximumSize(new java.awt.Dimension(32, 32));
         jLabelIcon.setMinimumSize(new java.awt.Dimension(32, 32));
         jLabelIcon.setPreferredSize(new java.awt.Dimension(32, 32));
         add(jLabelIcon);
 
         jLabelActionName.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelActionName.setText("jLabel3");
         add(jLabelActionName);
     }// </editor-fold>//GEN-END:initComponents
 
