@@ -5,9 +5,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 import javax.swing.JFrame;
-import restaurant.panel.main.table.JPanelTable;
 import view.VDish;
-import view.ViewData;
 import view.ViewItem;
 
 public class JPanelOrderDish extends javax.swing.JPanel {
@@ -25,26 +23,18 @@ public class JPanelOrderDish extends javax.swing.JPanel {
         numDish = listDish.getData().size();
         jPanelListOrderDish.setPreferredSize(new Dimension(430, 85 * (numDish / 2+1)));
         listDish.getData().forEach((ViewItem t) -> {
-            listOrderDishItem.add(new JPanelOrderDishItem((String) t.get("DiaChiAnhMA"), (String) t.get("TenMA"), (float) t.get("GiaMA")));
+            jPanelListOrderDish.add(new JPanelOrderDishItem((String) t.get("DiaChiAnhMA"), (String) t.get("TenMA"), (float) t.get("GiaMA")));
         });
-//        listOrderDishItem = new JPanelOrderDishItem[10];
-//        listOrderDishItem[0] = new JPanelOrderDishItem("salmon.jpeg", "sadasd á dá đá asd asd asd ", 103230);
-//        listOrderDishItem[1] = new JPanelOrderDishItem("Pasta.jpeg", "ten mon", 103230);
-//        listOrderDishItem[2] = new JPanelOrderDishItem("Pho.jpeg", "ten mon", 103230);
-//        listOrderDishItem[3] = new JPanelOrderDishItem("hamani.jpeg", "ten mon", 103230);
-//        listOrderDishItem[4] = new JPanelOrderDishItem("lemon-rice.jpg", "ten mon", 103230);
-//        listOrderDishItem[5] = new JPanelOrderDishItem("pasta-spaghetti.jpg", "ten mon", 103230);
-//        listOrderDishItem[6] = new JPanelOrderDishItem("sala-spinach.jpg", "ten mon", 103230);
-//        listOrderDishItem[7] = new JPanelOrderDishItem("salmon-teriyaki.jpg", "ten mon", 103230);
-//        listOrderDishItem[8] = new JPanelOrderDishItem("liquid-orange.jpeg", "ten mon", 103230);
-//        listOrderDishItem[9] = new JPanelOrderDishItem("tranmautritam.jpeg", "ten mon", 103230);
-        //jPanelListOrderDish.add(listOrderDishItem[0]);
-        listOrderDishItem.forEach((JPanelOrderDishItem t) -> {
-            jPanelListOrderDish.add(t);
-        });
-         
     }
-
+    public void filter(int menuId, String dishName){
+        if(listDish != null ) {
+            jPanelListOrderDish.removeAll();
+            listDish.filter(menuId, dishName);
+            listDish.getFilterData().forEach((t) -> {
+                jPanelListOrderDish.add(new JPanelOrderDishItem((String) t.get("DiaChiAnhMA"), (String) t.get("TenMA"), (float) t.get("GiaMA")));
+            });
+        }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

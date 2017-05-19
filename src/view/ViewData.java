@@ -14,8 +14,4 @@ import java.util.Comparator;
  */
 public class ViewData extends ArrayList<ViewItem>{
 
-    public ViewData filter(){
-        
-        return this;
-    }
 }

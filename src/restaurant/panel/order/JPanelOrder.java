@@ -1,16 +1,45 @@
 
 package restaurant.panel.order;
 
-import view.VDish;
+import core.ComboboxItem;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import javax.swing.JFrame;
 
 public class JPanelOrder extends javax.swing.JPanel {
-
+    JPanelOrderDish jpOrderDish;
     public JPanelOrder() {
         initComponents();
-        jPanelOrderDish.add(new JPanelOrderDish());
+        initCustomComponents();
+        jpOrderDish = new JPanelOrderDish();
+        jPanelOrderDish.add(jpOrderDish);
         jPanelOrderDetail.add(new JPanelOrderDetail());
+        
     }
-
+    private void initCustomComponents(){
+        ComboboxItem[] ci = new ComboboxItem[6];
+        ci[0] = new ComboboxItem("Tất cả", 0);
+        ci[1] = new ComboboxItem("Món chính", 2);
+        ci[2] = new ComboboxItem("Khai vị", 1);
+        ci[3] = new ComboboxItem("Tráng miệng", 3);
+        ci[4] = new ComboboxItem("Đồ uống", 4);
+        ci[5] = new ComboboxItem("Chưa phân loại", 5);
+        for (ComboboxItem comboboxItem : ci) {
+            jComboBoxSearchByMenu.addItem(comboboxItem);
+        }
+    }
+    public void filter(){
+        ComboboxItem ci = (ComboboxItem) jComboBoxSearchByMenu.getSelectedItem();
+        int filterMenuId = (Integer) ci.getValue();
+        String filterDishName = jTextFieldSearchByName.getText();
+        if (jpOrderDish != null) {
+            jpOrderDish.filter(filterMenuId, filterDishName);
+        }
+        
+System.out.println(filterMenuId + " " + filterDishName);
+        this.revalidate();
+        this.repaint();
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -18,8 +47,8 @@ public class JPanelOrder extends javax.swing.JPanel {
         jPanelHeader = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jTextFieldSearchByName = new javax.swing.JTextField();
+        jComboBoxSearchByMenu = new javax.swing.JComboBox<>();
         jPanelContent = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jPanelOrderDetail = new javax.swing.JPanel();
@@ -32,7 +61,17 @@ public class JPanelOrder extends javax.swing.JPanel {
 
         jLabel2.setText("Tìm theo tên");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jTextFieldSearchByName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldSearchByNameKeyReleased(evt);
+            }
+        });
+
+        jComboBoxSearchByMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxSearchByMenuActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelHeaderLayout = new javax.swing.GroupLayout(jPanelHeader);
         jPanelHeader.setLayout(jPanelHeaderLayout);
@@ -42,11 +81,11 @@ public class JPanelOrder extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(38, 38, 38)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboBoxSearchByMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(38, 38, 38)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldSearchByName, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(177, 177, 177))
         );
         jPanelHeaderLayout.setVerticalGroup(
@@ -55,9 +94,9 @@ public class JPanelOrder extends javax.swing.JPanel {
                 .addGap(24, 24, 24)
                 .addGroup(jPanelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxSearchByMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldSearchByName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
@@ -117,10 +156,24 @@ public class JPanelOrder extends javax.swing.JPanel {
                 .addComponent(jPanelContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+    public static void main(String[] args) {
+        JFrame jf = new JFrame();
+        jf.setLayout(new FlowLayout());
+        jf.setSize(new Dimension(1000,700));
+        jf.add(new JPanelOrder());
+        jf.setVisible(true);
+    }
+    private void jTextFieldSearchByNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldSearchByNameKeyReleased
+        filter();
+    }//GEN-LAST:event_jTextFieldSearchByNameKeyReleased
+
+    private void jComboBoxSearchByMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSearchByMenuActionPerformed
+        filter();
+    }//GEN-LAST:event_jComboBoxSearchByMenuActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<ComboboxItem> jComboBoxSearchByMenu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanelContent;
@@ -129,6 +182,6 @@ public class JPanelOrder extends javax.swing.JPanel {
     private javax.swing.JPanel jPanelOrderDetail;
     private javax.swing.JPanel jPanelOrderDish;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextFieldSearchByName;
     // End of variables declaration//GEN-END:variables
 }

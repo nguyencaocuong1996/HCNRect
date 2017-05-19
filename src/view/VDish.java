@@ -16,26 +16,35 @@ public class VDish extends View{
     
     public VDish(ViewData viewData) {
         data = viewData;
+        filterData = (ViewData) data.clone();
     }
     public VDish() {
     }
     public static VDish getAllDish(){
-        return searchByName("");
-        
-    }
-    public static VDish searchByName(String keyWord){
         java.sql.Date curDate =  new java.sql.Date(System.currentTimeMillis());
         String curDateString = curDate.toString();
         System.out.println(curDateString);
-        String sqlQuery = "SELECT ma.TenMA, ma.DiaChiAnhMA, ma.GiaMA FROM windncc_restaurant.mon_an as ma";
-        if(!"".equals(keyWord)) sqlQuery += " WHERE ma.TenMA LIKE '%" + keyWord + "%'";
+        String sqlQuery = "SELECT ma.MaMA, ma.TenMA, ma.DiaChiAnhMA, ma.GiaMA, ma.MaTD FROM mon_an as ma";
 //        System.out.println(sqlQuery);
         try{
-            ViewData aa = Database.viewSelect(sqlQuery);
-        return new VDish(aa);
+            return new VDish(Database.viewSelect(sqlQuery));
         } catch(SQLException e){
             e.printStackTrace();
         }
         return new VDish();
+    }
+    public VDish filter(int menuId, String dishName){
+        filter(new FilterView(){
+            @Override
+            public boolean filter(ViewItem o) {
+                Long viMenuId = (Long) o.get("MaTD");
+                String viDishName = (String) o.get("TenMA");
+                if("".equals(viDishName)) return viMenuId == menuId;
+                if(menuId == 0) return viDishName.contains(dishName);
+                return viMenuId == menuId && viDishName.contains(dishName);
+            }
+            
+        });
+        return this;
     }
 }

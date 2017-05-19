@@ -120,9 +120,6 @@ public class VTable extends View{
         
         return this;
     }
-    public ViewData getFilterData() {
-        return this.filterData;
-    }
     
     
     
