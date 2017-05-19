@@ -7,6 +7,7 @@ package restaurant;
 import java.awt.Dimension;
 import restaurant.panel.JPanelSidebar;
 import restaurant.panel.main.table.JPanelListTable;
+import restaurant.panel.order.JPanelListTableForOrder;
 import restaurant.panel.order.JPanelOrder;
 /**
  *
@@ -15,14 +16,14 @@ import restaurant.panel.order.JPanelOrder;
 public class MainFrame extends javax.swing.JFrame {
 
     JPanelSidebar sidebar = new JPanelSidebar();
-    JPanelListTable listTable;
+    JPanelListTableForOrder listTable;
     JPanelOrder order = JPanelOrder.getInstance();
     public MainFrame() {
         initComponents();
         JPanelSideBar.add(sidebar);
-//        listTable = new JPanelListTable();
-//        jPanelContent.add(listTable);
-        jPanelContent.add(order);
+        listTable = new JPanelListTableForOrder();
+        jPanelContent.add(listTable);
+//        jPanelContent.add(order);
 //        jPanelContent.remove(listTable);
     }
     @Override

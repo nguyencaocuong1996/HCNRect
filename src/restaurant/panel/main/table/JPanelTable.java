@@ -13,9 +13,10 @@ public class JPanelTable extends javax.swing.JPanel {
     
     protected int id;
     protected int status;
-    
-    public JPanelTable(String tableName, int status) {
+    protected MouseAdapter mouseAdapter;
+    public JPanelTable(int tableId, String tableName, int status) {
         initComponents();
+        this.id = tableId;
         jLabelName.setText(tableName);
         CFont.setStyleFont(jLabelName, 19, Color.black);
         jLabelIcon.setIcon(IconResources.TABLE_BLACK_X50);
@@ -25,13 +26,6 @@ public class JPanelTable extends javax.swing.JPanel {
             case 1: this.setBackground(Color.red); break;//bàn bận
             case 2: this.setBackground(Color.gray); break;//bàn đã đặt
         }
-        addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
-                    System.out.println(tableName);
-                }
-            });
     }
     public JPanelTable() {
         initComponents();
@@ -52,9 +46,9 @@ public class JPanelTable extends javax.swing.JPanel {
         JFrame jf = new JFrame();
         jf.setLayout(new FlowLayout());
         jf.setSize(new Dimension(500,500));
-        JPanelTable jt = new JPanelTable("Bàn 1",0);
-        JPanelTable jt1 = new JPanelTable("Bàn 2",1);
-        JPanelTable jt2 = new JPanelTable("Bàn 3",2);
+        JPanelTable jt = new JPanelTable(1,"Bàn 1",0);
+        JPanelTable jt1 = new JPanelTable(2,"Bàn 2",1);
+        JPanelTable jt2 = new JPanelTable(3,"Bàn 3",2);
         
         jf.add(jt);
         jf.add(jt1);

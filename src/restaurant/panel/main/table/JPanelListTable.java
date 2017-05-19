@@ -4,6 +4,8 @@ import core.ComboboxItem;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import view.VTable;
@@ -11,6 +13,7 @@ import view.VTable;
 public class JPanelListTable extends javax.swing.JPanel {
 
     public VTable listTable;
+    public HashMap<Integer, JPanelTable> listJPanelTable = new HashMap<>();
     public FlowLayout mainLayout = new FlowLayout(FlowLayout.LEFT);
     public int numUsingTable = 0;
     public int numOrderTable = 0;
@@ -37,16 +40,16 @@ public class JPanelListTable extends javax.swing.JPanel {
         jLabelNumUsingTable.setText((numUsingTable)+"");
         jLabelNumOrderTable.setText((numOrderTable)+"");
         int height = (numTable / 7 + 1) * 105 ;
-        jTableListPanel.setPreferredSize(new Dimension(760, height));
-        jTableListPanel.setLayout(mainLayout);
+        jPanelListTable.setPreferredSize(new Dimension(760, height));
+        jPanelListTable.setLayout(mainLayout);
         jScrollPane1.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
     }
 
     @Override
     public void revalidate() {
-        if(jTableListPanel != null){
+        if(jPanelListTable != null){
             int height = (numTable / 7 + 1) * 105 ;
-            jTableListPanel.setPreferredSize(new Dimension(760, height));
+            jPanelListTable.setPreferredSize(new Dimension(760, height));
         }
         super.revalidate(); //To change body of generated methods, choose Tools | Templates.
     }
@@ -68,16 +71,17 @@ public class JPanelListTable extends javax.swing.JPanel {
             jComboboxFilterByStatus.addItem(comboboxItem);
         }
     }
-    private void filter(){
+    protected void filter(){
         ComboboxItem ci = (ComboboxItem) jComboboxFilterByStatus.getSelectedItem();
         int statusId = (Integer) ci.getValue();
-        
         String filterName = jTextFieldFilterByName.getText();
         listTable = VTable.getInstance().filterByStatusAndName(statusId, filterName);
-        jTableListPanel.removeAll();
+        jPanelListTable.removeAll();
         listTable.getFilterData().forEach((t) -> {
-            JPanelTable c = new JPanelTable((String)t.get("TenBan"), (Integer)t.get("TrangThai"));
-            jTableListPanel.add(c);
+            Integer id = (Integer) t.get("MaBan");
+            if (listJPanelTable.size() > 0) {
+                jPanelListTable.add(listJPanelTable.get(id));
+            }
         });
         this.revalidate();
         this.repaint();
@@ -87,7 +91,7 @@ public class JPanelListTable extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableListPanel = new javax.swing.JPanel();
+        jPanelListTable = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jComboboxFilterByStatus = new javax.swing.JComboBox<ComboboxItem>();
         jLabel2 = new javax.swing.JLabel();
@@ -102,8 +106,8 @@ public class JPanelListTable extends javax.swing.JPanel {
 
         setMinimumSize(new java.awt.Dimension(800, 500));
 
-        jTableListPanel.setLayout(new java.awt.GridLayout(5, 7, 15, 0));
-        jScrollPane1.setViewportView(jTableListPanel);
+        jPanelListTable.setLayout(new java.awt.GridLayout(5, 7, 15, 0));
+        jScrollPane1.setViewportView(jPanelListTable);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -197,8 +201,8 @@ public class JPanelListTable extends javax.swing.JPanel {
     private javax.swing.JLabel jLabelNumOrderTable;
     private javax.swing.JLabel jLabelNumUsingTable;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanelListTable;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JPanel jTableListPanel;
     private javax.swing.JTextField jTextFieldFilterByName;
     // End of variables declaration//GEN-END:variables
 }
