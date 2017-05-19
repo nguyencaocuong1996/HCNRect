@@ -23,6 +23,6 @@ public abstract class IconResources {
     public static final ImageIcon ARROW_DOWN_X32 = new ImageIcon(IconResources.class.getResource("icon_arrow_down_red_x32.png"));
     public static final ImageIcon ARROW_UP_X32 = new ImageIcon(IconResources.class.getResource("icon_arrow_up_green_x32.png"));
     public static final ImageIcon CLOSE_X32 = new ImageIcon(IconResources.class.getResource("icon_close_red_x32.png"));
-    //public static final ImageIcon DISH_SALMON = new ImageIcon(IconResources.class.getResource("salmon.jpeg"));
     
+    public static final ImageIcon PLUS_X24 = new ImageIcon(IconResources.class.getResource("icon_plus_white_x24.png"));
 }

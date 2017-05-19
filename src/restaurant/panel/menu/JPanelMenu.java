@@ -16,6 +16,7 @@ public class JPanelMenu extends javax.swing.JPanel {
             JPanelMenuItem menuItemCoins = MenuItemFactory.get("coins");
             JPanelMenuItem menuItemReport = MenuItemFactory.get("report");
             JPanelMenuItem menuItemStaff = MenuItemFactory.get("staff");
+            menuItemOrder.setActive(true);
             jPanelMenuContent.add(menuItemOrder);
             jPanelMenuContent.add(menuItemPackage);
             jPanelMenuContent.add(menuItemCoins);

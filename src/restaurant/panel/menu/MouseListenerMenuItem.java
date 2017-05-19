@@ -29,5 +29,20 @@ public class MouseListenerMenuItem extends MouseAdapter{
         super.mouseClicked(e);
         System.out.println("Menu Item clicked!");
     }
+
+    @Override
+    public void mouseEntered(MouseEvent me) {
+        super.mouseEntered(me); //To change body of generated methods, choose Tools | Templates.
+        JPanelMenuItem jp = (JPanelMenuItem) me.getSource();
+        jp.setActive(true);
+    }
+
+    @Override
+    public void mouseExited(MouseEvent me) {
+        super.mouseExited(me); //To change body of generated methods, choose Tools | Templates.
+        JPanelMenuItem jp = (JPanelMenuItem) me.getSource();
+        jp.setActive(false);
+    }
+    
     
 }
