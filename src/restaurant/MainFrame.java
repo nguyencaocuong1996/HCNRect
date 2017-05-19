@@ -7,19 +7,23 @@ package restaurant;
 import java.awt.Dimension;
 import restaurant.panel.JPanelSidebar;
 import restaurant.panel.main.table.JPanelListTable;
+import restaurant.panel.order.JPanelOrder;
 /**
  *
  * @author WINDNCC
  */
 public class MainFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MainFrame
-     */
+    JPanelSidebar sidebar = new JPanelSidebar();
+    JPanelListTable listTable;
+    JPanelOrder order = new JPanelOrder();
     public MainFrame() {
         initComponents();
-        JPanelSideBar.add(new JPanelSidebar());
-        jPanelContent.add(new JPanelListTable());
+        JPanelSideBar.add(sidebar);
+        listTable = new JPanelListTable();
+        jPanelContent.add(listTable);
+        jPanelContent.add(order);
+        jPanelContent.remove(listTable);
     }
     @Override
     public Dimension getPreferredSize() {
