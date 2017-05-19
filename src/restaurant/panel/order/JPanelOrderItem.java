@@ -1,20 +1,69 @@
 
 package restaurant.panel.order;
 
+import assets.images.icons.IconResources;
+import java.awt.Component;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-
-
-
+import javax.swing.JPanel;
 
 public class JPanelOrderItem extends javax.swing.JPanel {
-    private int totalPrice = 0;
+    protected String dishName = "";
+    protected int quantity = 1;
+    protected float price;
+
+    public JPanelOrderItem(String dishName, int quantity, float price) {
+        initComponents();
+        this.dishName = dishName;
+        this.quantity = quantity;
+        this.price = price;
+        jLabelDishName.setText(this.dishName);
+        jTextFieldQty.setText(this.quantity + "");
+        jLabelTotalPrice.setText(quantity * price + "");
+    }
+
+    public String getDishName() {
+        return dishName;
+    }
+
+    public void setDishName(String dishName) {
+        this.dishName = dishName;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+    
+    public float getTotalPrice(){
+        return price * quantity;
+    }
+    public void setTotalPrice(){
+        jLabelTotalPrice.setText(getTotalPrice() + "");
+    }
+    public void setQuantity(int quantity) {
+        jTextFieldQty.setText(quantity+"");
+        this.quantity = quantity;
+        if(this.quantity == 1){
+            jLabelDown.setVisible(false);
+        } else {
+            jLabelDown.setVisible(true);
+        }
+        setTotalPrice();
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+    
     public JPanelOrderItem() {
         initComponents();
     }
-
+    
     public void setLblPriceFood(JLabel lblPriceFood) {
-        this.lblPriceFood = lblPriceFood;
+        this.jLabelTotalPrice = lblPriceFood;
     }
     
     
@@ -23,77 +72,138 @@ public class JPanelOrderItem extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblNameFood = new javax.swing.JLabel();
-        txtQuantity = new javax.swing.JTextField();
-        lblUp = new javax.swing.JLabel();
-        lblDown = new javax.swing.JLabel();
-        lblPriceFood = new javax.swing.JLabel();
-        lblClose = new javax.swing.JLabel();
+        jLabelDishName = new javax.swing.JLabel();
+        jTextFieldQty = new javax.swing.JTextField();
+        jLabelUp = new javax.swing.JLabel();
+        jLabelDown = new javax.swing.JLabel();
+        jLabelTotalPrice = new javax.swing.JLabel();
+        jLabelClose = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 204));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblNameFood.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        lblNameFood.setText("jLabel1");
-        add(lblNameFood, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 130, 30));
+        jLabelDishName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabelDishName.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabelDishName.setText("<html><p>Thịt kho tô chiên nước mắm</p></html>");
+        jLabelDishName.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabelDishName.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        add(jLabelDishName, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 30));
 
-        txtQuantity.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        txtQuantity.setText("1");
-        add(txtQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 60, 30));
-
-        lblUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_arrow_up_green_x32.png"))); // NOI18N
-        lblUp.setToolTipText("");
-        lblUp.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblUpMouseClicked(evt);
+        jTextFieldQty.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        jTextFieldQty.setText("1");
+        jTextFieldQty.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldQtyKeyReleased(evt);
             }
         });
-        add(lblUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, -1, 30));
+        add(jTextFieldQty, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 30, 30));
 
-        lblDown.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_arrow_down_red_x32.png"))); // NOI18N
-        lblDown.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelUp.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_arrow_up_green_x24.png"))); // NOI18N
+        jLabelUp.setToolTipText("");
+        jLabelUp.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblDownMouseClicked(evt);
+                jLabelUpMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabelUpMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabelUpMouseExited(evt);
             }
         });
-        add(lblDown, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, -1, 30));
+        add(jLabelUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 30, 30));
 
-        lblPriceFood.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        lblPriceFood.setText("jLabel4");
-        add(lblPriceFood, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, 110, 30));
-
-        lblClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_close_red_x32.png"))); // NOI18N
-        lblClose.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelDown.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelDown.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_arrow_down_red_x24.png"))); // NOI18N
+        jLabelDown.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jLabelDown.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblCloseMouseClicked(evt);
+                jLabelDownMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabelDownMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabelDownMouseExited(evt);
             }
         });
-        add(lblClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 20, -1, -1));
+        add(jLabelDown, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 30, 30));
+
+        jLabelTotalPrice.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        jLabelTotalPrice.setText("1000000");
+        add(jLabelTotalPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 90, 30));
+
+        jLabelClose.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_close_red_x24.png"))); // NOI18N
+        jLabelClose.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelCloseMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabelCloseMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabelCloseMouseExited(evt);
+            }
+        });
+        add(jLabelClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 30, 30));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lblUpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblUpMouseClicked
+    private void jLabelUpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpMouseClicked
+        setQuantity(getQuantity() + 1);
+    }//GEN-LAST:event_jLabelUpMouseClicked
 
-    }//GEN-LAST:event_lblUpMouseClicked
+    private void jLabelDownMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDownMouseClicked
+        setQuantity(getQuantity() - 1);
+    }//GEN-LAST:event_jLabelDownMouseClicked
 
-    private void lblDownMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDownMouseClicked
-        
-       
-    }//GEN-LAST:event_lblDownMouseClicked
+    private void jLabelCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCloseMouseClicked
+        JLabel jlClose = (JLabel) evt.getSource();
+        JPanelOrderItem jpOI = (JPanelOrderItem) jlClose.getParent();
+        JPanelOrderDetail jpOD = (JPanelOrderDetail) jpOI.getParent().getParent().getParent().getParent();
+        JPanel jplistoi = jpOD.getjPanelListOrderItem();
+        jpOD.listOrdering.remove(jpOI);
+        jplistoi.remove(jpOI);
+        jplistoi.revalidate();
+        jplistoi.repaint();
+    }//GEN-LAST:event_jLabelCloseMouseClicked
 
-    private void lblCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCloseMouseClicked
-        
-       //this.setVisible(false);
-       
-       
-    }//GEN-LAST:event_lblCloseMouseClicked
+    private void jTextFieldQtyKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldQtyKeyReleased
+        setQuantity(new Integer(jTextFieldQty.getText()));
+    }//GEN-LAST:event_jTextFieldQtyKeyReleased
+
+    private void jLabelUpMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpMouseEntered
+        jLabelUp.setIcon(IconResources.ARROW_UP_FILL_X24);
+    }//GEN-LAST:event_jLabelUpMouseEntered
+
+    private void jLabelUpMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpMouseExited
+        jLabelUp.setIcon(IconResources.ARROW_UP_X24);
+    }//GEN-LAST:event_jLabelUpMouseExited
+
+    private void jLabelDownMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDownMouseEntered
+        jLabelDown.setIcon(IconResources.ARROW_DOWN_FILL_X24);
+    }//GEN-LAST:event_jLabelDownMouseEntered
+
+    private void jLabelDownMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDownMouseExited
+        jLabelDown.setIcon(IconResources.ARROW_DOWN_X24);
+    }//GEN-LAST:event_jLabelDownMouseExited
+
+    private void jLabelCloseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCloseMouseEntered
+        jLabelClose.setIcon(IconResources.CLOSE_FILL_X24);
+    }//GEN-LAST:event_jLabelCloseMouseEntered
+
+    private void jLabelCloseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCloseMouseExited
+        jLabelClose.setIcon(IconResources.CLOSE_X24);
+    }//GEN-LAST:event_jLabelCloseMouseExited
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel lblClose;
-    private javax.swing.JLabel lblDown;
-    private javax.swing.JLabel lblNameFood;
-    private javax.swing.JLabel lblPriceFood;
-    private javax.swing.JLabel lblUp;
-    private javax.swing.JTextField txtQuantity;
+    private javax.swing.JLabel jLabelClose;
+    private javax.swing.JLabel jLabelDishName;
+    private javax.swing.JLabel jLabelDown;
+    private javax.swing.JLabel jLabelTotalPrice;
+    private javax.swing.JLabel jLabelUp;
+    private javax.swing.JTextField jTextFieldQty;
     // End of variables declaration//GEN-END:variables
 }
