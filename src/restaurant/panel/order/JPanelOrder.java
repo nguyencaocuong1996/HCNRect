@@ -35,8 +35,6 @@ public class JPanelOrder extends javax.swing.JPanel {
         if (jpOrderDish != null) {
             jpOrderDish.filter(filterMenuId, filterDishName);
         }
-        
-System.out.println(filterMenuId + " " + filterDishName);
         this.revalidate();
         this.repaint();
     }
