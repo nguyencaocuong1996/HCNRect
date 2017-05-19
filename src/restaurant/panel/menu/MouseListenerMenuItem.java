@@ -26,7 +26,7 @@ public class MouseListenerMenuItem extends MouseAdapter{
     
     @Override
     public void mouseClicked(MouseEvent e) {
-        super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
+        super.mouseClicked(e);
         System.out.println("Menu Item clicked!");
     }
     

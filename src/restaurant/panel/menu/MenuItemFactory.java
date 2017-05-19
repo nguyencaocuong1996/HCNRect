@@ -20,14 +20,14 @@ public class MenuItemFactory {
                 jpi = new JPanelMenuItem("Đặt bàn", IconResources.ORDER);
                 break;
             case "package":
-                jpi =  new JPanelMenuItem("Hàng hóa", IconResources.PACKAGE);
+                jpi =  new JPanelMenuItem("Hàng hóa", IconResources.PACKAGE, true);
                 jpi.addMouseListener(new MouseListenerMenuItem(jpi));
                 break;
             case "coins":
-                jpi = new JPanelMenuItem("Giao dịch", IconResources.COINS);
+                jpi = new JPanelMenuItem("Giao dịch", IconResources.COINS, true);
                 break;
             case "report":
-                jpi =  new JPanelMenuItem("Báo cáo", IconResources.REPORT);
+                jpi =  new JPanelMenuItem("Báo cáo", IconResources.REPORT, true);
                 break;
             case "staff":
                 jpi = new JPanelMenuItem("Nhân viên", IconResources.STAFF);
