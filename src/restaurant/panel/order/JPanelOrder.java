@@ -106,7 +106,7 @@ public class JPanelOrder extends javax.swing.JPanel {
         jPanelOrderAction.setLayout(jPanelOrderActionLayout);
         jPanelOrderActionLayout.setHorizontalGroup(
             jPanelOrderActionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 290, Short.MAX_VALUE)
         );
         jPanelOrderActionLayout.setVerticalGroup(
             jPanelOrderActionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,8 +124,8 @@ public class JPanelOrder extends javax.swing.JPanel {
                 .addComponent(jPanelOrderDish, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
-                    .addComponent(jPanelOrderAction, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanelOrderAction, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2)))
         );
         jPanelContentLayout.setVerticalGroup(
             jPanelContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

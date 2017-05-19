@@ -162,8 +162,8 @@ public class JPanelOrderItem extends javax.swing.JPanel {
         JLabel jlClose = (JLabel) evt.getSource();
         JPanelOrderItem jpOI = (JPanelOrderItem) jlClose.getParent();
         JPanelOrderDetail jpOD = (JPanelOrderDetail) jpOI.getParent().getParent().getParent().getParent();
-        JPanel jplistoi = jpOD.getjPanelListOrderItem();
-        jpOD.listOrdering.remove(jpOI);
+        JPanel jplistoi = jpOD.getjPanelListOrdering();
+        jpOD.listDishOrdering.remove(jpOI);
         jplistoi.remove(jpOI);
         jplistoi.revalidate();
         jplistoi.repaint();
