@@ -24,9 +24,12 @@ public abstract class IconResources {
     
     
     public static final ImageIcon TABLE_BLACK_X50 = new ImageIcon(IconResources.class.getResource("icon_table_black_x50.png"));
-    public static final ImageIcon ARROW_DOWN_X32 = new ImageIcon(IconResources.class.getResource("icon_arrow_down_red_x32.png"));
-    public static final ImageIcon ARROW_UP_X32 = new ImageIcon(IconResources.class.getResource("icon_arrow_up_green_x32.png"));
-    public static final ImageIcon CLOSE_X32 = new ImageIcon(IconResources.class.getResource("icon_close_red_x32.png"));
+    public static final ImageIcon ARROW_DOWN_X24 = new ImageIcon(IconResources.class.getResource("icon_arrow_down_red_x24.png"));
+    public static final ImageIcon ARROW_UP_X24 = new ImageIcon(IconResources.class.getResource("icon_arrow_up_green_x24.png"));
+    public static final ImageIcon CLOSE_X24 = new ImageIcon(IconResources.class.getResource("icon_close_red_x24.png"));
+    public static final ImageIcon CLOSE_FILL_X24 = new ImageIcon(IconResources.class.getResource("icon_close_red_fill_x24.png"));
+    public static final ImageIcon ARROW_UP_FILL_X24 = new ImageIcon(IconResources.class.getResource("icon_arrow_up_green_fill_x24.png"));
+    public static final ImageIcon ARROW_DOWN_FILL_X24 = new ImageIcon(IconResources.class.getResource("icon_arrow_down_red_fill_x24.png"));
     
     public static final ImageIcon PLUS_X24 = new ImageIcon(IconResources.class.getResource("icon_plus_white_x24.png"));
     
