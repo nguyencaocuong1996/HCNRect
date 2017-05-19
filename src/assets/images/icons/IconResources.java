@@ -1,16 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package assets.images.icons;
 
 import javax.swing.ImageIcon;
 
-/**
- *
- * @author WINDNCC
- */
 public abstract class IconResources {
     public static final ImageIcon ORDER = new ImageIcon(IconResources.class.getResource("icon_order.png"));
     public static final ImageIcon PACKAGE = new ImageIcon(IconResources.class.getResource("icon_package.png"));
@@ -30,6 +22,9 @@ public abstract class IconResources {
     public static final ImageIcon CLOSE_FILL_X24 = new ImageIcon(IconResources.class.getResource("icon_close_red_fill_x24.png"));
     public static final ImageIcon ARROW_UP_FILL_X24 = new ImageIcon(IconResources.class.getResource("icon_arrow_up_green_fill_x24.png"));
     public static final ImageIcon ARROW_DOWN_FILL_X24 = new ImageIcon(IconResources.class.getResource("icon_arrow_down_red_fill_x24.png"));
+    public static final ImageIcon DELL_GRAY_X24 = new ImageIcon(IconResources.class.getResource("icon_dell_gray_x24.png"));
+    public static final ImageIcon EDIT_GREEN_X24 = new ImageIcon(IconResources.class.getResource("icon_edit_green_x24.png"));
+    public static final ImageIcon CALENDAR_BLUE_X24 = new ImageIcon(IconResources.class.getResource("icon_calendar_blue_x24.png"));
     
     public static final ImageIcon PLUS_X24 = new ImageIcon(IconResources.class.getResource("icon_plus_white_x24.png"));
     
