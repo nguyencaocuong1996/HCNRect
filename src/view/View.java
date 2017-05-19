@@ -5,17 +5,24 @@
  */
 package view;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  *
  * @author WINDNCC
  */
 public abstract class View {
-    ViewData data;
+    protected ViewData data;
+    protected ViewData filterData;
     protected static View instance;
     public ViewData getData() {
         return data;
+    }
+    public void filter(FilterView fw){
+        filterData.removeAll(filterData);
+        data.forEach((t) -> {
+            if (fw.filter(t)) {
+                filterData.add(t);
+            }
+        });
     }
 }

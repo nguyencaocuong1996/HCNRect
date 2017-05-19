@@ -3,19 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
-
-import java.util.ArrayList;
-import java.util.Comparator;
+package core;
 
 /**
  *
  * @author WINDNCC
  */
-public class ViewData extends ArrayList<ViewItem>{
-
-    public ViewData filter(){
-        
-        return this;
-    }
+public interface Filterable<T> {
+    public boolean filter(T o);
 }

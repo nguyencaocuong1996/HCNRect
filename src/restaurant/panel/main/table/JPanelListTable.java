@@ -68,18 +68,12 @@ public class JPanelListTable extends javax.swing.JPanel {
             jComboboxFilterByStatus.addItem(comboboxItem);
         }
     }
-    private void filterByStatus(int statusId){
-        listTable = VTable.getInstance().filterByStatus(statusId);
-        jTableListPanel.removeAll();
-        listTable.getFilterData().forEach((t) -> {
-            JPanelTable c = new JPanelTable((String)t.get("TenBan"), (Integer)t.get("TrangThai"));
-            jTableListPanel.add(c);
-        });
-        this.revalidate();
-        this.repaint();
-    }
-    private void filterByName(String name){
-        listTable = VTable.getInstance().filterByName(name);
+    private void filter(){
+        ComboboxItem ci = (ComboboxItem) jComboboxFilterByStatus.getSelectedItem();
+        int statusId = (Integer) ci.getValue();
+        
+        String filterName = jTextFieldFilterByName.getText();
+        listTable = VTable.getInstance().filterByStatusAndName(statusId, filterName);
         jTableListPanel.removeAll();
         listTable.getFilterData().forEach((t) -> {
             JPanelTable c = new JPanelTable((String)t.get("TenBan"), (Integer)t.get("TrangThai"));
@@ -180,26 +174,15 @@ public class JPanelListTable extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextFieldFilterByNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldFilterByNameKeyReleased
-        ComboboxItem ci = (ComboboxItem) jComboboxFilterByStatus.getSelectedItem();
-        int val = (Integer) ci.getValue();
-        filterByStatus(val);
-        String filterName = jTextFieldFilterByName.getText();
-        System.out.println(filterName);
-        filterByName(filterName);
+        filter();
     }//GEN-LAST:event_jTextFieldFilterByNameKeyReleased
 
     private void jTextFieldFilterByNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldFilterByNameActionPerformed
-
+        filter();
     }//GEN-LAST:event_jTextFieldFilterByNameActionPerformed
 
     private void jComboboxFilterByStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboboxFilterByStatusActionPerformed
-        // TODO add your handling code here:
-        ComboboxItem ci = (ComboboxItem) jComboboxFilterByStatus.getSelectedItem();
-        int val = (Integer) ci.getValue();
-        filterByStatus(val);
-        String filterName = jTextFieldFilterByName.getText();
-        System.out.println(filterName);
-        filterByName(filterName);
+        filter();
     }//GEN-LAST:event_jComboboxFilterByStatusActionPerformed
 
 
