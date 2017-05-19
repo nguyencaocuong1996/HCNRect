@@ -16,14 +16,14 @@ public class MainFrame extends javax.swing.JFrame {
 
     JPanelSidebar sidebar = new JPanelSidebar();
     JPanelListTable listTable;
-    JPanelOrder order = new JPanelOrder();
+    JPanelOrder order = JPanelOrder.getInstance();
     public MainFrame() {
         initComponents();
         JPanelSideBar.add(sidebar);
-        listTable = new JPanelListTable();
-        jPanelContent.add(listTable);
+//        listTable = new JPanelListTable();
+//        jPanelContent.add(listTable);
         jPanelContent.add(order);
-        jPanelContent.remove(listTable);
+//        jPanelContent.remove(listTable);
     }
     @Override
     public Dimension getPreferredSize() {

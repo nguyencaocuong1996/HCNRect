@@ -7,14 +7,14 @@ import java.awt.FlowLayout;
 import javax.swing.JFrame;
 
 public class JPanelOrder extends javax.swing.JPanel {
-    JPanelOrderDish jpOrderDish;
+    public static JPanelOrder instance;
+    JPanelOrderDish jpOrderDish = new JPanelOrderDish();;
+    JPanelOrderDetail jpOrderDetail = new JPanelOrderDetail();
     public JPanelOrder() {
         initComponents();
         initCustomComponents();
-        jpOrderDish = new JPanelOrderDish();
         jPanelOrderDish.add(jpOrderDish);
-        jPanelOrderDetail.add(new JPanelOrderDetail());
-        
+        jpOrderDetail.setTargetPanel(jPanelOrderDetail);
     }
     private void initCustomComponents(){
         ComboboxItem[] ci = new ComboboxItem[6];
@@ -38,6 +38,12 @@ public class JPanelOrder extends javax.swing.JPanel {
         this.revalidate();
         this.repaint();
     }
+
+    public static JPanelOrder getInstance() {
+        if(instance == null) instance = new JPanelOrder();
+        return instance;
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -98,9 +104,20 @@ public class JPanelOrder extends javax.swing.JPanel {
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
+        jPanelContent.setMinimumSize(new java.awt.Dimension(752, 463));
+
+        jScrollPane2.setBorder(null);
+        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane2.setToolTipText("");
+        jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        jPanelOrderDetail.setForeground(java.awt.Color.yellow);
+        jPanelOrderDetail.setMinimumSize(new java.awt.Dimension(290, 1000));
+        jPanelOrderDetail.setPreferredSize(new java.awt.Dimension(290, 1000));
+        jPanelOrderDetail.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 0));
         jScrollPane2.setViewportView(jPanelOrderDetail);
 
-        jPanelOrderAction.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        jPanelOrderAction.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, null, null, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
 
         javax.swing.GroupLayout jPanelOrderActionLayout = new javax.swing.GroupLayout(jPanelOrderAction);
         jPanelOrderAction.setLayout(jPanelOrderActionLayout);

@@ -13,15 +13,34 @@ import javax.swing.JPanel;
 
 public class JPanelOrderDetail extends javax.swing.JPanel {
     public ArrayList<JPanelOrderItem> listDishOrdering = new ArrayList<>();
-    
+    public JPanel targetPanel;
+
+    public void setTargetPanel(JPanel targetPanel) {
+        this.targetPanel = targetPanel;
+        this.targetPanel.add(this);
+        this.targetPanel.setPreferredSize(jPanelListOrdering.getPreferredSize());
+    }
+    public void addOrderItem(JPanelOrderItem jpOrderItem){
+        listDishOrdering.add(jpOrderItem);
+        jPanelListOrdering.add(jpOrderItem, 0);
+        Dimension d = new Dimension(295, listDishOrdering.size() * 35);
+        targetPanel.setPreferredSize(d);
+        jPanelListOrdering.setPreferredSize(d);
+    }
+    public void removeOrderItem(JPanelOrderItem jpOrderItem){
+        listDishOrdering.remove(jpOrderItem);
+        jPanelListOrdering.remove(jpOrderItem);
+        Dimension d = new Dimension(295, listDishOrdering.size() * 35);
+        JPanelOrder.getInstance().jpOrderDish.getListOrderDishItem().forEach((t) -> {
+            if(t.getDishId() == jpOrderItem.getDishId()){
+                t.setExistsInOrdering(false);
+            }
+        });
+        targetPanel.setPreferredSize(d);
+        jPanelListOrdering.setPreferredSize(d);
+    }
     public JPanelOrderDetail() {
         initComponents();
-        listDishOrdering.add(new JPanelOrderItem("cuong dep trai", 10, 110000));
-        listDishOrdering.add(new JPanelOrderItem("huy xau trai", 10, 120000));
-        jPanelListOrdering.setPreferredSize(new Dimension(295, listDishOrdering.size() * 35));
-        listDishOrdering.forEach((t) -> {
-            jPanelListOrdering.add(t);
-        });
     }
 
     public JPanel getjPanelListOrdering() {
@@ -41,9 +60,17 @@ public class JPanelOrderDetail extends javax.swing.JPanel {
 
         jPanelListOrdering = new javax.swing.JPanel();
 
-        setMaximumSize(new java.awt.Dimension(295, 245));
-        setMinimumSize(new java.awt.Dimension(295, 245));
-        setPreferredSize(new java.awt.Dimension(295, 245));
+        setBackground(new java.awt.Color(227, 227, 227));
+        setMaximumSize(null);
+        setMinimumSize(null);
+        setPreferredSize(null);
+        setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 0));
+
+        jPanelListOrdering.setBackground(new java.awt.Color(227, 227, 227));
+        jPanelListOrdering.setMaximumSize(new java.awt.Dimension(9999, 9999));
+        jPanelListOrdering.setMinimumSize(new java.awt.Dimension(293, 243));
+        jPanelListOrdering.setPreferredSize(new java.awt.Dimension(293, 243));
+        jPanelListOrdering.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 5));
         add(jPanelListOrdering);
     }// </editor-fold>//GEN-END:initComponents
 

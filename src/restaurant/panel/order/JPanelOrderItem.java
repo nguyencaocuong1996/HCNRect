@@ -9,10 +9,12 @@ import javax.swing.JPanel;
 public class JPanelOrderItem extends javax.swing.JPanel {
     protected String dishName = "";
     protected int quantity = 1;
+    protected int dishId;
     protected float price;
 
-    public JPanelOrderItem(String dishName, int quantity, float price) {
+    public JPanelOrderItem(int dishId, String dishName, int quantity, float price) {
         initComponents();
+        this.dishId = dishId;
         this.dishName = dishName;
         this.quantity = quantity;
         this.price = price;
@@ -21,6 +23,16 @@ public class JPanelOrderItem extends javax.swing.JPanel {
         jLabelTotalPrice.setText(quantity * price + "");
     }
 
+    public int getDishId() {
+        return dishId;
+    }
+
+    public void setDishId(int dishId) {
+        this.dishId = dishId;
+    }
+
+    
+    
     public String getDishName() {
         return dishName;
     }
@@ -80,6 +92,7 @@ public class JPanelOrderItem extends javax.swing.JPanel {
         jLabelClose = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 204));
+        setPreferredSize(new java.awt.Dimension(280, 30));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabelDishName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -132,7 +145,7 @@ public class JPanelOrderItem extends javax.swing.JPanel {
 
         jLabelTotalPrice.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         jLabelTotalPrice.setText("1000000");
-        add(jLabelTotalPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 90, 30));
+        add(jLabelTotalPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 80, 30));
 
         jLabelClose.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_close_red_x24.png"))); // NOI18N
@@ -147,7 +160,7 @@ public class JPanelOrderItem extends javax.swing.JPanel {
                 jLabelCloseMouseExited(evt);
             }
         });
-        add(jLabelClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 30, 30));
+        add(jLabelClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 30, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabelUpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpMouseClicked
@@ -161,12 +174,15 @@ public class JPanelOrderItem extends javax.swing.JPanel {
     private void jLabelCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCloseMouseClicked
         JLabel jlClose = (JLabel) evt.getSource();
         JPanelOrderItem jpOI = (JPanelOrderItem) jlClose.getParent();
-        JPanelOrderDetail jpOD = (JPanelOrderDetail) jpOI.getParent().getParent().getParent().getParent();
-        JPanel jplistoi = jpOD.getjPanelListOrdering();
-        jpOD.listDishOrdering.remove(jpOI);
-        jplistoi.remove(jpOI);
-        jplistoi.revalidate();
-        jplistoi.repaint();
+        JPanelOrderDetail jpOD = JPanelOrder.getInstance().jpOrderDetail;
+        jpOD.removeOrderItem(jpOI);
+        JPanelOrder.getInstance().revalidate();
+        JPanelOrder.getInstance().repaint();
+//        JPanel jplistoi = jpOD.getjPanelListOrdering();
+//        jpOD.listDishOrdering.remove(jpOI);
+//        jplistoi.remove(jpOI);
+//        jplistoi.revalidate();
+//        jplistoi.repaint();
     }//GEN-LAST:event_jLabelCloseMouseClicked
 
     private void jTextFieldQtyKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldQtyKeyReleased

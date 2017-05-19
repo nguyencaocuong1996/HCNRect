@@ -15,6 +15,10 @@ public class JPanelOrderDish extends javax.swing.JPanel {
     public JPanelOrderDish(VDish vDish) {
         this.listDish = vDish;
     }
+
+    public ArrayList<JPanelOrderDishItem> getListOrderDishItem() {
+        return listOrderDishItem;
+    }
     
     
     public JPanelOrderDish() {
@@ -23,7 +27,10 @@ public class JPanelOrderDish extends javax.swing.JPanel {
         numDish = listDish.getData().size();
         jPanelListOrderDish.setPreferredSize(new Dimension(430, 85 * (numDish / 2+1)));
         listDish.getData().forEach((ViewItem t) -> {
-            jPanelListOrderDish.add(new JPanelOrderDishItem((String) t.get("DiaChiAnhMA"), (String) t.get("TenMA"), (float) t.get("GiaMA")));
+            Long dishIdL = (Long) t.get("MaMA");
+            JPanelOrderDishItem newJPODI = new JPanelOrderDishItem(dishIdL.intValue() , (String) t.get("DiaChiAnhMA"), (String) t.get("TenMA"), (float) t.get("GiaMA"));
+            listOrderDishItem.add(newJPODI);
+            jPanelListOrderDish.add(newJPODI);
         });
     }
     public void filter(int menuId, String dishName){
@@ -31,7 +38,12 @@ public class JPanelOrderDish extends javax.swing.JPanel {
             jPanelListOrderDish.removeAll();
             listDish.filter(menuId, dishName);
             listDish.getFilterData().forEach((t) -> {
-                jPanelListOrderDish.add(new JPanelOrderDishItem((String) t.get("DiaChiAnhMA"), (String) t.get("TenMA"), (float) t.get("GiaMA")));
+                Long dishIdL = (Long) t.get("MaMA");
+                listOrderDishItem.forEach((x) -> {
+                    if(x.getDishId() == dishIdL){
+                        jPanelListOrderDish.add(x);
+                    }
+                });
             });
         }
     }

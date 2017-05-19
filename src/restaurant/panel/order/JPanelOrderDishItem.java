@@ -3,22 +3,43 @@ package restaurant.panel.order;
 
 import assets.font.CFont;
 import assets.images.dishs.DishImageResources;
-import assets.images.icons.IconResources;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import restaurant.panel.main.table.JPanelTable;
 
-public class JPanelOrderDishItem extends javax.swing.JPanel {
-
+public class JPanelOrderDishItem extends javax.swing.JPanel{
+    String dishName;
+    String urlImage;
+    float dishPrice;
+    int dishId;
+    boolean existsInOrdering = false;
     public JPanelOrderDishItem() {
         initComponents();
     }
+
+    public int getDishId() {
+        return dishId;
+    }
+
+    public boolean isExistsInOrdering() {
+        return existsInOrdering;
+    }
+
+    public void setExistsInOrdering(boolean existsInOrdering) {
+        this.existsInOrdering = existsInOrdering;
+    }
     
-    public JPanelOrderDishItem(String urlImage, String dishName, float dishPrice) {
+    public JPanelOrderDishItem(int dishId, String urlImage, String dishName, float dishPrice) {
         initComponents();
+        this.dishId = dishId;
+        this.dishName = dishName;
+        this.dishPrice = dishPrice;
+        this.urlImage = urlImage;
+        customInit();
         jLabelDishImage.setIcon(new ImageIcon(DishImageResources.class.getResource(urlImage)));
         
         jLabelDishName.setText("<html><p style='overflow: hidden;'>"+dishName+"</p><html>");
@@ -27,12 +48,32 @@ public class JPanelOrderDishItem extends javax.swing.JPanel {
         jLabelDishPrice.setText(dishPrice + " VNĐ");
         CFont.setStyleFont(jLabelDishPrice, 14, Color.BLACK);
     }
-    
+    private void customInit(){
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                if (!existsInOrdering) {
+                    JPanelOrder.getInstance().jpOrderDetail.addOrderItem(new JPanelOrderItem(dishId, dishName,1,dishPrice));
+                    existsInOrdering = true;
+                } else {
+                    JPanelOrder.getInstance().jpOrderDetail.listDishOrdering.forEach((t) -> {
+                        if(t.getDishId() == dishId){
+                            t.setQuantity(t.getQuantity() + 1);
+                        }
+                    });
+                }
+                JPanelOrder.getInstance().revalidate();
+                JPanelOrder.getInstance().repaint();
+            }
+            
+        });
+    }
     public static void main(String[] args) {
         JFrame jf = new JFrame();
         jf.setLayout(new FlowLayout());
         jf.setSize(new Dimension(500,500));
-        JPanelOrderDishItem jt = new JPanelOrderDishItem("salmon.jpeg","Salmon", 21000);
+        JPanelOrderDishItem jt = new JPanelOrderDishItem(1,"salmon.jpeg","Salmon", 21000);
 
         
         jf.add(jt);
