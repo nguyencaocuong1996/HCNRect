@@ -13,15 +13,19 @@ public class JPanelMenu extends javax.swing.JPanel {
         try{
             JPanelMenuItem menuItemPackage = MenuItemFactory.get("package");
             JPanelMenuItem menuItemOrder = MenuItemFactory.get("order");
+            JPanelMenuItem menuItemBookTable = MenuItemFactory.get("book");
             JPanelMenuItem menuItemCoins = MenuItemFactory.get("coins");
             JPanelMenuItem menuItemReport = MenuItemFactory.get("report");
             JPanelMenuItem menuItemStaff = MenuItemFactory.get("staff");
-            menuItemOrder.setActive(true);
+            JPanelMenuItem menuItemPartner = MenuItemFactory.get("partner");
             jPanelMenuContent.add(menuItemOrder);
+            jPanelMenuContent.add(menuItemBookTable);
+            jPanelMenuContent.add(menuItemPartner);
             jPanelMenuContent.add(menuItemPackage);
             jPanelMenuContent.add(menuItemCoins);
-            jPanelMenuContent.add(menuItemReport);
             jPanelMenuContent.add(menuItemStaff);
+            jPanelMenuContent.add(menuItemReport);
+            
         } catch(Exception e) {
             e.printStackTrace();
         }

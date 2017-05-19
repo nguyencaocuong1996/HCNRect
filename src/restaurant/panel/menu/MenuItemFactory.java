@@ -1,23 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package restaurant.panel.menu;
 
 import assets.images.icons.IconResources;
 
-/**
- *
- * @author WINDNCC
- */
 public class MenuItemFactory {
     public static JPanelMenuItem get(String type) throws Exception{
         JPanelMenuItem jpi;
         try{
         switch(type){
             case "order":
-                jpi = new JPanelMenuItem("Đặt bàn", IconResources.ORDER);
+                jpi = new JPanelMenuItem("Đặt món", IconResources.ORDER);
+                break;
+            case "book":
+                 jpi = new JPanelMenuItem("Đặt bàn", IconResources.BOOKTABLE);
+                 break;
+            case "partner":
+                jpi = new JPanelMenuItem("Đối tác", IconResources.PARTNER, true);
                 break;
             case "package":
                 jpi =  new JPanelMenuItem("Hàng hóa", IconResources.PACKAGE, true);

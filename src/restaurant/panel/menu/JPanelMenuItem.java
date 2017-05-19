@@ -42,7 +42,6 @@ public class JPanelMenuItem extends javax.swing.JPanel {
     }
 
     public void setActive(boolean active) {
-        System.out.println("cac");
         jPanelActive.setVisible(active);
         this.active = active;
     }
