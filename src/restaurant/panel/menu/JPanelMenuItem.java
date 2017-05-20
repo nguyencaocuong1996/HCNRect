@@ -1,6 +1,7 @@
 
 package restaurant.panel.menu;
 
+import assets.font.CFont;
 import assets.images.icons.IconResources;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -33,6 +34,7 @@ public class JPanelMenuItem extends javax.swing.JPanel {
         jLabelActionName.setText(actionName);
         jPanelActive.setVisible(false);
         jLabelIcon.setIcon(icon);
+        CFont.setStyleFont(jLabelActionName, 15, Color.white);
         this.orderInMenu = orderInMenu;
     }
 
@@ -124,6 +126,7 @@ public class JPanelMenuItem extends javax.swing.JPanel {
         jLabelIcon.setPreferredSize(new java.awt.Dimension(70, 50));
         add(jLabelIcon);
 
+        jLabelActionName.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabelActionName.setForeground(new java.awt.Color(255, 255, 255));
         jLabelActionName.setPreferredSize(new java.awt.Dimension(100, 50));
         add(jLabelActionName);

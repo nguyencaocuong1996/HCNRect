@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import restaurant.panel.PanelFactory;
+import restaurant.panel.booktable.JPanelBookTable;
 import restaurant.panel.order.JPanelListTableForOrder;
 
 public class JPanelMenu extends javax.swing.JPanel {
@@ -17,18 +18,21 @@ public class JPanelMenu extends javax.swing.JPanel {
         JPanelMenuItem jpMIOrder = new JPanelMenuItem("Gọi món", IconResources.ORDER, 1);
         JPanelMenuItem jpMIBook = new JPanelMenuItem("Đặt bàn", IconResources.BOOKTABLE, 2);
         JPanelMenuItem jpMIPackage = new JPanelMenuItem("Hàng hóa", IconResources.PACKAGE, 3, SubMenuFactory.get("package"));
-        JPanelMenuItem jpMIReport = new JPanelMenuItem("Báo cáo", IconResources.REPORT, 4);
-        JPanelMenuItem jpMIStaff = new JPanelMenuItem("Nhân viên", IconResources.STAFF, 5);
-        JPanelMenuItem jpMICoins = new JPanelMenuItem("Giao dịch", IconResources.COINS, 6);
+        JPanelMenuItem jpMIReport = new JPanelMenuItem("Báo cáo", IconResources.REPORT, 4, SubMenuFactory.get("package"));
+        JPanelMenuItem jpMIPartner = new JPanelMenuItem("Đối tác", IconResources.PARTNER, 6, SubMenuFactory.get("package"));
+        JPanelMenuItem jpMIStaff = new JPanelMenuItem("Nhân viên", IconResources.STAFF, 7);
+        JPanelMenuItem jpMICoins = new JPanelMenuItem("Giao dịch", IconResources.COINS, 8);
+        
         //Add mouseListener
         jpMIOrder.addMouseListener(new MouseListenerMenuItem(JPanelListTableForOrder.getInstance(), PanelFactory.HEADER_PICK_TABLE));
-        jpMIBook.addMouseListener(new MouseListenerMenuItem(PanelFactory.CONTENT_OVERVIEW, PanelFactory.HEADER_OVERVIEW));
+        jpMIBook.addMouseListener(new MouseListenerMenuItem(JPanelBookTable.getInstance(), PanelFactory.HEADER_BOOK_TABLE));
         jpMIPackage.addMouseListener(new MouseListenerMenuItem());
         //add to List
         listJPanelMenuItem.add(jpMIOrder);
         listJPanelMenuItem.add(jpMIBook);
         listJPanelMenuItem.add(jpMIPackage);
         listJPanelMenuItem.add(jpMIReport);
+        listJPanelMenuItem.add(jpMIPartner);
         listJPanelMenuItem.add(jpMIStaff);
         listJPanelMenuItem.add(jpMICoins);
         //add to Panel

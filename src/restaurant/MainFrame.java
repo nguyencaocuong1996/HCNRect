@@ -4,8 +4,14 @@
  * and open the template in the editor.
  */
 package restaurant;
+import assets.font.CFont;
+import core.CDateTime;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 import restaurant.panel.JPanelSidebar;
 import restaurant.panel.PanelFactory;
 import restaurant.panel.header.JPanelHeaderOrder;
@@ -24,7 +30,18 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         jPanelHeader.add(PanelFactory.HEADER_OVERVIEW);
         jPanelContent.add(PanelFactory.CONTENT_OVERVIEW);
-        JPanelSideBar.add(new JPanelSidebar());
+        JPanelSideBar.add(sidebar);
+        customInit();
+    }
+    public final void customInit(){
+        CFont.setStyleFont(jLabelClock, 14, Color.white);
+        CFont.setStyleFont(jLabelOverView, 11, Color.white);
+        ActionListener updateClockAction = (ActionEvent e) -> {
+            CDateTime current = new CDateTime();
+            jLabelClock.setText(current.getTime().toString() + " " +current.getDate().toDMY());
+        };
+        Timer t = new Timer(1000, updateClockAction);
+        t.start();
     }
     public void changeContentPanel(JPanel targetPanel){
         jPanelContent.removeAll();
@@ -73,6 +90,9 @@ public class MainFrame extends javax.swing.JFrame {
         jPanelHeader = new javax.swing.JPanel();
         JPanelSideBar = new javax.swing.JPanel();
         jPanelContent = new javax.swing.JPanel();
+        jPanelFooter = new javax.swing.JPanel();
+        jLabelClock = new javax.swing.JLabel();
+        jLabelOverView = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(102, 255, 102));
@@ -98,6 +118,21 @@ public class MainFrame extends javax.swing.JFrame {
         jPanelContent.setPreferredSize(SizeConst.MF_CONTENT_SIZE);
         jPanelContent.setLayout(new javax.swing.OverlayLayout(jPanelContent));
         getContentPane().add(jPanelContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 770, 520));
+
+        jPanelFooter.setBackground(new java.awt.Color(70, 92, 139));
+        jPanelFooter.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 0));
+
+        jLabelClock.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelClock.setText("CLOCK");
+        jLabelClock.setPreferredSize(new java.awt.Dimension(250, 20));
+        jPanelFooter.add(jLabelClock);
+
+        jLabelOverView.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelOverView.setText("Phần mềm quản lý nhà hàng ---- Th.S Đỗ Thị Minh Phụng  ---- Sinh viên:  Nguyễn Cao Cường, Trần Khánh Nguyên, Võ Quang Huy");
+        jLabelOverView.setPreferredSize(new java.awt.Dimension(770, 14));
+        jPanelFooter.add(jLabelOverView);
+
+        getContentPane().add(jPanelFooter, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 600, 1020, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -137,7 +172,10 @@ public class MainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPanelSideBar;
+    private javax.swing.JLabel jLabelClock;
+    private javax.swing.JLabel jLabelOverView;
     private javax.swing.JPanel jPanelContent;
+    private javax.swing.JPanel jPanelFooter;
     private javax.swing.JPanel jPanelHeader;
     // End of variables declaration//GEN-END:variables
 }

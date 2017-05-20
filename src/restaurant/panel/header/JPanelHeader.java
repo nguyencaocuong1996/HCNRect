@@ -104,7 +104,7 @@ public class JPanelHeader extends javax.swing.JPanel {
         jLabelTitleHeader.setMaximumSize(new java.awt.Dimension(50, 50));
         jLabelTitleHeader.setMinimumSize(new java.awt.Dimension(50, 50));
         jLabelTitleHeader.setPreferredSize(new java.awt.Dimension(50, 50));
-        add(jLabelTitleHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 220, 60));
+        add(jLabelTitleHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 320, 60));
 
         jLabelBack.setBackground(new java.awt.Color(102, 102, 102));
         jLabelBack.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

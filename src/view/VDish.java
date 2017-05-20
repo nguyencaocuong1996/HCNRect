@@ -21,9 +21,6 @@ public class VDish extends View{
     public VDish() {
     }
     public static VDish getAllDish(){
-        java.sql.Date curDate =  new java.sql.Date(System.currentTimeMillis());
-        String curDateString = curDate.toString();
-        System.out.println(curDateString);
         String sqlQuery = "SELECT ma.MaMA, ma.TenMA, ma.DiaChiAnhMA, ma.GiaMA, ma.MaTD FROM mon_an as ma";
 //        System.out.println(sqlQuery);
         try{

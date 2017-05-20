@@ -18,6 +18,7 @@ public class PanelFactory {
     public static JPanelHeader HEADER_OVERVIEW = new JPanelHeader("Giới thiệu", IconResources.BOOKTABLE);
     public static JPanelHeader HEADER_PICK_TABLE = new JPanelHeader("Chọn bàn", IconResources.BOOKTABLE);
     public static JPanelHeader HEADER_ORDER = new JPanelHeader("Gọi món", IconResources.ORDER, JPanelListTableForOrder.getInstance(), PanelFactory.HEADER_PICK_TABLE);
+    public static JPanelHeader HEADER_BOOK_TABLE = new JPanelHeader("Danh sách đặt bàn", IconResources.BOOKTABLE);
     public static final JPanelWelcome CONTENT_OVERVIEW = new JPanelWelcome();
     
     public static final JPanelSidebar SIDEBAR = new JPanelSidebar();

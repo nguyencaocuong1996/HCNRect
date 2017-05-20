@@ -37,7 +37,7 @@ public class MouseListenerMenuItem extends MouseAdapter{
                     MainFrame.getInstance().changeHeaderPanel(jPanelHeaderTarget);
                 }
             } else {
-                System.out.println("click lai lan nua lam cai gi, fuckk you huy");
+                jpMI.setActive(false);
             }
             
             

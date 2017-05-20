@@ -1,6 +1,8 @@
 
 package restaurant.panel.booktable;
 
+import java.awt.Color;
+
 
 
 public class JPanelBookTableItem extends javax.swing.JPanel {
@@ -15,14 +17,14 @@ public class JPanelBookTableItem extends javax.swing.JPanel {
         initComponents();
     }
 
-    public JPanelBookTableItem(String nameCustomer, String phoneNumber, String timeOrder, String tableBook, String statusTableBook) {
+    public JPanelBookTableItem(String nameCustomer, String phoneNumber, String timeOrder, String tableBook, String statusTableBook, boolean odd) {
         initComponents();
         this.nameCustomer = nameCustomer;
         this.phoneNumber = phoneNumber;
         this.timeOrder = timeOrder;
         this.tableBook = tableBook;
         this.statusTableBook = statusTableBook;
-        
+        if(odd) this.setBackground(new Color(224, 224, 235));
         jPanelNameCustomer.setText(nameCustomer);
         jPanelPhoneNumber.setText(phoneNumber);
         jPanelTimeBook.setText(timeOrder);
@@ -83,35 +85,42 @@ public class JPanelBookTableItem extends javax.swing.JPanel {
         jPanelTimeBook = new javax.swing.JLabel();
         jPanelTableBook = new javax.swing.JLabel();
         jPanelStatusBook = new javax.swing.JLabel();
-        jPanelDell = new javax.swing.JLabel();
         jPanelUpdate = new javax.swing.JLabel();
+        jPanelDell = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(245, 245, 245));
         setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.lightGray, java.awt.Color.lightGray, java.awt.Color.lightGray));
         setMinimumSize(new java.awt.Dimension(755, 60));
-        setPreferredSize(new java.awt.Dimension(775, 60));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setPreferredSize(new java.awt.Dimension(775, 40));
+        setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         jPanelNameCustomer.setText("Nguyễn Cao Cường");
-        add(jPanelNameCustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 22, -1, -1));
+        jPanelNameCustomer.setPreferredSize(new java.awt.Dimension(170, 14));
+        add(jPanelNameCustomer);
 
         jPanelPhoneNumber.setText("0122123932");
-        add(jPanelPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, -1, -1));
+        jPanelPhoneNumber.setPreferredSize(new java.awt.Dimension(125, 14));
+        add(jPanelPhoneNumber);
 
         jPanelTimeBook.setText("11:30");
-        add(jPanelTimeBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, -1, -1));
+        jPanelTimeBook.setPreferredSize(new java.awt.Dimension(110, 14));
+        add(jPanelTimeBook);
 
         jPanelTableBook.setText("VIP 2");
-        add(jPanelTableBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 20, -1, -1));
+        jPanelTableBook.setPreferredSize(new java.awt.Dimension(110, 14));
+        add(jPanelTableBook);
 
         jPanelStatusBook.setText("Đã nhận");
-        add(jPanelStatusBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 20, -1, -1));
-
-        jPanelDell.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_dell_gray_x24.png"))); // NOI18N
-        add(jPanelDell, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 20, -1, -1));
+        jPanelStatusBook.setPreferredSize(new java.awt.Dimension(120, 14));
+        add(jPanelStatusBook);
 
         jPanelUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_edit_green_x24.png"))); // NOI18N
-        add(jPanelUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, -1, -1));
+        jPanelUpdate.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jPanelUpdate.setPreferredSize(new java.awt.Dimension(40, 24));
+        add(jPanelUpdate);
+
+        jPanelDell.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_dell_gray_x24.png"))); // NOI18N
+        add(jPanelDell);
     }// </editor-fold>//GEN-END:initComponents
 
 
