@@ -3,6 +3,7 @@ package restaurant.panel.header;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import restaurant.panel.booktable.JPanelBookTable;
 
@@ -10,33 +11,54 @@ public class JPanelHeader extends javax.swing.JPanel {
 
     protected boolean hasBack;
     protected String titleHeader;
+    protected ImageIcon titleIcon;
     
     public JPanelHeader() {
         initComponents();
         jLabelBack.setOpaque(true);
     }
 
-    public JPanelHeader(boolean hasBack, String titleHeader) {
+    public JPanelHeader(boolean hasBack, String titleHeader, ImageIcon titleIcon) {
+        initComponents();
         this.hasBack = hasBack;
         this.titleHeader = titleHeader;
         
         jLabelBack.setOpaque(true);
         
+        jLabelTitleHeader.setText(titleHeader);
+        jLabelTitleHeader.setIcon(titleIcon);
     }
 
     public JPanelHeader(boolean hasBack) {
         this.hasBack = hasBack;
         jLabelBack.setVisible(hasBack);
     }
-    
-    
-        public static void main(String[] args) {
-        JFrame jf = new JFrame();
-        jf.setLayout(new FlowLayout());
-        jf.setSize(new Dimension(814, 500));
-        jf.add(new JPanelHeader());
-        jf.setVisible(true);
+
+    public boolean isHasBack() {
+        return hasBack;
     }
+
+    public void setHasBack(boolean hasBack) {
+        this.hasBack = hasBack;
+    }
+
+    public String getTitleHeader() {
+        return titleHeader;
+    }
+
+    public void setTitleHeader(String titleHeader) {
+        this.titleHeader = titleHeader;
+    }
+
+    public ImageIcon getTitleIcon() {
+        return titleIcon;
+    }
+
+    public void setTitleIcon(ImageIcon titleIcon) {
+        this.titleIcon = titleIcon;
+    }
+    
+
     
     
 
