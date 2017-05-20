@@ -3,7 +3,6 @@ package restaurant.panel.order;
 
 import com.mysql.jdbc.Connection;
 import core.ComboboxItem;
-import static database.Database.conn;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.sql.DriverManager;
@@ -14,6 +13,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
+import restaurant.report.ReportResources;
 public class JPanelOrder extends javax.swing.JPanel {
     public static JPanelOrder instance;
     private int tableId;
@@ -348,19 +348,10 @@ public class JPanelOrder extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextFieldAmountPayKeyReleased
 
     private void jPanelToPayTheBillMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelToPayTheBillMouseClicked
-        System.out.println("thuc dien thanh toan");
-        
-        String link = "C:\\Users\\User\\Desktop\\restaurant\\trunk\\src\\restaurant\\panel\\order\\IReportPayment.jrxml";
-        try {
-//              String URL = "jdbc:mysql://johnny.heliohost.org:3306/windncc_restaurant?useUnicode=yes&characterEncoding=UTF-8&serverTimezone=Asia/Saigon&useTimezone=yes";
-//              String USER = "windncc_huyxt";
-//              String PASS = "db123456";
-////            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-//              Connection conn = (Connection) DriverManager.getConnection(URL, USER, PASS);
-//            
-              
-              
-              JasperReport jR = JasperCompileManager.compileReport(link);
+        System.out.println(ReportResources.RP_BILL);
+        try { 
+            System.out.println(ReportResources.RP_BILL);
+              JasperReport jR = JasperCompileManager.compileReport(ReportResources.RP_BILL);
               
               JasperPrint jP = JasperFillManager.fillReport(jR, null, database.Database.getConnection());
               
