@@ -10,11 +10,40 @@ import java.awt.FlowLayout;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import view.VDishOrdering;
 
 public class JPanelOrderDetail extends javax.swing.JPanel {
     public ArrayList<JPanelOrderItem> listDishOrdering = new ArrayList<>();
     public JPanel targetPanel;
+    private VDishOrdering vDishOrdering;
+    private int tableId;
 
+    public JPanelOrderDetail(int tableId) {
+        initComponents();
+        this.tableId = tableId;
+        vDishOrdering = VDishOrdering.getByTableId(tableId);
+        if(vDishOrdering.getData().size() > 0 ){
+            vDishOrdering.getData().forEach((t) -> {
+                Long qty = (Long) t.get("SoLuong");
+                JPanelOrderItem jpOI = new JPanelOrderItem(this.tableId, (String) t.get("TenMA"), qty.intValue() , (Float) t.get("GiaMA"));
+                addOrderItem(jpOI);
+            });
+        }
+    }
+    
+    public JPanelOrderDetail(int tableId, JPanel targetPanel) {
+        initComponents();
+        this.targetPanel = targetPanel;
+        this.tableId = tableId;
+        vDishOrdering = VDishOrdering.getByTableId(tableId);
+        if(vDishOrdering.getData().size() > 0 ){
+            vDishOrdering.getData().forEach((t) -> {
+                Long qty = (Long) t.get("SoLuong");
+                JPanelOrderItem jpOI = new JPanelOrderItem(this.tableId, (String) t.get("TenMA"), qty.intValue() , (Float) t.get("GiaMA"));
+                addOrderItem(jpOI);
+            });
+        }
+    }
     public void setTargetPanel(JPanel targetPanel) {
         this.targetPanel = targetPanel;
         this.targetPanel.add(this);
@@ -31,11 +60,7 @@ public class JPanelOrderDetail extends javax.swing.JPanel {
         listDishOrdering.remove(jpOrderItem);
         jPanelListOrdering.remove(jpOrderItem);
         Dimension d = new Dimension(295, listDishOrdering.size() * 35);
-        JPanelOrder.getInstance().jpOrderDish.getListOrderDishItem().forEach((t) -> {
-            if(t.getDishId() == jpOrderItem.getDishId()){
-                t.setExistsInOrdering(false);
-            }
-        });
+        JPanelOrder.getInstance().getJpOrderDish().getListOrderDishItem().get(jpOrderItem.getDishId()).setExistsInOrdering(false);
         targetPanel.setPreferredSize(d);
         jPanelListOrdering.setPreferredSize(d);
     }

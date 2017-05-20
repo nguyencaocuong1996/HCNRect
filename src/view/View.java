@@ -13,7 +13,6 @@ package view;
 public abstract class View {
     protected ViewData data;
     protected ViewData filterData;
-    protected static View instance;
     public ViewData getData() {
         return data;
     }

@@ -54,10 +54,10 @@ public class JPanelOrderDishItem extends javax.swing.JPanel{
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if (!existsInOrdering) {
-                    JPanelOrder.getInstance().jpOrderDetail.addOrderItem(new JPanelOrderItem(dishId, dishName,1,dishPrice));
+                    JPanelOrder.getInstance().getJpOrderDetail().addOrderItem(new JPanelOrderItem(dishId, dishName,1,dishPrice));
                     existsInOrdering = true;
                 } else {
-                    JPanelOrder.getInstance().jpOrderDetail.listDishOrdering.forEach((t) -> {
+                    JPanelOrder.getInstance().getJpOrderDetail().listDishOrdering.forEach((t) -> {
                         if(t.getDishId() == dishId){
                             t.setQuantity(t.getQuantity() + 1);
                         }

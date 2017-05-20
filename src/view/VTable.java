@@ -17,6 +17,7 @@ import java.math.BigDecimal;
  * @author WINDNCC
  */
 public class VTable extends View{
+    private static VTable instance;
     public VTable() {
     }
 

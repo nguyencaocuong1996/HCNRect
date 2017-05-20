@@ -4,19 +4,20 @@ package restaurant.panel.order;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JFrame;
 import view.VDish;
 import view.ViewItem;
 
 public class JPanelOrderDish extends javax.swing.JPanel {
     protected VDish listDish;
-    protected ArrayList<JPanelOrderDishItem>  listOrderDishItem = new ArrayList<>();
+    protected HashMap<Integer, JPanelOrderDishItem>  listOrderDishItem = new HashMap<>();
     protected int numDish;
     public JPanelOrderDish(VDish vDish) {
         this.listDish = vDish;
     }
 
-    public ArrayList<JPanelOrderDishItem> getListOrderDishItem() {
+    public HashMap<Integer, JPanelOrderDishItem> getListOrderDishItem() {
         return listOrderDishItem;
     }
     
@@ -29,7 +30,7 @@ public class JPanelOrderDish extends javax.swing.JPanel {
         listDish.getData().forEach((ViewItem t) -> {
             Long dishIdL = (Long) t.get("MaMA");
             JPanelOrderDishItem newJPODI = new JPanelOrderDishItem(dishIdL.intValue() , (String) t.get("DiaChiAnhMA"), (String) t.get("TenMA"), (float) t.get("GiaMA"));
-            listOrderDishItem.add(newJPODI);
+            listOrderDishItem.put(dishIdL.intValue(), newJPODI);
             jPanelListOrderDish.add(newJPODI);
         });
     }
@@ -39,11 +40,7 @@ public class JPanelOrderDish extends javax.swing.JPanel {
             listDish.filter(menuId, dishName);
             listDish.getFilterData().forEach((t) -> {
                 Long dishIdL = (Long) t.get("MaMA");
-                listOrderDishItem.forEach((x) -> {
-                    if(x.getDishId() == dishIdL){
-                        jPanelListOrderDish.add(x);
-                    }
-                });
+                jPanelListOrderDish.add(listOrderDishItem.get(dishIdL.intValue()));
             });
         }
     }

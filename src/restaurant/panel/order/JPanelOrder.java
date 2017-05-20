@@ -4,17 +4,20 @@ package restaurant.panel.order;
 import core.ComboboxItem;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JFrame;
 
 public class JPanelOrder extends javax.swing.JPanel {
     public static JPanelOrder instance;
-    JPanelOrderDish jpOrderDish = new JPanelOrderDish();;
-    JPanelOrderDetail jpOrderDetail = new JPanelOrderDetail();
+    private int tableId;
+    private JPanelOrderDish jpOrderDish = new JPanelOrderDish();;
+    private JPanelOrderDetail jpOrderDetail;
+    private HashMap<Integer, JPanelOrderDetail> listJPanelOrderDetail = new HashMap<>();
     public JPanelOrder() {
         initComponents();
         initCustomComponents();
         jPanelOrderDish.add(jpOrderDish);
-        jpOrderDetail.setTargetPanel(jPanelOrderDetail);
     }
     private void initCustomComponents(){
         ComboboxItem[] ci = new ComboboxItem[6];
@@ -39,6 +42,33 @@ public class JPanelOrder extends javax.swing.JPanel {
         this.repaint();
     }
 
+    public JPanelOrderDish getJpOrderDish() {
+        return jpOrderDish;
+    }
+
+    public JPanelOrderDetail getJpOrderDetail() {
+        return jpOrderDetail;
+    }
+
+    
+    public HashMap<Integer, JPanelOrderDetail> getListJPanelOrderDetail() {
+        return listJPanelOrderDetail;
+    }
+    
+
+    public int getTableId() {
+        return tableId;
+    }
+
+    public void setTableId(int tableId) {
+        jpOrderDetail = new JPanelOrderDetail(tableId, jPanelOrderDetail);
+        jPanelOrderDetail.removeAll();
+        jPanelOrderDetail.add(jpOrderDetail);
+        this.tableId = tableId;
+    }
+
+    
+    
     public static JPanelOrder getInstance() {
         if(instance == null) instance = new JPanelOrder();
         return instance;

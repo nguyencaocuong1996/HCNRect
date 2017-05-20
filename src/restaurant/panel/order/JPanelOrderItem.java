@@ -174,7 +174,7 @@ public class JPanelOrderItem extends javax.swing.JPanel {
     private void jLabelCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCloseMouseClicked
         JLabel jlClose = (JLabel) evt.getSource();
         JPanelOrderItem jpOI = (JPanelOrderItem) jlClose.getParent();
-        JPanelOrderDetail jpOD = JPanelOrder.getInstance().jpOrderDetail;
+        JPanelOrderDetail jpOD = JPanelOrder.getInstance().getJpOrderDetail();
         jpOD.removeOrderItem(jpOI);
         JPanelOrder.getInstance().revalidate();
         JPanelOrder.getInstance().repaint();

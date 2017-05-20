@@ -5,6 +5,7 @@
  */
 package restaurant;
 import java.awt.Dimension;
+import javax.swing.JPanel;
 import restaurant.panel.JPanelSidebar;
 import restaurant.panel.main.table.JPanelListTable;
 import restaurant.panel.order.JPanelListTableForOrder;
@@ -14,21 +15,40 @@ import restaurant.panel.order.JPanelOrder;
  * @author WINDNCC
  */
 public class MainFrame extends javax.swing.JFrame {
-
-    JPanelSidebar sidebar = new JPanelSidebar();
-    JPanelListTableForOrder listTable;
-    JPanelOrder order = JPanelOrder.getInstance();
+    private static MainFrame instance;
+    public JPanelSidebar sidebar = new JPanelSidebar();
+    public JPanelListTableForOrder listTable;
+    public JPanelOrder jPanelOrder = JPanelOrder.getInstance();
     public MainFrame() {
         initComponents();
         JPanelSideBar.add(sidebar);
-        listTable = new JPanelListTableForOrder();
+        listTable = JPanelListTableForOrder.getInstance();
         jPanelContent.add(listTable);
-//        jPanelContent.add(order);
-//        jPanelContent.remove(listTable);
+        jPanelOrder.setVisible(false);
+        jPanelContent.add(jPanelOrder);
+//        jPanelContent.revalidate();
     }
+
+    public static MainFrame getInstance() {
+        if(instance == null) instance = new MainFrame();
+        return instance;
+    }
+    
     @Override
     public Dimension getPreferredSize() {
         return SizeConst.MAIN_FRAME_SIZE;
+    }
+
+    public JPanel getJPanelSideBar() {
+        return JPanelSideBar;
+    }
+
+    public JPanel getjPanelContent() {
+        return jPanelContent;
+    }
+
+    public JPanel getjPanelHeader() {
+        return jPanelHeader;
     }
     
     /**
@@ -75,7 +95,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanelContent.setBackground(new java.awt.Color(204, 204, 255));
         jPanelContent.setPreferredSize(SizeConst.MF_CONTENT_SIZE);
-        jPanelContent.setLayout(new java.awt.GridLayout(1, 0, 15, 0));
+        jPanelContent.setLayout(new javax.swing.OverlayLayout(jPanelContent));
         getContentPane().add(jPanelContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 770, 520));
 
         pack();
@@ -110,7 +130,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new MainFrame().setVisible(true);
+            MainFrame.getInstance().setVisible(true);
         });
     }
 

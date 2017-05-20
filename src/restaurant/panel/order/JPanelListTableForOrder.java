@@ -17,7 +17,7 @@ import restaurant.panel.main.table.JPanelListTable;
  * @author WINDNCC
  */
 public class JPanelListTableForOrder extends JPanelListTable{
-
+    private static JPanelListTableForOrder instance;
     public JPanelListTableForOrder() {
         super();
         listTable.getData().forEach((t) -> {
@@ -35,4 +35,10 @@ public class JPanelListTableForOrder extends JPanelListTable{
         jf.add(new JPanelListTableForOrder());
         jf.setVisible(true);
     }
+
+    public static JPanelListTableForOrder getInstance() {
+        if(instance == null) instance = new JPanelListTableForOrder();
+        return instance;
+    }
+        
 }
