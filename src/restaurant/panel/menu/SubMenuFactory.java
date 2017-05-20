@@ -20,11 +20,12 @@ public class SubMenuFactory {
             case "package" :
                 listSubMenuItem.add(new JPanelSubMenuItem("pak 1"));
                 listSubMenuItem.add(new JPanelSubMenuItem("pak 2"));
-                listSubMenuItem.add(new JPanelSubMenuItem("pak 1"));
-                listSubMenuItem.add(new JPanelSubMenuItem("pak 2"));
-                listSubMenuItem.add(new JPanelSubMenuItem("pak 1"));
                 listSubMenuItem.add(new JPanelSubMenuItem("pak 2"));
             break;
+            case "report" :
+                listSubMenuItem.add(new JPanelSubMenuItem("pak 1"));
+                listSubMenuItem.add(new JPanelSubMenuItem("pak 2"));
+                break;
         }
         return new JPanelSubMenu(listSubMenuItem);
     }

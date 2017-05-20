@@ -29,7 +29,7 @@ public class JPanelSidebar extends javax.swing.JPanel {
      */
     public JPanelSidebar() {
         initComponents();
-        JPanelMenu jpMenu = new JPanelMenu();
+        JPanelMenu jpMenu = JPanelMenu.getInstance();
         jPanelSidebarContent.add(jpMenu);
     }
 

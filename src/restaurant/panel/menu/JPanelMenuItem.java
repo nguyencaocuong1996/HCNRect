@@ -2,10 +2,10 @@
 package restaurant.panel.menu;
 
 import assets.images.icons.IconResources;
-import java.awt.Component;
+import java.awt.Color;
 import java.awt.Dimension;
-import java.util.ArrayList;
-import javax.swing.BoxLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -13,24 +13,40 @@ import javax.swing.JPanel;
 public class JPanelMenuItem extends javax.swing.JPanel {
     public String actionName;
     protected ImageIcon icon;
+    protected JPanelSubMenu jpSubMenu;
     protected boolean active = false;
-    
-    public JPanelMenuItem(String actionName, ImageIcon icon, boolean hasSub) {
+    protected boolean hasSub = false;
+    public JPanelMenuItem(String actionName, ImageIcon icon, JPanelSubMenu subMenu) {
         initComponents();
+        this.actionName = actionName;
         jLabelActionName.setText(actionName);
         jLabelIcon.setIcon(icon);
         jPanelActive.setVisible(false);
-        if(hasSub == true)
-        {
-            jLabelIconPlus.setIcon(IconResources.PLUS_X24);
-        }
+        jLabelIconPlus.setIcon(IconResources.PLUS_X24);
+        this.jpSubMenu = subMenu;
+        this.add(this.jpSubMenu);
+        hasSub = true;
     }
     
     public JPanelMenuItem(String actionName, ImageIcon icon) {
         initComponents();
+        this.actionName = actionName;
         jLabelActionName.setText(actionName);
         jPanelActive.setVisible(false);
         jLabelIcon.setIcon(icon);
+    }
+
+    public boolean isHasSub() {
+        return hasSub;
+    }
+
+    
+    public JLabel getjLabelIcon() {
+        return jLabelIcon;
+    }
+
+    public JPanel getjPanelActive() {
+        return jPanelActive;
     }
     
     public JPanelMenuItem() {
@@ -40,8 +56,18 @@ public class JPanelMenuItem extends javax.swing.JPanel {
     public boolean isActive() {
         return active;
     }
-
     public void setActive(boolean active) {
+        if (jpSubMenu != null) {
+            if (active) {
+                Dimension newSize = new Dimension( 250, jpSubMenu.getPreferredSize().height + 40);
+                this.setPreferredSize(newSize);
+                this.setBackground(new Color(34, 45, 68));
+            } else {
+                this.setBackground(new Color(70, 92, 139));
+                this.setPreferredSize(new Dimension(250, 40)); 
+            }
+            jpSubMenu.setVisible(active);
+        }
         jPanelActive.setVisible(active);
         this.active = active;
     }
@@ -80,7 +106,7 @@ public class JPanelMenuItem extends javax.swing.JPanel {
         setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 0));
 
         jPanelActive.setBackground(new java.awt.Color(147, 193, 120));
-        jPanelActive.setPreferredSize(new java.awt.Dimension(15, 50));
+        jPanelActive.setPreferredSize(new java.awt.Dimension(10, 50));
         jPanelActive.setLayout(null);
         add(jPanelActive);
 

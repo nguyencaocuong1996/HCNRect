@@ -1,6 +1,7 @@
 
 package restaurant.panel.menu;
 
+import java.awt.Dimension;
 import java.util.ArrayList;
 
 public class JPanelSubMenu extends javax.swing.JPanel {
@@ -12,6 +13,9 @@ public class JPanelSubMenu extends javax.swing.JPanel {
         this.listSubMenuItem.forEach((item)->{
             this.add(item);
         });
+        int height = this.listSubMenuItem.size() * 44;
+        this.setPreferredSize(new Dimension(250, height));
+        setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -19,8 +23,7 @@ public class JPanelSubMenu extends javax.swing.JPanel {
     private void initComponents() {
 
         setBackground(new java.awt.Color(34, 45, 68));
-        setPreferredSize(null);
-        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.Y_AXIS));
+        setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 0));
     }// </editor-fold>//GEN-END:initComponents
 
 
