@@ -39,6 +39,14 @@ public class JPanelTable extends javax.swing.JPanel {
     public void setId(int id) {
         this.id = id;
     }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
     
     
     

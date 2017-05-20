@@ -5,6 +5,7 @@
  */
 package restaurant.panel.order;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
@@ -17,15 +18,16 @@ public class JPanelOrderDetail extends javax.swing.JPanel {
     public JPanel targetPanel;
     private VDishOrdering vDishOrdering;
     private int tableId;
-
+    private int numDish;
     public JPanelOrderDetail(int tableId) {
         initComponents();
         this.tableId = tableId;
         vDishOrdering = VDishOrdering.getByTableId(tableId);
-        if(vDishOrdering.getData().size() > 0 ){
+        numDish = vDishOrdering.getData().size();
+        if( numDish > 0 ){
             vDishOrdering.getData().forEach((t) -> {
                 Long qty = (Long) t.get("SoLuong");
-                JPanelOrderItem jpOI = new JPanelOrderItem(this.tableId, (String) t.get("TenMA"), qty.intValue() , (Float) t.get("GiaMA"));
+                JPanelOrderItem jpOI = new JPanelOrderItem((Integer) t.get("MaMA"), (String) t.get("TenMA"), qty.intValue() , (Float) t.get("GiaMA"));
                 addOrderItem(jpOI);
             });
         }
@@ -39,7 +41,8 @@ public class JPanelOrderDetail extends javax.swing.JPanel {
         if(vDishOrdering.getData().size() > 0 ){
             vDishOrdering.getData().forEach((t) -> {
                 Long qty = (Long) t.get("SoLuong");
-                JPanelOrderItem jpOI = new JPanelOrderItem(this.tableId, (String) t.get("TenMA"), qty.intValue() , (Float) t.get("GiaMA"));
+                Long dishId = (Long) t.get("MaMA");
+                JPanelOrderItem jpOI = new JPanelOrderItem(dishId.intValue() , (String) t.get("TenMA"), qty.intValue() , (Float) t.get("GiaMA"));
                 addOrderItem(jpOI);
             });
         }
@@ -50,20 +53,45 @@ public class JPanelOrderDetail extends javax.swing.JPanel {
         this.targetPanel.setPreferredSize(jPanelListOrdering.getPreferredSize());
     }
     public void addOrderItem(JPanelOrderItem jpOrderItem){
+        if(numDish == 0){
+            System.out.println("start start");
+            JPanelListTableForOrder.getInstance().getListJPanelTable().get(this.tableId).setStatus(1);
+            JPanelListTableForOrder.getInstance().getListJPanelTable().get(this.tableId).setBackground(Color.red);
+            JPanelListTableForOrder.getInstance().revalidate();
+            JPanelListTableForOrder.getInstance().repaint();
+        }
+        jpOrderItem.dbAdd();
         listDishOrdering.add(jpOrderItem);
         jPanelListOrdering.add(jpOrderItem, 0);
         Dimension d = new Dimension(295, listDishOrdering.size() * 35);
         targetPanel.setPreferredSize(d);
         jPanelListOrdering.setPreferredSize(d);
+        numDish = listDishOrdering.size();
     }
     public void removeOrderItem(JPanelOrderItem jpOrderItem){
-        listDishOrdering.remove(jpOrderItem);
-        jPanelListOrdering.remove(jpOrderItem);
-        Dimension d = new Dimension(295, listDishOrdering.size() * 35);
-        JPanelOrder.getInstance().getJpOrderDish().getListOrderDishItem().get(jpOrderItem.getDishId()).setExistsInOrdering(false);
-        targetPanel.setPreferredSize(d);
-        jPanelListOrdering.setPreferredSize(d);
+        if(numDish <= 1){
+            System.out.println("end end end");
+            JPanelListTableForOrder.getInstance().getListJPanelTable().get(this.tableId).setStatus(0);
+            JPanelListTableForOrder.getInstance().getListJPanelTable().get(this.tableId).setBackground(Color.yellow);
+            JPanelListTableForOrder.getInstance().revalidate();
+            JPanelListTableForOrder.getInstance().repaint();
+        }
+        if(numDish >=1){
+            listDishOrdering.remove(jpOrderItem);
+            jPanelListOrdering.remove(jpOrderItem);
+            Dimension d = new Dimension(295, listDishOrdering.size() * 35);
+            targetPanel.setPreferredSize(d);
+            jPanelListOrdering.setPreferredSize(d);
+            numDish = listDishOrdering.size();
+        }
     }
+
+    public ArrayList<JPanelOrderItem> getListDishOrdering() {
+        return listDishOrdering;
+    }
+    
+    
+    
     public JPanelOrderDetail() {
         initComponents();
     }

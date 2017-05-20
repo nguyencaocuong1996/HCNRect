@@ -2,9 +2,8 @@
 package restaurant.panel.order;
 
 import assets.images.icons.IconResources;
-import java.awt.Component;
+import java.util.HashMap;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 public class JPanelOrderItem extends javax.swing.JPanel {
     protected String dishName = "";
@@ -18,11 +17,46 @@ public class JPanelOrderItem extends javax.swing.JPanel {
         this.dishName = dishName;
         this.quantity = quantity;
         this.price = price;
-        jLabelDishName.setText(this.dishName);
+        if(quantity == 1){
+            jLabelDown.setVisible(false);
+        }
+        jLabelDishName.setText("<html><p>"+this.dishName+"</p></html>");
         jTextFieldQty.setText(this.quantity + "");
         jLabelTotalPrice.setText(quantity * price + "");
     }
-
+    public void dbAdd(){
+        int tableId = JPanelOrder.getInstance().getTableId();
+        System.out.println("add");
+        HashMap ud = new HashMap();
+        ud.put("MaMA", dishId);
+        ud.put("MaBan", tableId);
+        ud.put("SoLuong", this.quantity);
+        try {
+            database.Database.insert("chi_tiet_dat_mon", ud);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+    public void dbUpdate(){
+        System.out.println("update");
+        HashMap ud = new HashMap();
+        ud.put("SoLuong", this.quantity);
+        try {
+            int tableId = JPanelOrder.getInstance().getTableId();
+            database.Database.update("chi_tiet_dat_mon", ud, "MaBan = " + tableId + " AND MaMA = " + this.dishId);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+    public void dbDelete(){
+        System.out.println("delete");
+        try {
+            int tableId = JPanelOrder.getInstance().getTableId();
+            database.Database.delete("chi_tiet_dat_mon", "MaBan = " + tableId + " AND MaMA = " + this.dishId);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
     public int getDishId() {
         return dishId;
     }
@@ -77,7 +111,6 @@ public class JPanelOrderItem extends javax.swing.JPanel {
     public void setLblPriceFood(JLabel lblPriceFood) {
         this.jLabelTotalPrice = lblPriceFood;
     }
-    
     
 
     @SuppressWarnings("unchecked")
@@ -165,19 +198,27 @@ public class JPanelOrderItem extends javax.swing.JPanel {
 
     private void jLabelUpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpMouseClicked
         setQuantity(getQuantity() + 1);
+        dbUpdate();
     }//GEN-LAST:event_jLabelUpMouseClicked
 
     private void jLabelDownMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDownMouseClicked
         setQuantity(getQuantity() - 1);
+        dbUpdate();
     }//GEN-LAST:event_jLabelDownMouseClicked
 
     private void jLabelCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCloseMouseClicked
-        JLabel jlClose = (JLabel) evt.getSource();
-        JPanelOrderItem jpOI = (JPanelOrderItem) jlClose.getParent();
-        JPanelOrderDetail jpOD = JPanelOrder.getInstance().getJpOrderDetail();
-        jpOD.removeOrderItem(jpOI);
+        JPanelOrder.getInstance().getListJPanelOrderDetail().get(JPanelOrder.getInstance().getTableId()).removeOrderItem(this);
         JPanelOrder.getInstance().revalidate();
         JPanelOrder.getInstance().repaint();
+        this.dbDelete();
+        Thread t = new Thread(){
+            @Override
+            public void run() {
+                super.run(); //To change body of generated methods, choose Tools | Templates.
+                System.out.println("hoho");
+            }
+        };
+        t.start();
 //        JPanel jplistoi = jpOD.getjPanelListOrdering();
 //        jpOD.listDishOrdering.remove(jpOI);
 //        jplistoi.remove(jpOI);
@@ -187,6 +228,7 @@ public class JPanelOrderItem extends javax.swing.JPanel {
 
     private void jTextFieldQtyKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldQtyKeyReleased
         setQuantity(new Integer(jTextFieldQty.getText()));
+        dbUpdate();
     }//GEN-LAST:event_jTextFieldQtyKeyReleased
 
     private void jLabelUpMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpMouseEntered

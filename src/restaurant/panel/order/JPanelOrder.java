@@ -4,7 +4,6 @@ package restaurant.panel.order;
 import core.ComboboxItem;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JFrame;
 
@@ -61,7 +60,12 @@ public class JPanelOrder extends javax.swing.JPanel {
     }
 
     public void setTableId(int tableId) {
-        jpOrderDetail = new JPanelOrderDetail(tableId, jPanelOrderDetail);
+        if(JPanelOrder.getInstance().getListJPanelOrderDetail().get(tableId) == null){
+            jpOrderDetail = new JPanelOrderDetail(tableId, jPanelOrderDetail);
+            JPanelOrder.getInstance().getListJPanelOrderDetail().put(tableId, jpOrderDetail);
+        } else {
+            jpOrderDetail = JPanelOrder.getInstance().getListJPanelOrderDetail().get(tableId);
+        }
         jPanelOrderDetail.removeAll();
         jPanelOrderDetail.add(jpOrderDetail);
         this.tableId = tableId;

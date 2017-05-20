@@ -16,7 +16,6 @@ public class JPanelOrderDishItem extends javax.swing.JPanel{
     String urlImage;
     float dishPrice;
     int dishId;
-    boolean existsInOrdering = false;
     public JPanelOrderDishItem() {
         initComponents();
     }
@@ -25,14 +24,6 @@ public class JPanelOrderDishItem extends javax.swing.JPanel{
         return dishId;
     }
 
-    public boolean isExistsInOrdering() {
-        return existsInOrdering;
-    }
-
-    public void setExistsInOrdering(boolean existsInOrdering) {
-        this.existsInOrdering = existsInOrdering;
-    }
-    
     public JPanelOrderDishItem(int dishId, String urlImage, String dishName, float dishPrice) {
         initComponents();
         this.dishId = dishId;
@@ -52,16 +43,18 @@ public class JPanelOrderDishItem extends javax.swing.JPanel{
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                if (!existsInOrdering) {
+                int tableId = JPanelOrder.getInstance().getTableId();
+                JPanelOrderDetail jpOD = JPanelOrder.getInstance().getListJPanelOrderDetail().get(tableId);
+                boolean checkExists = false;
+                for (JPanelOrderItem item : jpOD.getListDishOrdering()) {
+                    if(item.getDishId() == dishId){
+                        item.setQuantity(item.getQuantity() + 1);
+                        checkExists = true;
+                        break;
+                    }
+                }
+                if(checkExists == false){
                     JPanelOrder.getInstance().getJpOrderDetail().addOrderItem(new JPanelOrderItem(dishId, dishName,1,dishPrice));
-                    existsInOrdering = true;
-                } else {
-                    JPanelOrder.getInstance().getJpOrderDetail().listDishOrdering.forEach((t) -> {
-                        if(t.getDishId() == dishId){
-                            t.setQuantity(t.getQuantity() + 1);
-                        }
-                    });
                 }
                 JPanelOrder.getInstance().revalidate();
                 JPanelOrder.getInstance().repaint();

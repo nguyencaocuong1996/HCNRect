@@ -43,9 +43,9 @@ public class Database {
 //            URL = prop.getProperty("url");
 //            USER = prop.getProperty("user");
 //            PASS = prop.getProperty("password");
-              URL = "jdbc:mysql://johnny.heliohost.org:3306/windncc_restaurant?useUnicode=yes&characterEncoding=UTF-8&serverTimezone=Asia/Saigon&useTimezone=yes";
-              USER = "windncc_java";
-              PASS = "db123456";
+              URL = "jdbc:mysql://localhost:3306/restaurant?useUnicode=yes&characterEncoding=UTF-8&serverTimezone=Asia/Saigon&useTimezone=yes";
+              USER = "root";
+              PASS = "";
 //            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             conn = (Connection) DriverManager.getConnection(URL, USER, PASS);
             
@@ -55,6 +55,18 @@ public class Database {
         return conn;
     }
     
+    public static boolean rawUpdate(String query){
+        Connection con = Database.getConnection();
+        int row = 0;
+        try {
+            Statement stmt = (Statement) con.createStatement();
+            row = stmt.executeUpdate(query);
+            closeConnection();
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return row > 0;
+}
     
     public static void insert(String tableName, HashMap insertData){
         Connection con = Database.getConnection();
@@ -100,8 +112,8 @@ public static void update(String tableName, HashMap updateData, String condition
                 dataStr += "`" + nextElement.getKey() + "` = " + nextElement.getValue();
             }
         }
-        String sql = "UPDATE " + tableName + " SE T " + dataStr + " WHERE " + conditionStr;
-//        System.out.println(sql);
+        String sql = "UPDATE " + tableName + " SET " + dataStr + " WHERE " + conditionStr;
+        System.out.println(sql);
         try {
             Statement stmt = (Statement) con.createStatement();
             stmt.executeUpdate(sql);
@@ -114,7 +126,7 @@ public static void update(String tableName, HashMap updateData, String condition
 public static void delete(String tableName, String conditionStr){
         Connection con = Database.getConnection();
         String sql = "DELETE FROM " + tableName + " WHERE " + conditionStr;
-//        System.out.println(sql);
+        System.out.println(sql);
         try {
             Statement stmt = (Statement) con.createStatement();
             stmt.executeUpdate(sql);

@@ -27,7 +27,7 @@ public class MainFrame extends javax.swing.JFrame {
         jPanelContent.add(listTable);
         jPanelOrder.setVisible(false);
         jPanelContent.add(jPanelOrder);
-//        jPanelContent.revalidate();
+        jPanelContent.revalidate();
     }
 
     public static MainFrame getInstance() {

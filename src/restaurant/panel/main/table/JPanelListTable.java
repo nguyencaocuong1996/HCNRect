@@ -71,6 +71,11 @@ public class JPanelListTable extends javax.swing.JPanel {
             jComboboxFilterByStatus.addItem(comboboxItem);
         }
     }
+
+    public HashMap<Integer, JPanelTable> getListJPanelTable() {
+        return listJPanelTable;
+    }
+
     protected void filter(){
         ComboboxItem ci = (ComboboxItem) jComboboxFilterByStatus.getSelectedItem();
         int statusId = (Integer) ci.getValue();
