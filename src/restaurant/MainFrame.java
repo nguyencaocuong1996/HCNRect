@@ -7,6 +7,7 @@ package restaurant;
 import java.awt.Dimension;
 import javax.swing.JPanel;
 import restaurant.panel.JPanelSidebar;
+import restaurant.panel.PanelFactory;
 import restaurant.panel.header.JPanelHeaderOrder;
 import restaurant.panel.order.JPanelListTableForOrder;
 import restaurant.panel.order.JPanelOrder;
@@ -21,15 +22,23 @@ public class MainFrame extends javax.swing.JFrame {
     public JPanelOrder jPanelOrder = JPanelOrder.getInstance();
     public MainFrame() {
         initComponents();
-        jPanelHeader.add(new JPanelHeaderOrder());
-        JPanelSideBar.add(sidebar);
-        listTable = JPanelListTableForOrder.getInstance();
-        jPanelContent.add(listTable);
-        jPanelOrder.setVisible(false);
-        jPanelContent.add(jPanelOrder);
-        jPanelContent.revalidate();
+        jPanelHeader.add(PanelFactory.HEADER_OVERVIEW);
+        jPanelContent.add(PanelFactory.CONTENT_OVERVIEW);
+        JPanelSideBar.add(new JPanelSidebar());
     }
-
+    public void changeContentPanel(JPanel targetPanel){
+        jPanelContent.removeAll();
+        targetPanel.setVisible(true);
+        jPanelContent.add(targetPanel);
+        jPanelContent.revalidate();
+        jPanelContent.repaint();
+    }
+    public void changeHeaderPanel(JPanel targetPanel){
+        jPanelHeader.removeAll();
+        jPanelHeader.add(targetPanel);
+        jPanelHeader.revalidate();
+        jPanelHeader.repaint();
+    }
     public static MainFrame getInstance() {
         if(instance == null) instance = new MainFrame();
         return instance;

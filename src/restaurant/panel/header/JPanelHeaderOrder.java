@@ -3,11 +3,12 @@ package restaurant.panel.header;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import restaurant.MainFrame;
 import restaurant.panel.order.JPanelListTableForOrder;
 import restaurant.panel.order.JPanelOrder;
 
 public class JPanelHeaderOrder extends javax.swing.JPanel {
-    
+    public static JPanelHeaderOrder instance;
     
     public JPanelHeaderOrder() {
         initComponents();
@@ -15,10 +16,15 @@ public class JPanelHeaderOrder extends javax.swing.JPanel {
         jLabelBack.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                JPanelOrder.getInstance().setVisible(false);
-                JPanelListTableForOrder.getInstance().setVisible(true);
+                MainFrame.getInstance().changeContentPanel(JPanelListTableForOrder.getInstance());
+                System.out.println("cacacac");
             }
         });
+    }
+
+    public static JPanelHeaderOrder getInstance() {
+        if (instance == null) instance = new JPanelHeaderOrder();
+        return instance;
     }
 
     @SuppressWarnings("unchecked")

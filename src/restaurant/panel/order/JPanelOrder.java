@@ -61,9 +61,11 @@ public class JPanelOrder extends javax.swing.JPanel {
 
     public void setTableId(int tableId) {
         if(JPanelOrder.getInstance().getListJPanelOrderDetail().get(tableId) == null){
+            System.out.println("ban chua ton tai, tao ban moi");
             jpOrderDetail = new JPanelOrderDetail(tableId, jPanelOrderDetail);
             JPanelOrder.getInstance().getListJPanelOrderDetail().put(tableId, jpOrderDetail);
         } else {
+            System.out.println("ban da ton tai, ko can tao");
             jpOrderDetail = JPanelOrder.getInstance().getListJPanelOrderDetail().get(tableId);
         }
         jPanelOrderDetail.removeAll();

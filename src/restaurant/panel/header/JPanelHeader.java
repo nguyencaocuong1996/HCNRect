@@ -12,7 +12,6 @@ public class JPanelHeader extends javax.swing.JPanel {
     protected boolean hasBack;
     protected String titleHeader;
     protected ImageIcon titleIcon;
-    
     public JPanelHeader() {
         initComponents();
         jLabelBack.setOpaque(true);
@@ -24,7 +23,7 @@ public class JPanelHeader extends javax.swing.JPanel {
         this.titleHeader = titleHeader;
         
         jLabelBack.setOpaque(true);
-        
+        jLabelBack.setVisible(hasBack);
         jLabelTitleHeader.setText(titleHeader);
         jLabelTitleHeader.setIcon(titleIcon);
     }

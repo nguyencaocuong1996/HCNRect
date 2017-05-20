@@ -3,9 +3,9 @@ package restaurant.panel.menu;
 
 import assets.images.icons.IconResources;
 import java.awt.Dimension;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
+import restaurant.panel.PanelFactory;
+import restaurant.panel.order.JPanelListTableForOrder;
 
 public class MenuItemFactory {
     public static JPanelMenuItem get(String type) throws Exception{
@@ -13,25 +13,27 @@ public class MenuItemFactory {
         try{
         switch(type){
             case "order":
-                jpi = new JPanelMenuItem("Đặt món", IconResources.ORDER);
+                jpi = new JPanelMenuItem("Đặt món", IconResources.ORDER, 1);
+                jpi.addMouseListener(new MouseListenerMenuItem(JPanelListTableForOrder.getInstance(), PanelFactory.HEADER_ORDER));
                 break;
             case "book":
-                 jpi = new JPanelMenuItem("Đặt bàn", IconResources.BOOKTABLE);
+                 jpi = new JPanelMenuItem("Đặt bàn", IconResources.BOOKTABLE, 2);
+                 jpi.addMouseListener(new MouseListenerMenuItem(PanelFactory.CONTENT_OVERVIEW, PanelFactory.HEADER_OVERVIEW));
                  break;
             case "partner":
-                jpi = new JPanelMenuItem("Đối tác", IconResources.PARTNER);
+                jpi = new JPanelMenuItem("Đối tác", IconResources.PARTNER, 3);
                 break;
             case "package":
-                jpi =  new JPanelMenuItem("Hàng hóa", IconResources.PACKAGE, SubMenuFactory.get("package"));
+                jpi =  new JPanelMenuItem("Hàng hóa", IconResources.PACKAGE, 4, SubMenuFactory.get("package"));
                 break;
             case "coins":
-                jpi = new JPanelMenuItem("Giao dịch", IconResources.COINS);
+                jpi = new JPanelMenuItem("Giao dịch", IconResources.COINS, 5);
                 break;
             case "report":
-                jpi =  new JPanelMenuItem("Báo cáo", IconResources.REPORT, SubMenuFactory.get("report"));
+                jpi =  new JPanelMenuItem("Báo cáo", IconResources.REPORT, 5, SubMenuFactory.get("report"));
                 break;
             case "staff":
-                jpi = new JPanelMenuItem("Nhân viên", IconResources.STAFF);
+                jpi = new JPanelMenuItem("Nhân viên", IconResources.STAFF, 6);
                 break;
             default:
                 throw new Exception("Cannot get JPanelMenuItem " + type);

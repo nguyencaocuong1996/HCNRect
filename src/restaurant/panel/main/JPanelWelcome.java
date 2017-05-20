@@ -1,5 +1,5 @@
 
-package restaurant.panel.main.welcome;
+package restaurant.panel.main;
 
 import assets.images.icons.IconResources;
 import java.awt.Dimension;
@@ -7,9 +7,9 @@ import java.awt.FlowLayout;
 import javax.swing.JFrame;
 import restaurant.panel.order.JPanelOrderDishItem;
 
-public class JPanelWellcome extends javax.swing.JPanel {
+public class JPanelWelcome extends javax.swing.JPanel {
 
-    public JPanelWellcome() {
+    public JPanelWelcome() {
         initComponents();
         JPanelLogoUIT.setIcon(IconResources.LOGO_UIT);
     }
@@ -18,7 +18,7 @@ public class JPanelWellcome extends javax.swing.JPanel {
         JFrame jf = new JFrame();
         jf.setLayout(new FlowLayout());
         jf.setSize(new Dimension(756,535));
-        JPanelWellcome jt = new JPanelWellcome();
+        JPanelWelcome jt = new JPanelWelcome();
 
         
         jf.add(jt);

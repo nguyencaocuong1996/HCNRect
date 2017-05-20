@@ -10,6 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import restaurant.MainFrame;
 
 public class JPanelOrderDishItem extends javax.swing.JPanel{
     String dishName;
@@ -43,6 +44,7 @@ public class JPanelOrderDishItem extends javax.swing.JPanel{
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                MainFrame.getInstance().changeContentPanel(JPanelOrder.getInstance());
                 int tableId = JPanelOrder.getInstance().getTableId();
                 JPanelOrderDetail jpOD = JPanelOrder.getInstance().getListJPanelOrderDetail().get(tableId);
                 boolean checkExists = false;

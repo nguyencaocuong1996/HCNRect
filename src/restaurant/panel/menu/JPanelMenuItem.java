@@ -4,8 +4,6 @@ package restaurant.panel.menu;
 import assets.images.icons.IconResources;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -16,26 +14,36 @@ public class JPanelMenuItem extends javax.swing.JPanel {
     protected JPanelSubMenu jpSubMenu;
     protected boolean active = false;
     protected boolean hasSub = false;
-    public JPanelMenuItem(String actionName, ImageIcon icon, JPanelSubMenu subMenu) {
+    protected int orderInMenu = 0;
+    public JPanelMenuItem(String actionName, ImageIcon icon, int orderInMenu, JPanelSubMenu subMenu) {
         initComponents();
-        this.actionName = actionName;
-        jLabelActionName.setText(actionName);
-        jLabelIcon.setIcon(icon);
-        jPanelActive.setVisible(false);
         jLabelIconPlus.setIcon(IconResources.PLUS_X24);
         this.jpSubMenu = subMenu;
         this.add(this.jpSubMenu);
         hasSub = true;
+        customInit( actionName,  icon,  orderInMenu);
     }
     
-    public JPanelMenuItem(String actionName, ImageIcon icon) {
+    public JPanelMenuItem(String actionName, ImageIcon icon, int orderInMenu) {
         initComponents();
+        customInit( actionName,  icon,  orderInMenu);
+    }
+    public final void customInit(String actionName, ImageIcon icon, int orderInMenu){
         this.actionName = actionName;
         jLabelActionName.setText(actionName);
         jPanelActive.setVisible(false);
         jLabelIcon.setIcon(icon);
+        this.orderInMenu = orderInMenu;
     }
 
+    public int getOrderInMenu() {
+        return orderInMenu;
+    }
+
+    public void setOrderInMenu(int orderInMenu) {
+        this.orderInMenu = orderInMenu;
+    }
+    
     public boolean isHasSub() {
         return hasSub;
     }

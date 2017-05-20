@@ -27,8 +27,9 @@ public class JPanelTableForOrder extends JPanelTable{
                 System.out.println(tableId);
                 JPanelOrder.getInstance().setTableId(tableId);
                 JPanelOrder.getInstance().setVisible(true);
-//                MainFrame.getInstance().getjPanelContent().revalidate();
-//                MainFrame.getInstance().getjPanelContent().repaint();
+                int a = JPanelOrder.getInstance().getTableId();
+                System.out.println(a);
+                MainFrame.getInstance().changeContentPanel(JPanelOrder.getInstance());
                 System.out.println("order action");
             }
         };

@@ -10,28 +10,38 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+import restaurant.MainFrame;
 
 public class MouseListenerMenuItem extends MouseAdapter{
     protected JPanel jPanelTarget;
-    public MouseListenerMenuItem(JPanel jPanelTarget) {
+    protected JPanel jPanelHeaderTarget;
+    public MouseListenerMenuItem(JPanel jPanelTarget, JPanel jPanelHeaderTarget) {
         this.jPanelTarget = jPanelTarget;
+        this.jPanelHeaderTarget = jPanelHeaderTarget;
     }
-    
+    public MouseListenerMenuItem() {
+    }
     @Override
     public void mouseClicked(MouseEvent e) {
             JPanelMenuItem jpMI = (JPanelMenuItem) e.getSource();
             if (!jpMI.isActive()) {
-                JPanelMenu.getInstance().getListJPanelMenuItem().forEach((t, u) -> {
-                        if(u.isActive()){
-                            u.setActive(false);
+                JPanelMenu.getInstance().getListJPanelMenuItem().forEach((t) -> {
+                        if(t.isActive()){
+                            t.setActive(false);
                         }
                 });
+                
+                jpMI.setActive(!jpMI.isActive());
+                if (jPanelTarget != null && !jpMI.hasSub) {
+                    MainFrame.getInstance().changeContentPanel(jPanelTarget);
+                    MainFrame.getInstance().changeHeaderPanel(jPanelHeaderTarget);
+                }
+            } else {
+                System.out.println("click lai lan nua lam cai gi, fuckk you huy");
             }
             
-            jpMI.setActive(!jpMI.isActive());
-            if (jpMI.hasSub) {
-                
-            }
+            
+            
     }
 
     @Override

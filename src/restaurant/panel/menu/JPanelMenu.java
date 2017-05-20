@@ -3,46 +3,41 @@ package restaurant.panel.menu;
 
 import assets.images.icons.IconResources;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
-
+import restaurant.panel.PanelFactory;
+import restaurant.panel.order.JPanelListTableForOrder;
+import restaurant.panel.order.JPanelOrder;
 
 public class JPanelMenu extends javax.swing.JPanel {
     private static JPanelMenu instance;
-    private HashMap<Integer, JPanelMenuItem> listJPanelMenuItem;
+    private ArrayList<JPanelMenuItem> listJPanelMenuItem = new ArrayList<>();;
     public JPanelMenu() {
         initComponents();
-        try{
-            listJPanelMenuItem = new HashMap<>();
-            listJPanelMenuItem.put(1, MenuItemFactory.get("order"));
-            listJPanelMenuItem.put(2, MenuItemFactory.get("book"));
-            listJPanelMenuItem.put(3, MenuItemFactory.get("package"));
-            listJPanelMenuItem.put(4, MenuItemFactory.get("coins"));
-            listJPanelMenuItem.put(5, MenuItemFactory.get("report"));
-            listJPanelMenuItem.put(6, MenuItemFactory.get("staff"));
-            listJPanelMenuItem.put(7, MenuItemFactory.get("partner"));
-//            JPanelMenuItem menuItemPackage = ;
-//            JPanelMenuItem menuItemOrder = MenuItemFactory.get("order");
-//            JPanelMenuItem menuItemBookTable = MenuItemFactory.get("book");
-//            JPanelMenuItem menuItemCoins = MenuItemFactory.get("coins");
-//            JPanelMenuItem menuItemReport = MenuItemFactory.get("report");
-//            JPanelMenuItem menuItemStaff = MenuItemFactory.get("staff");
-//            JPanelMenuItem menuItemPartner = MenuItemFactory.get("partner");
-            MouseListenerMenuItem ml = new MouseListenerMenuItem(jPanelMenuContent);
-            for (Map.Entry<Integer, JPanelMenuItem> entry : listJPanelMenuItem.entrySet()) {
-                Integer key = entry.getKey(); 
-                JPanelMenuItem value = entry.getValue();
-                value.addMouseListener(ml);
-                jPanelMenuContent.add(value, key);
-            }
-            
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
+        JPanelMenuItem jpMIOrder = new JPanelMenuItem("Gọi món", IconResources.ORDER, 1);
+        JPanelMenuItem jpMIBook = new JPanelMenuItem("Đặt bàn", IconResources.BOOKTABLE, 2);
+        JPanelMenuItem jpMIPackage = new JPanelMenuItem("Hàng hóa", IconResources.PACKAGE, 3, SubMenuFactory.get("package"));
+        JPanelMenuItem jpMIReport = new JPanelMenuItem("Báo cáo", IconResources.REPORT, 4);
+        JPanelMenuItem jpMIStaff = new JPanelMenuItem("Nhân viên", IconResources.STAFF, 5);
+        JPanelMenuItem jpMICoins = new JPanelMenuItem("Giao dịch", IconResources.COINS, 6);
+        jpMIOrder.addMouseListener(new MouseListenerMenuItem(JPanelListTableForOrder.getInstance(), PanelFactory.HEADER_ORDER));
+        listJPanelMenuItem.add(jpMIOrder);
+        listJPanelMenuItem.add(jpMIBook);
+        listJPanelMenuItem.add(jpMIPackage);
+        listJPanelMenuItem.add(jpMIReport);
+        listJPanelMenuItem.add(jpMIStaff);
+        listJPanelMenuItem.add(jpMICoins);
+        listJPanelMenuItem.forEach((t) -> {
+            jPanelMenuContent.add(t);
+        });
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -64,7 +59,7 @@ public class JPanelMenu extends javax.swing.JPanel {
         return instance;
     }
 
-    public HashMap<Integer, JPanelMenuItem> getListJPanelMenuItem() {
+    public ArrayList<JPanelMenuItem> getListJPanelMenuItem() {
         return listJPanelMenuItem;
     }
     
