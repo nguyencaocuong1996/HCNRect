@@ -8,6 +8,7 @@ package restaurant.panel.order;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import restaurant.MainFrame;
+import restaurant.panel.PanelFactory;
 import restaurant.panel.main.table.JPanelTable;
 
 /**
@@ -30,6 +31,7 @@ public class JPanelTableForOrder extends JPanelTable{
                 int a = JPanelOrder.getInstance().getTableId();
                 System.out.println(a);
                 MainFrame.getInstance().changeContentPanel(JPanelOrder.getInstance());
+                MainFrame.getInstance().changeHeaderPanel(PanelFactory.HEADER_ORDER);
                 System.out.println("order action");
             }
         };

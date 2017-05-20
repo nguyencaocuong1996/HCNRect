@@ -3,18 +3,10 @@ package restaurant.panel.menu;
 
 import assets.images.icons.IconResources;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import restaurant.panel.PanelFactory;
 import restaurant.panel.order.JPanelListTableForOrder;
-import restaurant.panel.order.JPanelOrder;
 
 public class JPanelMenu extends javax.swing.JPanel {
     private static JPanelMenu instance;
@@ -27,7 +19,7 @@ public class JPanelMenu extends javax.swing.JPanel {
         JPanelMenuItem jpMIReport = new JPanelMenuItem("Báo cáo", IconResources.REPORT, 4);
         JPanelMenuItem jpMIStaff = new JPanelMenuItem("Nhân viên", IconResources.STAFF, 5);
         JPanelMenuItem jpMICoins = new JPanelMenuItem("Giao dịch", IconResources.COINS, 6);
-        jpMIOrder.addMouseListener(new MouseListenerMenuItem(JPanelListTableForOrder.getInstance(), PanelFactory.HEADER_ORDER));
+        jpMIOrder.addMouseListener(new MouseListenerMenuItem(JPanelListTableForOrder.getInstance(), PanelFactory.HEADER_PICK_TABLE));
         listJPanelMenuItem.add(jpMIOrder);
         listJPanelMenuItem.add(jpMIBook);
         listJPanelMenuItem.add(jpMIPackage);
@@ -62,8 +54,6 @@ public class JPanelMenu extends javax.swing.JPanel {
     public ArrayList<JPanelMenuItem> getListJPanelMenuItem() {
         return listJPanelMenuItem;
     }
-    
-    
     
     public static void main(String[] args) {
         JFrame jf = new JFrame();

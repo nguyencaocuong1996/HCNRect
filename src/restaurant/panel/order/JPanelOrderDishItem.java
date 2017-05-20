@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import restaurant.MainFrame;
+import restaurant.panel.PanelFactory;
 
 public class JPanelOrderDishItem extends javax.swing.JPanel{
     String dishName;

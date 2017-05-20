@@ -3,13 +3,18 @@ package restaurant.panel.header;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import restaurant.MainFrame;
 import restaurant.panel.booktable.JPanelBookTable;
 
 public class JPanelHeader extends javax.swing.JPanel {
-
-    protected boolean hasBack;
+    protected JPanel jPanelBackTarget;
+    protected JPanel jPanelBackHeaderTarget;
+    protected boolean hasBack = false;
     protected String titleHeader;
     protected ImageIcon titleIcon;
     public JPanelHeader() {
@@ -17,17 +22,34 @@ public class JPanelHeader extends javax.swing.JPanel {
         jLabelBack.setOpaque(true);
     }
 
-    public JPanelHeader(boolean hasBack, String titleHeader, ImageIcon titleIcon) {
+    public JPanelHeader(String titleHeader, ImageIcon titleIcon) {
         initComponents();
-        this.hasBack = hasBack;
         this.titleHeader = titleHeader;
-        
+        this.titleIcon = titleIcon;
+        customInit();
+    }
+    public JPanelHeader(String titleHeader, ImageIcon titleIcon, JPanel jPanelBackTarget, JPanel jPanelBackHeaderTarget) {
+        initComponents();
+        this.hasBack = true;
+        this.titleHeader = titleHeader;
+        this.titleIcon = titleIcon;
+        this.jPanelBackTarget = jPanelBackTarget;
+        this.jPanelBackHeaderTarget = jPanelBackHeaderTarget;
+        this.jLabelBack.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                MainFrame.getInstance().changeContentPanel(jPanelBackTarget);
+                MainFrame.getInstance().changeHeaderPanel(jPanelBackHeaderTarget);
+            }         
+        });
+        customInit();
+    }
+    public final void customInit(){
         jLabelBack.setOpaque(true);
         jLabelBack.setVisible(hasBack);
         jLabelTitleHeader.setText(titleHeader);
         jLabelTitleHeader.setIcon(titleIcon);
     }
-
     public JPanelHeader(boolean hasBack) {
         this.hasBack = hasBack;
         jLabelBack.setVisible(hasBack);
