@@ -96,22 +96,22 @@ public class JPanelBookTableItem extends javax.swing.JPanel {
         add(jPanelNameCustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 22, -1, -1));
 
         jPanelPhoneNumber.setText("0122123932");
-        add(jPanelPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(198, 22, -1, -1));
+        add(jPanelPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, -1, -1));
 
         jPanelTimeBook.setText("11:30");
-        add(jPanelTimeBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(339, 22, -1, -1));
+        add(jPanelTimeBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, -1, -1));
 
         jPanelTableBook.setText("VIP 2");
-        add(jPanelTableBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(434, 22, -1, -1));
+        add(jPanelTableBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 20, -1, -1));
 
         jPanelStatusBook.setText("Đã nhận");
-        add(jPanelStatusBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(535, 22, -1, -1));
+        add(jPanelStatusBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 20, -1, -1));
 
         jPanelDell.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_dell_gray_x24.png"))); // NOI18N
-        add(jPanelDell, new org.netbeans.lib.awtextra.AbsoluteConstraints(718, 22, -1, -1));
+        add(jPanelDell, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 20, -1, -1));
 
         jPanelUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_edit_green_x24.png"))); // NOI18N
-        add(jPanelUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(663, 22, -1, -1));
+        add(jPanelUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
 
