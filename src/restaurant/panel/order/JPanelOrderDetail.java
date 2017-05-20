@@ -28,11 +28,10 @@ public class JPanelOrderDetail extends javax.swing.JPanel {
             vDishOrdering.getData().forEach((t) -> {
                 Long qty = (Long) t.get("SoLuong");
                 JPanelOrderItem jpOI = new JPanelOrderItem((Integer) t.get("MaMA"), (String) t.get("TenMA"), qty.intValue() , (Float) t.get("GiaMA"));
-                addOrderItem(jpOI);
+                addOrderItem(jpOI, false);
             });
         }
     }
-    
     public JPanelOrderDetail(int tableId, JPanel targetPanel) {
         initComponents();
         this.targetPanel = targetPanel;
@@ -43,24 +42,33 @@ public class JPanelOrderDetail extends javax.swing.JPanel {
                 Long qty = (Long) t.get("SoLuong");
                 Long dishId = (Long) t.get("MaMA");
                 JPanelOrderItem jpOI = new JPanelOrderItem(dishId.intValue() , (String) t.get("TenMA"), qty.intValue() , (Float) t.get("GiaMA"));
-                addOrderItem(jpOI);
+                addOrderItem(jpOI, false);
             });
         }
+    }
+    public float getTotalBill(){
+        float total = 0;
+        if (listDishOrdering.size() > 0) {
+                for(JPanelOrderItem jpOI : listDishOrdering){
+                    total += jpOI.getTotalPrice();
+                }
+        }
+        return total;
     }
     public void setTargetPanel(JPanel targetPanel) {
         this.targetPanel = targetPanel;
         this.targetPanel.add(this);
         this.targetPanel.setPreferredSize(jPanelListOrdering.getPreferredSize());
     }
-    public void addOrderItem(JPanelOrderItem jpOrderItem){
+    public void addOrderItem(JPanelOrderItem jpOrderItem, boolean addToDB){
         if(numDish == 0){
-            System.out.println("start start");
+            System.out.println("addOrderItem in JPanelOrderDetail.java: 1 món vừa được chọn hoặc tìm thấy trong database, chuyển trạng thái thành đang sử dụng (1)");
             JPanelListTableForOrder.getInstance().getListJPanelTable().get(this.tableId).setStatus(1);
             JPanelListTableForOrder.getInstance().getListJPanelTable().get(this.tableId).setBackground(Color.red);
             JPanelListTableForOrder.getInstance().revalidate();
             JPanelListTableForOrder.getInstance().repaint();
         }
-        jpOrderItem.dbAdd();
+        if(addToDB == true) jpOrderItem.dbAdd();
         listDishOrdering.add(jpOrderItem);
         jPanelListOrdering.add(jpOrderItem, 0);
         Dimension d = new Dimension(295, listDishOrdering.size() * 35);
@@ -68,9 +76,12 @@ public class JPanelOrderDetail extends javax.swing.JPanel {
         jPanelListOrdering.setPreferredSize(d);
         numDish = listDishOrdering.size();
     }
+    public void addOrderItem(JPanelOrderItem jpOrderItem){
+        addOrderItem(jpOrderItem, true);
+    }
     public void removeOrderItem(JPanelOrderItem jpOrderItem){
         if(numDish <= 1){
-            System.out.println("end end end");
+            System.out.println("removeOrderItem in JPanelOrderDetail.java: vừa xóa tất cả các món, chuyển trạng thái thành rảnh (0)");
             JPanelListTableForOrder.getInstance().getListJPanelTable().get(this.tableId).setStatus(0);
             JPanelListTableForOrder.getInstance().getListJPanelTable().get(this.tableId).setBackground(Color.yellow);
             JPanelListTableForOrder.getInstance().revalidate();

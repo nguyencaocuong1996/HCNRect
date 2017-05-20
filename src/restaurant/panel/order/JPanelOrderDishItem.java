@@ -59,6 +59,7 @@ public class JPanelOrderDishItem extends javax.swing.JPanel{
                 if(checkExists == false){
                     JPanelOrder.getInstance().getJpOrderDetail().addOrderItem(new JPanelOrderItem(dishId, dishName,1,dishPrice));
                 }
+                JPanelOrder.getInstance().updateBill();
                 JPanelOrder.getInstance().revalidate();
                 JPanelOrder.getInstance().repaint();
             }

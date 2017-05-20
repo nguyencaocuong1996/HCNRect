@@ -113,7 +113,7 @@ public static void update(String tableName, HashMap updateData, String condition
             }
         }
         String sql = "UPDATE " + tableName + " SET " + dataStr + " WHERE " + conditionStr;
-        System.out.println(sql);
+//        System.out.println(sql);
         try {
             Statement stmt = (Statement) con.createStatement();
             stmt.executeUpdate(sql);
@@ -126,7 +126,7 @@ public static void update(String tableName, HashMap updateData, String condition
 public static void delete(String tableName, String conditionStr){
         Connection con = Database.getConnection();
         String sql = "DELETE FROM " + tableName + " WHERE " + conditionStr;
-        System.out.println(sql);
+//        System.out.println(sql);
         try {
             Statement stmt = (Statement) con.createStatement();
             stmt.executeUpdate(sql);

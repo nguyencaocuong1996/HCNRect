@@ -8,6 +8,8 @@ import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
+import restaurant.panel.order.JPanelListTableForOrder;
+import view.VTable;
 
 public class JPanelTable extends javax.swing.JPanel {
     
@@ -45,6 +47,13 @@ public class JPanelTable extends javax.swing.JPanel {
     }
 
     public void setStatus(int status) {
+        VTable.getInstance().getFilterData().forEach((t) -> {
+            Integer vTableId = (Integer) t.get("MaBan");
+            if(vTableId == this.id){
+                t.put("TrangThai", status);
+            }
+        });
+        JPanelListTableForOrder.getInstance().filter();
         this.status = status;
     }
     

@@ -13,19 +13,25 @@ public class JPanelMenu extends javax.swing.JPanel {
     private ArrayList<JPanelMenuItem> listJPanelMenuItem = new ArrayList<>();;
     public JPanelMenu() {
         initComponents();
+        //Create item
         JPanelMenuItem jpMIOrder = new JPanelMenuItem("Gọi món", IconResources.ORDER, 1);
         JPanelMenuItem jpMIBook = new JPanelMenuItem("Đặt bàn", IconResources.BOOKTABLE, 2);
         JPanelMenuItem jpMIPackage = new JPanelMenuItem("Hàng hóa", IconResources.PACKAGE, 3, SubMenuFactory.get("package"));
         JPanelMenuItem jpMIReport = new JPanelMenuItem("Báo cáo", IconResources.REPORT, 4);
         JPanelMenuItem jpMIStaff = new JPanelMenuItem("Nhân viên", IconResources.STAFF, 5);
         JPanelMenuItem jpMICoins = new JPanelMenuItem("Giao dịch", IconResources.COINS, 6);
+        //Add mouseListener
         jpMIOrder.addMouseListener(new MouseListenerMenuItem(JPanelListTableForOrder.getInstance(), PanelFactory.HEADER_PICK_TABLE));
+        jpMIBook.addMouseListener(new MouseListenerMenuItem(PanelFactory.CONTENT_OVERVIEW, PanelFactory.HEADER_OVERVIEW));
+        jpMIPackage.addMouseListener(new MouseListenerMenuItem());
+        //add to List
         listJPanelMenuItem.add(jpMIOrder);
         listJPanelMenuItem.add(jpMIBook);
         listJPanelMenuItem.add(jpMIPackage);
         listJPanelMenuItem.add(jpMIReport);
         listJPanelMenuItem.add(jpMIStaff);
         listJPanelMenuItem.add(jpMICoins);
+        //add to Panel
         listJPanelMenuItem.forEach((t) -> {
             jPanelMenuContent.add(t);
         });

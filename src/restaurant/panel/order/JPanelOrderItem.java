@@ -26,35 +26,38 @@ public class JPanelOrderItem extends javax.swing.JPanel {
     }
     public void dbAdd(){
         int tableId = JPanelOrder.getInstance().getTableId();
-        System.out.println("add");
+        System.out.println("dbAdd in JPanelOrderItem.java: thêm món vừa được chọn vào database");
         HashMap ud = new HashMap();
         ud.put("MaMA", dishId);
         ud.put("MaBan", tableId);
         ud.put("SoLuong", this.quantity);
         try {
             database.Database.insert("chi_tiet_dat_mon", ud);
+            System.out.println("----Thêm món thành công!");
         } catch (Exception e) {
-            throw e;
+            System.out.println("----Thêm món thất bại!");
         }
     }
     public void dbUpdate(){
-        System.out.println("update");
+        System.out.println("dbUpdate in JPanelOrderItem.java: cập nhật món đã chọn vào database");
         HashMap ud = new HashMap();
         ud.put("SoLuong", this.quantity);
         try {
             int tableId = JPanelOrder.getInstance().getTableId();
             database.Database.update("chi_tiet_dat_mon", ud, "MaBan = " + tableId + " AND MaMA = " + this.dishId);
+            System.out.println("----Sửa món thành công!");
         } catch (Exception e) {
-            throw e;
+            System.out.println("----Sửa món thất bại!");
         }
     }
     public void dbDelete(){
-        System.out.println("delete");
+        System.out.println("dbDelete in JPanelOrderItem.java: Xóa món đã chọn");
         try {
             int tableId = JPanelOrder.getInstance().getTableId();
             database.Database.delete("chi_tiet_dat_mon", "MaBan = " + tableId + " AND MaMA = " + this.dishId);
+            System.out.println("----Xóa món thành công!");
         } catch (Exception e) {
-            throw e;
+            System.out.println("----Xóa món thất bại!");
         }
     }
     public int getDishId() {
@@ -199,11 +202,13 @@ public class JPanelOrderItem extends javax.swing.JPanel {
     private void jLabelUpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpMouseClicked
         setQuantity(getQuantity() + 1);
         dbUpdate();
+        JPanelOrder.getInstance().updateBill();
     }//GEN-LAST:event_jLabelUpMouseClicked
 
     private void jLabelDownMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDownMouseClicked
         setQuantity(getQuantity() - 1);
         dbUpdate();
+        JPanelOrder.getInstance().updateBill();
     }//GEN-LAST:event_jLabelDownMouseClicked
 
     private void jLabelCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCloseMouseClicked
@@ -211,24 +216,13 @@ public class JPanelOrderItem extends javax.swing.JPanel {
         JPanelOrder.getInstance().revalidate();
         JPanelOrder.getInstance().repaint();
         this.dbDelete();
-        Thread t = new Thread(){
-            @Override
-            public void run() {
-                super.run(); //To change body of generated methods, choose Tools | Templates.
-                System.out.println("hoho");
-            }
-        };
-        t.start();
-//        JPanel jplistoi = jpOD.getjPanelListOrdering();
-//        jpOD.listDishOrdering.remove(jpOI);
-//        jplistoi.remove(jpOI);
-//        jplistoi.revalidate();
-//        jplistoi.repaint();
+        JPanelOrder.getInstance().updateBill();
     }//GEN-LAST:event_jLabelCloseMouseClicked
 
     private void jTextFieldQtyKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldQtyKeyReleased
         setQuantity(new Integer(jTextFieldQty.getText()));
         dbUpdate();
+        JPanelOrder.getInstance().updateBill();
     }//GEN-LAST:event_jTextFieldQtyKeyReleased
 
     private void jLabelUpMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpMouseEntered
