@@ -34,7 +34,7 @@ public class JPanelMenu extends javax.swing.JPanel {
 //            JPanelMenuItem menuItemPartner = MenuItemFactory.get("partner");
             MouseListenerMenuItem ml = new MouseListenerMenuItem(jPanelMenuContent);
             for (Map.Entry<Integer, JPanelMenuItem> entry : listJPanelMenuItem.entrySet()) {
-                Integer key = entry.getKey();
+                Integer key = entry.getKey(); 
                 JPanelMenuItem value = entry.getValue();
                 value.addMouseListener(ml);
                 jPanelMenuContent.add(value, key);
