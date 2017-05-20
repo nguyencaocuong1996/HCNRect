@@ -90,12 +90,15 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jPanelDell">
+    <Component class="javax.swing.JLabel" name="jPanelDelete">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/assets/images/icons/icon_dell_gray_x24.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jPanelDeleteMouseClicked"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

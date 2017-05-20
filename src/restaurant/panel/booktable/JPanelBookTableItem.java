@@ -2,36 +2,56 @@
 package restaurant.panel.booktable;
 
 import java.awt.Color;
+import java.util.HashMap;
 
 
 
 public class JPanelBookTableItem extends javax.swing.JPanel {
-    
+    protected int bookTableId;
+    protected int statusId;
     protected String nameCustomer;
     protected String phoneNumber;
     protected String timeOrder;
     protected String tableBook;
     protected String statusTableBook;
-    
+    protected static HashMap<Integer, String> status = new HashMap<>();
     public JPanelBookTableItem() {
         initComponents();
+        customInit();
     }
-
-    public JPanelBookTableItem(String nameCustomer, String phoneNumber, String timeOrder, String tableBook, String statusTableBook, boolean odd) {
+    public JPanelBookTableItem(String nameCustomer, String phoneNumber, String timeOrder, String tableBook, int status, boolean odd) {
         initComponents();
+        if(odd) this.setBackground(new Color(224, 224, 235));
+        this.statusId = status;
         this.nameCustomer = nameCustomer;
         this.phoneNumber = phoneNumber;
         this.timeOrder = timeOrder;
         this.tableBook = tableBook;
-        this.statusTableBook = statusTableBook;
+        customInit();
+    }
+    public JPanelBookTableItem(int bookTableId, String nameCustomer, String phoneNumber, String timeOrder, String tableBook, int status, boolean odd) {
+        initComponents();
+        this.bookTableId = bookTableId;
+        this.statusId = status;
         if(odd) this.setBackground(new Color(224, 224, 235));
+        this.nameCustomer = nameCustomer;
+        this.phoneNumber = phoneNumber;
+        this.timeOrder = timeOrder;
+        this.tableBook = tableBook;
+        customInit();
+    }
+    public final void customInit(){
+        if (status.isEmpty()) {
+            status.put(0, "Chưa tới");
+            status.put(1, "Đã nhận bàn");
+            status.put(2, "Đã hủy");
+        }
         jPanelNameCustomer.setText(nameCustomer);
         jPanelPhoneNumber.setText(phoneNumber);
         jPanelTimeBook.setText(timeOrder);
         jPanelTableBook.setText(tableBook);
-        jPanelStatusBook.setText(statusTableBook);
+        jPanelStatusBook.setText(status.get(this.statusId));
     }
-
     public String getNameCustomer() {
         return nameCustomer;
     }
@@ -71,7 +91,30 @@ public class JPanelBookTableItem extends javax.swing.JPanel {
     public void setStatusTableBook(String statusTableBook) {
         this.statusTableBook = statusTableBook;
     }
-    
+    public void dbDelete(){
+        System.out.println("dbDelete in JPanelBookTableItem.java: Xóa phiếu đã chọn!");
+        try {
+            database.Database.delete("phieu_dat_ban", "MaPDB = " + this.bookTableId);
+            System.out.println("----Xóa phiếu thành công!");
+        } catch (Exception e) {
+            System.out.println("----Xóa phiếu thất bại!");
+        }
+    }
+    public void dbUpdate(){
+        System.out.println("dbUpdate in JPanelBookTableItem.java: Cập nhật phiếu đã chọn!");
+        HashMap ud = new HashMap();
+        ud.put("NgayGioDatBan", this.timeOrder);
+        ud.put("TrangThai", this.statusTableBook);
+        try {
+            database.Database.update("chi_tiet_dat_mon", ud, "MaPDB = " + this.bookTableId);
+            System.out.println("----Sửa món thành công!");
+        } catch (Exception e) {
+            System.out.println("----Sửa món thất bại!");
+        }
+    }
+    public void dbAdd(){
+        
+    }
     
     
     
@@ -86,7 +129,7 @@ public class JPanelBookTableItem extends javax.swing.JPanel {
         jPanelTableBook = new javax.swing.JLabel();
         jPanelStatusBook = new javax.swing.JLabel();
         jPanelUpdate = new javax.swing.JLabel();
-        jPanelDell = new javax.swing.JLabel();
+        jPanelDelete = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(245, 245, 245));
         setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.lightGray, java.awt.Color.lightGray, java.awt.Color.lightGray));
@@ -119,13 +162,26 @@ public class JPanelBookTableItem extends javax.swing.JPanel {
         jPanelUpdate.setPreferredSize(new java.awt.Dimension(40, 24));
         add(jPanelUpdate);
 
-        jPanelDell.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_dell_gray_x24.png"))); // NOI18N
-        add(jPanelDell);
+        jPanelDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_dell_gray_x24.png"))); // NOI18N
+        jPanelDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanelDeleteMouseClicked(evt);
+            }
+        });
+        add(jPanelDelete);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jPanelDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelDeleteMouseClicked
+        System.out.println("ahaha");
+        dbDelete();
+        JPanelBookTable.getInstance().getjPanelListBookTableContent().remove(this);
+        JPanelBookTable.getInstance().getjPanelListBookTableContent().revalidate();
+        JPanelBookTable.getInstance().getjPanelListBookTableContent().repaint();
+    }//GEN-LAST:event_jPanelDeleteMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jPanelDell;
+    private javax.swing.JLabel jPanelDelete;
     private javax.swing.JLabel jPanelNameCustomer;
     private javax.swing.JLabel jPanelPhoneNumber;
     private javax.swing.JLabel jPanelStatusBook;

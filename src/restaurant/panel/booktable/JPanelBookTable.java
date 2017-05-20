@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.Locale;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import restaurant.MainFrame;
 import view.VBookTable;
 import view.ViewItem;
@@ -35,29 +36,15 @@ public class JPanelBookTable extends javax.swing.JPanel {
         while(i.hasNext()){
             count ++;
             ViewItem t = (ViewItem) i.next();
+            Long bookTableId = (Long) t.get("MaPDB");
             String customerName = (String) t.get("HoTenKH");
             String tableName = (String) t.get("TenBan");
             String phoneNumber = (String) t.get("SDTKH");
             Integer status = new Integer(t.get("TrangThai").toString());
             Timestamp dateTime = (Timestamp) t.get("NgayGioDatBan");
             String dateTimeString = dateTime.toString();
-            Date date = new Date(dateTime.getTime());
-            String statusString = "";
-            switch(status){
-                case 0:
-                    statusString = "Chưa nhận bàn";
-                    break;
-                case 1:
-                    statusString = "Đã tới";
-                    break;
-                case 2:
-                    statusString = "Đã hủy";
-                    break;
-                default:
-                    statusString = "Không xác định";
-                    break;
-            }
-            jPanelListBookTableContent.add(new JPanelBookTableItem(customerName, phoneNumber, dateTimeString, tableName, statusString, (count % 2 != 0)));
+//            Date date = new Date(dateTime.getTime());
+            jPanelListBookTableContent.add(new JPanelBookTableItem(bookTableId.intValue(), customerName, phoneNumber, dateTimeString, tableName, status, (count % 2 != 0)));
         }
         viewBookTable.getData().forEach((t) ->{
             
@@ -69,12 +56,17 @@ public class JPanelBookTable extends javax.swing.JPanel {
         jPanelListBookTableContent.revalidate();
         jPanelListBookTableContent.repaint();
     }
+
+    public JPanel getjPanelListBookTableContent() {
+        return jPanelListBookTableContent;
+    }
+    
     public static void main(String[] args) {
         System.out.println(CDateTime.getInstance().getDate().toDMY());
         JFrame jf = new JFrame();
         jf.setLayout(new FlowLayout());
         jf.setSize(new Dimension(814, 500));
-        jf.add(new JPanelBookTable());
+        jf.add(JPanelBookTable.getInstance());
         jf.setVisible(true);
     }
     @SuppressWarnings("unchecked")
