@@ -88,56 +88,30 @@ public class JPanelBookTableItem extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(245, 245, 245));
         setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.lightGray, java.awt.Color.lightGray, java.awt.Color.lightGray));
-        setMinimumSize(new java.awt.Dimension(755, 80));
+        setMinimumSize(new java.awt.Dimension(755, 60));
+        setPreferredSize(new java.awt.Dimension(775, 60));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelNameCustomer.setText("Nguyễn Cao Cường");
+        add(jPanelNameCustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 22, -1, -1));
 
         jPanelPhoneNumber.setText("0122123932");
+        add(jPanelPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(198, 22, -1, -1));
 
         jPanelTimeBook.setText("11:30");
+        add(jPanelTimeBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(339, 22, -1, -1));
 
         jPanelTableBook.setText("VIP 2");
+        add(jPanelTableBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(434, 22, -1, -1));
 
         jPanelStatusBook.setText("Đã nhận");
+        add(jPanelStatusBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(535, 22, -1, -1));
 
         jPanelDell.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_dell_gray_x24.png"))); // NOI18N
+        add(jPanelDell, new org.netbeans.lib.awtextra.AbsoluteConstraints(718, 22, -1, -1));
 
         jPanelUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_edit_green_x24.png"))); // NOI18N
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanelNameCustomer)
-                .addGap(32, 32, 32)
-                .addComponent(jPanelPhoneNumber)
-                .addGap(41, 41, 41)
-                .addComponent(jPanelTimeBook)
-                .addGap(48, 48, 48)
-                .addComponent(jPanelTableBook)
-                .addGap(57, 57, 57)
-                .addComponent(jPanelStatusBook)
-                .addGap(56, 56, 56)
-                .addComponent(jPanelUpdate)
-                .addGap(31, 31, 31)
-                .addComponent(jPanelDell)
-                .addContainerGap(30, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jPanelNameCustomer)
-                    .addComponent(jPanelPhoneNumber)
-                    .addComponent(jPanelTimeBook)
-                    .addComponent(jPanelTableBook)
-                    .addComponent(jPanelStatusBook)
-                    .addComponent(jPanelDell)
-                    .addComponent(jPanelUpdate))
-                .addContainerGap(22, Short.MAX_VALUE))
-        );
+        add(jPanelUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(663, 22, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
 
