@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.sql.DriverManager;
 import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JFrame;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -352,9 +353,9 @@ public class JPanelOrder extends javax.swing.JPanel {
         try { 
             System.out.println(ReportResources.RP_BILL);
               JasperReport jR = JasperCompileManager.compileReport(ReportResources.RP_BILL);
-              
-              JasperPrint jP = JasperFillManager.fillReport(jR, null, database.Database.getConnection());
-              
+              Map<String, Object> params = new HashMap<>();
+              params.put("MaBan", 3);
+              JasperPrint jP = JasperFillManager.fillReport(jR, params, database.Database.getConnection());
               JasperViewer.viewReport(jP);
         } catch (Exception e) {
             e.printStackTrace();
