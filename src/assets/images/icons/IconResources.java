@@ -25,7 +25,8 @@ public abstract class IconResources {
     public static final ImageIcon DELL_GRAY_X24 = new ImageIcon(IconResources.class.getResource("icon_dell_gray_x24.png"));
     public static final ImageIcon EDIT_GREEN_X24 = new ImageIcon(IconResources.class.getResource("icon_edit_green_x24.png"));
     public static final ImageIcon CALENDAR_BLUE_X24 = new ImageIcon(IconResources.class.getResource("icon_calendar_blue_x24.png"));
-    
+    public static final ImageIcon BACK_WHITE_X80 = new ImageIcon(IconResources.class.getResource("icon_back_white_x80.png"));
+    public static final ImageIcon ORDER_WHITE_X80 = new ImageIcon(IconResources.class.getResource("icon_order_white_x50.png"));
     public static final ImageIcon PLUS_X24 = new ImageIcon(IconResources.class.getResource("icon_plus_white_x24.png"));
     
     public static final ImageIcon LOGO_UIT = new ImageIcon(IconResources.class.getResource("logo.jpg"));

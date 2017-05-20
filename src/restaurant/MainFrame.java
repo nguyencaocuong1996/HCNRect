@@ -7,7 +7,7 @@ package restaurant;
 import java.awt.Dimension;
 import javax.swing.JPanel;
 import restaurant.panel.JPanelSidebar;
-import restaurant.panel.main.table.JPanelListTable;
+import restaurant.panel.header.JPanelHeaderOrder;
 import restaurant.panel.order.JPanelListTableForOrder;
 import restaurant.panel.order.JPanelOrder;
 /**
@@ -21,6 +21,7 @@ public class MainFrame extends javax.swing.JFrame {
     public JPanelOrder jPanelOrder = JPanelOrder.getInstance();
     public MainFrame() {
         initComponents();
+        jPanelHeader.add(new JPanelHeaderOrder());
         JPanelSideBar.add(sidebar);
         listTable = JPanelListTableForOrder.getInstance();
         jPanelContent.add(listTable);
@@ -72,19 +73,10 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelHeader.setBackground(new java.awt.Color(147, 193, 120));
+        jPanelHeader.setMaximumSize(new java.awt.Dimension(770, 80));
+        jPanelHeader.setMinimumSize(new java.awt.Dimension(770, 80));
         jPanelHeader.setPreferredSize(SizeConst.MF_HEADER_SIZE);
-
-        javax.swing.GroupLayout jPanelHeaderLayout = new javax.swing.GroupLayout(jPanelHeader);
-        jPanelHeader.setLayout(jPanelHeaderLayout);
-        jPanelHeaderLayout.setHorizontalGroup(
-            jPanelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 770, Short.MAX_VALUE)
-        );
-        jPanelHeaderLayout.setVerticalGroup(
-            jPanelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 80, Short.MAX_VALUE)
-        );
-
+        jPanelHeader.setLayout(new javax.swing.OverlayLayout(jPanelHeader));
         getContentPane().add(jPanelHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, 770, 80));
 
         JPanelSideBar.setBackground(new java.awt.Color(51, 255, 0));
