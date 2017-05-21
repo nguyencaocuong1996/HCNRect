@@ -19,6 +19,7 @@ import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modal.InsertData;
+import modal.ModalData;
 import view.ViewData;
 import view.ViewItem;
 
@@ -68,7 +69,7 @@ public class Database {
         return row > 0;
 }
     
-    public static void insert(String tableName, HashMap insertData){
+    public static void insert(String tableName, HashMap insertData) throws SQLException{
         Connection con = Database.getConnection();
         Set setInsert = (Set) insertData.entrySet();
         Iterator itDataInsert = setInsert.iterator();
@@ -93,7 +94,7 @@ public class Database {
             int row = stmt.executeUpdate(sql);
             closeConnection();
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            throw e;
         }
 }   
 public static void update(String tableName, HashMap updateData, String conditionStr){
@@ -153,6 +154,27 @@ public static ViewData viewSelect(String query) throws SQLException{
             }
             closeConnection();
             return resViewData;
+        } catch (SQLException e) {
+            throw e;
+        }
+}
+public static ModalData modalSelect(String query) throws SQLException{
+        ModalData resModalData = new ModalData();
+        Connection con = Database.getConnection();
+        query += " LIMIT 0,1";
+        try {
+            Statement stmt = (Statement) con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int columnCount = rsmd.getColumnCount();
+            while(rs.next()){
+                for (int i = 1; i <= columnCount; i++) {
+                    resModalData.put(rsmd.getColumnName(i), rs.getObject(rsmd.getColumnName(i)));
+                }
+                break;
+            }
+            closeConnection();
+            return resModalData;
         } catch (SQLException e) {
             throw e;
         }

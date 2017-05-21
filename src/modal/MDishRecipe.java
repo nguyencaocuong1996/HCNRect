@@ -6,6 +6,7 @@
 package modal;
 
 import database.Database;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 /**
@@ -59,8 +60,8 @@ public class MDishRecipe extends Model{
     }
 
     @Override
-    void insert() {
-        insertData = new HashMap();
+    void insert() throws SQLException{
+        insertData = new ModalData();
         insertData.put("MaMA", this.getDishId());
         insertData.put("MaNL", this.getMaterialId());
         insertData.put("LuongCan", this.getQty());
@@ -70,7 +71,7 @@ public class MDishRecipe extends Model{
 
     @Override
     void update(){
-        updateData = new HashMap();
+        updateData = new ModalData();
         updateData.put("LuongCan", this.getQty());
         updateData.put("GhiChu", this.getNote());
         Database.update(getTableName(), updateData, "MaNL = " + this.getMaterialId() + " AND MaMA = " + this.getDishId());

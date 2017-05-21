@@ -6,10 +6,8 @@ import datechooser.beans.DateChooserDialog;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.Date;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Iterator;
-import java.util.Locale;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import restaurant.MainFrame;
@@ -18,23 +16,34 @@ import view.ViewItem;
 import assets.font.CFont;
 import core.RadiusBorder;
 import java.awt.Color;
-import java.time.format.DateTimeFormatter;
+import java.awt.Component;
+import java.sql.SQLException;
 import java.util.Calendar;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
+import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
-import javax.swing.text.DateFormatter;
+import modal.MBookTable;
+import modal.MCustomer;
 public class JPanelBookTable extends javax.swing.JPanel {
     private VBookTable viewBookTable;
     private static JPanelBookTable instance;
+    private MBookTable mBookTable;
     public JPanelBookTable() {
         initComponents();
+        customInit();
         jLabelDateBookTable.setText(CDateTime.getInstance().date.toDMY());
         jLabelAddDateBookTable.setText(CDateTime.getInstance().date.toDMY());
         viewBookTable = VBookTable.getByDate(CDateTime.getInstance().date.toString(), 1, 15);
+        mBookTable = new MBookTable();
         showData();
     }
-    public void customInit(){
-        dateChooserDialogListBookTable.setLocale(Locale.FRENCH);
+    public final void customInit(){
+        
+        jDialogPickTable.setLocationRelativeTo(jDialogAddBookTable);
+//        jDialogAddBookTable.setLocation(WIDTH, WIDTH);
         
     }
     public final void showData(){
@@ -65,6 +74,26 @@ public class JPanelBookTable extends javax.swing.JPanel {
     public JPanel getjPanelListBookTableContent() {
         return jPanelListBookTableContent;
     }
+
+    public MBookTable getmBookTable() {
+        return mBookTable;
+    }
+
+    public void setmBookTable(MBookTable mBookTable) {
+        this.mBookTable = mBookTable;
+    }
+
+    public JDialog getjDialogPickTable() {
+        return jDialogPickTable;
+    }
+
+    public JDialog getjDialogAddBookTable() {
+        return jDialogAddBookTable;
+    }
+
+    public JLabel getjLabelPickTable() {
+        return jLabelPickTable;
+    }
     
     public static void main(String[] args) {
         System.out.println(CDateTime.getInstance().getDate().toDMY());
@@ -83,6 +112,7 @@ public class JPanelBookTable extends javax.swing.JPanel {
         jPanelDialogHeader = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabelAddBookTable = new javax.swing.JLabel();
+        jLabelPickTable = new javax.swing.JLabel();
         jPanelDialogContent = new javax.swing.JPanel();
         jTextFieldCustomerPhone = new javax.swing.JTextField();
         jLabelCustomerPhone = new javax.swing.JLabel();
@@ -98,6 +128,7 @@ public class JPanelBookTable extends javax.swing.JPanel {
         jLabelDoAddBookTable = new javax.swing.JLabel();
         jLabelCloseAddBookTable = new javax.swing.JLabel();
         dateChooserDialogAddBookTable = new datechooser.beans.DateChooserDialog();
+        jDialogPickTable = new javax.swing.JDialog();
         jPanelBookTableHeader = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -183,6 +214,14 @@ public class JPanelBookTable extends javax.swing.JPanel {
 
     jLabelAddBookTable.setText("Lập phiếu đặt bàn");
 
+    jLabelPickTable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_book_table_x24.png"))); // NOI18N
+    jLabelPickTable.setText("Click chọn bàn đặt");
+    jLabelPickTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            jLabelPickTableMouseClicked(evt);
+        }
+    });
+
     javax.swing.GroupLayout jPanelDialogHeaderLayout = new javax.swing.GroupLayout(jPanelDialogHeader);
     jPanelDialogHeader.setLayout(jPanelDialogHeaderLayout);
     jPanelDialogHeaderLayout.setHorizontalGroup(
@@ -192,6 +231,8 @@ public class JPanelBookTable extends javax.swing.JPanel {
             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
             .addComponent(jLabelAddBookTable)
+            .addGap(65, 65, 65)
+            .addComponent(jLabelPickTable)
             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     jPanelDialogHeaderLayout.setVerticalGroup(
@@ -201,16 +242,39 @@ public class JPanelBookTable extends javax.swing.JPanel {
             .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addContainerGap())
         .addGroup(jPanelDialogHeaderLayout.createSequentialGroup()
-            .addGap(29, 29, 29)
-            .addComponent(jLabelAddBookTable)
+            .addGap(21, 21, 21)
+            .addGroup(jPanelDialogHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabelAddBookTable)
+                .addComponent(jLabelPickTable, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
+
+    CFont.setStyleFont(jLabelPickTable, 14, Color.WHITE);
 
     jPanelDialogContent.setBackground(new java.awt.Color(70, 92, 139));
     jPanelDialogContent.setForeground(new java.awt.Color(70, 92, 139));
     jPanelDialogContent.setToolTipText("");
     jPanelDialogContent.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-    jPanelDialogContent.add(jTextFieldCustomerPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 10, 200, -1));
+
+    jTextFieldCustomerPhone.addFocusListener(new java.awt.event.FocusAdapter() {
+        public void focusGained(java.awt.event.FocusEvent evt) {
+            jTextFieldCustomerPhoneFocusGained(evt);
+        }
+        public void focusLost(java.awt.event.FocusEvent evt) {
+            jTextFieldCustomerPhoneFocusLost(evt);
+        }
+    });
+    jTextFieldCustomerPhone.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jTextFieldCustomerPhoneActionPerformed(evt);
+        }
+    });
+    jTextFieldCustomerPhone.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            jTextFieldCustomerPhoneKeyReleased(evt);
+        }
+    });
+    jPanelDialogContent.add(jTextFieldCustomerPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 10, 150, -1));
 
     jLabelCustomerPhone.setText("Số điện thoại khách hàng: *");
     jPanelDialogContent.add(jLabelCustomerPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
@@ -241,7 +305,7 @@ public class JPanelBookTable extends javax.swing.JPanel {
             .addComponent(jLabelAddDateBookTable)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jSpinnerTimePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(24, Short.MAX_VALUE))
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     jPanel1Layout.setVerticalGroup(
         jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -259,7 +323,7 @@ public class JPanelBookTable extends javax.swing.JPanel {
     Date latestDate = calendar.getTime();
     SpinnerDateModel model = new SpinnerDateModel(earliestDate,earliestDate,latestDate,Calendar.MINUTE);
     jSpinnerTimePicker.setModel(model);
-    jSpinnerTimePicker.setEditor(new JSpinner.DateEditor(jSpinnerTimePicker, "hh:mm"));
+    jSpinnerTimePicker.setEditor(new JSpinner.DateEditor(jSpinnerTimePicker, "HH:mm"));
 
     jPanelDialogContent.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, -1, 30));
     jPanelDialogContent.add(jTextFieldCustomerName, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, 200, -1));
@@ -283,6 +347,11 @@ public class JPanelBookTable extends javax.swing.JPanel {
     jLabelDoAddBookTable.setForeground(new java.awt.Color(255, 255, 255));
     jLabelDoAddBookTable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/book_table_white_24px.png"))); // NOI18N
     jLabelDoAddBookTable.setText("Lập phiếu");
+    jLabelDoAddBookTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            jLabelDoAddBookTableMouseClicked(evt);
+        }
+    });
     jPanelDialogContent.add(jLabelDoAddBookTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 120, 30));
     jLabelDoAddBookTable.setBorder(new RadiusBorder(Color.WHITE,1,15,0,true));
     jLabelDoAddBookTable.setOpaque(true);
@@ -335,6 +404,14 @@ public class JPanelBookTable extends javax.swing.JPanel {
             dateChooserDialogAddBookTableOnCommit(evt);
         }
     });
+
+    jDialogPickTable.setTitle("Chọn bàn để đặt");
+    jDialogPickTable.setAlwaysOnTop(true);
+    jDialogPickTable.setMaximumSize(new java.awt.Dimension(800, 550));
+    jDialogPickTable.setMinimumSize(new java.awt.Dimension(800, 550));
+    jDialogPickTable.setPreferredSize(new java.awt.Dimension(800, 550));
+    jDialogPickTable.setResizable(false);
+    jDialogPickTable.getContentPane().setLayout(new java.awt.FlowLayout());
 
     setMaximumSize(new java.awt.Dimension(800, 520));
     setMinimumSize(new java.awt.Dimension(800, 520));
@@ -512,8 +589,12 @@ public class JPanelBookTable extends javax.swing.JPanel {
 //        JFrameAddBookTable.getInstance().setUndecorated(true);
 //        JFrameAddBookTable.getInstance().setVisible(true);
 //        jFrame1.setVisible(true);
-        jDialogAddBookTable.setLocationRelativeTo(this);
-        jDialogAddBookTable.setVisible(true);
+//        jDialogAddBookTable.setLocationRelativeTo(this);
+//        jDialogAddBookTable.setVisible(true);
+//            jDialogPickTable.getContentPane().add(JPanelBookTablePickTable.getInstance());
+            jDialogAddBookTable.setLocationRelativeTo(MainFrame.getInstance());
+            jDialogAddBookTable.setAlwaysOnTop(true);
+            jDialogAddBookTable.setVisible(true);
     }//GEN-LAST:event_jPanelShowBookTableMouseClicked
 
     private void jLabelCloseAddBookTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCloseAddBookTableMouseClicked
@@ -552,6 +633,92 @@ public class JPanelBookTable extends javax.swing.JPanel {
         showData();
     }//GEN-LAST:event_dateChooserDialogListBookTableOnCommit
 
+    private void jLabelDoAddBookTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDoAddBookTableMouseClicked
+        System.out.println("jLabelDoAddBookTableMouseClicked in JPanelBookTable.java: thực hiện lập phiếu");
+        mBookTable.setStatus(0);
+        //get date and time
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdfSql = new SimpleDateFormat("yyyy-MM-dd");
+        String date = sdf.format(dateChooserDialogAddBookTable.getSelectedDate().getTime());
+        String dateSql = sdfSql.format(dateChooserDialogAddBookTable.getSelectedDate().getTime());
+        Date d = (Date)jSpinnerTimePicker.getValue();
+        Calendar c = Calendar.getInstance();
+        c.setTime(d);
+        mBookTable.setDateTimeBook(dateSql+" "+c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE)+":00");
+        //#get time
+        mBookTable.setMessage(jTextAreaCustomerMessage.getText());
+        if (mBookTable.getTableId() == 0) {
+            JOptionPane.showMessageDialog(jDialogAddBookTable,  "Chưa chọn bàn!");
+            return;
+        }
+        if(mBookTable.getCustomerId() == 0){
+            MCustomer mc = new MCustomer();
+            mc.setFullName(jTextFieldCustomerName.getText());
+            mc.setPhone(jTextFieldCustomerPhone.getText());
+            mc.setCustomerTypeId(1);
+            try {
+                mc.insert();
+                mBookTable.setCustomerId(MCustomer.getLastCustomer().getId());
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(jDialogAddBookTable,  "Không thể thêm khách hàng mới!");
+                e.printStackTrace();
+                return;
+            }
+        }
+        try {
+            mBookTable.insert();
+            JOptionPane.showMessageDialog(jDialogAddBookTable,  "Lập phiếu thành công!");
+            //set all textfield to empty
+            jTextFieldCustomerName.setText("");
+            jTextFieldCustomerPhone.setText("");
+            jTextAreaCustomerMessage.setText("");
+            mBookTable.reset();
+            jLabelPickTable.setText("Click chọn bàn");
+            //end set textfield
+            jDialogAddBookTable.setVisible(false);
+            //cap nhat lai list, chuyen list sang ngay vua dat
+            viewBookTable = VBookTable.getByDate(dateSql, 1, 15);
+            jLabelDateBookTable.setText(date);
+            showData();
+            //end cap nhat lai list
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(jDialogAddBookTable,  "Lập phiếu thất bại!");
+            e.printStackTrace();
+            return;
+        }
+    }//GEN-LAST:event_jLabelDoAddBookTableMouseClicked
+
+    private void jTextFieldCustomerPhoneFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldCustomerPhoneFocusLost
+        MCustomer customer = MCustomer.getByPhone(jTextFieldCustomerPhone.getText());
+        if (customer.getId() != 0) {
+            jTextFieldCustomerName.setText(customer.getFullName());
+            jTextFieldCustomerName.setEnabled(false);
+            mBookTable.setCustomerId(customer.getId());
+        }
+    }//GEN-LAST:event_jTextFieldCustomerPhoneFocusLost
+
+    private void jTextFieldCustomerPhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCustomerPhoneActionPerformed
+        
+    }//GEN-LAST:event_jTextFieldCustomerPhoneActionPerformed
+
+    private void jTextFieldCustomerPhoneKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldCustomerPhoneKeyReleased
+        
+    }//GEN-LAST:event_jTextFieldCustomerPhoneKeyReleased
+
+    private void jTextFieldCustomerPhoneFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldCustomerPhoneFocusGained
+        if(!jTextFieldCustomerName.isEnabled()){
+            jTextFieldCustomerName.setText("");
+            jTextFieldCustomerName.setEnabled(true);
+        }
+    }//GEN-LAST:event_jTextFieldCustomerPhoneFocusGained
+
+    private void jLabelPickTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelPickTableMouseClicked
+        jDialogPickTable.setLocationRelativeTo(jDialogAddBookTable);
+        jDialogAddBookTable.setAlwaysOnTop(false);
+        jDialogPickTable.getContentPane().add(JPanelBookTablePickTable.getInstance());
+        jDialogPickTable.setVisible(true);
+    }//GEN-LAST:event_jLabelPickTableMouseClicked
+
     public DateChooserDialog getDateChooserDialog1() {
         return dateChooserDialogListBookTable;
     }
@@ -566,6 +733,7 @@ public class JPanelBookTable extends javax.swing.JPanel {
     private datechooser.beans.DateChooserDialog dateChooserDialogListBookTable;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JDialog jDialogAddBookTable;
+    private javax.swing.JDialog jDialogPickTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -584,6 +752,7 @@ public class JPanelBookTable extends javax.swing.JPanel {
     private javax.swing.JLabel jLabelDateBookTable;
     private javax.swing.JLabel jLabelDateTimeBook;
     private javax.swing.JLabel jLabelDoAddBookTable;
+    private javax.swing.JLabel jLabelPickTable;
     private javax.swing.JLabel jLabelShowChooserDate;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelBookTableContent;

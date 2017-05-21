@@ -7,6 +7,7 @@ package modal;
 
 import java.util.HashMap;
 import database.Database;
+import java.sql.SQLException;
 /**
  *
  * @author WINDNCC
@@ -64,8 +65,8 @@ public class MDish extends Model{
     }
 
     @Override
-    void insert() {
-        insertData = new HashMap();
+    void insert() throws SQLException{
+        insertData = new ModalData();
         insertData.put("TenMA", this.getName());
         insertData.put("GiaMA", this.getPrice());
         insertData.put("DiaChiAnhMA", this.getImageUrl());
@@ -74,7 +75,7 @@ public class MDish extends Model{
 
     @Override
     void update() {
-        updateData = new HashMap();
+        updateData = new ModalData();
         updateData.put("TenMA", this.getName());
         updateData.put("GiaMA", this.getPrice());
         updateData.put("DiaChiAnhMA", this.getImageUrl());

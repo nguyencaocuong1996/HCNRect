@@ -6,6 +6,7 @@
 package modal;
 
 import database.Database;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 /**
@@ -61,18 +62,23 @@ public class MStaff extends Model{
     }
 
     @Override
-    void insert() {
-        insertData = new HashMap();
+    void insert() throws SQLException {
+        insertData = new ModalData();
         insertData.put("HoTenNV", this.getName());
         insertData.put("SDTNV", this.getPhone());
         insertData.put("DiaChiNV", this.getAddress());
         insertData.put("MaPB", this.getDepartmentId());
-        Database.insert(getTableName(), insertData);
+        try {
+            Database.insert(getTableName(), insertData);
+        } catch (SQLException e) {
+            throw e;
+        }
+        
     }
 
     @Override
     void update() {
-        updateData = new HashMap();
+        updateData = new ModalData();
         updateData.put("HoTenNV", this.getName());
         updateData.put("SDTNV", this.getPhone());
         updateData.put("DiaChiNV", this.getAddress());

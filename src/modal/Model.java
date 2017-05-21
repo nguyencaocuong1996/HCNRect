@@ -1,21 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modal;
 
-import java.util.HashMap;
+import java.sql.SQLException;
 
-/**
- *
- * @author WINDNCC
- */
 abstract class Model {
-    protected HashMap insertData;
-    protected HashMap updateData;
-    abstract void insert();
-    abstract void update();
-    abstract void delete();
+    protected ModalData insertData;
+    protected ModalData updateData;
+    abstract void insert() throws SQLException;
+    abstract void update() throws SQLException;
+    abstract void delete() throws SQLException;
     abstract String getTableName();
 }

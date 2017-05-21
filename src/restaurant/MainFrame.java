@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.swing.UIManager;
 import restaurant.panel.JPanelSidebar;
 import restaurant.panel.PanelFactory;
 import restaurant.panel.header.JPanelHeaderOrder;
@@ -28,6 +29,7 @@ public class MainFrame extends javax.swing.JFrame {
     public JPanelOrder jPanelOrder = JPanelOrder.getInstance();
     public MainFrame() {
         initComponents();
+        UIManager.put("OptionPane.okButtonText", "Xác nhận");
         jPanelHeader.add(PanelFactory.get(PanelFactory.ID.HEADER_OVERVIEW));
         jPanelContent.add(PanelFactory.get(PanelFactory.ID.OVERVIEW));
         JPanelSideBar.add(sidebar);
