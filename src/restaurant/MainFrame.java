@@ -15,7 +15,7 @@ import javax.swing.Timer;
 import restaurant.panel.JPanelSidebar;
 import restaurant.panel.PanelFactory;
 import restaurant.panel.header.JPanelHeaderOrder;
-import restaurant.panel.order.JPanelListTableForOrder;
+import restaurant.panel.order.JPanelOrderPickTable;
 import restaurant.panel.order.JPanelOrder;
 /**
  *
@@ -24,12 +24,12 @@ import restaurant.panel.order.JPanelOrder;
 public class MainFrame extends javax.swing.JFrame {
     private static MainFrame instance;
     public JPanelSidebar sidebar = new JPanelSidebar();
-    public JPanelListTableForOrder listTable;
+    public JPanelOrderPickTable listTable;
     public JPanelOrder jPanelOrder = JPanelOrder.getInstance();
     public MainFrame() {
         initComponents();
-        jPanelHeader.add(PanelFactory.HEADER_OVERVIEW);
-        jPanelContent.add(PanelFactory.CONTENT_OVERVIEW);
+        jPanelHeader.add(PanelFactory.get(PanelFactory.ID.HEADER_OVERVIEW));
+        jPanelContent.add(PanelFactory.get(PanelFactory.ID.OVERVIEW));
         JPanelSideBar.add(sidebar);
         customInit();
     }

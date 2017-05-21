@@ -4,7 +4,7 @@ package restaurant.panel.header;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import restaurant.MainFrame;
-import restaurant.panel.order.JPanelListTableForOrder;
+import restaurant.panel.order.JPanelOrderPickTable;
 import restaurant.panel.order.JPanelOrder;
 
 public class JPanelHeaderOrder extends javax.swing.JPanel {
@@ -16,7 +16,7 @@ public class JPanelHeaderOrder extends javax.swing.JPanel {
         jLabelBack.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                MainFrame.getInstance().changeContentPanel(JPanelListTableForOrder.getInstance());
+                MainFrame.getInstance().changeContentPanel(JPanelOrderPickTable.getInstance());
                 System.out.println("cacacac");
             }
         });

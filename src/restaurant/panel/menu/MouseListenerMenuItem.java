@@ -11,18 +11,24 @@ import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import restaurant.MainFrame;
+import restaurant.panel.PanelFactory;
+import restaurant.panel.booktable.JPanelBookTable;
+import restaurant.panel.order.JPanelOrder;
 
 public class MouseListenerMenuItem extends MouseAdapter{
-    protected JPanel jPanelTarget;
-    protected JPanel jPanelHeaderTarget;
-    public MouseListenerMenuItem(JPanel jPanelTarget, JPanel jPanelHeaderTarget) {
-        this.jPanelTarget = jPanelTarget;
-        this.jPanelHeaderTarget = jPanelHeaderTarget;
+    protected int targetPanelId;
+    protected int targetHeaderPanelId;
+    public MouseListenerMenuItem(int targetPanelId, int targetHeaderPanelId) {
+        this.targetPanelId = targetPanelId;
+        this.targetHeaderPanelId = targetHeaderPanelId;
     }
     public MouseListenerMenuItem() {
     }
+    
     @Override
     public void mouseClicked(MouseEvent e) {
+            JPanel jpTarget = PanelFactory.get(targetPanelId);
+            JPanel jpHeaderTarget = PanelFactory.get(targetHeaderPanelId);
             JPanelMenuItem jpMI = (JPanelMenuItem) e.getSource();
             if (!jpMI.isActive()) {
                 JPanelMenu.getInstance().getListJPanelMenuItem().forEach((t) -> {
@@ -32,18 +38,15 @@ public class MouseListenerMenuItem extends MouseAdapter{
                 });
                 
                 jpMI.setActive(!jpMI.isActive());
-                if (jPanelTarget != null && !jpMI.hasSub) {
-                    MainFrame.getInstance().changeContentPanel(jPanelTarget);
-                    MainFrame.getInstance().changeHeaderPanel(jPanelHeaderTarget);
+                if (jpTarget != null && !jpMI.hasSub) {
+                    MainFrame.getInstance().changeContentPanel(jpTarget);
+                    MainFrame.getInstance().changeHeaderPanel(jpHeaderTarget);
                 }
             } else {
                 jpMI.setActive(false);
             }
-            
-            
-            
     }
-
+    
     @Override
     public void mouseEntered(MouseEvent me) {
         super.mouseEntered(me); //To change body of generated methods, choose Tools | Templates.

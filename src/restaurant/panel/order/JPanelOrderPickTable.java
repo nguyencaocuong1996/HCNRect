@@ -14,9 +14,9 @@ import restaurant.panel.main.table.JPanelListTable;
  *
  * @author WINDNCC
  */
-public class JPanelListTableForOrder extends JPanelListTable{
-    private static JPanelListTableForOrder instance;
-    public JPanelListTableForOrder() {
+public class JPanelOrderPickTable extends JPanelListTable{
+    private static JPanelOrderPickTable instance;
+    public JPanelOrderPickTable() {
         super();
         listTable.getData().forEach((t) -> {
             Integer tId = (Integer) t.get("MaBan");
@@ -30,12 +30,12 @@ public class JPanelListTableForOrder extends JPanelListTable{
         JFrame jf = new JFrame();
         jf.setLayout(new FlowLayout());
         jf.setSize(new Dimension(500,500));
-        jf.add(new JPanelListTableForOrder());
+        jf.add(new JPanelOrderPickTable());
         jf.setVisible(true);
     }
 
-    public static JPanelListTableForOrder getInstance() {
-        if(instance == null) instance = new JPanelListTableForOrder();
+    public static JPanelOrderPickTable getInstance() {
+        if(instance == null) instance = new JPanelOrderPickTable();
         return instance;
     }
         

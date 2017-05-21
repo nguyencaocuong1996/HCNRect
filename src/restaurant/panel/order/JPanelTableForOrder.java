@@ -25,11 +25,11 @@ public class JPanelTableForOrder extends JPanelTable{
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 System.out.println("Constructor in JPanelTableForOrder.java : Mã bàn " + tableId + " vừa được Click:");
-                JPanelListTableForOrder.getInstance().setVisible(false);
+                JPanelOrderPickTable.getInstance().setVisible(false);
                 JPanelOrder.getInstance().setTableId(tableId);
                 JPanelOrder.getInstance().setVisible(true);
-                MainFrame.getInstance().changeContentPanel(JPanelOrder.getInstance());
-                MainFrame.getInstance().changeHeaderPanel(PanelFactory.HEADER_ORDER);
+                MainFrame.getInstance().changeContentPanel(PanelFactory.get(PanelFactory.ID.ORDER));
+                MainFrame.getInstance().changeHeaderPanel(PanelFactory.get(PanelFactory.ID.HEADER_ORDER));
             }
         };
         addMouseListener(mouseAdapter);

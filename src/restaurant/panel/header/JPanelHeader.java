@@ -9,11 +9,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import restaurant.MainFrame;
+import restaurant.panel.PanelFactory;
 import restaurant.panel.booktable.JPanelBookTable;
 
 public class JPanelHeader extends javax.swing.JPanel {
-    protected JPanel jPanelBackTarget;
-    protected JPanel jPanelBackHeaderTarget;
+    protected int jPanelBackTargetId;
+    protected int jPanelBackHeaderTargetId;
     protected boolean hasBack = false;
     protected String titleHeader;
     protected ImageIcon titleIcon;
@@ -28,18 +29,18 @@ public class JPanelHeader extends javax.swing.JPanel {
         this.titleIcon = titleIcon;
         customInit();
     }
-    public JPanelHeader(String titleHeader, ImageIcon titleIcon, JPanel jPanelBackTarget, JPanel jPanelBackHeaderTarget) {
+    public JPanelHeader(String titleHeader, ImageIcon titleIcon, int jPanelBackTargetId, int jPanelBackHeaderTargetId) {
         initComponents();
         this.hasBack = true;
         this.titleHeader = titleHeader;
         this.titleIcon = titleIcon;
-        this.jPanelBackTarget = jPanelBackTarget;
-        this.jPanelBackHeaderTarget = jPanelBackHeaderTarget;
+        this.jPanelBackTargetId = jPanelBackTargetId;
+        this.jPanelBackHeaderTargetId = jPanelBackHeaderTargetId;
         this.jLabelBack.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                MainFrame.getInstance().changeContentPanel(jPanelBackTarget);
-                MainFrame.getInstance().changeHeaderPanel(jPanelBackHeaderTarget);
+                MainFrame.getInstance().changeContentPanel(PanelFactory.get(jPanelBackTargetId));
+                MainFrame.getInstance().changeHeaderPanel(PanelFactory.get(jPanelBackHeaderTargetId));
             }         
         });
         customInit();

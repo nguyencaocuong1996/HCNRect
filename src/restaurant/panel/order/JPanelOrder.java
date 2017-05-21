@@ -222,6 +222,14 @@ public class JPanelOrder extends javax.swing.JPanel {
 
         jTextFieldAmountPay.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         jTextFieldAmountPay.setText("0");
+        jTextFieldAmountPay.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextFieldAmountPayFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldAmountPayFocusLost(evt);
+            }
+        });
         jTextFieldAmountPay.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextFieldAmountPayKeyReleased(evt);
@@ -230,6 +238,14 @@ public class JPanelOrder extends javax.swing.JPanel {
 
         jTextFieldDiscount.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         jTextFieldDiscount.setText("0");
+        jTextFieldDiscount.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextFieldDiscountFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldDiscountFocusLost(evt);
+            }
+        });
         jTextFieldDiscount.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextFieldDiscountKeyReleased(evt);
@@ -361,6 +377,30 @@ public class JPanelOrder extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }//GEN-LAST:event_jPanelToPayTheBillMouseClicked
+
+    private void jTextFieldDiscountFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldDiscountFocusGained
+        if(jTextFieldDiscount.getText().equals("0")){
+            jTextFieldDiscount.setText("");
+        }
+    }//GEN-LAST:event_jTextFieldDiscountFocusGained
+
+    private void jTextFieldDiscountFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldDiscountFocusLost
+        if(jTextFieldDiscount.getText().equals("")){
+            jTextFieldDiscount.setText("0");
+        }
+    }//GEN-LAST:event_jTextFieldDiscountFocusLost
+
+    private void jTextFieldAmountPayFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldAmountPayFocusGained
+        if(jTextFieldAmountPay.getText().equals("0")){
+            jTextFieldAmountPay.setText("");
+        }
+    }//GEN-LAST:event_jTextFieldAmountPayFocusGained
+
+    private void jTextFieldAmountPayFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldAmountPayFocusLost
+        if(jTextFieldAmountPay.getText().equals("")){
+            jTextFieldAmountPay.setText("0");
+        }
+    }//GEN-LAST:event_jTextFieldAmountPayFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

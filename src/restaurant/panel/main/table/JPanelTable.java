@@ -8,7 +8,7 @@ import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
-import restaurant.panel.order.JPanelListTableForOrder;
+import restaurant.panel.order.JPanelOrderPickTable;
 import view.VTable;
 
 public class JPanelTable extends javax.swing.JPanel {
@@ -53,7 +53,7 @@ public class JPanelTable extends javax.swing.JPanel {
                 t.put("TrangThai", status);
             }
         });
-        JPanelListTableForOrder.getInstance().filter();
+        JPanelOrderPickTable.getInstance().filter();
         this.status = status;
     }
     

@@ -63,10 +63,10 @@ public class JPanelOrderDetail extends javax.swing.JPanel {
     public void addOrderItem(JPanelOrderItem jpOrderItem, boolean addToDB){
         if(numDish == 0){
             System.out.println("addOrderItem in JPanelOrderDetail.java: 1 món vừa được chọn hoặc tìm thấy trong database, chuyển trạng thái thành đang sử dụng (1)");
-            JPanelListTableForOrder.getInstance().getListJPanelTable().get(this.tableId).setStatus(1);
-            JPanelListTableForOrder.getInstance().getListJPanelTable().get(this.tableId).setBackground(Color.red);
-            JPanelListTableForOrder.getInstance().revalidate();
-            JPanelListTableForOrder.getInstance().repaint();
+            JPanelOrderPickTable.getInstance().getListJPanelTable().get(this.tableId).setStatus(1);
+            JPanelOrderPickTable.getInstance().getListJPanelTable().get(this.tableId).setBackground(Color.red);
+            JPanelOrderPickTable.getInstance().revalidate();
+            JPanelOrderPickTable.getInstance().repaint();
         }
         if(addToDB == true) jpOrderItem.dbAdd();
         listDishOrdering.add(jpOrderItem);
@@ -82,10 +82,10 @@ public class JPanelOrderDetail extends javax.swing.JPanel {
     public void removeOrderItem(JPanelOrderItem jpOrderItem){
         if(numDish <= 1){
             System.out.println("removeOrderItem in JPanelOrderDetail.java: vừa xóa tất cả các món, chuyển trạng thái thành rảnh (0)");
-            JPanelListTableForOrder.getInstance().getListJPanelTable().get(this.tableId).setStatus(0);
-            JPanelListTableForOrder.getInstance().getListJPanelTable().get(this.tableId).setBackground(Color.yellow);
-            JPanelListTableForOrder.getInstance().revalidate();
-            JPanelListTableForOrder.getInstance().repaint();
+            JPanelOrderPickTable.getInstance().getListJPanelTable().get(this.tableId).setStatus(0);
+            JPanelOrderPickTable.getInstance().getListJPanelTable().get(this.tableId).setBackground(Color.yellow);
+            JPanelOrderPickTable.getInstance().revalidate();
+            JPanelOrderPickTable.getInstance().repaint();
         }
         if(numDish >=1){
             listDishOrdering.remove(jpOrderItem);

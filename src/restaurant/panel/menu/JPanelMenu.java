@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import restaurant.panel.PanelFactory;
 import restaurant.panel.booktable.JPanelBookTable;
-import restaurant.panel.order.JPanelListTableForOrder;
+import restaurant.panel.order.JPanelOrderPickTable;
 
 public class JPanelMenu extends javax.swing.JPanel {
     private static JPanelMenu instance;
@@ -24,8 +24,8 @@ public class JPanelMenu extends javax.swing.JPanel {
         JPanelMenuItem jpMICoins = new JPanelMenuItem("Giao dịch", IconResources.COINS, 8);
         
         //Add mouseListener
-        jpMIOrder.addMouseListener(new MouseListenerMenuItem(JPanelListTableForOrder.getInstance(), PanelFactory.HEADER_PICK_TABLE));
-        jpMIBook.addMouseListener(new MouseListenerMenuItem(JPanelBookTable.getInstance(), PanelFactory.HEADER_BOOK_TABLE));
+        jpMIOrder.addMouseListener(new MouseListenerMenuItem(PanelFactory.ID.ORDER_PICK_TABLE, PanelFactory.ID.HEADER_ORDER_PICK_TABLE));
+        jpMIBook.addMouseListener(new MouseListenerMenuItem(PanelFactory.ID.BOOK_TABLE, PanelFactory.ID.HEADER_BOOK_TABLE));
         jpMIPackage.addMouseListener(new MouseListenerMenuItem());
         //add to List
         listJPanelMenuItem.add(jpMIOrder);

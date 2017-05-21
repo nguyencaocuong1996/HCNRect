@@ -76,7 +76,11 @@ public class CDateTime {
         }
         @Override
         public String toString() {
-            return y+"-"+m+"-"+d;
+            String sm;
+            String sd;
+            if(m<10) sm = "0" + m; else sm = m+"";
+            if(d<10) sd = "0" + d; else sd = d+"";
+            return y+"-"+sm+"-"+sd;
         }
         
     }

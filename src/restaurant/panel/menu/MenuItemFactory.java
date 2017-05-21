@@ -5,7 +5,7 @@ import assets.images.icons.IconResources;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 import restaurant.panel.PanelFactory;
-import restaurant.panel.order.JPanelListTableForOrder;
+import restaurant.panel.order.JPanelOrderPickTable;
 
 public class MenuItemFactory {
     public static JPanelMenuItem get(String type) throws Exception{
@@ -14,11 +14,11 @@ public class MenuItemFactory {
         switch(type){
             case "order":
                 jpi = new JPanelMenuItem("Đặt món", IconResources.ORDER, 1);
-                jpi.addMouseListener(new MouseListenerMenuItem(JPanelListTableForOrder.getInstance(), PanelFactory.HEADER_ORDER));
+//                jpi.addMouseListener(new MouseListenerMenuItem(JPanelListTableForOrder.getInstance(), PanelFactory.HEADER_ORDER));
                 break;
             case "book":
                  jpi = new JPanelMenuItem("Đặt bàn", IconResources.BOOKTABLE, 2);
-                 jpi.addMouseListener(new MouseListenerMenuItem(PanelFactory.CONTENT_OVERVIEW, PanelFactory.HEADER_OVERVIEW));
+//                 jpi.addMouseListener(new MouseListenerMenuItem(PanelFactory.CONTENT_OVERVIEW, PanelFactory.HEADER_OVERVIEW));
                  break;
             case "partner":
                 jpi = new JPanelMenuItem("Đối tác", IconResources.PARTNER, 3);

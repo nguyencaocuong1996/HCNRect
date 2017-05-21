@@ -47,6 +47,7 @@ public class JPanelOrderDishItem extends javax.swing.JPanel{
             public void mouseClicked(MouseEvent e) {
                 MainFrame.getInstance().changeContentPanel(JPanelOrder.getInstance());
                 int tableId = JPanelOrder.getInstance().getTableId();
+                System.out.println(tableId);
                 JPanelOrderDetail jpOD = JPanelOrder.getInstance().getListJPanelOrderDetail().get(tableId);
                 boolean checkExists = false;
                 for (JPanelOrderItem item : jpOD.getListDishOrdering()) {
