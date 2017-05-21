@@ -27,7 +27,7 @@ import view.ViewItem;
  * @author WINDNCC
  */
 public class Database {
-    private static Connection conn = null;
+    public static Connection conn = null;
     private static String URL;
     private static String USER;
     private static String PASS;
@@ -43,9 +43,9 @@ public class Database {
 //            URL = prop.getProperty("url");
 //            USER = prop.getProperty("user");
 //            PASS = prop.getProperty("password");
-              URL = "jdbc:mysql://localhost:3306/restaurant?useUnicode=yes&characterEncoding=UTF-8&serverTimezone=Asia/Saigon&useTimezone=yes";
-              USER = "root";
-              PASS = "";
+              URL = "jdbc:mysql://johnny.heliohost.org:3306/windncc_restaurant?useUnicode=yes&characterEncoding=UTF-8&serverTimezone=Asia/Saigon&useTimezone=yes";
+              USER = "windncc_huyxt";
+              PASS = "db123456";
 //            DriverManager.registerDriver(new com.mysql.jdbc.Driver());
             conn = (Connection) DriverManager.getConnection(URL, USER, PASS);
             
