@@ -83,8 +83,13 @@ public class MDish extends Model{
     }
 
     @Override
-    public void delete(){
-        Database.delete(getTableName(), "MaMA = " + getId());
+    public void delete() throws SQLException{
+        try {
+            Database.delete(getTableName(), "MaMA = " + getId());
+        } catch (SQLException e) {
+            throw e;
+        }
+        
     }
     @Override
     String getTableName() {

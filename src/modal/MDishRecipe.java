@@ -77,8 +77,13 @@ public class MDishRecipe extends Model{
         Database.update(getTableName(), updateData, "MaNL = " + this.getMaterialId() + " AND MaMA = " + this.getDishId());
     }
     @Override
-    public void delete(){
-        Database.delete(getTableName(), "MaMA = " + getDishId() + " AND MaNL = " + getMaterialId());
+    public void delete() throws SQLException{
+        try {
+            Database.delete(getTableName(), "MaMA = " + getDishId() + " AND MaNL = " + getMaterialId());
+        } catch (SQLException e) {
+            throw e;
+        }
+        
     }
     @Override
     String getTableName() {

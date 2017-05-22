@@ -103,8 +103,13 @@ public class MMaterial extends Model{
     }
     
     @Override
-    public void delete(){
-        Database.delete(getTableName(), "MaNL = " + getId());
+    public void delete() throws SQLException{
+        try {
+            Database.delete(getTableName(), "MaNL = " + getId());
+        } catch (SQLException e) {
+            throw e;
+        }
+        
     }
     
     @Override

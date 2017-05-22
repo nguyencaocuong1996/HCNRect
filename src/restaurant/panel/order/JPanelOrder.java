@@ -2,6 +2,7 @@
 package restaurant.panel.order;
 
 import com.mysql.jdbc.Connection;
+import core.CDateTime;
 import core.ComboboxItem;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -11,6 +12,10 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import modal.MBill;
+import modal.MBillDetail;
+import modal.MCustomer;
+import modal.MTable;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -375,10 +380,43 @@ public class JPanelOrder extends javax.swing.JPanel {
         int confirm = JOptionPane.showConfirmDialog(this, "Thực hiện thanh toán? Không thể hoàn tác.");
         if(confirm == JOptionPane.YES_OPTION){
             try { 
+                JPanelOrderDetail jpOD = listJPanelOrderDetail.get(getTableId());
+                MBill mBill = new MBill();
+                mBill.setCustomerId(1);
+                mBill.setStaffId(1);
+                mBill.setTotalBill(jpOD.getTotalBill());
+                mBill.setDateTimeBill(CDateTime.getInstance().toString());
+                mBill.setTableId(getTableId());
+                try {
+                    mBill.insert();
+                    mBill = MBill.getLastBill();
+                    for(JPanelOrderItem jpOI : jpOD.getListDishOrdering()){
+                        MBillDetail mBD = new MBillDetail();
+                        mBD.setBillId(mBill.getId());
+                        mBD.setDishId(jpOI.getDishId());
+                        mBD.setQuantity(jpOI.getQuantity());
+                        mBD.insert();
+                    }
+                    System.out.println(mBill.getId());
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    return;
+                }
                 VDishOrdering.deleteOrdering(getTableId());
                 JasperReport jR = JasperCompileManager.compileReport(ReportResources.RP_BILL);
+                
                 Map<String, Object> params = new HashMap<>();
-                params.put("MaBan", getTableId());
+                
+                params.put("MaHD", mBill.getId());
+                MTable mTable = MTable.getById(mBill.getTableId());
+                params.put("TenBan", mTable.getName());
+                
+                MCustomer mc = MCustomer.getByID(mBill.getCustomerId());
+                params.put("HoTenKH", mc.getFullName());
+                
+                params.put("SDTKH", mc.getPhone());
+                params.put("GiamGia", new Float(jTextFieldDiscount.getText()));
+                params.put("TienPhaiThanhToan", jpOD.getTotalBill());
                 JasperPrint jP = JasperFillManager.fillReport(jR, params, database.Database.getConnection());
                 JasperViewer.viewReport(jP,false);
                 MainFrame.getInstance().changeContentPanel(PanelFactory.get(PanelFactory.ID.ORDER_PICK_TABLE));

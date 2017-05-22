@@ -87,8 +87,13 @@ public class MStaff extends Model{
     }
     
     @Override
-    void delete(){
-        Database.delete(getTableName(), "MaNV = " + getId());
+    void delete() throws SQLException{
+        try {
+            Database.delete(getTableName(), "MaNV = " + getId());
+        } catch (SQLException e) {
+            throw e;
+        }
+        
     }
     
     @Override
