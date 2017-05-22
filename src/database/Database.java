@@ -124,7 +124,7 @@ public static void update(String tableName, HashMap updateData, String condition
         }
 }
 
-public static void delete(String tableName, String conditionStr){
+public static void delete(String tableName, String conditionStr) throws SQLException{
         Connection con = Database.getConnection();
         String sql = "DELETE FROM " + tableName + " WHERE " + conditionStr;
 //        System.out.println(sql);
@@ -133,7 +133,7 @@ public static void delete(String tableName, String conditionStr){
             stmt.executeUpdate(sql);
             closeConnection();
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            throw e;
         }
 }
 

@@ -19,6 +19,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.Locale;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -48,7 +49,6 @@ public class JPanelBookTable extends javax.swing.JPanel {
     }
     public final void showData(){
         jPanelListBookTableContent.removeAll();
-        int a = 0;
         Iterator i = viewBookTable.getData().iterator();
         int count = 0;
         while(i.hasNext()){
@@ -70,7 +70,30 @@ public class JPanelBookTable extends javax.swing.JPanel {
         jPanelListBookTableContent.revalidate();
         jPanelListBookTableContent.repaint();
     }
-
+    private void filter(){
+        jPanelListBookTableContent.removeAll();
+        viewBookTable.filterByNameAndPhone(jTextFieldFilterByNameAndPhone.getText(), jTextFieldFilterByNameAndPhone.getText());
+        Iterator i = viewBookTable.getFilterData().iterator();
+        int count = 0;
+        while(i.hasNext()){
+            count ++;
+            ViewItem t = (ViewItem) i.next();
+            Long bookTableId = (Long) t.get("MaPDB");
+            String customerName = (String) t.get("HoTenKH");
+            String tableName = (String) t.get("TenBan");
+            String phoneNumber = (String) t.get("SDTKH");
+            Integer status = new Integer(t.get("TrangThai").toString());
+            java.sql.Time time = (java.sql.Time) t.get("GioDen");
+            String dateTimeString = time.toLocalTime().plusHours(1).toString();
+            jPanelListBookTableContent.add(new JPanelBookTableItem(bookTableId.intValue(), customerName, phoneNumber, dateTimeString, tableName, status, (count % 2 != 0)));
+        }
+        int num = viewBookTable.getData().size();
+        int height = (num * 45);
+        int width = jPanelListBookTableContent.getPreferredSize().width;
+        jPanelListBookTableContent.setPreferredSize(new Dimension(width, height));
+        jPanelListBookTableContent.revalidate();
+        jPanelListBookTableContent.repaint();
+    }
     public JPanel getjPanelListBookTableContent() {
         return jPanelListBookTableContent;
     }
@@ -130,14 +153,13 @@ public class JPanelBookTable extends javax.swing.JPanel {
         dateChooserDialogAddBookTable = new datechooser.beans.DateChooserDialog();
         jDialogPickTable = new javax.swing.JDialog();
         jPanelBookTableHeader = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldFilterByNameAndPhone = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabelShowChooserDate = new javax.swing.JLabel();
         jLabelDateBookTable = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jPanelShowBookTable = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jPanelBookTableContent = new javax.swing.JPanel();
         jPanelListBookTableHeader = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -407,9 +429,7 @@ public class JPanelBookTable extends javax.swing.JPanel {
 
     jDialogPickTable.setTitle("Chọn bàn để đặt");
     jDialogPickTable.setAlwaysOnTop(true);
-    jDialogPickTable.setMaximumSize(new java.awt.Dimension(800, 550));
     jDialogPickTable.setMinimumSize(new java.awt.Dimension(800, 550));
-    jDialogPickTable.setPreferredSize(new java.awt.Dimension(800, 550));
     jDialogPickTable.setResizable(false);
     jDialogPickTable.getContentPane().setLayout(new java.awt.FlowLayout());
 
@@ -419,6 +439,17 @@ public class JPanelBookTable extends javax.swing.JPanel {
     setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 5));
 
     jPanelBookTableHeader.setPreferredSize(new java.awt.Dimension(792, 40));
+
+    jTextFieldFilterByNameAndPhone.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jTextFieldFilterByNameAndPhoneActionPerformed(evt);
+        }
+    });
+    jTextFieldFilterByNameAndPhone.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            jTextFieldFilterByNameAndPhoneKeyReleased(evt);
+        }
+    });
 
     jLabel7.setText("Ngày đặt");
 
@@ -450,8 +481,6 @@ public class JPanelBookTable extends javax.swing.JPanel {
     jLabel10.setVerticalAlignment(javax.swing.SwingConstants.TOP);
     jPanelShowBookTable.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 0, 100, 40));
 
-    jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
     javax.swing.GroupLayout jPanelBookTableHeaderLayout = new javax.swing.GroupLayout(jPanelBookTableHeader);
     jPanelBookTableHeader.setLayout(jPanelBookTableHeaderLayout);
     jPanelBookTableHeaderLayout.setHorizontalGroup(
@@ -466,10 +495,8 @@ public class JPanelBookTable extends javax.swing.JPanel {
             .addGap(40, 40, 40)
             .addComponent(jLabel6)
             .addGap(14, 14, 14)
-            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(18, 18, 18)
+            .addComponent(jTextFieldFilterByNameAndPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(95, 95, 95)
             .addComponent(jPanelShowBookTable, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addContainerGap(100, Short.MAX_VALUE))
     );
@@ -482,10 +509,9 @@ public class JPanelBookTable extends javax.swing.JPanel {
                 .addComponent(jLabelShowChooserDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelBookTableHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldFilterByNameAndPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGap(0, 0, Short.MAX_VALUE))
+            .addGap(0, 2, Short.MAX_VALUE))
     );
 
     add(jPanelBookTableHeader);
@@ -719,6 +745,14 @@ public class JPanelBookTable extends javax.swing.JPanel {
         jDialogPickTable.setVisible(true);
     }//GEN-LAST:event_jLabelPickTableMouseClicked
 
+    private void jTextFieldFilterByNameAndPhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldFilterByNameAndPhoneActionPerformed
+//        System.out.println("do action222");
+    }//GEN-LAST:event_jTextFieldFilterByNameAndPhoneActionPerformed
+
+    private void jTextFieldFilterByNameAndPhoneKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldFilterByNameAndPhoneKeyReleased
+        filter();
+    }//GEN-LAST:event_jTextFieldFilterByNameAndPhoneKeyReleased
+
     public DateChooserDialog getDateChooserDialog1() {
         return dateChooserDialogListBookTable;
     }
@@ -731,7 +765,6 @@ public class JPanelBookTable extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private datechooser.beans.DateChooserDialog dateChooserDialogAddBookTable;
     private datechooser.beans.DateChooserDialog dateChooserDialogListBookTable;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JDialog jDialogAddBookTable;
     private javax.swing.JDialog jDialogPickTable;
     private javax.swing.JLabel jLabel1;
@@ -766,8 +799,8 @@ public class JPanelBookTable extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSpinner jSpinnerTimePicker;
     private javax.swing.JTextArea jTextAreaCustomerMessage;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextFieldCustomerName;
     private javax.swing.JTextField jTextFieldCustomerPhone;
+    private javax.swing.JTextField jTextFieldFilterByNameAndPhone;
     // End of variables declaration//GEN-END:variables
 }

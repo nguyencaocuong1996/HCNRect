@@ -21,6 +21,19 @@ public class VBookTable extends View{
     public VBookTable() {
     }
     
+    public VBookTable filterByNameAndPhone(String name, String phone){
+        filter(new FilterView(){
+            @Override
+            public boolean filter(ViewItem o) {
+                String n = (String) o.get("HoTenKH");
+                String p = (String) o.get("SDTKH");
+                return n.contains(name) || p.contains(phone);
+            }
+            
+        });
+        return this;
+    }
+    
     public static VBookTable getListBookTable(int page, int numRow){
         Long startRow =new Long(numRow * (page - 1));
         String query = "SELECT pdb.MaPDB, pdb.MaBan, pdb.MaKH, TIME(pdb.NgayGioDatBan) as GioDen, b.TenBan, kh.HoTenKH, kh.SDTKH, pdb.TrangThai " +
@@ -53,5 +66,6 @@ public class VBookTable extends View{
         }
         return new VBookTable();
     }
+    
     
 }

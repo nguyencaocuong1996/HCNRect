@@ -33,4 +33,12 @@ public class VDishOrdering extends View{
         }
         return new VDishOrdering();
     }
+    public static void deleteOrdering(int tableId) throws SQLException{
+        try {
+            database.Database.delete("chi_tiet_dat_mon", "MaBan = "+tableId);
+        } catch (SQLException e) {
+            throw e;
+        }
+        
+    }
 }

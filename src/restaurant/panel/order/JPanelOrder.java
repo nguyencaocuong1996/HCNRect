@@ -6,15 +6,21 @@ import core.ComboboxItem;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
+import restaurant.MainFrame;
+import restaurant.panel.PanelFactory;
 import restaurant.report.ReportResources;
+import view.VDishOrdering;
 public class JPanelOrder extends javax.swing.JPanel {
     public static JPanelOrder instance;
     private int tableId;
@@ -365,17 +371,27 @@ public class JPanelOrder extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextFieldAmountPayKeyReleased
 
     private void jPanelToPayTheBillMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelToPayTheBillMouseClicked
-        System.out.println(ReportResources.RP_BILL);
-        try { 
-            System.out.println(ReportResources.RP_BILL);
-              JasperReport jR = JasperCompileManager.compileReport(ReportResources.RP_BILL);
-              Map<String, Object> params = new HashMap<>();
-              params.put("MaBan", 3);
-              JasperPrint jP = JasperFillManager.fillReport(jR, params, database.Database.getConnection());
-              JasperViewer.viewReport(jP);
-        } catch (Exception e) {
-            e.printStackTrace();
+        System.out.println("jPanelToPayTheBillMouseClicked in JPanelOrder.java: " + ReportResources.RP_BILL);
+        int confirm = JOptionPane.showConfirmDialog(this, "Thực hiện thanh toán? Không thể hoàn tác.");
+        if(confirm == JOptionPane.YES_OPTION){
+            try { 
+                VDishOrdering.deleteOrdering(getTableId());
+                JasperReport jR = JasperCompileManager.compileReport(ReportResources.RP_BILL);
+                Map<String, Object> params = new HashMap<>();
+                params.put("MaBan", getTableId());
+                JasperPrint jP = JasperFillManager.fillReport(jR, params, database.Database.getConnection());
+                JasperViewer.viewReport(jP,false);
+                MainFrame.getInstance().changeContentPanel(PanelFactory.get(PanelFactory.ID.ORDER_PICK_TABLE));
+                MainFrame.getInstance().changeHeaderPanel(PanelFactory.get(PanelFactory.ID.HEADER_ORDER_PICK_TABLE));
+            } catch (JRException e) {
+                e.printStackTrace();
+            } catch (SQLException e){
+                e.printStackTrace();
+            }
+        } else {
+            return;
         }
+        
     }//GEN-LAST:event_jPanelToPayTheBillMouseClicked
 
     private void jTextFieldDiscountFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldDiscountFocusGained

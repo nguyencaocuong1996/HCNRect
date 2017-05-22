@@ -76,7 +76,7 @@ public class JPanelListTable extends javax.swing.JPanel {
         return listJPanelTable;
     }
 
-    protected void filter(){
+    public void filter(){
         ComboboxItem ci = (ComboboxItem) jComboboxFilterByStatus.getSelectedItem();
         int statusId = (Integer) ci.getValue();
         String filterName = jTextFieldFilterByName.getText();
