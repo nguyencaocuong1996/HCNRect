@@ -403,7 +403,7 @@ public class JPanelOrder extends javax.swing.JPanel {
                     return;
                 }
                 VDishOrdering.deleteOrdering(getTableId());
-                JasperReport jR = JasperCompileManager.compileReport(ReportResources.RP_BILL);
+                
                 
                 Map<String, Object> params = new HashMap<>();
                 
@@ -417,6 +417,7 @@ public class JPanelOrder extends javax.swing.JPanel {
                 params.put("SDTKH", mc.getPhone());
                 params.put("GiamGia", new Float(jTextFieldDiscount.getText()));
                 params.put("TienPhaiThanhToan", jpOD.getTotalBill());
+                JasperReport jR = JasperCompileManager.compileReport(ReportResources.RP_BILL);
                 JasperPrint jP = JasperFillManager.fillReport(jR, params, database.Database.getConnection());
                 JasperViewer.viewReport(jP,false);
                 MainFrame.getInstance().changeContentPanel(PanelFactory.get(PanelFactory.ID.ORDER_PICK_TABLE));

@@ -11,4 +11,5 @@ package restaurant.report;
  */
 public class ReportResources {
     public static final String RP_BILL = ReportResources.class.getResource("source/IReportPayment.jrxml").toString().substring(6);
+    public static final String RP_TOP_DISH_BY_MOTH = ReportResources.class.getResource("source/IReportTopDishByMoth.jrxml").toString().substring(6);
 }

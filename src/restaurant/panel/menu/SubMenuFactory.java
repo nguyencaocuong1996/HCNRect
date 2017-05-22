@@ -5,8 +5,16 @@
  */
 package restaurant.panel.menu;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import javax.swing.JPanel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
+import restaurant.report.ReportResources;
 
 /**
  *
@@ -21,10 +29,27 @@ public class SubMenuFactory {
                 listSubMenuItem.add(new JPanelSubMenuItem("Món ăn"));
                 listSubMenuItem.add(new JPanelSubMenuItem("Nguyên liệu"));
                 listSubMenuItem.add(new JPanelSubMenuItem("Bàn ăn"));
+                listSubMenuItem.get(0);
             break;
             case "report" :
                 listSubMenuItem.add(new JPanelSubMenuItem("Thu chi"));
                 listSubMenuItem.add(new JPanelSubMenuItem("Tồn kho"));
+                listSubMenuItem.add(new JPanelSubMenuItem("Món ăn"));
+                listSubMenuItem.get(2).addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent me) {
+                try {
+                    System.out.println("Mon an is clicked");
+                    JasperReport jR = JasperCompileManager.compileReport(ReportResources.RP_TOP_DISH_BY_MOTH);
+                    JasperPrint jP = JasperFillManager.fillReport(jR, null, database.Database.getConnection());
+                    JasperViewer.viewReport(jP,false);
+                } catch (JRException e) {
+                    e.printStackTrace();
+                }
+                
+            }
+                    
+});
                 break;
             case "partner":
                 listSubMenuItem.add(new JPanelSubMenuItem("Khách hàng"));

@@ -1,54 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="abe4fcc3-318b-446b-a502-fbdb21dbb6cb">
-	<property name="ireport.zoom" value="3.0"/>
-	<property name="ireport.x" value="49"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="56"/>
 	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
 	<style name="Detail" fontName="Arial" fontSize="12"/>
-	<queryString language="SQL">
-		<![CDATA[SELECT
-     *,
-     ban.`MaBan` AS ban_MaBan,
-     ban.`TenBan` AS ban_TenBan,
-     ban.`GhiChu` AS ban_GhiChu
-FROM
-     `ban` ban]]>
+	<queryString>
+		<![CDATA[SELECT ma.MaMA, ma.TenMA, IFNULL( sum(cthd.SoLuong), 0 ) as SoLanGoiTrongThang, (sum(cthd.SoLuong) * ma.GiaMA) as TongTienThuDuoc
+FROM mon_an as ma
+LEFT JOIN chi_tiet_hoa_don as cthd ON cthd.MaMA = ma.MaMA
+LEFT JOIN hoa_don as hd ON hd.MaHD = cthd.MaHD
+GROUP BY ma.MaMA, ma.TenMA
+ORDER BY SoLanGoiTrongThang DESC]]>
 	</queryString>
-	<field name="MaBan" class="java.lang.Integer">
+	<field name="MaMA" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="TenBan" class="java.lang.String">
+	<field name="TenMA" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="GhiChu" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
+	<field name="SoLanGoiTrongThang" class="java.lang.Double"/>
+	<field name="TongTienThuDuoc" class="java.lang.Double"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="132" splitType="Stretch">
 			<staticText>
-				<reportElement style="Title" x="154" y="30" width="263" height="33" uuid="32ec4f14-d29e-4eba-8358-ca2669a733cb"/>
-				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[Báo Cáo Hàng Hóa]]></text>
+				<reportElement style="Title" x="98" y="60" width="371" height="33" uuid="32ec4f14-d29e-4eba-8358-ca2669a733cb"/>
+				<textElement verticalAlignment="Middle">
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Báo cáo món ăn được gọi nhiều nhất]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="110" width="143" height="20" uuid="4d28796d-a060-4a34-b6f8-aada7d867afa"/>
+				<reportElement x="0" y="40" width="143" height="20" uuid="4d28796d-a060-4a34-b6f8-aada7d867afa"/>
 				<text><![CDATA[Điện thoại: 01229696969]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="90" width="211" height="20" uuid="d78370c9-e911-469f-9350-cc81a5e6d2b4"/>
+				<reportElement x="0" y="20" width="211" height="20" uuid="d78370c9-e911-469f-9350-cc81a5e6d2b4"/>
 				<text><![CDATA[Địa chỉ: 31 Pastuer, Phường 1, Quận1, HCM]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="70" width="111" height="20" uuid="e5654775-909a-4071-bfb1-1adebe914adb"/>
+				<reportElement x="0" y="0" width="111" height="20" uuid="e5654775-909a-4071-bfb1-1adebe914adb"/>
 				<textElement>
 					<font fontName="SansSerif"/>
 				</textElement>
 				<text><![CDATA[Nhà hàng: Rectangle]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="211" y="93" width="147" height="39" uuid="6186b353-a1fe-430c-a74c-d93ea647290e"/>
+				<textElement>
+					<font fontName="Arial" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[trong tháng 5]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -64,21 +71,25 @@ FROM
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement style="Column header" x="0" y="19" width="185" height="15" uuid="d1722c68-e879-468a-b8a7-4ab2efaa01ae"/>
-				<text><![CDATA[MaBan]]></text>
+				<reportElement x="0" y="16" width="72" height="20" uuid="ffa5d2dc-1584-4d3c-a49f-2596224daca2"/>
+				<text><![CDATA[Mã món ăn]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="185" y="19" width="185" height="15" uuid="acabb973-1259-4271-a608-3709d9c35a7a"/>
-				<text><![CDATA[TenBan]]></text>
+				<reportElement x="72" y="16" width="166" height="20" uuid="913e2ac4-ccd2-404d-8d62-83e694d7d1ba"/>
+				<text><![CDATA[Tên món ăn]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="370" y="19" width="185" height="15" uuid="a20dcacb-3b5b-4a0a-9019-e25bc689ec53"/>
-				<text><![CDATA[GhiChu]]></text>
+				<reportElement x="238" y="16" width="130" height="20" uuid="c9d115d3-363e-4e7b-8bf2-a61aa4a0ce5a"/>
+				<text><![CDATA[Số lượng đặt trong tháng]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="413" y="16" width="136" height="20" uuid="e7840086-0b4e-4306-88e4-a09eebaf406d"/>
+				<text><![CDATA[Số tiền thu được]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="16" splitType="Stretch">
+		<band height="27" splitType="Stretch">
 			<line>
 				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="b617bbbc-5b1b-4f17-aef6-93807cf7d5b4"/>
 				<graphicElement>
@@ -86,16 +97,20 @@ FROM
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement style="Detail" x="0" y="0" width="185" height="15" uuid="ea58ad69-7157-4e29-836c-490523557347"/>
-				<textFieldExpression><![CDATA[$F{MaBan}]]></textFieldExpression>
+				<reportElement x="0" y="0" width="72" height="20" uuid="864b30aa-f39d-4d85-9bc1-362c5856ba63"/>
+				<textFieldExpression><![CDATA[$F{MaMA}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="185" y="0" width="185" height="15" uuid="a3ada330-e9fa-46db-94ef-64cf8bda5f3d"/>
-				<textFieldExpression><![CDATA[$F{TenBan}]]></textFieldExpression>
+				<reportElement x="72" y="0" width="100" height="20" uuid="9eb6fefe-20c5-455a-8d4a-c666b622440a"/>
+				<textFieldExpression><![CDATA[$F{TenMA}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="Detail" x="370" y="0" width="185" height="15" uuid="f2298b05-6ead-41e1-8640-f4abe9040f77"/>
-				<textFieldExpression><![CDATA[$F{GhiChu}]]></textFieldExpression>
+				<reportElement x="238" y="0" width="130" height="20" uuid="2b99df79-ebf5-46fe-bda5-38666faee719"/>
+				<textFieldExpression><![CDATA[$F{SoLanGoiTrongThang}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="413" y="0" width="136" height="20" uuid="c62f5b73-cab7-4d38-a641-959f53a235e1"/>
+				<textFieldExpression><![CDATA[$F{TongTienThuDuoc}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

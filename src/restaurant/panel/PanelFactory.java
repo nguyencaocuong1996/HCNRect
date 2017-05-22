@@ -22,6 +22,8 @@ public class PanelFactory {
     private static JPanelHeader headerOrderPickTable;
     private static JPanelHeader headerOrder;
     private static JPanelHeader headerBookTable;
+    private static JPanelHeader headerPackageMaterial;
+    private static JPanelHeader headerPackageDish;
     private static JPanelWelcome overview;
     private static JPanelSidebar sidebar;
     
@@ -37,6 +39,9 @@ public class PanelFactory {
             public static final int HEADER_ORDER_PICK_TABLE = 221;
             public static final int HEADER_ORDER = 231;
             public static final int HEADER_BOOK_TABLE = 241;
+            public static final int HEADER_PACKAGE_MATERIAL = 251;
+            public static final int HEADER_PACKAGE_DISH = 252;
+            public static final int HEADER_PACKAGE_TABLE = 253;
     }
     public static JPanel get(int panelId){
         JPanel jp = new JPanel();
@@ -81,6 +86,9 @@ public class PanelFactory {
             case ID.HEADER_ORDER_PICK_TABLE:
                 if (headerOrderPickTable == null) headerOrderPickTable = new JPanelHeader("Chọn bàn", IconResources.BOOKTABLE);
                 jp = headerOrderPickTable;
+            case ID.HEADER_PACKAGE_DISH:
+                
+                break;
             default:
                 break;
         }
