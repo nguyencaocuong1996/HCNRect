@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="abe4fcc3-318b-446b-a502-fbdb21dbb6cb">
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="49"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     *,
+     ban.`MaBan` AS ban_MaBan,
+     ban.`TenBan` AS ban_TenBan,
+     ban.`GhiChu` AS ban_GhiChu
+FROM
+     `ban` ban]]>
+	</queryString>
+	<field name="MaBan" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TenBan" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="GhiChu" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="132" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="154" y="30" width="263" height="33" uuid="32ec4f14-d29e-4eba-8358-ca2669a733cb"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Báo Cáo Hàng Hóa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="110" width="143" height="20" uuid="4d28796d-a060-4a34-b6f8-aada7d867afa"/>
+				<text><![CDATA[Điện thoại: 01229696969]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="90" width="211" height="20" uuid="d78370c9-e911-469f-9350-cc81a5e6d2b4"/>
+				<text><![CDATA[Địa chỉ: 31 Pastuer, Phường 1, Quận1, HCM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="70" width="111" height="20" uuid="e5654775-909a-4071-bfb1-1adebe914adb"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Nhà hàng: Rectangle]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="a6ddd2c3-83d4-4586-a849-e9ab78ca15ed"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="19" width="185" height="15" uuid="d1722c68-e879-468a-b8a7-4ab2efaa01ae"/>
+				<text><![CDATA[MaBan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="185" y="19" width="185" height="15" uuid="acabb973-1259-4271-a608-3709d9c35a7a"/>
+				<text><![CDATA[TenBan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="370" y="19" width="185" height="15" uuid="a20dcacb-3b5b-4a0a-9019-e25bc689ec53"/>
+				<text><![CDATA[GhiChu]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="b617bbbc-5b1b-4f17-aef6-93807cf7d5b4"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="185" height="15" uuid="ea58ad69-7157-4e29-836c-490523557347"/>
+				<textFieldExpression><![CDATA[$F{MaBan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="185" y="0" width="185" height="15" uuid="a3ada330-e9fa-46db-94ef-64cf8bda5f3d"/>
+				<textFieldExpression><![CDATA[$F{TenBan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="370" y="0" width="185" height="15" uuid="f2298b05-6ead-41e1-8640-f4abe9040f77"/>
+				<textFieldExpression><![CDATA[$F{GhiChu}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="81" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="d958ffd2-33c2-4133-b181-58a7c472e541"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="401" y="4" width="132" height="20" uuid="81f8c8c7-7224-4d49-96a4-587c91b7ead7"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Ngày......Tháng.......Năm]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="433" y="24" width="100" height="20" uuid="d3858f11-3fb1-4f59-9f19-287004204a91"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Giám đốc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="211" y="24" width="100" height="20" uuid="d8b9b10d-b506-417b-bc76-6ab31dfdc5e0"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quản lý]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="24" width="100" height="20" uuid="e0ed0318-e72d-46d2-a4a9-43aabe1818e4"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Người lập biểu]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="539c2dd5-a6fb-4eda-bf28-14f804a56341"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="89557054-c1c6-4453-9701-6a239c9d97e6"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
