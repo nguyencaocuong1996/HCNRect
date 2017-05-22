@@ -18,13 +18,17 @@ public class SubMenuFactory {
         ArrayList<JPanelSubMenuItem> listSubMenuItem = new ArrayList<>();
         switch(type){
             case "package" :
-                listSubMenuItem.add(new JPanelSubMenuItem("pak 1"));
-                listSubMenuItem.add(new JPanelSubMenuItem("pak 2"));
-                listSubMenuItem.add(new JPanelSubMenuItem("pak 2"));
+                listSubMenuItem.add(new JPanelSubMenuItem("Món ăn"));
+                listSubMenuItem.add(new JPanelSubMenuItem("Nguyên liệu"));
+                listSubMenuItem.add(new JPanelSubMenuItem("Bàn ăn"));
             break;
             case "report" :
-                listSubMenuItem.add(new JPanelSubMenuItem("pak 1"));
-                listSubMenuItem.add(new JPanelSubMenuItem("pak 2"));
+                listSubMenuItem.add(new JPanelSubMenuItem("Thu chi"));
+                listSubMenuItem.add(new JPanelSubMenuItem("Tồn kho"));
+                break;
+            case "partner":
+                listSubMenuItem.add(new JPanelSubMenuItem("Khách hàng"));
+                listSubMenuItem.add(new JPanelSubMenuItem("Nhà cung cấp"));
                 break;
         }
         return new JPanelSubMenu(listSubMenuItem);

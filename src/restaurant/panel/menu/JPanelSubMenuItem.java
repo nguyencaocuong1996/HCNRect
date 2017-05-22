@@ -16,7 +16,7 @@ public class JPanelSubMenuItem extends javax.swing.JPanel {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("cac");
+                System.out.println("sub menu is clicked");
             }
             
 });

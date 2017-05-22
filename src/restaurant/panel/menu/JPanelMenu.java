@@ -18,8 +18,8 @@ public class JPanelMenu extends javax.swing.JPanel {
         JPanelMenuItem jpMIOrder = new JPanelMenuItem("Gọi món", IconResources.ORDER, 1);
         JPanelMenuItem jpMIBook = new JPanelMenuItem("Đặt bàn", IconResources.BOOKTABLE, 2);
         JPanelMenuItem jpMIPackage = new JPanelMenuItem("Hàng hóa", IconResources.PACKAGE, 3, SubMenuFactory.get("package"));
-        JPanelMenuItem jpMIReport = new JPanelMenuItem("Báo cáo", IconResources.REPORT, 4, SubMenuFactory.get("package"));
-        JPanelMenuItem jpMIPartner = new JPanelMenuItem("Đối tác", IconResources.PARTNER, 6, SubMenuFactory.get("package"));
+        JPanelMenuItem jpMIReport = new JPanelMenuItem("Báo cáo", IconResources.REPORT, 4, SubMenuFactory.get("report"));
+        JPanelMenuItem jpMIPartner = new JPanelMenuItem("Đối tác", IconResources.PARTNER, 6, SubMenuFactory.get("partner"));
         JPanelMenuItem jpMIStaff = new JPanelMenuItem("Nhân viên", IconResources.STAFF, 7);
         JPanelMenuItem jpMICoins = new JPanelMenuItem("Giao dịch", IconResources.COINS, 8);
         
@@ -27,6 +27,8 @@ public class JPanelMenu extends javax.swing.JPanel {
         jpMIOrder.addMouseListener(new MouseListenerMenuItem(PanelFactory.ID.ORDER_PICK_TABLE, PanelFactory.ID.HEADER_ORDER_PICK_TABLE));
         jpMIBook.addMouseListener(new MouseListenerMenuItem(PanelFactory.ID.BOOK_TABLE, PanelFactory.ID.HEADER_BOOK_TABLE));
         jpMIPackage.addMouseListener(new MouseListenerMenuItem());
+        jpMIReport.addMouseListener(new MouseListenerMenuItem());
+        jpMIPartner.addMouseListener(new MouseListenerMenuItem());
         //add to List
         listJPanelMenuItem.add(jpMIOrder);
         listJPanelMenuItem.add(jpMIBook);
