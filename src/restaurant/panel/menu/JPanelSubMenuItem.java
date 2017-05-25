@@ -11,12 +11,14 @@ import restaurant.panel.PanelFactory;
 
 public class JPanelSubMenuItem extends javax.swing.JPanel {
     public String name;
-    public int targetPanelId;
-    public int targetPanelHeaderId;
+    public int targetPanelId = 0;
+    public int targetPanelHeaderId = 0;
     public JPanelSubMenuItem(String name, int targetId, int targetHeaderId){
+        initComponents();
         this.name = name;
-        this.targetPanelId = targetId = 0;
-        this.targetPanelHeaderId = targetHeaderId = 0;
+        this.targetPanelId = targetId;
+        this.targetPanelHeaderId = targetHeaderId;
+        customInit();
     }
     public JPanelSubMenuItem(String name) {
         initComponents();
@@ -29,7 +31,7 @@ public class JPanelSubMenuItem extends javax.swing.JPanel {
     }
     private void customInit(){
         this.setBorder(new MatteBorder(0, 0, 1, 0, Color.white));
-        jLabelActionName.setText(name);
+        jLabelActionName.setText(this.name);
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

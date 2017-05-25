@@ -27,30 +27,28 @@ public class SubMenuFactory {
         ArrayList<JPanelSubMenuItem> listSubMenuItem = new ArrayList<>();
         switch(type){
             case "package" :
-                listSubMenuItem.add(new JPanelSubMenuItem("Món ăn"));
-                listSubMenuItem.add(new JPanelSubMenuItem("Nguyên liệu"));
-                listSubMenuItem.add(new JPanelSubMenuItem("Bàn ăn"));
-                listSubMenuItem.get(0).addMouseListener(new MouseListenerSubMenuItem(PanelFactory.ID.PACKAGE_DISH, PanelFactory.ID.HEADER_PACKAGE_DISH));
-            break;
+                listSubMenuItem.add(new JPanelSubMenuItem("Món ăn",PanelFactory.ID.PACKAGE_DISH,PanelFactory.ID.HEADER_PACKAGE_DISH));
+                listSubMenuItem.add(new JPanelSubMenuItem("Nguyên liệu",PanelFactory.ID.PACKAGE_MATERIAL,PanelFactory.ID.HEADER_PACKAGE_MATERIAL));
+                listSubMenuItem.add(new JPanelSubMenuItem("Bàn ăn",PanelFactory.ID.PACKAGE_TABLE,PanelFactory.ID.HEADER_PACKAGE_TABLE));
+                break;
             case "report" :
                 listSubMenuItem.add(new JPanelSubMenuItem("Thu chi"));
                 listSubMenuItem.add(new JPanelSubMenuItem("Tồn kho"));
                 listSubMenuItem.add(new JPanelSubMenuItem("Món ăn"));
-                listSubMenuItem.get(2).addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent me) {
-                try {
-                    System.out.println("Mon an is clicked");
-                    JasperReport jR = JasperCompileManager.compileReport(ReportResources.RP_TOP_DISH_BY_MOTH);
-                    JasperPrint jP = JasperFillManager.fillReport(jR, null, database.Database.getConnection());
-                    JasperViewer.viewReport(jP,false);
-                } catch (JRException e) {
-                    e.printStackTrace();
-                }
-                
-            }
-                    
-});
+//                listSubMenuItem.get(2).addMouseListener(new MouseAdapter() {
+//                    @Override
+//                    public void mouseClicked(MouseEvent me) {
+//                    try {
+//                        System.out.println("Mon an is clicked");
+//                        JasperReport jR = JasperCompileManager.compileReport(ReportResources.RP_TOP_DISH_BY_MOTH);
+//                        JasperPrint jP = JasperFillManager.fillReport(jR, null, database.Database.getConnection());
+//                        JasperViewer.viewReport(jP,false);
+//                    } catch (JRException e) {
+//                        e.printStackTrace();
+//                    }
+//                
+//                    }  
+//                });
                 break;
             case "partner":
                 listSubMenuItem.add(new JPanelSubMenuItem("Khách hàng"));

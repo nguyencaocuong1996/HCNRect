@@ -5,6 +5,7 @@
  */
 package view;
 
+import core.CString;
 import database.DBConst;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,10 +24,10 @@ public class VTable extends View{
 
     public VTable(ViewData viewData) {
         data = viewData;
-        filterData = (ViewData) data.clone();
         data.forEach((ViewItem t) -> {
             Integer tableId = (Integer) t.get("MaBan");
             String tableName = (String) t.get("TenBan");
+            String tableNote = (String) t.get("GhiChu");
             BigDecimal dishOrderTable = (BigDecimal) t.get("SoMonDangDat");
             Integer dishOrderTableInt = dishOrderTable.intValue();
             BigDecimal dishSoPhieuDat = (BigDecimal) t.get("SoPhieuDatHomNayVaChuaToi");
@@ -42,16 +43,17 @@ public class VTable extends View{
                 }
             }
             t.put("TrangThai", tableStatus);
+            t.put("GhiChu", tableNote);
             t.remove("SoMonDangDat");
             t.remove("SoPhieuDatHomNayVaChuaToi");
         });
+        filterData = (ViewData) data.clone();
 //        System.out.println("aa");
     }
-    
     public static VTable searchByName(String keyWord){
         java.sql.Date curDate =  new java.sql.Date(System.currentTimeMillis());
         String curDateString = curDate.toString();
-        String sqlQuery = "SELECT b.MaBan, b.TenBan, ifnull(sum(ctdm.MaBan), 0) as SoMonDangDat, ifnull((pdb.MaBan), 0) as SoPhieuDatHomNayVaChuaToi FROM ban as b" +
+        String sqlQuery = "SELECT b.MaBan, b.TenBan,b.GhiChu, ifnull(sum(ctdm.MaBan), 0) as SoMonDangDat, ifnull((pdb.MaBan), 0) as SoPhieuDatHomNayVaChuaToi FROM ban as b" +
                             " left join chi_tiet_dat_mon as ctdm on b.MaBan = ctdm.MaBan" +
                             " left join phieu_dat_ban as pdb on pdb.MaBan = b.MaBan and date(pdb.NgayGioDatBan) = '"+curDateString+"' and pdb.TrangThai = 0";
         if(!"".equals(keyWord)) sqlQuery += " WHERE b.TenBan LIKE '%" + keyWord + "%'";
@@ -99,10 +101,9 @@ public class VTable extends View{
         this.filter(new FilterView(){
             @Override
             public boolean filter(ViewItem vi) {
-                
-                String n = (String) vi.get("TenBan");
-                System.out.println(n);
-                return n.contains(name);
+                String n = CString.removeAccent((String) vi.get("TenBan")).toLowerCase();
+//                System.out.println(n);
+                return n.contains(CString.removeAccent(name).toLowerCase());
             }
         });
         return this;
