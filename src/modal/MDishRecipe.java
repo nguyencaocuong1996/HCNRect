@@ -70,11 +70,16 @@ public class MDishRecipe extends Model{
     }
 
     @Override
-    void update(){
+    public void update() throws SQLException{
         updateData = new ModalData();
         updateData.put("LuongCan", this.getQty());
         updateData.put("GhiChu", this.getNote());
-        Database.update(getTableName(), updateData, "MaNL = " + this.getMaterialId() + " AND MaMA = " + this.getDishId());
+        try {
+            Database.update(getTableName(), updateData, "MaNL = " + this.getMaterialId() + " AND MaMA = " + this.getDishId());
+        } catch (SQLException e) {
+            throw e;
+        }
+        
     }
     @Override
     public void delete() throws SQLException{

@@ -77,13 +77,18 @@ public class MStaff extends Model{
     }
 
     @Override
-    void update() {
+    public void update() throws SQLException {
         updateData = new ModalData();
         updateData.put("HoTenNV", this.getName());
         updateData.put("SDTNV", this.getPhone());
         updateData.put("DiaChiNV", this.getAddress());
         updateData.put("MaPB", this.getDepartmentId());
-        Database.update(getTableName(), updateData, "MaNV = " + getId());
+        try {
+            Database.update(getTableName(), updateData, "MaNV = " + getId());
+        } catch (SQLException e) {
+            throw e;
+        }
+        
     }
     
     @Override

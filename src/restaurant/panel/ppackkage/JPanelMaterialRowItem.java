@@ -7,6 +7,7 @@ package restaurant.panel.ppackkage;
 import assets.images.ImageResources;
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 /**
  *
@@ -47,8 +48,8 @@ public class JPanelMaterialRowItem extends javax.swing.JPanel {
         jLabelMaterialId = new javax.swing.JLabel();
         jLabelMaterialName = new javax.swing.JLabel();
         jLabelMaterialQty = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        jLabelEdit = new javax.swing.JLabel();
+        jLabelDelete = new javax.swing.JLabel();
         jLabelMaterialLimit = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(760, 57));
@@ -61,9 +62,9 @@ public class JPanelMaterialRowItem extends javax.swing.JPanel {
 
         jLabelMaterialQty.setText("120000000");
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_edit_green_x24.png"))); // NOI18N
+        jLabelEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_edit_green_x24.png"))); // NOI18N
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_dell_gray_x24.png"))); // NOI18N
+        jLabelDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_dell_gray_x24.png"))); // NOI18N
 
         jLabelMaterialLimit.setText("limit");
 
@@ -81,9 +82,9 @@ public class JPanelMaterialRowItem extends javax.swing.JPanel {
                 .addGap(127, 127, 127)
                 .addComponent(jLabelMaterialLimit)
                 .addGap(105, 105, 105)
-                .addComponent(jLabel6)
+                .addComponent(jLabelEdit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel7)
+                .addComponent(jLabelDelete)
                 .addContainerGap(141, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -92,8 +93,8 @@ public class JPanelMaterialRowItem extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(16, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabelDelete)
+                    .addComponent(jLabelEdit))
                 .addGap(17, 17, 17))
             .addComponent(jLabelMaterialName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabelMaterialId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -133,9 +134,17 @@ public class JPanelMaterialRowItem extends javax.swing.JPanel {
         this.unit = image;
     }
 
+    public JLabel getjLabelDelete() {
+        return jLabelDelete;
+    }
+
+    public JLabel getjLabelEdit() {
+        return jLabelEdit;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabelDelete;
+    private javax.swing.JLabel jLabelEdit;
     private javax.swing.JLabel jLabelMaterialId;
     private javax.swing.JLabel jLabelMaterialLimit;
     private javax.swing.JLabel jLabelMaterialName;

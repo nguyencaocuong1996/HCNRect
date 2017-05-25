@@ -6,24 +6,29 @@
 package restaurant.panel.ppackkage;
 import assets.images.ImageResources;
 import java.awt.Color;
+import java.sql.SQLException;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import modal.MTable;
+import view.VTable;
 
 /**
  *
  * @author WINDNCC
  */
 public class JPanelTableRowItem extends javax.swing.JPanel {
-    protected String dishName;
+    protected String tableName;
     protected int id;
     protected String note;
     protected static Color oddBackground = new Color(224, 224, 235);
     public JPanelTableRowItem() {
         initComponents();
     }
-    public JPanelTableRowItem(int dishId, String dishName, String note, boolean odd) {
+    public JPanelTableRowItem(int tableId, String tableName, String note, boolean odd) {
         initComponents();
-        this.id = dishId;
-        this.dishName = dishName;
+        this.id = tableId;
+        this.tableName = tableName;
         this.note = note;
         if(odd){
             setBackground(oddBackground);
@@ -31,49 +36,54 @@ public class JPanelTableRowItem extends javax.swing.JPanel {
         customInit();
     }
     public final void customInit(){
-        jLabelDishId.setText(this.id + "");
-        jLabelDishName.setText("<html><p>" + this.dishName + "</p></html>");
+        jLabelTableId.setText(this.id + "");
+        jLabelTableName.setText("<html><p>" + this.tableName + "</p></html>");
         if(this.note == null) this.note = " ";
-        jLabelNote.setText("<html><p>" + this.note + "</p></html>");
+        jLabelTableNote.setText("<html><p>" + this.note + "</p></html>");
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabelDishId = new javax.swing.JLabel();
-        jLabelDishName = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabelNote = new javax.swing.JLabel();
+        jLabelTableId = new javax.swing.JLabel();
+        jLabelTableName = new javax.swing.JLabel();
+        jLabelEditTable = new javax.swing.JLabel();
+        jLabelDelete = new javax.swing.JLabel();
+        jLabelTableNote = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(760, 57));
         setMinimumSize(new java.awt.Dimension(760, 57));
         setPreferredSize(new java.awt.Dimension(760, 57));
 
-        jLabelDishId.setText("001");
+        jLabelTableId.setText("001");
 
-        jLabelDishName.setText("Bàn 1");
+        jLabelTableName.setText("Bàn 1");
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_edit_green_x24.png"))); // NOI18N
+        jLabelEditTable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_edit_green_x24.png"))); // NOI18N
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_dell_gray_x24.png"))); // NOI18N
+        jLabelDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_dell_gray_x24.png"))); // NOI18N
+        jLabelDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelDeleteMouseClicked(evt);
+            }
+        });
 
-        jLabelNote.setText("Chú thích");
+        jLabelTableNote.setText("Chú thích");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabelDishId, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelTableId, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
-                .addComponent(jLabelDishName, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelTableName, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabelNote, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelTableNote, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel6)
+                .addComponent(jLabelEditTable)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel7)
+                .addComponent(jLabelDelete)
                 .addContainerGap(77, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -81,21 +91,43 @@ public class JPanelTableRowItem extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(16, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabelDelete)
+                    .addComponent(jLabelEditTable))
                 .addGap(17, 17, 17))
-            .addComponent(jLabelDishId, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabelDishName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabelNote, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabelTableId, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabelTableName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabelTableNote, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    public String getDishName() {
-        return dishName;
+    private void jLabelDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDeleteMouseClicked
+        MTable mTable = new MTable(this.id);
+        int check = JOptionPane.showConfirmDialog(JPanelManagementTable.getInstance(), "Bạn có chắc muốn xóa!");
+        if(check == JOptionPane.YES_OPTION){
+            try {
+                mTable.delete();
+                JOptionPane.showMessageDialog(this, "Xóa bàn thành công!");
+                JPanelManagementTable.getInstance().listTable = VTable.getAllTable();
+                JPanelManagementTable.getInstance().listJPTRI.remove(this.id);
+                JPanelManagementTable.getInstance().filter();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(this, "Xóa bàn thất bại!");
+            }
+        }
+
+    }//GEN-LAST:event_jLabelDeleteMouseClicked
+
+    public JLabel getjLabelEditTable() {
+        return jLabelEditTable;
+    }
+    
+    public String getTableName() {
+        return tableName;
     }
 
-    public void setDishName(String name) {
-        this.dishName = name;
+    public void setTableName(String name) {
+        jLabelTableName.setText(name);
+        this.tableName = name;
     }
 
     public int getId() {
@@ -106,11 +138,22 @@ public class JPanelTableRowItem extends javax.swing.JPanel {
         this.id = id;
     }
 
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        jLabelTableNote.setText(note);
+        this.note = note;
+    }
+
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabelDishId;
-    private javax.swing.JLabel jLabelDishName;
-    private javax.swing.JLabel jLabelNote;
+    private javax.swing.JLabel jLabelDelete;
+    private javax.swing.JLabel jLabelEditTable;
+    private javax.swing.JLabel jLabelTableId;
+    private javax.swing.JLabel jLabelTableName;
+    private javax.swing.JLabel jLabelTableNote;
     // End of variables declaration//GEN-END:variables
 }

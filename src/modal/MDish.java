@@ -74,12 +74,17 @@ public class MDish extends Model{
     }
 
     @Override
-    void update() {
+    public void update() throws SQLException{
         updateData = new ModalData();
         updateData.put("TenMA", this.getName());
         updateData.put("GiaMA", this.getPrice());
         updateData.put("DiaChiAnhMA", this.getImageUrl());
-        Database.update(getTableName(), updateData, "MaMA = " + getId());
+        try {
+            Database.update(getTableName(), updateData, "MaMA = " + getId());
+        } catch (SQLException e) {
+            throw e;
+        }
+        
     }
 
     @Override

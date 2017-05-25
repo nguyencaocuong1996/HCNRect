@@ -89,17 +89,28 @@ public class MMaterial extends Model{
         insertData.put("TenNL", this.getName());
         insertData.put("SoLuongTon", this.getInStock());
         insertData.put("MucToiThieu", this.getMinInStock());
-        Database.insert(getTableName(), insertData);
+        insertData.put("DonVi", this.getUnit());
+        try {
+            Database.insert(getTableName(), insertData);
+        } catch (SQLException e) {
+            throw e;
+        }
+        
     }
 
     @Override
-    public void update() {
+    public void update() throws SQLException {
         updateData = new ModalData();
         updateData.put("TenNL", this.getName());
         updateData.put("SoLuongTon", this.getInStock());
         updateData.put("MucToiThieu", this.getMinInStock());
         updateData.put("DonVi", this.getUnit());
-        Database.update(getTableName(), updateData, "MaNL = " + this.getId());
+        try {
+            Database.update(getTableName(), updateData, "MaNL = " + this.getId());
+        } catch (SQLException e) {
+            throw e;
+        }
+        
     }
     
     @Override

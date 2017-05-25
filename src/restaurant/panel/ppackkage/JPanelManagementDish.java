@@ -33,7 +33,7 @@ public class JPanelManagementDish extends javax.swing.JPanel {
             jPanelTableContent.add(jpDRI);
             count++;
         };
-        int height = listDish.getData().size() * 62;
+        int height = listDish.getData().size() * 58;
         jPanelTableContent.setPreferredSize(new Dimension(780, height));
         
     }
@@ -47,7 +47,7 @@ public class JPanelManagementDish extends javax.swing.JPanel {
             Long id = (Long) t.get("MaMA");
             jPanelTableContent.add(listJPDRI.get(id.intValue()));
         };
-        int height = listDish.getFilterData().size() * 62;
+        int height = listDish.getFilterData().size() * 58;
         jPanelTableContent.setPreferredSize(new Dimension(780, height));
         this.revalidate();
         this.repaint();
@@ -90,7 +90,7 @@ public class JPanelManagementDish extends javax.swing.JPanel {
         jPanel1.setMaximumSize(new java.awt.Dimension(451, 42));
         jPanel1.setMinimumSize(new java.awt.Dimension(451, 42));
 
-        jLabel1.setText("Tìm món ăn:");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_management_search_darkgreen_x32.png"))); // NOI18N
 
         jTextFieldFilterName.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -98,6 +98,7 @@ public class JPanelManagementDish extends javax.swing.JPanel {
             }
         });
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_management_add_x32.png"))); // NOI18N
         jLabel2.setText("Thêm món ăn");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -116,7 +117,7 @@ public class JPanelManagementDish extends javax.swing.JPanel {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(8, 8, 8)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)

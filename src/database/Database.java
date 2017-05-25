@@ -97,7 +97,7 @@ public class Database {
             throw e;
         }
 }   
-public static void update(String tableName, HashMap updateData, String conditionStr){
+public static void update(String tableName, HashMap updateData, String conditionStr) throws SQLException{
         Connection con = Database.getConnection();
         Set setInsert = (Set) updateData.entrySet();
         Iterator itDataInsert = setInsert.iterator();
@@ -120,7 +120,7 @@ public static void update(String tableName, HashMap updateData, String condition
             stmt.executeUpdate(sql);
             closeConnection();
         } catch (SQLException e) {
-            System.out.println(e.toString());
+            throw e;
         }
 }
 

@@ -57,7 +57,7 @@ public class VTable extends View{
                             " left join chi_tiet_dat_mon as ctdm on b.MaBan = ctdm.MaBan" +
                             " left join phieu_dat_ban as pdb on pdb.MaBan = b.MaBan and date(pdb.NgayGioDatBan) = '"+curDateString+"' and pdb.TrangThai = 0";
         if(!"".equals(keyWord)) sqlQuery += " WHERE b.TenBan LIKE '%" + keyWord + "%'";
-               sqlQuery +=  " group by b.MaBan";
+               sqlQuery +=  " group by b.MaBan ORDER BY b.MaBan DESC";
 //        System.out.println(sqlQuery);
         try{
         return new VTable(Database.viewSelect(sqlQuery));
