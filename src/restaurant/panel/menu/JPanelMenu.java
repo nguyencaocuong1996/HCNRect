@@ -26,9 +26,9 @@ public class JPanelMenu extends javax.swing.JPanel {
         //Add mouseListener
         jpMIOrder.addMouseListener(new MouseListenerMenuItem(PanelFactory.ID.ORDER_PICK_TABLE, PanelFactory.ID.HEADER_ORDER_PICK_TABLE));
         jpMIBook.addMouseListener(new MouseListenerMenuItem(PanelFactory.ID.BOOK_TABLE, PanelFactory.ID.HEADER_BOOK_TABLE));
-        jpMIPackage.addMouseListener(new MouseListenerMenuItem());
-        jpMIReport.addMouseListener(new MouseListenerMenuItem());
-        jpMIPartner.addMouseListener(new MouseListenerMenuItem());
+        jpMIPackage.addMouseListener(new MouseListenerSubMenuItem());
+        jpMIReport.addMouseListener(new MouseListenerSubMenuItem());
+        jpMIPartner.addMouseListener(new MouseListenerSubMenuItem());
         //add to List
         listJPanelMenuItem.add(jpMIOrder);
         listJPanelMenuItem.add(jpMIBook);
