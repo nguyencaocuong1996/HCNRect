@@ -14,6 +14,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
+import restaurant.panel.PanelFactory;
 import restaurant.report.ReportResources;
 
 /**
@@ -29,7 +30,7 @@ public class SubMenuFactory {
                 listSubMenuItem.add(new JPanelSubMenuItem("Món ăn"));
                 listSubMenuItem.add(new JPanelSubMenuItem("Nguyên liệu"));
                 listSubMenuItem.add(new JPanelSubMenuItem("Bàn ăn"));
-                listSubMenuItem.get(0);
+                listSubMenuItem.get(0).addMouseListener(new MouseListenerSubMenuItem(PanelFactory.ID.OVERVIEW, PanelFactory.ID.HEADER_OVERVIEW));
             break;
             case "report" :
                 listSubMenuItem.add(new JPanelSubMenuItem("Thu chi"));
