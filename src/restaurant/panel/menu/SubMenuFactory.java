@@ -30,7 +30,7 @@ public class SubMenuFactory {
                 listSubMenuItem.add(new JPanelSubMenuItem("Món ăn"));
                 listSubMenuItem.add(new JPanelSubMenuItem("Nguyên liệu"));
                 listSubMenuItem.add(new JPanelSubMenuItem("Bàn ăn"));
-                listSubMenuItem.get(0).addMouseListener(new MouseListenerSubMenuItem(PanelFactory.ID.OVERVIEW, PanelFactory.ID.HEADER_OVERVIEW));
+                listSubMenuItem.get(0).addMouseListener(new MouseListenerSubMenuItem(PanelFactory.ID.PACKAGE_DISH, PanelFactory.ID.HEADER_PACKAGE_DISH));
             break;
             case "report" :
                 listSubMenuItem.add(new JPanelSubMenuItem("Thu chi"));

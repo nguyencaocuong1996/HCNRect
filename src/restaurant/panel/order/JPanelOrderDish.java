@@ -3,7 +3,6 @@ package restaurant.panel.order;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JFrame;
 import view.VDish;

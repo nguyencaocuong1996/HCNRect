@@ -13,6 +13,7 @@ import restaurant.panel.header.JPanelHeaderOrder;
 import restaurant.panel.main.JPanelWelcome;
 import restaurant.panel.order.JPanelOrderPickTable;
 import restaurant.panel.order.JPanelOrder;
+import restaurant.panel.ppackkage.JPanelManagementDish;
 /**
  *
  * @author WINDNCC
@@ -26,6 +27,7 @@ public class PanelFactory {
     private static JPanelHeader headerPackageDish;
     private static JPanelWelcome overview;
     private static JPanelSidebar sidebar;
+    private static JPanelManagementDish managementDish;
     
     public class ID{
             public static final int SIDEBAR = 1;
@@ -34,6 +36,7 @@ public class PanelFactory {
             public static final int ORDER_PICK_TABLE = 112;
             public static final int BOOK_TABLE = 121;
             public static final int OVERVIEW = 131;
+            public static final int PACKAGE_DISH = 141;
             //header
             public static final int HEADER_OVERVIEW = 211;
             public static final int HEADER_ORDER_PICK_TABLE = 221;
@@ -87,7 +90,12 @@ public class PanelFactory {
                 if (headerOrderPickTable == null) headerOrderPickTable = new JPanelHeader("Chọn bàn", IconResources.BOOKTABLE);
                 jp = headerOrderPickTable;
             case ID.HEADER_PACKAGE_DISH:
-                
+                if(headerPackageDish == null) headerPackageDish = new JPanelHeader("Quản lý món ăn", IconResources.PRAWN_WHITE_X50 );
+                jp = headerPackageDish;
+                break;
+            case ID.PACKAGE_DISH:
+                if(managementDish == null) managementDish = new JPanelManagementDish();
+                jp = managementDish;
                 break;
             default:
                 break;

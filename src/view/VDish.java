@@ -5,6 +5,7 @@
  */
 package view;
 
+import core.CString;
 import database.Database;
 import java.sql.SQLException;
 
@@ -31,14 +32,16 @@ public class VDish extends View{
         return new VDish();
     }
     public VDish filter(int menuId, String dishName){
-        filter(new FilterView(){
+        super.filter(new FilterView(){
             @Override
             public boolean filter(ViewItem o) {
                 Long viMenuId = (Long) o.get("MaTD");
                 String viDishName = (String) o.get("TenMA");
+                viDishName = CString.removeAccent(viDishName).toLowerCase();
                 if("".equals(viDishName)) return viMenuId == menuId;
-                if(menuId == 0) return viDishName.contains(dishName);
-                return viMenuId == menuId && viDishName.contains(dishName);
+                String dishNameFormat = CString.removeAccent(dishName).toLowerCase();
+                if(menuId == 0) return viDishName.contains(dishNameFormat);
+                return viMenuId == menuId && viDishName.contains(dishNameFormat);
             }
             
         });
