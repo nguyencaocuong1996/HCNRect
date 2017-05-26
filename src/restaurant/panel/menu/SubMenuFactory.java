@@ -32,6 +32,7 @@ public class SubMenuFactory {
                 listSubMenuItem.add(new JPanelSubMenuItem("Bàn ăn",PanelFactory.ID.PACKAGE_TABLE,PanelFactory.ID.HEADER_PACKAGE_TABLE));
                 break;
             case "report" :
+                listSubMenuItem.add(new JPanelSubMenuItem("Cuối ngày", PanelFactory.ID.REPORT_END_OF_DAY, PanelFactory.ID.HEADER_REPORT));
                 listSubMenuItem.add(new JPanelSubMenuItem("Thu chi"));
                 listSubMenuItem.add(new JPanelSubMenuItem("Tồn kho"));
                 listSubMenuItem.add(new JPanelSubMenuItem("Món ăn"));

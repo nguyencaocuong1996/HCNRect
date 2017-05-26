@@ -16,6 +16,7 @@ import restaurant.panel.order.JPanelOrder;
 import restaurant.panel.ppackkage.JPanelManagementDish;
 import restaurant.panel.ppackkage.JPanelManagementMaterial;
 import restaurant.panel.ppackkage.JPanelManagementTable;
+import restaurant.panel.report.JPanelReportEndOfDay;
 /**
  *
  * @author WINDNCC
@@ -28,11 +29,13 @@ public class PanelFactory {
     private static JPanelHeader headerPackageMaterial;
     private static JPanelHeader headerPackageDish;
     private static JPanelHeader headerPackageTable;
+    private static JPanelHeader headerReport;
     private static JPanelWelcome overview;
     private static JPanelSidebar sidebar;
     private static JPanelManagementDish managementDish;
     private static JPanelManagementTable managementTable;
     private static JPanelManagementMaterial managementMaterial;
+    private static JPanelReportEndOfDay reportEndOfDay;
     public class ID{
             public static final int SIDEBAR = 1;
             //content
@@ -43,6 +46,7 @@ public class PanelFactory {
             public static final int PACKAGE_DISH = 141;
             public static final int PACKAGE_TABLE = 142;
             public static final int PACKAGE_MATERIAL = 143;
+            public static final int REPORT_END_OF_DAY = 151;
             //header
             public static final int HEADER_OVERVIEW = 211;
             public static final int HEADER_ORDER_PICK_TABLE = 221;
@@ -51,6 +55,7 @@ public class PanelFactory {
             public static final int HEADER_PACKAGE_MATERIAL = 251;
             public static final int HEADER_PACKAGE_DISH = 252;
             public static final int HEADER_PACKAGE_TABLE = 253;
+            public static final int HEADER_REPORT = 261;
     }
     public static JPanel get(int panelId){
         JPanel jp;
@@ -101,6 +106,12 @@ public class PanelFactory {
                 if(headerPackageDish == null) headerPackageDish = new JPanelHeader("Quản lý món ăn", IconResources.PRAWN_WHITE_X50 );
                 jp = headerPackageDish;
                 break;
+            case ID.HEADER_REPORT:
+                if (headerReport == null) {
+                    headerReport = new JPanelHeader("Báo cáo", IconResources.PRAWN_WHITE_X50 );
+                }
+                jp = headerReport;
+                break;
             case ID.PACKAGE_DISH:
                 if(managementDish == null) managementDish = new JPanelManagementDish();
                 jp = managementDish;
@@ -126,6 +137,10 @@ public class PanelFactory {
                     managementTable = JPanelManagementTable.getInstance();
                 }
                 jp = managementTable;
+                break;
+            case ID.REPORT_END_OF_DAY:
+                if(reportEndOfDay == null) reportEndOfDay = new JPanelReportEndOfDay();
+                jp = reportEndOfDay;
                 break;
             //end package
             default:

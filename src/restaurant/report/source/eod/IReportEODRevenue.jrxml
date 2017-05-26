@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="64883fc4-33e6-4b64-9fa8-126ca4ee6213">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="sqlDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="viDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT hd.MaHD, kh.HoTenKH, hd.TriGiaHD
+FROM hoa_don AS hd
+LEFT JOIN chi_tiet_hoa_don AS cthd ON hd.MaHD = cthd.MaHD
+LEFT JOIN khach_hang AS kh ON kh.MaKH = hd.MaKH
+WHERE DATE(hd.NgayLapHD) = $P{sqlDate}
+GROUP BY hd.MaHD]]>
+	</queryString>
+	<field name="MaHD" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="HoTenKH" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TriGiaHD" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="TriGiaHD_1" class="java.lang.Float" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{TriGiaHD}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="103" y="0" width="100" height="20" uuid="411e3fa6-5244-412a-8ab3-08ccc5f13faa"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="3" y="0" width="100" height="20" uuid="86ed865a-2b60-445d-a3e0-1901f53985e1"/>
+				<text><![CDATA[Ngày lập báo cáo]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<textField>
+				<reportElement x="208" y="15" width="100" height="20" uuid="e07643df-6b0d-4b83-a66f-a366938d2bef"/>
+				<textFieldExpression><![CDATA[$P{viDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="64" y="15" width="129" height="20" uuid="6a238f0e-443a-46f4-9151-5e7e849d57e3"/>
+				<text><![CDATA[Báo cáo doanh thu ngày]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="25" y="19" width="115" height="20" uuid="7616a125-9a83-4aa6-8ae1-07243175d719"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mã hóa đơn]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="193" y="19" width="115" height="20" uuid="c81e9254-59fb-4aca-9f45-715ed6ca2831"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Họ tên khách hàng]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="379" y="19" width="115" height="20" uuid="b411ec4f-b3fa-46d9-aa2c-9a8fb2d08a3b"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Trị giá hóa đơn]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="36" splitType="Stretch">
+			<textField>
+				<reportElement x="25" y="3" width="100" height="20" uuid="5efd4ee4-3d85-4068-9d3b-e28b3b6e4a66"/>
+				<textElement>
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MaHD}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="193" y="3" width="100" height="20" uuid="cf21c3b8-d452-4f47-8da1-89e0a3b65ce5"/>
+				<textElement>
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{HoTenKH}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="379" y="3" width="100" height="20" uuid="78866638-5a80-43e8-9988-a17f345e3a31"/>
+				<textElement>
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TriGiaHD}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<textField>
+				<reportElement x="379" y="14" width="139" height="20" uuid="8d2a8e21-2d37-408b-9fe1-6f10493c3cda"/>
+				<textElement>
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{TriGiaHD_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="293" y="14" width="86" height="20" uuid="099a903f-8a3d-451c-b3f7-6f7949e5b88d"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Doanh thu:]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
