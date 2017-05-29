@@ -21,7 +21,7 @@ public class MUser extends Model{
         this.staffId = ((Long) md.get("MaNV")).intValue();
         this.userName = (String) md.get("TenDangNhap");
         this.passWord = (String) md.get("MatKhau");
-        this.type = ((Long) md.get("ChucVu")).intValue();
+        this.type = ((Integer) md.get("ChucVu"));
     }
     
     public MUser(int staffId, String userName, String passWord, int type) {
@@ -37,7 +37,7 @@ public class MUser extends Model{
     
     
     
-    public MUser get(int id) throws SQLException{
+    public static MUser get(int id) throws SQLException{
         String sql = "SELECT * FROM tai_khoan WHERE MaNV = " + id;
         try {
             return new MUser(database.Database.modalSelect(sql));
@@ -45,8 +45,8 @@ public class MUser extends Model{
             throw e;
         }
     }
-    public MUser get(String userName, String passWord) throws SQLException{
-        String sql = "SELECT * FROM tai_khoan WHERE TenTaiKhoan = " + userName + " AND MatKhau = " + passWord;
+    public static MUser get(String userName, String passWord) throws SQLException{
+        String sql = "SELECT * FROM tai_khoan WHERE TenDangNhap = '" + userName + "' AND MatKhau = '" + passWord+"'";
         try {
             return new MUser(database.Database.modalSelect(sql));
         } catch (SQLException e) {
@@ -54,8 +54,10 @@ public class MUser extends Model{
         }
     }
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
+        MUser n = new MUser();
         
+        System.out.println(n.get("nguyentk", "nguyen11").userName);
     }
     @Override
     void insert() throws SQLException {
