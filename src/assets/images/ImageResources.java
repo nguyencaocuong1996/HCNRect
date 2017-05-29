@@ -14,4 +14,7 @@ public class ImageResources {
         return new ImageIcon(ImageResources.class.getResource("dishs/"+name));
     }
     
+    public static ImageIcon getImage(String name){
+        return new ImageIcon(ImageResources.class.getResource("image/"+name));
+    }
 }
