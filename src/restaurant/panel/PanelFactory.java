@@ -31,6 +31,7 @@ public class PanelFactory {
     private static JPanelHeader headerPackageDish;
     private static JPanelHeader headerPackageTable;
     private static JPanelHeader headerReport;
+    private static JPanelHeader headerImportMaterial;
     private static JPanelWelcome overview;
     private static JPanelSidebar sidebar;
     private static JPanelManagementDish managementDish;
@@ -58,6 +59,7 @@ public class PanelFactory {
             public static final int HEADER_PACKAGE_MATERIAL = 251;
             public static final int HEADER_PACKAGE_DISH = 252;
             public static final int HEADER_PACKAGE_TABLE = 253;
+            public static final int HEADER_PACKAGE_IMPORT_MATERIAL = 254;
             public static final int HEADER_REPORT = 261;
     }
     public static JPanel get(int panelId){
@@ -108,6 +110,10 @@ public class PanelFactory {
             case ID.HEADER_PACKAGE_DISH:
                 if(headerPackageDish == null) headerPackageDish = new JPanelHeader("Quản lý món ăn", IconResources.PRAWN_WHITE_X50 );
                 jp = headerPackageDish;
+                break;
+            case ID.HEADER_PACKAGE_IMPORT_MATERIAL:
+                if(headerImportMaterial == null) headerImportMaterial = new JPanelHeader("Nhập kho", IconResources.COINS, PanelFactory.ID.PACKAGE_MATERIAL, PanelFactory.ID.HEADER_PACKAGE_MATERIAL);
+                jp = headerImportMaterial;
                 break;
             case ID.HEADER_REPORT:
                 if (headerReport == null) {
