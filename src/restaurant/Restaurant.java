@@ -33,7 +33,7 @@ public class Restaurant {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            MainFrame.getInstance().setVisible(true);
+            LoginFrame.getInstance().setVisible(true);
         });
     }
     
