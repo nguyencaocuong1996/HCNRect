@@ -3,6 +3,8 @@ package restaurant.panel.order;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import javax.swing.JFrame;
 import view.VDish;

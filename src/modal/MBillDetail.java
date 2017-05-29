@@ -6,6 +6,9 @@
 package modal;
 
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import view.VDishRecipe;
 
 /**
  *
@@ -25,6 +28,23 @@ public class MBillDetail extends Model{
             insertData.put("MaMA", getDishId());
             insertData.put("SoLuong", getQuantity());
             database.Database.insert(TABLE_NAME, insertData);
+            VDishRecipe vDishRecipe = VDishRecipe.get(getDishId());
+            vDishRecipe.getData().forEach((t) -> {
+                int materialId = ((Long) t.get("MaNL")).intValue();
+                float qty = ((Float) t.get("LuongCan")) * getQuantity();
+                try {
+                    MMaterial material =  MMaterial.get(materialId);
+                    material.setInStock(material.getInStock() - qty);
+                    material.update();
+                } catch (SQLException e) {
+                    try {
+                        throw e;
+                    } catch (SQLException ex) {
+                        Logger.getLogger(MBillDetail.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                
+            });
         } catch (SQLException e) {
             throw e;
         }

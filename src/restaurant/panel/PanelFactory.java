@@ -16,6 +16,7 @@ import restaurant.panel.order.JPanelOrder;
 import restaurant.panel.ppackkage.JPanelManagementDish;
 import restaurant.panel.ppackkage.JPanelManagementMaterial;
 import restaurant.panel.ppackkage.JPanelManagementTable;
+import restaurant.panel.report.JPanelReportDetails;
 import restaurant.panel.report.JPanelReportEndOfDay;
 /**
  *
@@ -36,6 +37,7 @@ public class PanelFactory {
     private static JPanelManagementTable managementTable;
     private static JPanelManagementMaterial managementMaterial;
     private static JPanelReportEndOfDay reportEndOfDay;
+    private static JPanelReportDetails reportDetails;
     public class ID{
             public static final int SIDEBAR = 1;
             //content
@@ -47,6 +49,7 @@ public class PanelFactory {
             public static final int PACKAGE_TABLE = 142;
             public static final int PACKAGE_MATERIAL = 143;
             public static final int REPORT_END_OF_DAY = 151;
+            public static final int REPORT_DETAILS = 152;
             //header
             public static final int HEADER_OVERVIEW = 211;
             public static final int HEADER_ORDER_PICK_TABLE = 221;
@@ -138,11 +141,17 @@ public class PanelFactory {
                 }
                 jp = managementTable;
                 break;
+            //end package
+            //report
             case ID.REPORT_END_OF_DAY:
                 if(reportEndOfDay == null) reportEndOfDay = new JPanelReportEndOfDay();
                 jp = reportEndOfDay;
                 break;
-            //end package
+            case ID.REPORT_DETAILS:
+                if(reportDetails == null) reportDetails = new JPanelReportDetails();
+                jp = reportDetails;
+                break;
+            //#report
             default:
                 jp = new JPanel();
                 break;

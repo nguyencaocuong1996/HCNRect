@@ -3,8 +3,10 @@ package restaurant.panel.menu;
 
 import assets.images.icons.IconResources;
 import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import restaurant.MainFrame;
 import restaurant.panel.PanelFactory;
 import restaurant.panel.booktable.JPanelBookTable;
 import restaurant.panel.order.JPanelOrderPickTable;

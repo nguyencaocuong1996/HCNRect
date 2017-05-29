@@ -15,41 +15,63 @@ import java.util.HashMap;
  */
 public class MDishRecipe extends Model{
     protected static final String TABLE_NAME = "cong_thuc";
-    protected String dishId;
-    protected String materialId;
-    protected String qty;
+    protected int dishId;
+    protected int materialId;
+    protected float qty;
     protected String note;
 
-    public MDishRecipe(String dishId, String materialId, String qty, String note) {
+    public MDishRecipe(int dishId, int materialId, float qty, String note) {
         this.dishId = dishId;
         this.materialId = materialId;
         this.qty = qty;
         this.note = note;
     }
-
-    public String getDishId() {
+    public MDishRecipe(ModalData md){
+        this.dishId = ((Long) md.get("MaMA")).intValue();
+        this.materialId = ((Long) md.get("MaNL")).intValue();
+        this.qty = (Float) md.get("LuongCan");
+        this.note = (String) md.get("GhiChu");
+    }
+    public static MDishRecipe get(int dishId, int materialId) throws SQLException{
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE MaMA = " + dishId + " AND MaNL = " + materialId;
+        try {
+            return new MDishRecipe(database.Database.modalSelect(sql));
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+    public static void main(String[] args) {
+        try {
+            MDishRecipe a = MDishRecipe.get(1, 2);
+            System.out.println(a.getQty());
+        } catch (SQLException e) {
+        }
+        
+    }
+    public int getDishId() {
         return dishId;
     }
 
-    public void setDishId(String dishId) {
+    public void setDishId(int dishId) {
         this.dishId = dishId;
     }
 
-    public String getMaterialId() {
+    public int getMaterialId() {
         return materialId;
     }
 
-    public void setMaterialId(String materialId) {
+    public void setMaterialId(int materialId) {
         this.materialId = materialId;
     }
 
-    public String getQty() {
+    public float getQty() {
         return qty;
     }
 
-    public void setQty(String qty) {
+    public void setQty(float qty) {
         this.qty = qty;
     }
+   
 
     public String getNote() {
         return note;

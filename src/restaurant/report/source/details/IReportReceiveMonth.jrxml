@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b855da41-0d28-43f0-8370-33cf08ea7bab">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="75"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="sqlDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[2017-01-01]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT MONTH(hd.NgayLapHD) as Thang, DAY(hd.NgayLapHD) AS ngay, sum(hd.TriGiaHD) as TongTien
+FROM hoa_don AS hd
+WHERE YEAR(hd.NgayLapHD) = SUBSTRING($P{sqlDate}, 1, 4)
+GROUP BY MONTH(hd.NgayLapHD), DAY(hd.NgayLapHD)
+ORDER BY MONTH(hd.NgayLapHD) ASC]]>
+	</queryString>
+	<field name="Thang" class="java.lang.Integer"/>
+	<field name="ngay" class="java.lang.Integer"/>
+	<field name="TongTien" class="java.lang.Double"/>
+	<variable name="TongTien_1" class="java.lang.Double" resetType="Group" resetGroup="thang" calculation="Sum">
+		<variableExpression><![CDATA[$F{TongTien}]]></variableExpression>
+	</variable>
+	<group name="thang">
+		<groupExpression><![CDATA[$F{Thang}]]></groupExpression>
+		<groupHeader>
+			<band height="30">
+				<textField>
+					<reportElement x="147" y="0" width="100" height="20" uuid="125b5134-d463-4742-a660-149694053774"/>
+					<textElement>
+						<font fontName="DejaVu Sans" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{Thang}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="47" y="0" width="100" height="20" uuid="a369ba79-003d-45d7-b77a-e5959411ae63"/>
+					<textElement textAlignment="Right">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Tháng: ]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="50">
+				<textField>
+					<reportElement x="368" y="11" width="100" height="20" uuid="102a21dc-9d65-41e1-93c6-0f37ce544b11"/>
+					<textElement>
+						<font fontName="DejaVu Sans" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{TongTien_1}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="268" y="11" width="100" height="20" uuid="44d611df-e2fe-427c-af9a-1b49ac9ab14c"/>
+					<textElement textAlignment="Right">
+						<font fontName="DejaVu Sans" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ Tổng: ]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="107" y="10" width="330" height="36" uuid="6f1cac50-dbdd-426d-bcfd-3c9b1ac3c9b2"/>
+				<textElement>
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Báo cáo doanh thu theo tháng]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="147" y="46" width="58" height="20" uuid="152e471c-eb60-4f2e-a099-fee84e713947"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Năm: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="205" y="46" width="140" height="20" uuid="3cdb3015-073c-44b7-a7af-6fba77d982c4"/>
+				<textFieldExpression><![CDATA[$P{sqlDate}.substring( 0, 4 )]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="205" y="9" width="163" height="20" uuid="8b19b9fe-bdad-4500-b944-2ed06171cc8e"/>
+				<textElement>
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<text><![CDATA[Báo cáo doanh thu theo tháng]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="160" y="2" width="100" height="20" uuid="aecfd8f0-0150-452b-8ca2-346f4978be62"/>
+				<textElement>
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ngay]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="368" y="2" width="100" height="20" uuid="0ffef42d-6a9f-489c-bc1e-a2e3a6e48496"/>
+				<textElement>
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TongTien]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="43" splitType="Stretch">
+			<textField>
+				<reportElement x="160" y="23" width="100" height="20" uuid="94278464-e085-4f29-b299-3ebffb5174a6"/>
+				<textElement>
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ngay}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="368" y="23" width="100" height="20" uuid="f56d0bf8-8134-4a5b-ab6c-ba01a6a4f467"/>
+				<textElement>
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TongTien}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

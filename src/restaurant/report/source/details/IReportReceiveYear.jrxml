@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="130767ab-8ea4-4327-81da-567505268c27">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT YEAR(hd.NgayLapHD) AS Nam, MONTH(hd.NgayLapHD) as Thang, sum(hd.TriGiaHD) as TongTien
+FROM hoa_don AS hd
+GROUP BY YEAR(hd.NgayLapHD), MONTH(hd.NgayLapHD)
+ORDER BY YEAR(hd.NgayLapHD) DESC]]>
+	</queryString>
+	<field name="Nam" class="java.lang.Integer"/>
+	<field name="Thang" class="java.lang.Integer"/>
+	<field name="TongTien" class="java.lang.Double"/>
+	<variable name="TongTien_1" class="java.lang.Double" resetType="Group" resetGroup="nam group" calculation="Sum">
+		<variableExpression><![CDATA[$F{TongTien}]]></variableExpression>
+	</variable>
+	<group name="nam group">
+		<groupExpression><![CDATA[$F{Nam}]]></groupExpression>
+		<groupHeader>
+			<band height="50">
+				<textField>
+					<reportElement x="118" y="13" width="100" height="20" uuid="0bffe804-0307-4684-8b06-1ad6269f682e"/>
+					<textElement>
+						<font fontName="DejaVu Sans" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{Nam}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="18" y="13" width="100" height="20" uuid="fe96f9dd-3d33-494c-8de6-fa491b697e5d"/>
+					<textElement textAlignment="Right">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Năm: ]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="50">
+				<textField>
+					<reportElement x="434" y="30" width="100" height="20" uuid="c6c632e8-32e0-420c-9e06-8f1afe0e8d9d"/>
+					<textElement>
+						<font fontName="DejaVu Sans"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{TongTien_1}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="291" y="30" width="100" height="20" uuid="6f382042-7e44-4fa4-8e12-8ef0b9c0c766"/>
+					<textElement textAlignment="Right">
+						<font fontName="DejaVu Sans" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Tổng kết doanh thu:]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="118" y="21" width="348" height="38" uuid="a4211885-f40b-4750-8c8b-7eeb0858e18b"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Báo cáo doanh thu theo năm]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="434" y="2" width="100" height="20" uuid="bf0c0666-09a6-4ac9-828b-79869e1c9435"/>
+				<textElement>
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TongTien]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="146" y="2" width="100" height="20" uuid="76e9f8c8-634f-48d1-932b-881a2fccb25a"/>
+				<textElement>
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Thang]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="43" splitType="Stretch">
+			<textField>
+				<reportElement x="434" y="23" width="100" height="20" uuid="e3bf61ac-368b-4663-a20a-18fdf908134a"/>
+				<textElement>
+					<font fontName="DejaVu Sans" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TongTien}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="146" y="22" width="100" height="20" uuid="e9cd63cb-c37d-4687-a798-360616f70cd0"/>
+				<textElement>
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Thang}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

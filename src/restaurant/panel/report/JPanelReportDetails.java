@@ -11,6 +11,7 @@ import java.awt.Dimension;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.ButtonModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -35,6 +36,8 @@ public class JPanelReportDetails extends javax.swing.JPanel {
     public static final int CUS_USUALLY = 22;
     private String dateSql;
     private String date;
+    private String dateSqlTo;
+    private String dateTo;
     private int about;
     private int type;
     public JPanelReportDetails() {
@@ -46,6 +49,13 @@ public class JPanelReportDetails extends javax.swing.JPanel {
         dateSql = CDateTime.getInstance().getDate().toString();
         jLabelPickDate.setText(date);
         jRadioButtonRP.setSelected(true);
+        //Add Action command JRadioButton ChooseType
+        jRadioButtonReceive.setActionCommand("receive");
+        jRadioButtonPayment.setActionCommand("payment");
+        jRadioButtonByMoth.setActionCommand("month");
+        jRadioButtonByYear.setActionCommand("year");
+        jRadioButtonByDateRange.setActionCommand("range");
+        //end ADD Action command
         //ADD JRadioButton to buttonGroup
         ArrayList<JRadioButton> listJRBChooseAbout = new ArrayList<>();
         for(Component c : jPanelBtnChooseAbout.getComponents()){
@@ -78,7 +88,41 @@ public class JPanelReportDetails extends javax.swing.JPanel {
         jPanelChooseTypeContent.removeAll();
         jPanelChooseTypeContent.add(jPanelTypeRP);
     }
-    
+    public static final String getReportUrl(String type, String dateType){
+        String url = "";
+        switch(type){
+            case "receive":
+                switch(dateType){
+                    case "month":
+                        url = ReportResources.RECEIVE_MOTH;
+                        break;
+                    case "year":
+                        url = ReportResources.RECEIVE_YEAR;
+                        break;
+                    case "range":
+                        url = ReportResources.RECEIVE_RANGE;
+                        break;
+                }
+                break;
+            case "payment": 
+                switch(dateType){
+                    case "moth":
+                        
+                        break;
+                    case "year":
+                        
+                        break;
+                    case "range":
+                        
+                        break;
+                }
+                break;
+        }
+        return url;
+    }
+    public static final HashMap<String, Object> getReportParams(){
+        return new HashMap<>();
+    }
     public static void main(String[] args) {
         JFrame jf = new JFrame("hoho");
         jf.setSize(new Dimension(785,600));
@@ -99,6 +143,7 @@ public class JPanelReportDetails extends javax.swing.JPanel {
         buttonGroupReportAbout = new javax.swing.ButtonGroup();
         buttonGroupReportType = new javax.swing.ButtonGroup();
         buttonGroupReportDate = new javax.swing.ButtonGroup();
+        dateChooserDialogTo = new datechooser.beans.DateChooserDialog();
         jPanel8 = new javax.swing.JPanel();
         jPanelChooseAbout = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -117,8 +162,8 @@ public class JPanelReportDetails extends javax.swing.JPanel {
         jPanelTypeStaff = new javax.swing.JPanel();
         jPanelTypeLiabilities = new javax.swing.JPanel();
         jPanelTypeRP = new javax.swing.JPanel();
-        jRadioButtonRPMoth = new javax.swing.JRadioButton();
-        jRadioButtonRPYear = new javax.swing.JRadioButton();
+        jRadioButtonReceive = new javax.swing.JRadioButton();
+        jRadioButtonPayment = new javax.swing.JRadioButton();
         jPanelTypeCustomer = new javax.swing.JPanel();
         jRadioButton4 = new javax.swing.JRadioButton();
         jRadioButton5 = new javax.swing.JRadioButton();
@@ -131,13 +176,21 @@ public class JPanelReportDetails extends javax.swing.JPanel {
         jRadioButtonByMoth = new javax.swing.JRadioButton();
         jRadioButtonByYear = new javax.swing.JRadioButton();
         jRadioButtonByDateRange = new javax.swing.JRadioButton();
+        jLabelPickDateTo = new javax.swing.JLabel();
         jPanelOpenReport = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabelOpenReport = new javax.swing.JLabel();
 
         dateChooserDialogReport.setCalendarPreferredSize(new java.awt.Dimension(450, 400));
         dateChooserDialogReport.addCommitListener(new datechooser.events.CommitListener() {
             public void onCommit(datechooser.events.CommitEvent evt) {
                 dateChooserDialogReportOnCommit(evt);
+            }
+        });
+
+        dateChooserDialogTo.setCalendarPreferredSize(new java.awt.Dimension(450, 400));
+        dateChooserDialogTo.addCommitListener(new datechooser.events.CommitListener() {
+            public void onCommit(datechooser.events.CommitEvent evt) {
+                dateChooserDialogToOnCommit(evt);
             }
         });
 
@@ -295,29 +348,29 @@ public class JPanelReportDetails extends javax.swing.JPanel {
 
         jPanelChooseTypeContent.add(jPanelTypeLiabilities);
 
-        jRadioButtonRPMoth.setText("Thu");
+        jRadioButtonReceive.setText("Thu");
 
-        jRadioButtonRPYear.setText("Chi");
+        jRadioButtonPayment.setText("Chi");
 
         javax.swing.GroupLayout jPanelTypeRPLayout = new javax.swing.GroupLayout(jPanelTypeRP);
         jPanelTypeRP.setLayout(jPanelTypeRPLayout);
         jPanelTypeRPLayout.setHorizontalGroup(
             jPanelTypeRPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelTypeRPLayout.createSequentialGroup()
-                .addGap(402, 402, 402)
-                .addComponent(jRadioButtonRPMoth)
+                .addGap(300, 300, 300)
+                .addComponent(jRadioButtonReceive)
                 .addGap(49, 49, 49)
-                .addComponent(jRadioButtonRPYear)
-                .addContainerGap(265, Short.MAX_VALUE))
+                .addComponent(jRadioButtonPayment)
+                .addContainerGap(367, Short.MAX_VALUE))
         );
         jPanelTypeRPLayout.setVerticalGroup(
             jPanelTypeRPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelTypeRPLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(21, 21, 21)
                 .addGroup(jPanelTypeRPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButtonRPMoth)
-                    .addComponent(jRadioButtonRPYear))
-                .addContainerGap(31, Short.MAX_VALUE))
+                    .addComponent(jRadioButtonReceive)
+                    .addComponent(jRadioButtonPayment))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         jPanelChooseTypeContent.add(jPanelTypeRP);
@@ -412,6 +465,28 @@ public class JPanelReportDetails extends javax.swing.JPanel {
         jRadioButtonByYear.setText("Theo năm");
 
         jRadioButtonByDateRange.setText("Khoảng thời gian xác định");
+        jRadioButtonByDateRange.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jRadioButtonByDateRangeStateChanged(evt);
+            }
+        });
+        jRadioButtonByDateRange.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jRadioButtonByDateRangeFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jRadioButtonByDateRangeFocusLost(evt);
+            }
+        });
+
+        jLabelPickDateTo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabelPickDateTo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_calendar_blue_x24.png"))); // NOI18N
+        jLabelPickDateTo.setText("29/6/2017");
+        jLabelPickDateTo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelPickDateToMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -420,16 +495,18 @@ public class JPanelReportDetails extends javax.swing.JPanel {
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addGap(330, 330, 330)
-                        .addComponent(jLabelPickDate, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel12Layout.createSequentialGroup()
                         .addGap(211, 211, 211)
                         .addComponent(jRadioButtonByMoth)
                         .addGap(49, 49, 49)
                         .addComponent(jRadioButtonByYear)
                         .addGap(33, 33, 33)
-                        .addComponent(jRadioButtonByDateRange)))
-                .addContainerGap(142, Short.MAX_VALUE))
+                        .addComponent(jRadioButtonByDateRange))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGap(331, 331, 331)
+                        .addComponent(jLabelPickDate, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelPickDateTo, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(204, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -439,9 +516,14 @@ public class JPanelReportDetails extends javax.swing.JPanel {
                     .addComponent(jRadioButtonByMoth)
                     .addComponent(jRadioButtonByYear)
                     .addComponent(jRadioButtonByDateRange))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addComponent(jLabelPickDate, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelPickDate, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelPickDateTo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
+
+        jLabelPickDateTo.setVisible(false);
 
         javax.swing.GroupLayout jPanelChooseDateLayout = new javax.swing.GroupLayout(jPanelChooseDate);
         jPanelChooseDate.setLayout(jPanelChooseDateLayout);
@@ -485,9 +567,14 @@ public class JPanelReportDetails extends javax.swing.JPanel {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Mở báo cáo");
+        jLabelOpenReport.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabelOpenReport.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelOpenReport.setText("Mở báo cáo");
+        jLabelOpenReport.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelOpenReportMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelOpenReportLayout = new javax.swing.GroupLayout(jPanelOpenReport);
         jPanelOpenReport.setLayout(jPanelOpenReportLayout);
@@ -495,12 +582,12 @@ public class JPanelReportDetails extends javax.swing.JPanel {
             jPanelOpenReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelOpenReportLayout.createSequentialGroup()
                 .addGap(327, 327, 327)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelOpenReport, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelOpenReportLayout.setVerticalGroup(
             jPanelOpenReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(jLabelOpenReport, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -521,34 +608,7 @@ public class JPanelReportDetails extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jPanelOpenReportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelOpenReportMouseClicked
-        HashMap<String, Object> params = new HashMap<>();
-        String rpUrl = ReportResources.RP_EOD_REVENUE;
-        params.put("sqlDate", this.dateSql);
-        params.put("viDate", date);
-        switch(type){
-            case RP_MONTH:
-                rpUrl = ReportResources.RP_EOD_REVENUE;
-                
-            break;
-            case RP_YEAR:
-                rpUrl = ReportResources.RP_EOD_DISH;
-                break;
-            case CUS_MOST_PAYMENT:
-                
-                break;
-            case CUS_USUALLY:
-                
-                break;
-        }
-        try {
-            JasperReport jR = JasperCompileManager.compileReport(rpUrl);
-            JasperPrint jP = JasperFillManager.fillReport(jR, params, database.Database.getConnection());
-            JasperViewer.viewReport(jP,false);
-        } catch (JRException e) {
-            JOptionPane.showMessageDialog(this, "Có lỗi xảy ra! không thể tạo report.");
-            e.printStackTrace();
-        }
-        
+
     }//GEN-LAST:event_jPanelOpenReportMouseClicked
 
     private void jLabelPickDateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelPickDateMouseClicked
@@ -576,22 +636,75 @@ public class JPanelReportDetails extends javax.swing.JPanel {
         System.out.println("do it");
     }//GEN-LAST:event_jRadioButtonCustomerMouseReleased
 
+    private void jLabelOpenReportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelOpenReportMouseClicked
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("sqlDate", this.dateSql);
+        params.put("viDate", date);
+        try {
+            String rpType = buttonGroupReportType.getSelection().getActionCommand();
+            String dateType = buttonGroupReportDate.getSelection().getActionCommand();
+            if("range".equals(dateType)){
+                params.put("sqlDateTo", this.dateSqlTo);
+                params.put("viDateTo", this.dateTo);
+            }
+            String rpUrl = getReportUrl(rpType, dateType);
+            try {
+                JasperReport jR = JasperCompileManager.compileReport(rpUrl);
+                JasperPrint jP = JasperFillManager.fillReport(jR, params, database.Database.getConnection());
+                JasperViewer.viewReport(jP,false);
+            } catch (JRException e) {
+                JOptionPane.showMessageDialog(this, "Có lỗi xảy ra! không thể tạo report.");
+                e.printStackTrace();
+            }
+           
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Chưa chọn đầy đủ thông tin để hiển thị báo cáo!");
+        }
+        
+    }//GEN-LAST:event_jLabelOpenReportMouseClicked
+
+    private void jLabelPickDateToMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelPickDateToMouseClicked
+        dateChooserDialogTo.showDialog(MainFrame.getInstance());
+    }//GEN-LAST:event_jLabelPickDateToMouseClicked
+
+    private void jRadioButtonByDateRangeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRadioButtonByDateRangeStateChanged
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jRadioButtonByDateRangeStateChanged
+
+    private void jRadioButtonByDateRangeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jRadioButtonByDateRangeFocusGained
+        // TODO add your handling code here:
+        jLabelPickDateTo.setVisible(true);
+    }//GEN-LAST:event_jRadioButtonByDateRangeFocusGained
+
+    private void jRadioButtonByDateRangeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jRadioButtonByDateRangeFocusLost
+
+    }//GEN-LAST:event_jRadioButtonByDateRangeFocusLost
+
+    private void dateChooserDialogToOnCommit(datechooser.events.CommitEvent evt) {//GEN-FIRST:event_dateChooserDialogToOnCommit
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdfSql = new SimpleDateFormat("yyyy-MM-dd");
+        this.dateTo = sdf.format(dateChooserDialogTo.getSelectedDate().getTime());
+        this.dateSqlTo = sdfSql.format(dateChooserDialogTo.getSelectedDate().getTime());
+        jLabelPickDateTo.setText(date);
+    }//GEN-LAST:event_dateChooserDialogToOnCommit
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupReportAbout;
     private javax.swing.ButtonGroup buttonGroupReportDate;
     private javax.swing.ButtonGroup buttonGroupReportType;
     private datechooser.beans.DateChooserDialog dateChooserDialogReport;
+    private datechooser.beans.DateChooserDialog dateChooserDialogTo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabelOpenReport;
     private javax.swing.JLabel jLabelPickDate;
+    private javax.swing.JLabel jLabelPickDateTo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanelBtnChooseAbout;
@@ -613,9 +726,9 @@ public class JPanelReportDetails extends javax.swing.JPanel {
     private javax.swing.JRadioButton jRadioButtonCustomer;
     private javax.swing.JRadioButton jRadioButtonDish;
     private javax.swing.JRadioButton jRadioButtonLiabilities;
+    private javax.swing.JRadioButton jRadioButtonPayment;
     private javax.swing.JRadioButton jRadioButtonRP;
-    private javax.swing.JRadioButton jRadioButtonRPMoth;
-    private javax.swing.JRadioButton jRadioButtonRPYear;
+    private javax.swing.JRadioButton jRadioButtonReceive;
     private javax.swing.JRadioButton jRadioButtonStaff;
     private javax.swing.JRadioButton jRadioButtonStock;
     // End of variables declaration//GEN-END:variables

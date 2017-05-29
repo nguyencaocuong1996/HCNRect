@@ -40,8 +40,22 @@ public class MMaterial extends Model{
         this.unit = unit;
         this.minInStock = minInStock;
     }
-
+    public MMaterial(ModalData md){
+        this.id = ((Long) md.get("MaNL")).intValue();
+        this.Name = (String) md.get("TenNL");
+        this.inStock = (Float) md.get("SoLuongTon");
+        this.unit = (String) md.get("DonVi");
+        this.minInStock = (Float) md.get("MucToiThieu");
+    }
     
+    public static MMaterial get(int id) throws SQLException{
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE MaNL = " + id;
+        try {
+            return new MMaterial(database.Database.modalSelect(sql));
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
     
     public int getId() {
         return id;

@@ -33,23 +33,7 @@ public class SubMenuFactory {
                 break;
             case "report" :
                 listSubMenuItem.add(new JPanelSubMenuItem("Cuối ngày", PanelFactory.ID.REPORT_END_OF_DAY, PanelFactory.ID.HEADER_REPORT));
-                listSubMenuItem.add(new JPanelSubMenuItem("Thu chi"));
-                listSubMenuItem.add(new JPanelSubMenuItem("Tồn kho"));
-                listSubMenuItem.add(new JPanelSubMenuItem("Món ăn"));
-//                listSubMenuItem.get(2).addMouseListener(new MouseAdapter() {
-//                    @Override
-//                    public void mouseClicked(MouseEvent me) {
-//                    try {
-//                        System.out.println("Mon an is clicked");
-//                        JasperReport jR = JasperCompileManager.compileReport(ReportResources.RP_TOP_DISH_BY_MOTH);
-//                        JasperPrint jP = JasperFillManager.fillReport(jR, null, database.Database.getConnection());
-//                        JasperViewer.viewReport(jP,false);
-//                    } catch (JRException e) {
-//                        e.printStackTrace();
-//                    }
-//                
-//                    }  
-//                });
+                listSubMenuItem.add(new JPanelSubMenuItem("Chi tiết", PanelFactory.ID.REPORT_DETAILS, PanelFactory.ID.HEADER_REPORT));
                 break;
             case "partner":
                 listSubMenuItem.add(new JPanelSubMenuItem("Khách hàng"));
