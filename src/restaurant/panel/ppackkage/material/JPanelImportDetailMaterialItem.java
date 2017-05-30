@@ -11,57 +11,21 @@ import javax.swing.JOptionPane;
 
 public class JPanelImportDetailMaterialItem extends javax.swing.JPanel {
     protected String materialName = "";
-    protected int quantity = 1;
+    protected float quantity = 0f;
     protected int materialId;
     protected float materialPrice = 0;
 
-    public JPanelImportDetailMaterialItem(int materialId, String materialName, int quantity) {
+    public JPanelImportDetailMaterialItem(int materialId, String materialName, float quantity) {
         initComponents();
         this.materialId = materialId;
         this.materialName = materialName;
         this.quantity = quantity;
-        if(quantity == 1){
+        if(quantity == 0){
             jLabelDown.setVisible(false);
         }
         jLabelMaterialName.setText("<html><p>"+this.materialName+"</p></html>");
         jTextFieldQty.setText(this.quantity + "");
         jLabelTotalPrice.setText(quantity * materialPrice + "");
-    }
-    public void dbAdd(){
-        int tableId = JPanelOrder.getInstance().getTableId();
-        System.out.println("dbAdd in JPanelOrderItem.java: thêm món vừa được chọn vào database");
-        HashMap ud = new HashMap();
-        ud.put("MaMA", materialId);
-        ud.put("MaBan", tableId);
-        ud.put("SoLuong", this.quantity);
-        try {
-            database.Database.insert("chi_tiet_dat_mon", ud);
-            System.out.println("----Thêm món thành công!");
-        } catch (Exception e) {
-            System.out.println("----Thêm món thất bại!");
-        }
-    }
-    public void dbUpdate(){
-        System.out.println("dbUpdate in JPanelOrderItem.java: cập nhật món đã chọn vào database");
-        HashMap ud = new HashMap();
-        ud.put("SoLuong", this.quantity);
-        try {
-            int tableId = JPanelOrder.getInstance().getTableId();
-            database.Database.update("chi_tiet_dat_mon", ud, "MaBan = " + tableId + " AND MaMA = " + this.materialId);
-            System.out.println("----Sửa món thành công!");
-        } catch (Exception e) {
-            System.out.println("----Sửa món thất bại!");
-        }
-    }
-    public void dbDelete(){
-        System.out.println("dbDelete in JPanelOrderItem.java: Xóa món đã chọn");
-        try {
-            int tableId = JPanelOrder.getInstance().getTableId();
-            database.Database.delete("chi_tiet_dat_mon", "MaBan = " + tableId + " AND MaMA = " + this.materialId);
-            System.out.println("----Xóa món thành công!");
-        } catch (Exception e) {
-            System.out.println("----Xóa món thất bại!");
-        }
     }
     public int getDishId() {
         return materialId;
@@ -81,7 +45,7 @@ public class JPanelImportDetailMaterialItem extends javax.swing.JPanel {
         this.materialName = dishName;
     }
 
-    public int getQuantity() {
+    public float getQuantity() {
         return quantity;
     }
     
@@ -92,7 +56,7 @@ public class JPanelImportDetailMaterialItem extends javax.swing.JPanel {
         System.out.println("sôso" + getTotalPrice());
         jLabelTotalPrice.setText(getTotalPrice() + "");
     }
-    public void setQuantity(int quantity) {
+    public void setQuantity(float quantity) {
         jTextFieldQty.setText(quantity+"");
         this.quantity = quantity;
         if(this.quantity == 1){
@@ -138,19 +102,18 @@ public class JPanelImportDetailMaterialItem extends javax.swing.JPanel {
         jLabelTotalPrice = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 204));
-        setMaximumSize(new java.awt.Dimension(417, 32));
-        setMinimumSize(new java.awt.Dimension(417, 32));
-        setPreferredSize(new java.awt.Dimension(417, 32));
+        setMaximumSize(new java.awt.Dimension(370, 32));
+        setMinimumSize(new java.awt.Dimension(370, 32));
+        setPreferredSize(new java.awt.Dimension(370, 32));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabelMaterialName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabelMaterialName.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabelMaterialName.setText("<html><p>Thịt kho tô chiên nước mắm</p></html>");
         jLabelMaterialName.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         jLabelMaterialName.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        add(jLabelMaterialName, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 30));
+        add(jLabelMaterialName, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 30));
 
-        jTextFieldQty.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        jTextFieldQty.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextFieldQty.setText("1");
         jTextFieldQty.addInputMethodListener(new java.awt.event.InputMethodListener() {
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
@@ -169,7 +132,7 @@ public class JPanelImportDetailMaterialItem extends javax.swing.JPanel {
                 jTextFieldQtyKeyReleased(evt);
             }
         });
-        add(jTextFieldQty, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 0, 30, 30));
+        add(jTextFieldQty, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, 40, 30));
 
         jLabelUp.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelUp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_arrow_up_green_x24.png"))); // NOI18N
@@ -201,7 +164,7 @@ public class JPanelImportDetailMaterialItem extends javax.swing.JPanel {
                 jLabelDownMouseExited(evt);
             }
         });
-        add(jLabelDown, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 30, 30));
+        add(jLabelDown, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 30, 30));
 
         jLabelClose.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_close_red_x24.png"))); // NOI18N
@@ -216,7 +179,7 @@ public class JPanelImportDetailMaterialItem extends javax.swing.JPanel {
                 jLabelCloseMouseExited(evt);
             }
         });
-        add(jLabelClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 0, 30, 30));
+        add(jLabelClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 0, 30, 30));
 
         jTextFieldPrice.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -228,25 +191,29 @@ public class JPanelImportDetailMaterialItem extends javax.swing.JPanel {
                 jTextFieldPriceKeyReleased(evt);
             }
         });
-        add(jTextFieldPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 90, 30));
+        add(jTextFieldPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 70, 30));
 
-        jLabelTotalPrice.setText("jLabel1");
-        add(jLabelTotalPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, 110, 30));
+        jLabelTotalPrice.setText("Tổng tiền");
+        add(jLabelTotalPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 90, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabelUpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpMouseClicked
-        setQuantity(getQuantity() + 1);
+        setQuantity(getQuantity() + 1f);
 //        dbUpdate();
 //        JPanelOrder.getInstance().updateBill();
     }//GEN-LAST:event_jLabelUpMouseClicked
 
     private void jLabelDownMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDownMouseClicked
-        setQuantity(getQuantity() - 1);
+        setQuantity(getQuantity() - 1f);
 //        dbUpdate();
 //        JPanelOrder.getInstance().updateBill();
     }//GEN-LAST:event_jLabelDownMouseClicked
 
     private void jLabelCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCloseMouseClicked
+        JPanelImportDetailMaterialItem jpIDMI = JPanelImportMaterial.getInstance().getListImportingMaterial().get(materialId);
+        JPanelImportMaterial.getInstance().getjPanelListImportingMaterial().remove(jpIDMI);
+        JPanelImportMaterial.getInstance().getjPanelListImportingMaterial().revalidate();
+        JPanelImportMaterial.getInstance().getjPanelListImportingMaterial().repaint();
 //        JPanelOrder.getInstance().getListJPanelOrderDetail().get(JPanelOrder.getInstance().getTableId()).removeOrderItem(this);
 //        JPanelOrder.getInstance().revalidate();
 //        JPanelOrder.getInstance().repaint();

@@ -8,7 +8,9 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -26,6 +28,8 @@ import restaurant.MainFrame;
 import restaurant.panel.PanelFactory;
 import restaurant.report.ReportResources;
 import view.VDishOrdering;
+import view.VMenu;
+import view.ViewItem;
 public class JPanelOrder extends javax.swing.JPanel {
     public static JPanelOrder instance;
     private int tableId;
@@ -38,16 +42,23 @@ public class JPanelOrder extends javax.swing.JPanel {
         jPanelOrderDish.add(jpOrderDish);
     }
     private void initCustomComponents(){
-        ComboboxItem[] ci = new ComboboxItem[6];
-        ci[0] = new ComboboxItem("Tất cả", 0);
-        ci[1] = new ComboboxItem("Món chính", 2);
-        ci[2] = new ComboboxItem("Khai vị", 1);
-        ci[3] = new ComboboxItem("Tráng miệng", 3);
-        ci[4] = new ComboboxItem("Đồ uống", 4);
-        ci[5] = new ComboboxItem("Chưa phân loại", 5);
-        for (ComboboxItem comboboxItem : ci) {
-            jComboBoxSearchByMenu.addItem(comboboxItem);
+        try {
+            VMenu vMenu = VMenu.getAllMenu();
+//            System.out.println(vMenu.getData());
+            ArrayList<ComboboxItem> ci = new ArrayList<>();
+            vMenu.getData().forEach((t) -> {
+                String menuName = (String) t.get("TenTD");
+                int menuId = ((Long) t.get("MaTD")).intValue();
+                ci.add(new ComboboxItem(menuName, menuId));
+            });
+            ci.forEach((t) -> {
+                jComboBoxSearchByMenu.addItem(t);
+            });
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+       
+        
     }
     public void filter(){
         ComboboxItem ci = (ComboboxItem) jComboBoxSearchByMenu.getSelectedItem();

@@ -1,6 +1,10 @@
 
 package restaurant.panel.ppackkage.material;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.HashMap;
+
 /**
  *
  * @author WINDNCC
@@ -18,13 +22,32 @@ public class JPanelImportMaterialItem extends javax.swing.JPanel {
         jLabelMaterialId.setText(materialId + "");
         jLabelMaterialName.setText(name);
         jLabelMaterialInStock.setText(inStock+"");
-        
+        customInit();
     }
     
     public JPanelImportMaterialItem() {
         initComponents();
     }
-
+    public final void customInit(){
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e); //To change body of generated methods, choose Tools | Templates.
+                HashMap<Integer, JPanelImportDetailMaterialItem> listImporting = JPanelImportMaterial.getInstance().getListImportingMaterial();
+                JPanelImportDetailMaterialItem jpIDMI;
+                if (listImporting.get(materialId) == null) {
+                    System.out.println("CustomInit in JPanelImportMaterialItem.java: Chưa có instance của material này tạo instance mới.");
+                    jpIDMI = new JPanelImportDetailMaterialItem(materialId, name, 1.0f);
+                    listImporting.put(materialId, jpIDMI);
+                } else {
+                    System.out.println("CustomInit in JPanelImportMaterialItem.java: Đã có instance của material này lấy từ hashmap ra.");
+                    jpIDMI = listImporting.get(materialId);
+                    jpIDMI.setQuantity(jpIDMI.getQuantity() + 1f);
+                }
+                JPanelImportMaterial.getInstance().addImportingMaterialItem(jpIDMI);
+            }
+        });
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
