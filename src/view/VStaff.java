@@ -23,7 +23,7 @@ public class VStaff extends View {
     }
     
     public static VStaff getAllStaff(){
-        String sqlQuery = "SELECT nv.MaNV, nv.HoTenNV, nv.SDTNV, nv.DiaChiNV FROM nhan_vien as nv;";
+        String sqlQuery = "SELECT nv.MaNV, nv.HoTenNV, nv.SDTNV, nv.DiaChiNV, nv.MaPB FROM nhan_vien as nv;";
 //        System.out.println(sqlQuery);
         try{
             return new VStaff(Database.viewSelect(sqlQuery));

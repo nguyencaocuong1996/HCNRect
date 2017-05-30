@@ -21,6 +21,14 @@ public class MStaff extends Model{
     protected String address;
     protected int departmentId;
 
+    public MStaff(){
+        
+    }
+    public MStaff(int id) {
+        this.id = id;
+    }
+
+    
     public MStaff(String name, String phone, String address, int departmentId) {
         this.name = name;
         this.phone = phone;

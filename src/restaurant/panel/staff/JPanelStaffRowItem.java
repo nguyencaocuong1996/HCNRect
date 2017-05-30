@@ -9,6 +9,7 @@ import assets.images.ImageResources;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import modal.MStaff;
 
 /**
  *
@@ -36,7 +37,7 @@ public class JPanelStaffRowItem extends javax.swing.JPanel {
         }
         customInit();
     }
-    public final void customInit(){
+    public void customInit(){
         jLabelStaffId.setText(this.maNV + "");
         jLabelStaffName.setText("<html><p>" + this.tenNV + "</p></html>");
         jLabelStaffPhoneNumber.setText(this.soDienThoai + " ");
@@ -64,8 +65,18 @@ public class JPanelStaffRowItem extends javax.swing.JPanel {
         jLabelStaffPhoneNumber.setText("120000000");
 
         jLabelEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_edit_green_x24.png"))); // NOI18N
+        jLabelEdit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelEditMouseClicked(evt);
+            }
+        });
 
         jLabelDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_dell_gray_x24.png"))); // NOI18N
+        jLabelDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelDeleteMouseClicked(evt);
+            }
+        });
 
         jLabelStaffAddress.setText("limit");
 
@@ -103,6 +114,29 @@ public class JPanelStaffRowItem extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jLabelDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDeleteMouseClicked
+        // TODO add your handling code here:
+//       MStaff mStaff = new MStaff(tenNV, soDienThoai , diaChi);
+//       mStaff.delete();
+        
+        try {
+            MStaff mStaff = new MStaff(maNV);
+            mStaff.delete();
+            JPanelManagementStaff.getInstance().getjPanelTableContent().remove(this);
+            JPanelManagementStaff.getInstance().getjPanelTableContent().revalidate();
+            JPanelManagementStaff.getInstance().getjPanelTableContent().repaint();
+        } catch (Exception e) {
+        }
+        
+    }//GEN-LAST:event_jLabelDeleteMouseClicked
+
+    public JLabel getjLabelEditStaff() {
+        return jLabelEdit;
+    }
+    private void jLabelEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelEditMouseClicked
+
     
 
     
@@ -138,6 +172,10 @@ public class JPanelStaffRowItem extends javax.swing.JPanel {
 
     public void setSoDienThoai(String soDienThoai) {
         this.soDienThoai = soDienThoai;
+    }
+    
+    public void setDiaChi(String diaChi){
+        this.diaChi = diaChi;
     }
 
     public static Color getOddBackground() {

@@ -60,6 +60,11 @@ public class JPanelTableRowItem extends javax.swing.JPanel {
         jLabelTableName.setText("Bàn 1");
 
         jLabelEditTable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_edit_green_x24.png"))); // NOI18N
+        jLabelEditTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelEditTableMouseClicked(evt);
+            }
+        });
 
         jLabelDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_dell_gray_x24.png"))); // NOI18N
         jLabelDelete.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -116,6 +121,10 @@ public class JPanelTableRowItem extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_jLabelDeleteMouseClicked
+
+    private void jLabelEditTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditTableMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelEditTableMouseClicked
 
     public JLabel getjLabelEditTable() {
         return jLabelEditTable;
