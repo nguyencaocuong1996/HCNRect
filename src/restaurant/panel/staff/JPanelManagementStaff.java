@@ -5,16 +5,21 @@
  */
 package restaurant.panel.staff;
 
+import core.ComboboxItem;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import javax.swing.JFrame;
+import modal.MStaff;
 import restaurant.panel.ppackkage.JPanelManagementMaterial;
 import restaurant.panel.ppackkage.JPanelMaterialRowItem;
 import restaurant.panel.ppackkage.JPanelTableRowItem;
+import view.VDepartment;
 import view.VStaff;
 import view.ViewItem;
 
@@ -25,13 +30,17 @@ import view.ViewItem;
 public class JPanelManagementStaff extends javax.swing.JPanel {
     protected static JPanelManagementStaff instance;
     public VStaff listStaff;
+    public VDepartment  listDepartment;
     protected HashMap<Integer, JPanelStaffRowItem> listJPSRI = new HashMap<>();
     public JPanelManagementStaff() {
         initComponents();
+        customInit();
+    }
+    
+    private void customInit(){
         jDialogAddStaff.setLocationRelativeTo(this);
         listStaff = VStaff.getAllStaff();
-        Iterator i = listStaff.getData().iterator();
-        
+        Iterator i = listStaff.getData().iterator();        
         int count = 0;
         while(i.hasNext()){
             ViewItem t = (ViewItem) i.next();
@@ -45,8 +54,7 @@ public class JPanelManagementStaff extends javax.swing.JPanel {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     
-                }
-                
+                }                
             });
             listJPSRI.put(id.intValue(), jpSRI);
             jPanelTableContent.add(jpSRI);
@@ -55,8 +63,21 @@ public class JPanelManagementStaff extends javax.swing.JPanel {
         int height = listStaff.getData().size() * 58;
         jPanelTableContent.setPreferredSize(new Dimension(780, height));
         
+        ArrayList<ComboboxItem> listCI = new ArrayList<>();
+        try {
+            listDepartment = VDepartment.getAllDepartment();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        listDepartment.getData().forEach((t) -> {
+            String name = (String)t.get("TenPB");
+            int id = ((Long)t.get("MaPB")).intValue();
+            jComboBoxDepartment.addItem(new ComboboxItem(name, id));
+            
+        });
     }
-
+    
     private void filter(){
         jPanelTableContent.removeAll();
         listStaff.filter(jTextFieldFilterName.getText());
@@ -102,13 +123,13 @@ public class JPanelManagementStaff extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jTextFieldName = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextFieldQty = new javax.swing.JTextField();
+        jTextFieldPhone = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jTextFieldUnit = new javax.swing.JTextField();
-        jTextFieldLimit = new javax.swing.JTextField();
+        jTextFieldAddress = new javax.swing.JTextField();
         jLabelCloseAdd = new javax.swing.JLabel();
-        jLabelDoAddMaterial = new javax.swing.JLabel();
+        jLabelDoAddStaff = new javax.swing.JLabel();
+        jComboBoxDepartment = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabelAddStaff = new javax.swing.JLabel();
@@ -123,9 +144,7 @@ public class JPanelManagementStaff extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanelTableContent = new javax.swing.JPanel();
 
-        jDialogAddStaff.setMaximumSize(new java.awt.Dimension(500, 300));
         jDialogAddStaff.setMinimumSize(new java.awt.Dimension(500, 300));
-        jDialogAddStaff.setPreferredSize(new java.awt.Dimension(500, 300));
 
         jPanel3.setBackground(new java.awt.Color(147, 193, 120));
         jPanel3.setPreferredSize(new java.awt.Dimension(400, 60));
@@ -157,13 +176,13 @@ public class JPanelManagementStaff extends javax.swing.JPanel {
         jLabel8.setText("Tên NV:");
 
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Số lượng trong kho:");
+        jLabel9.setText("Số điện thoại:");
 
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Mức tối thiểu trong kho:");
+        jLabel10.setText("Địa chỉ:");
 
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Đơn vị:");
+        jLabel11.setText("Phòng ban:");
 
         jLabelCloseAdd.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelCloseAdd.setForeground(new java.awt.Color(255, 255, 255));
@@ -175,13 +194,13 @@ public class JPanelManagementStaff extends javax.swing.JPanel {
             }
         });
 
-        jLabelDoAddMaterial.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabelDoAddMaterial.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelDoAddMaterial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_add_row_x24.png"))); // NOI18N
-        jLabelDoAddMaterial.setText("Thêm");
-        jLabelDoAddMaterial.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelDoAddStaff.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabelDoAddStaff.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelDoAddStaff.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_add_row_x24.png"))); // NOI18N
+        jLabelDoAddStaff.setText("Thêm");
+        jLabelDoAddStaff.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelDoAddMaterialMouseClicked(evt);
+                jLabelDoAddStaffMouseClicked(evt);
             }
         });
 
@@ -192,25 +211,28 @@ public class JPanelManagementStaff extends javax.swing.JPanel {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(89, 89, 89))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabelDoAddStaff))
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldQty, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldLimit, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel11)
-                .addGap(60, 60, 60)
-                .addComponent(jTextFieldUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabelDoAddMaterial)
-                .addGap(18, 18, 18)
-                .addComponent(jLabelCloseAdd)
-                .addGap(219, 219, 219))
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jTextFieldName)
+                        .addComponent(jComboBoxDepartment, 0, 173, Short.MAX_VALUE)
+                        .addComponent(jTextFieldPhone)
+                        .addComponent(jTextFieldAddress))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(109, 109, 109)
+                        .addComponent(jLabelCloseAdd)))
+                .addContainerGap(274, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,22 +240,24 @@ public class JPanelManagementStaff extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11)
-                    .addComponent(jTextFieldUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
+                    .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel9)
-                    .addComponent(jTextFieldQty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldLimit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
+                    .addComponent(jLabel11)
+                    .addComponent(jComboBoxDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelCloseAdd)
-                    .addComponent(jLabelDoAddMaterial))
-                .addGap(145, 145, 145))
+                    .addComponent(jLabel9)
+                    .addComponent(jTextFieldPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jTextFieldAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelDoAddStaff)
+                    .addComponent(jLabelCloseAdd))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         jLabel11.getAccessibleContext().setAccessibleName("Phòng Ban:");
@@ -242,7 +266,7 @@ public class JPanelManagementStaff extends javax.swing.JPanel {
         jDialogAddStaff.getContentPane().setLayout(jDialogAddStaffLayout);
         jDialogAddStaffLayout.setHorizontalGroup(
             jDialogAddStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jDialogAddStaffLayout.setVerticalGroup(
@@ -250,7 +274,7 @@ public class JPanelManagementStaff extends javax.swing.JPanel {
             .addGroup(jDialogAddStaffLayout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
 
@@ -393,28 +417,35 @@ public class JPanelManagementStaff extends javax.swing.JPanel {
         jDialogAddStaff.setVisible(false);
     }//GEN-LAST:event_jLabelCloseAddMouseClicked
 
-    private void jLabelDoAddMaterialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDoAddMaterialMouseClicked
-//        try {
-//            String name = jTextFieldName.getText();
-//            Float qty = new Float(jTextFieldQty.getText());
-//            Float limit = new Float(jTextFieldLimit.getText());
-//            String unit = jTextFieldUnit.getText();
-//            MMaterial mMaterial = new MMaterial(name, qty , unit, limit);
-//            mMaterial.insert();
-//            jDialogAddMaterial.setVisible(false);
-//
-//        } catch (NumberFormatException e) {
-//            JOptionPane.showMessageDialog(this, "Có lỗi xảy ra! Vui lòng kiểm tra lại kiểu dữ liệu!");
-//            e.printStackTrace();
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(this, "Có lỗi xảy ra! Lỗi database!");
-//            ex.printStackTrace();
-//        }
+    private void jLabelDoAddStaffMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDoAddStaffMouseClicked
+        try {
+            String name = jTextFieldName.getText();
+            int departmentID = (int)((ComboboxItem)(jComboBoxDepartment.getSelectedItem())).getValue();
+            String phone = jTextFieldPhone.getText();
+            String address = jTextFieldAddress.getText();
+            MStaff mStaff = new MStaff(name, phone , address, departmentID);
+            mStaff.insert();
+            jDialogAddStaff.setVisible(false);
 
-    }//GEN-LAST:event_jLabelDoAddMaterialMouseClicked
+        } catch (NumberFormatException e) {
+           // JOptionPane.showMessageDialog(this, "Có lỗi xảy ra! Vui lòng kiểm tra lại kiểu dữ liệu!");
+            e.printStackTrace();
+        } catch (SQLException ex) {
+            //JOptionPane.showMessageDialog(this, "Có lỗi xảy ra! Lỗi database!");
+            ex.printStackTrace();
+        }
+
+        jPanelTableContent.removeAll();
+        customInit();
+        int height = listStaff.getFilterData().size() * 58 + 58;
+        jPanelTableContent.setPreferredSize(new Dimension(780, height));
+        this.revalidate();
+        this.repaint();
+    }//GEN-LAST:event_jLabelDoAddStaffMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<ComboboxItem> jComboBoxDepartment;
     private javax.swing.JDialog jDialogAddStaff;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -429,7 +460,7 @@ public class JPanelManagementStaff extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelAddStaff;
     private javax.swing.JLabel jLabelCloseAdd;
-    private javax.swing.JLabel jLabelDoAddMaterial;
+    private javax.swing.JLabel jLabelDoAddStaff;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -437,10 +468,9 @@ public class JPanelManagementStaff extends javax.swing.JPanel {
     private javax.swing.JPanel jPanelTableContent;
     private javax.swing.JPanel jPanelTableHeader4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextFieldAddress;
     private javax.swing.JTextField jTextFieldFilterName;
-    private javax.swing.JTextField jTextFieldLimit;
     private javax.swing.JTextField jTextFieldName;
-    private javax.swing.JTextField jTextFieldQty;
-    private javax.swing.JTextField jTextFieldUnit;
+    private javax.swing.JTextField jTextFieldPhone;
     // End of variables declaration//GEN-END:variables
 }

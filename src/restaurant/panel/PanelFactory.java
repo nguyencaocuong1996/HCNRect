@@ -18,6 +18,7 @@ import restaurant.panel.ppackkage.JPanelManagementMaterial;
 import restaurant.panel.ppackkage.JPanelManagementTable;
 import restaurant.panel.report.JPanelReportDetails;
 import restaurant.panel.report.JPanelReportEndOfDay;
+import restaurant.panel.staff.JPanelManagementStaff;
 /**
  *
  * @author WINDNCC
@@ -32,6 +33,7 @@ public class PanelFactory {
     private static JPanelHeader headerPackageTable;
     private static JPanelHeader headerReport;
     private static JPanelHeader headerImportMaterial;
+    private static JPanelHeader headerManageStaff;
     private static JPanelWelcome overview;
     private static JPanelSidebar sidebar;
     private static JPanelManagementDish managementDish;
@@ -39,6 +41,7 @@ public class PanelFactory {
     private static JPanelManagementMaterial managementMaterial;
     private static JPanelReportEndOfDay reportEndOfDay;
     private static JPanelReportDetails reportDetails;
+    private static JPanelManagementStaff manageStaff;
     public class ID{
             public static final int SIDEBAR = 1;
             //content
@@ -51,6 +54,7 @@ public class PanelFactory {
             public static final int PACKAGE_MATERIAL = 143;
             public static final int REPORT_END_OF_DAY = 151;
             public static final int REPORT_DETAILS = 152;
+            public static final int MANAGE_STAFF = 161;
             //header
             public static final int HEADER_OVERVIEW = 211;
             public static final int HEADER_ORDER_PICK_TABLE = 221;
@@ -61,6 +65,7 @@ public class PanelFactory {
             public static final int HEADER_PACKAGE_TABLE = 253;
             public static final int HEADER_PACKAGE_IMPORT_MATERIAL = 254;
             public static final int HEADER_REPORT = 261;
+            public static final int HEADER_MANAGE_STAFF = 271;
     }
     public static JPanel get(int panelId){
         JPanel jp;
@@ -85,6 +90,9 @@ public class PanelFactory {
                 
             case ID.BOOK_TABLE:
                 jp = JPanelBookTable.getInstance();
+                break;
+            case ID.MANAGE_STAFF:
+                jp = JPanelManagementStaff.getInstance();
                 break;
                 
             case ID.HEADER_OVERVIEW:
@@ -157,6 +165,10 @@ public class PanelFactory {
                 if(reportDetails == null) reportDetails = new JPanelReportDetails();
                 jp = reportDetails;
                 break;
+            case ID.HEADER_MANAGE_STAFF:
+                if(headerManageStaff == null) headerManageStaff = new JPanelHeader("Quản lý nhân viên", IconResources.COINS);
+                jp = headerManageStaff;
+                break;   
             //#report
             default:
                 jp = new JPanel();

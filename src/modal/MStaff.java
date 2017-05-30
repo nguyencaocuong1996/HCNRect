@@ -21,6 +21,14 @@ public class MStaff extends Model{
     protected String address;
     protected int departmentId;
 
+    public MStaff(String name, String phone, String address, int departmentId) {
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+        this.departmentId = departmentId;
+    }
+
+    
     public int getId() {
         return id;
     }
@@ -62,7 +70,7 @@ public class MStaff extends Model{
     }
 
     @Override
-    void insert() throws SQLException {
+    public void insert() throws SQLException {
         insertData = new ModalData();
         insertData.put("HoTenNV", this.getName());
         insertData.put("SDTNV", this.getPhone());
@@ -92,7 +100,7 @@ public class MStaff extends Model{
     }
     
     @Override
-    void delete() throws SQLException{
+    public void delete() throws SQLException{
         try {
             Database.delete(getTableName(), "MaNV = " + getId());
         } catch (SQLException e) {
