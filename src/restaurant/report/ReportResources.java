@@ -5,6 +5,14 @@
  */
 package restaurant.report;
 
+import java.util.Map;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
+
 /**
  *
  * @author WINDNCC
@@ -17,7 +25,12 @@ public class ReportResources {
     public static final String RECEIVE_MOTH = ReportResources.class.getResource("source/details/IReportReceiveMonth.jrxml").toString().substring(6);
     public static final String RECEIVE_YEAR = ReportResources.class.getResource("source/details/IReportReceiveYear.jrxml").toString().substring(6);
     public static final String RECEIVE_RANGE = ReportResources.class.getResource("source/details/IReportReceiveRange.jrxml").toString().substring(6);
-//    public static final String CUSTOMER_YEAR = ReportResources.class.getResource("source/eod/IReportDetailCustomerYear.jrxml").toString().substring(6);
+    public static final String RECEIPT_NOTE = ReportResources.class.getResource("source/IReportReceiptNote.jrxml").toString().substring(6);
 //    public static final String DISH_RANGE = ReportResources.class.getResource("source/eod/IReportDetailDishRange.jrxml").toString().substring(6);
-
+    public static void showReport(String url, Map<String, Object> params) throws JRException
+    {
+        JasperReport jR = JasperCompileManager.compileReport(url);
+        JasperPrint jP = JasperFillManager.fillReport(jR, params, database.Database.getConnection());
+        JasperViewer.viewReport(jP,false);
+    }
 }

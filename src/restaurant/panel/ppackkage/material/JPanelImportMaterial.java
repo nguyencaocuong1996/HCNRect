@@ -12,6 +12,8 @@ import java.awt.Dimension;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -19,7 +21,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import modal.MReceiptNote;
 import modal.MReceiptNoteDetail;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 import restaurant.panel.ppackkage.JPanelChooseProvider;
+import restaurant.report.ReportResources;
 import view.VMaterial;
 
 /**
@@ -389,20 +398,40 @@ public class JPanelImportMaterial extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextFieldPayAmoutKeyReleased
 
     private void jLabelDoAddReceiptNoteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDoAddReceiptNoteMouseClicked
-        String date = CDateTime.getInstance().getDate().toString();
-        MReceiptNote mReceiptNote = new MReceiptNote(this.getProviderId(), date, getTotalPriceImport(), new Float(jTextFieldPayAmout.getText()));
-        try {
-            mReceiptNote.insert();
-            mReceiptNote = MReceiptNote.getLastReceiptNote();
-            for (Map.Entry<Integer, JPanelImportDetailMaterialItem> entry : listImportingMaterial.entrySet()) {
-                Integer key = entry.getKey();
-                JPanelImportDetailMaterialItem value = entry.getValue();
-                MReceiptNoteDetail mRND = new MReceiptNoteDetail(mReceiptNote.getId(), value.getMaterialId(), value.getQuantity(), value.getPrice());
-                mRND.insert();
+        if (getProviderId() == 0) {
+            JOptionPane.showMessageDialog(this, "Chưa chọn nhà cung cấp!");
+            return;
+        }
+        if(listImportingMaterial.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Chưa chọn mặt hàng nhập nào!");
+            return;
+        }
+        int check = JOptionPane.showConfirmDialog(this, "Hãy kiểm tra lại thông tin trước khi lập phiếu!");
+        if (check == JOptionPane.YES_OPTION) {
+            String date = CDateTime.getInstance().getDate().toString();
+            MReceiptNote mReceiptNote = new MReceiptNote(this.getProviderId(), date, getTotalPriceImport(), new Float(jTextFieldPayAmout.getText()));
+            try {
+                mReceiptNote.insert();
+                mReceiptNote = MReceiptNote.getLastReceiptNote();
+                for (Map.Entry<Integer, JPanelImportDetailMaterialItem> entry : listImportingMaterial.entrySet()) {
+                    Integer key = entry.getKey();
+                    JPanelImportDetailMaterialItem value = entry.getValue();
+                    MReceiptNoteDetail mRND = new MReceiptNoteDetail(mReceiptNote.getId(), value.getMaterialId(), value.getQuantity(), value.getPrice());
+                    mRND.insert();
+                }
+                Map<String, Object> params = new HashMap<>();
+                params.put("receiptNoteId", mReceiptNote.getId());
+                params.put("providerName", "Công ty TNHH HCN");
+                params.put("staffName", "Nguyễn Cao Cường");
+                params.put("totalMoney", new Float(jLabelTotalPriceImport.getText()));
+                params.put("payAmount", new Float(jTextFieldPayAmout.getText()));
+                ReportResources.showReport(ReportResources.RECEIPT_NOTE, params);
+            } catch (SQLException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Có lỗi xảy ra vui lòng thử lại!");
+            } catch (JRException ex) {
+                Logger.getLogger(JPanelImportMaterial.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Có lỗi xảy ra vui lòng thử lại!");
         }
     }//GEN-LAST:event_jLabelDoAddReceiptNoteMouseClicked
     public static void main(String[] args) {
@@ -433,8 +462,8 @@ public class JPanelImportMaterial extends javax.swing.JPanel {
         try {
             jLabelDoubt.setText((getTotalPriceImport() - new Float(jTextFieldPayAmout.getText())) + "");
         } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Chỉ được phép nhập số!");
         }
-        
     }
 
 

@@ -17,7 +17,7 @@ public class MReceiptNoteDetail extends Model{
     protected int materialId;
     protected float qty;
     protected float price;
-
+    private static final String TABLE_NAME = "chi_tiet_phieu_nhap";
     public MReceiptNoteDetail(int receiptNoteId, int materialId, float qty, float price) {
         this.receiptNoteId = receiptNoteId;
         this.materialId = materialId;
@@ -61,8 +61,12 @@ public class MReceiptNoteDetail extends Model{
     
     @Override
     public void insert() throws SQLException {
-        InsertData insData = new InsertData(this);
-        insData.execute();
+        insertData = new ModalData();
+        insertData.put("MaPNH", getReceiptNoteId());
+        insertData.put("MaNL", getMaterialId());
+        insertData.put("SoLuongNhap", getQty());
+        insertData.put("GiaNhap", getPrice());
+        database.Database.insert(TABLE_NAME, insertData);
     }
 
     @Override

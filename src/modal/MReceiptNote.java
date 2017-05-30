@@ -20,6 +20,7 @@ public class MReceiptNote extends Model{
     protected String date;
     protected float totalReceipt;
     protected float payAmount;
+    public static final String TABLE_NAME = "phieu_nhap_hang";
     public MReceiptNote() {
     }
 
@@ -98,8 +99,12 @@ public class MReceiptNote extends Model{
     
     @Override
     public void insert() throws SQLException {
-        InsertData insertD = new InsertData(this);
-        insertD.execute();
+        insertData = new ModalData();
+        insertData.put("MaNCC", getProviderId());
+        insertData.put("NgayNhapHang", getDate());
+        insertData.put("TriGiaPNH", getTotalReceipt());
+        insertData.put("SoTienDaTra", getPayAmount());
+        database.Database.insert(TABLE_NAME, insertData);
     }
 
     @Override

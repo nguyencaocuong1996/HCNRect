@@ -215,6 +215,7 @@ public class JPanelImportDetailMaterialItem extends javax.swing.JPanel {
         JPanelImportMaterial.getInstance().getjPanelListImportingMaterial().remove(jpIDMI);
         JPanelImportMaterial.getInstance().getjPanelListImportingMaterial().revalidate();
         JPanelImportMaterial.getInstance().getjPanelListImportingMaterial().repaint();
+        JPanelImportMaterial.getInstance().getListImportingMaterial().remove(materialId);
 //        JPanelOrder.getInstance().getListJPanelOrderDetail().get(JPanelOrder.getInstance().getTableId()).removeOrderItem(this);
 //        JPanelOrder.getInstance().revalidate();
 //        JPanelOrder.getInstance().repaint();
@@ -223,7 +224,14 @@ public class JPanelImportDetailMaterialItem extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabelCloseMouseClicked
 
     private void jTextFieldQtyKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldQtyKeyReleased
-        setQuantity(new Integer(jTextFieldQty.getText()));
+        try {
+            if(!jTextFieldQty.getText().isEmpty()){
+                setQuantity(new Integer(jTextFieldQty.getText()));
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showConfirmDialog(this, "Chỉ được phép nhập số!");
+        }
+        
     }//GEN-LAST:event_jTextFieldQtyKeyReleased
 
     private void jLabelUpMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelUpMouseEntered
@@ -252,8 +260,10 @@ public class JPanelImportDetailMaterialItem extends javax.swing.JPanel {
 
     private void jTextFieldPriceKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPriceKeyReleased
         try {
-            setPrice(new Float(jTextFieldPrice.getText()));
-            setTotalPrice();
+            if(!jTextFieldPrice.getText().isEmpty()){
+                setPrice(new Float(jTextFieldPrice.getText()));
+                setTotalPrice();
+            }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Chỉ được nhập số!");
             jTextFieldPrice.setText(getPrice()+"");
