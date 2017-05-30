@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modal;
-
 import database.Database;
+import java.sql.SQLException;
 import java.util.HashMap;
-import modal.MDish;
-import modal.MMaterial;
-import modal.MProvider;
-
 /**
  *
  * @author WINDNCC
@@ -40,15 +31,34 @@ public class InsertData {
         this.data.put("MoTaNCC", provider.getDescription());
     }
     
-    
+    public InsertData(MReceiptNote receiptNote){
+        tableName = "phieu_nhap_hang";
+        this.data.put("MaPNH", receiptNote.getId());
+        this.data.put("MaNCC", receiptNote.getProviderId());
+        this.data.put("NgayNhapHang", receiptNote.getDate());
+        this.data.put("TriGiaPNH", receiptNote.getTotalReceipt());
+        this.data.put("SoTienDaTra", receiptNote.getPayAmount());
+    }
+    public InsertData(MReceiptNoteDetail receiptNoteDetail){
+        tableName = "chi_tiet_phieu_nhap";
+        this.data.put("MaPNH", receiptNoteDetail.getReceiptNoteId());
+        this.data.put("MaNL", receiptNoteDetail.getMaterialId());
+        this.data.put("SoLuongNhap", receiptNoteDetail.getQty());
+        this.data.put("GiaNhap", receiptNoteDetail.getPrice());
+    }
     public HashMap getData() {
         return data;
     }
     public String getTableName() {
         return tableName;
     }
-    public void execute()
+    public void execute() throws SQLException
     {
-//        Database.insert(this);
+        try {
+            Database.insert(this.tableName, this.data);
+        } catch (SQLException e) {
+            throw e;
+        }
+      
     }
 }

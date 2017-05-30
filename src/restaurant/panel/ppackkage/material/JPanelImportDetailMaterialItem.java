@@ -1,10 +1,8 @@
 
 package restaurant.panel.ppackkage.material;
 
-import restaurant.panel.order.*;
 import assets.images.icons.IconResources;
 import java.awt.Dimension;
-import java.util.HashMap;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -27,12 +25,12 @@ public class JPanelImportDetailMaterialItem extends javax.swing.JPanel {
         jTextFieldQty.setText(this.quantity + "");
         jLabelTotalPrice.setText(quantity * materialPrice + "");
     }
-    public int getDishId() {
+    public int getMaterialId() {
         return materialId;
     }
 
-    public void setDishId(int dishId) {
-        this.materialId = dishId;
+    public void setMaterialId(int materialId) {
+        this.materialId = materialId;
     }
 
     
@@ -53,8 +51,10 @@ public class JPanelImportDetailMaterialItem extends javax.swing.JPanel {
         return materialPrice * quantity;
     }
     public void setTotalPrice(){
-        System.out.println("sôso" + getTotalPrice());
+//        System.out.println("sôso" + getTotalPrice());
         jLabelTotalPrice.setText(getTotalPrice() + "");
+        JPanelImportMaterial.getInstance().setJLabelTotalPriceImport();
+//        JPanelImportMaterial.getInstance().set
     }
     public void setQuantity(float quantity) {
         jTextFieldQty.setText(quantity+"");
@@ -65,6 +65,7 @@ public class JPanelImportDetailMaterialItem extends javax.swing.JPanel {
             jLabelDown.setVisible(true);
         }
         setTotalPrice();
+
     }
 
     public float getPrice() {
