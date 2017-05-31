@@ -3,16 +3,14 @@ package restaurant.panel.menu;
 
 import assets.images.icons.IconResources;
 import java.awt.Dimension;
-import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
 import javax.swing.JFrame;
-import restaurant.MainFrame;
+import modal.MStaff;
 import restaurant.panel.PanelFactory;
-import restaurant.panel.booktable.JPanelBookTable;
-import restaurant.panel.order.JPanelOrderPickTable;
 
 public class JPanelMenu extends javax.swing.JPanel {
     private static JPanelMenu instance;
+    private MStaff staff;
     private ArrayList<JPanelMenuItem> listJPanelMenuItem = new ArrayList<>();;
     public JPanelMenu() {
         initComponents();
@@ -68,6 +66,23 @@ public class JPanelMenu extends javax.swing.JPanel {
 
     public ArrayList<JPanelMenuItem> getListJPanelMenuItem() {
         return listJPanelMenuItem;
+    }
+
+    public MStaff getStaff() {
+        return staff;
+    }
+
+    public void setStaff(MStaff staff) {
+        switch(staff.getDepartmentId())
+        {
+            case 3:
+                listJPanelMenuItem.get(2).setVisible(false);
+                listJPanelMenuItem.get(4).setVisible(false);
+                listJPanelMenuItem.get(5).setVisible(false);
+                listJPanelMenuItem.get(6).setVisible(false);
+            break;
+        }
+        this.staff = staff;
     }
     
     public static void main(String[] args) {

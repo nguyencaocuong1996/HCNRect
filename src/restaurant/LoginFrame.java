@@ -11,10 +11,10 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modal.MUser;
-import core.CEncrypt;
 import javax.swing.JOptionPane;
 import modal.MDepartment;
 import modal.MStaff;
+import restaurant.panel.menu.JPanelMenu;
 /**
  *
  * @author khanhnguyen
@@ -59,11 +59,12 @@ public class LoginFrame extends javax.swing.JFrame{
             if(CheckLogin(userName, passWord)){
                 MUser user = MUser.get(userName, passWord);
                 MStaff staff = MStaff.get(user.getStaffId());
-                MDepartment department = MDepartment.get(staff.getId());
+                MDepartment department = MDepartment.get(staff.getDepartmentId());
                 MainFrame.getInstance().setVisible(true);
                 MainFrame.getInstance().setUser(user);
                 MainFrame.getInstance().setStaff(staff);
                 MainFrame.getInstance().setDepartment(department);
+                JPanelMenu.getInstance().setStaff(staff);
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "Sai tài khoản hoặc mật khẩu!", "Lỗi đăng nhập", JOptionPane.ERROR_MESSAGE);

@@ -51,7 +51,7 @@ public class JPanelManagementStaff extends javax.swing.JPanel {
             String name = (String) t.get("HoTenNV");
             String sodienthoai = (String) t.get("SDTNV");
             String diachi = (String) t.get("DiaChiNV");
-            int maPB = ((Integer)t.get("MaPB")).intValue();
+            int maPB = ((Integer)t.get("MaPB"));
             JPanelStaffRowItem jpSRI = new JPanelStaffRowItem(id.intValue(), name, sodienthoai, diachi,(count % 2 != 0));
             jpSRI.getjLabelEdit().addMouseListener(new MouseAdapter() {
                 @Override
@@ -70,7 +70,7 @@ public class JPanelManagementStaff extends javax.swing.JPanel {
             jPanelTableContent.add(jpSRI);
             count++;
         };
-        int height = listStaff.getData().size() * 58;
+        int height = listStaff.getData().size() * 62;
         jPanelTableContent.setPreferredSize(new Dimension(780, height));
         
         ArrayList<ComboboxItem> listCI = new ArrayList<>();
@@ -100,7 +100,7 @@ public class JPanelManagementStaff extends javax.swing.JPanel {
             Long id = (Long) t.get("MaNV");
             jPanelTableContent.add(listJPSRI.get(id.intValue()));
         }
-        int height = listStaff.getFilterData().size() * 58;
+        int height = listStaff.getFilterData().size() * 62;
         jPanelTableContent.setPreferredSize(new Dimension(780, height));
         this.revalidate();
         this.repaint();
@@ -450,6 +450,10 @@ public class JPanelManagementStaff extends javax.swing.JPanel {
                 .addContainerGap(52, Short.MAX_VALUE))
         );
 
+        setMaximumSize(new java.awt.Dimension(778, 520));
+        setMinimumSize(new java.awt.Dimension(778, 520));
+        setPreferredSize(new java.awt.Dimension(778, 520));
+
         jPanel1.setPreferredSize(new java.awt.Dimension(425, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_management_search_darkgreen_x32.png"))); // NOI18N
@@ -496,6 +500,10 @@ public class JPanelManagementStaff extends javax.swing.JPanel {
                 .addGap(8, 8, 8))
         );
 
+        jPanel2.setMaximumSize(new java.awt.Dimension(780, 480));
+        jPanel2.setMinimumSize(new java.awt.Dimension(780, 480));
+        jPanel2.setPreferredSize(new java.awt.Dimension(780, 480));
+
         jLabel23.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel23.setText("Mã");
 
@@ -510,6 +518,10 @@ public class JPanelManagementStaff extends javax.swing.JPanel {
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setMaximumSize(new java.awt.Dimension(770, 0));
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(770, 0));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(770, 0));
         jScrollPane1.setViewportView(jPanelTableContent);
 
         javax.swing.GroupLayout jPanelTableHeader4Layout = new javax.swing.GroupLayout(jPanelTableHeader4);
@@ -527,7 +539,7 @@ public class JPanelManagementStaff extends javax.swing.JPanel {
                 .addComponent(jLabel27)
                 .addGap(46, 46, 46)
                 .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE))
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanelTableHeader4Layout.setVerticalGroup(
             jPanelTableHeader4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -571,7 +583,7 @@ public class JPanelManagementStaff extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

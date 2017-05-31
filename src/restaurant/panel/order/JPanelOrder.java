@@ -9,18 +9,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import modal.MBill;
 import modal.MBillDetail;
 import modal.MCustomer;
+import modal.MStaff;
 import modal.MTable;
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.view.JasperViewer;
 import restaurant.MainFrame;
 import restaurant.panel.PanelFactory;
 import restaurant.report.ReportResources;
@@ -31,6 +30,7 @@ public class JPanelOrder extends javax.swing.JPanel {
     private int tableId;
     private JPanelOrderDish jpOrderDish = new JPanelOrderDish();
     private JPanelOrderDetail jpOrderDetail;
+    private MCustomer customer;
     private HashMap<Integer, JPanelOrderDetail> listJPanelOrderDetail = new HashMap<>();
     public JPanelOrder() {
         initComponents();
@@ -120,6 +120,19 @@ public class JPanelOrder extends javax.swing.JPanel {
         updateBill();
     }
 
+    public MCustomer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(MCustomer customer) {
+        jLabelChooseCustomer.setText(customer.getFullName() + " - " + customer.getPhone());
+        this.customer = customer;
+    }
+
+    public JDialog getjDialogChooseCustomer() {
+        return jDialogChooseCustomer;
+    }
+
     
     
     public static JPanelOrder getInstance() {
@@ -131,6 +144,7 @@ public class JPanelOrder extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialogChooseCustomer = new javax.swing.JDialog();
         jPanelHeader = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -150,7 +164,11 @@ public class JPanelOrder extends javax.swing.JPanel {
         jLabelCharge = new javax.swing.JLabel();
         jTextFieldAmountPay = new javax.swing.JTextField();
         jTextFieldDiscount = new javax.swing.JTextField();
+        jLabelChooseCustomer = new javax.swing.JLabel();
         jPanelOrderDish = new javax.swing.JPanel();
+
+        jDialogChooseCustomer.setMinimumSize(new java.awt.Dimension(410, 340));
+        jDialogChooseCustomer.getContentPane().setLayout(new java.awt.FlowLayout());
 
         jPanelHeader.setPreferredSize(new java.awt.Dimension(752, 80));
 
@@ -218,7 +236,6 @@ public class JPanelOrder extends javax.swing.JPanel {
                 jPanelToPayTheBillMouseClicked(evt);
             }
         });
-        jPanelToPayTheBill.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 10));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -272,28 +289,41 @@ public class JPanelOrder extends javax.swing.JPanel {
             }
         });
 
+        jLabelChooseCustomer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_user_darkgreen_x32.png"))); // NOI18N
+        jLabelChooseCustomer.setText("Click để chọn khách hàng");
+        jLabelChooseCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelChooseCustomerMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelOrderActionLayout = new javax.swing.GroupLayout(jPanelOrderAction);
         jPanelOrderAction.setLayout(jPanelOrderActionLayout);
         jPanelOrderActionLayout.setHorizontalGroup(
             jPanelOrderActionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelOrderActionLayout.createSequentialGroup()
-                .addGap(8, 8, 8)
                 .addGroup(jPanelOrderActionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelOrderActionLayout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabelCharge))
-                    .addComponent(jPanelToPayTheBill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelOrderActionLayout.createSequentialGroup()
+                        .addGap(8, 8, 8)
                         .addGroup(jPanelOrderActionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanelOrderActionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldAmountPay, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-                            .addComponent(jLabelTotalBill, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextFieldDiscount))))
+                            .addGroup(jPanelOrderActionLayout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabelCharge))
+                            .addComponent(jPanelToPayTheBill, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelOrderActionLayout.createSequentialGroup()
+                                .addGroup(jPanelOrderActionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanelOrderActionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextFieldAmountPay, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                                    .addComponent(jLabelTotalBill, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jTextFieldDiscount)))))
+                    .addGroup(jPanelOrderActionLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabelChooseCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelOrderActionLayout.setVerticalGroup(
@@ -315,9 +345,11 @@ public class JPanelOrder extends javax.swing.JPanel {
                 .addGroup(jPanelOrderActionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jLabelCharge))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanelToPayTheBill, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelChooseCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelToPayTheBill, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jPanelOrderDish.setPreferredSize(new java.awt.Dimension(100, 100));
@@ -332,7 +364,7 @@ public class JPanelOrder extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanelOrderAction, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)))
         );
         jPanelContentLayout.setVerticalGroup(
             jPanelContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -386,13 +418,20 @@ public class JPanelOrder extends javax.swing.JPanel {
 
     private void jPanelToPayTheBillMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelToPayTheBillMouseClicked
         System.out.println("jPanelToPayTheBillMouseClicked in JPanelOrder.java: " + ReportResources.RP_BILL);
+        
+        
         int confirm = JOptionPane.showConfirmDialog(this, "Thực hiện thanh toán? Không thể hoàn tác.");
         if(confirm == JOptionPane.YES_OPTION){
             try { 
+                MStaff staff = MainFrame.getInstance().getStaff();
                 JPanelOrderDetail jpOD = listJPanelOrderDetail.get(getTableId());
                 MBill mBill = new MBill();
-                mBill.setCustomerId(1);
-                mBill.setStaffId(1);
+                if (customer != null) {
+                    mBill.setCustomerId(customer.getId());
+                } else {
+                    mBill.setCustomerId(0);
+                }
+                mBill.setStaffId(staff.getId());
                 mBill.setTotalBill(jpOD.getTotalBill());
                 mBill.setDateTimeBill(CDateTime.getInstance().toString());
                 mBill.setTableId(getTableId());
@@ -406,7 +445,6 @@ public class JPanelOrder extends javax.swing.JPanel {
                         mBD.setQuantity(jpOI.getQuantity());
                         mBD.insert();
                     }
-                    System.out.println(mBill.getId());
                 } catch (SQLException e) {
                     e.printStackTrace();
                     return;
@@ -422,19 +460,18 @@ public class JPanelOrder extends javax.swing.JPanel {
                 
                 MCustomer mc = MCustomer.getByID(mBill.getCustomerId());
                 params.put("HoTenKH", mc.getFullName());
-                
+                params.put("HoTenNV", staff.getName());
                 params.put("SDTKH", mc.getPhone());
                 params.put("GiamGia", new Float(jTextFieldDiscount.getText()));
                 params.put("TienPhaiThanhToan", jpOD.getTotalBill());
-                JasperReport jR = JasperCompileManager.compileReport(ReportResources.RP_BILL);
-                JasperPrint jP = JasperFillManager.fillReport(jR, params, database.Database.getConnection());
-                JasperViewer.viewReport(jP,false);
+                params.put("MaNV", staff.getId());
+                ReportResources.showReport(ReportResources.RP_BILL, params);
                 MainFrame.getInstance().changeContentPanel(PanelFactory.get(PanelFactory.ID.ORDER_PICK_TABLE));
                 MainFrame.getInstance().changeHeaderPanel(PanelFactory.get(PanelFactory.ID.HEADER_ORDER_PICK_TABLE));
-            } catch (JRException e) {
+            } catch (SQLException e) {
                 e.printStackTrace();
-            } catch (SQLException e){
-                e.printStackTrace();
+            } catch (JRException ex) {
+                Logger.getLogger(JPanelOrder.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             return;
@@ -466,9 +503,16 @@ public class JPanelOrder extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jTextFieldAmountPayFocusLost
 
+    private void jLabelChooseCustomerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelChooseCustomerMouseClicked
+        jDialogChooseCustomer.setLocationRelativeTo(MainFrame.getInstance());
+        jDialogChooseCustomer.add(JPanelChooseCustomerForOrder.getInstance());
+        jDialogChooseCustomer.setVisible(true);
+    }//GEN-LAST:event_jLabelChooseCustomerMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<ComboboxItem> jComboBoxSearchByMenu;
+    private javax.swing.JDialog jDialogChooseCustomer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -477,6 +521,7 @@ public class JPanelOrder extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabelCharge;
+    private javax.swing.JLabel jLabelChooseCustomer;
     private javax.swing.JLabel jLabelTotalBill;
     private javax.swing.JPanel jPanelContent;
     private javax.swing.JPanel jPanelHeader;

@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="72ea9fd8-67b5-4679-8749-e916ae8716ae">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="128"/>
 	<parameter name="HoTenKH" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -13,16 +13,22 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="GiamGia" class="java.lang.Float">
-		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="TienPhaiThanhToan" class="java.lang.Float">
-		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="MaHD" class="java.lang.Integer">
-		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="HoTenNV" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="MaNV" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT ma.TenMA, cthd.SoLuong, ma.GiaMA, (GiaMa * SoLuong) as ThanhTien FROM hoa_don as hd
+		<![CDATA[SELECT ma.TenMA, cthd.SoLuong, ma.GiaMA, (GiaMA * SoLuong) as ThanhTien FROM hoa_don as hd
 LEFT JOIN chi_tiet_hoa_don as cthd ON hd.MaHD = cthd.MaHD
 LEFT JOIN mon_an as ma ON cthd.MaMA = ma.MaMa
 WHERE hd.MaHD = $P{MaHD}]]>
@@ -83,82 +89,93 @@ WHERE hd.MaHD = $P{MaHD}]]>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="135" splitType="Stretch">
+		<band height="206" splitType="Stretch">
 			<staticText>
-				<reportElement x="200" y="0" width="179" height="20" uuid="7b16a665-1cd5-4398-9dfb-8fd15dc0fefd"/>
+				<reportElement x="156" y="0" width="262" height="33" uuid="7b16a665-1cd5-4398-9dfb-8fd15dc0fefd"/>
 				<textElement>
-					<font fontName="DejaVu Sans" size="10" isBold="true" pdfEncoding="utf-8"/>
+					<font fontName="DejaVu Sans" size="18" isBold="true" pdfEncoding="utf-8"/>
 				</textElement>
 				<text><![CDATA[HÓA ĐƠN THANH TOÁN]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="227" y="20" width="93" height="20" uuid="82c23a19-4025-410d-8865-9c5b166861a0"/>
+				<reportElement x="184" y="45" width="93" height="20" uuid="82c23a19-4025-410d-8865-9c5b166861a0"/>
 				<textElement>
 					<font fontName="DejaVu Sans" isBold="true" pdfEncoding="utf-8"/>
 				</textElement>
 				<text><![CDATA[Mã hóa đơn: HD]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="19" y="40" width="111" height="24" uuid="df8fb586-f714-496d-9911-c7b9ba580e70"/>
+				<reportElement x="17" y="65" width="160" height="24" uuid="df8fb586-f714-496d-9911-c7b9ba580e70"/>
 				<textElement>
 					<font fontName="DejaVu Sans" isBold="true" pdfEncoding="utf-8"/>
 				</textElement>
 				<text><![CDATA[Họ tên khách hàng: ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="19" y="64" width="111" height="26" uuid="b8c4e21d-efad-4308-95c1-332d74b3e968"/>
+				<reportElement x="17" y="89" width="160" height="26" uuid="b8c4e21d-efad-4308-95c1-332d74b3e968"/>
 				<textElement>
 					<font fontName="DejaVu Sans" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Số điện thoại:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="114" width="555" height="13" uuid="21e5682b-ebe1-4e36-8319-f7c19aca35b9"/>
+				<reportElement x="0" y="193" width="555" height="13" uuid="21e5682b-ebe1-4e36-8319-f7c19aca35b9"/>
 				<textElement>
 					<font fontName="DejaVu Sans"/>
 				</textElement>
 				<text><![CDATA[---------------------------------------------------------------------------------------------------------------------------------------------------------------]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="146" y="40" width="100" height="24" uuid="e9bfb1c3-c157-47cc-a1c5-8c1d630a9020"/>
+				<reportElement x="177" y="65" width="219" height="24" uuid="e9bfb1c3-c157-47cc-a1c5-8c1d630a9020"/>
 				<textElement>
 					<font fontName="DejaVu Sans"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{HoTenKH}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="146" y="64" width="100" height="26" uuid="44a99ab3-6da3-4187-a94b-71db11a169b4"/>
+				<reportElement x="177" y="89" width="219" height="26" uuid="44a99ab3-6da3-4187-a94b-71db11a169b4"/>
 				<textElement>
 					<font fontName="DejaVu Sans"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{SDTKH}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="19" y="90" width="111" height="24" uuid="dd4f2a71-a463-4ce6-a2bf-ea82afff7d69"/>
+				<reportElement x="17" y="115" width="160" height="24" uuid="dd4f2a71-a463-4ce6-a2bf-ea82afff7d69"/>
 				<textElement>
 					<font fontName="DejaVu Sans" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Bàn: ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="146" y="90" width="100" height="24" uuid="a31e6c8e-e604-4d40-8963-37ad2cacede8"/>
+				<reportElement x="177" y="115" width="219" height="24" uuid="a31e6c8e-e604-4d40-8963-37ad2cacede8"/>
 				<textElement>
 					<font fontName="DejaVu Sans"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{TenBan}]]></textFieldExpression>
 			</textField>
 			<componentElement>
-				<reportElement x="420" y="40" width="125" height="50" uuid="902b9756-7cfd-483c-9f91-5cd93a568d88"/>
+				<reportElement x="418" y="89" width="125" height="50" uuid="902b9756-7cfd-483c-9f91-5cd93a568d88"/>
 				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Codabar" drawText="false" checksumRequired="false">
 					<jr:codeExpression><![CDATA["1234"]]></jr:codeExpression>
 				</jr:barbecue>
 			</componentElement>
 			<textField>
-				<reportElement x="320" y="20" width="100" height="20" uuid="63670deb-32d7-47bd-90a8-e788a46b4aff"/>
+				<reportElement x="277" y="45" width="100" height="20" uuid="63670deb-32d7-47bd-90a8-e788a46b4aff"/>
 				<textElement>
 					<font fontName="DejaVu Sans" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{MaHD}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="17" y="139" width="160" height="20" uuid="1b3890b2-bc4f-4813-a067-ed43642ce46b"/>
+				<textElement>
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nhân viên lập hóa đơn:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="177" y="139" width="219" height="20" uuid="eda01c69-7aca-4c45-99f1-40fcccb9b66d"/>
+				<textFieldExpression><![CDATA["NV" + $P{MaNV}.toString() + " - " + $P{HoTenNV}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
@@ -328,16 +345,16 @@ WHERE hd.MaHD = $P{MaHD}]]>
 				<text><![CDATA[ VNĐ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="100" y="0" width="56" height="20" uuid="b59a5ba8-eeb0-474f-a3f6-b8c5c3f6d08d"/>
+				<reportElement x="130" y="0" width="59" height="20" uuid="b59a5ba8-eeb0-474f-a3f6-b8c5c3f6d08d"/>
 				<textElement>
 					<font fontName="DejaVu Sans"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{PAGE_COUNT}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="30" y="0" width="68" height="20" uuid="799b619a-d80b-4769-9f9a-f27325166928"/>
+				<reportElement x="30" y="0" width="95" height="20" uuid="799b619a-d80b-4769-9f9a-f27325166928"/>
 				<textElement>
-					<font fontName="DejaVu Sans"/>
+					<font fontName="DejaVu Sans" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Tổng số món:]]></text>
 			</staticText>

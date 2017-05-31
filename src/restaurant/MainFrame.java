@@ -108,6 +108,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     public void setDepartment(MDepartment department) {
         jLabelDepartment.setText(department.getName());
+        System.out.println(department.getId() + department.getName());
         this.department = department;
     }
     
@@ -152,6 +153,7 @@ public class MainFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(102, 255, 102));
         setMinimumSize(getPreferredSize());
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelHeader.setBackground(new java.awt.Color(147, 193, 120));
