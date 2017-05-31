@@ -1,16 +1,12 @@
 
 package restaurant.panel.header;
 
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import restaurant.MainFrame;
 import restaurant.panel.PanelFactory;
-import restaurant.panel.booktable.JPanelBookTable;
 
 public class JPanelHeader extends javax.swing.JPanel {
     protected int jPanelBackTargetId;
@@ -46,6 +42,7 @@ public class JPanelHeader extends javax.swing.JPanel {
         customInit();
     }
     public final void customInit(){
+        jPanelUserInfo.setVisible(false);
         jLabelBack.setOpaque(true);
         jLabelBack.setVisible(hasBack);
         jLabelTitleHeader.setText(titleHeader);
@@ -90,9 +87,9 @@ public class JPanelHeader extends javax.swing.JPanel {
 
         jLabelTitleHeader = new javax.swing.JLabel();
         jLabelBack = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        jPanelShowUserInfo = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jPanelUserInfo = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(147, 193, 120));
         setMinimumSize(new java.awt.Dimension(770, 80));
@@ -112,24 +109,47 @@ public class JPanelHeader extends javax.swing.JPanel {
         jLabelBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_back_white_x50.png"))); // NOI18N
         add(jLabelBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 80));
 
-        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
-        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 15));
+        jPanelShowUserInfo.setBackground(new java.awt.Color(102, 102, 102));
+        jPanelShowUserInfo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanelShowUserInfoMouseClicked(evt);
+            }
+        });
+        jPanelShowUserInfo.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 15));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_avata_white_x50.png"))); // NOI18N
-        jPanel1.add(jLabel2);
+        jPanelShowUserInfo.add(jLabel2);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_arrow_down_white_fill_x24.png"))); // NOI18N
-        jPanel1.add(jLabel3);
+        add(jPanelShowUserInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 0, 100, 80));
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 0, 100, 80));
+        jPanelUserInfo.setBackground(new java.awt.Color(102, 102, 102));
+        add(jPanelUserInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 0, 210, 80));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jPanelShowUserInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelShowUserInfoMouseClicked
+        if (this.getParent().getParent() != null) {
+            JPanel jp = MainFrame.getInstance().getjPanelUserInfo();
+            jPanelUserInfo.setVisible(!jPanelUserInfo.isVisible());
+            if (!(jp.getParent() == jPanelUserInfo)) {
+                jPanelUserInfo.add(jp);
+                repaint();
+            } else {
+                jPanelUserInfo.remove(jp);
+                repaint();
+            }
+            
+        }
+        
+//        JDialog jd = MainFrame.getInstance().getjDialogUserInfo();
+//        jd.setVisible(!jd.isVisible());
+    }//GEN-LAST:event_jPanelShowUserInfoMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelBack;
     private javax.swing.JLabel jLabelTitleHeader;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanelShowUserInfo;
+    private javax.swing.JPanel jPanelUserInfo;
     // End of variables declaration//GEN-END:variables
 }

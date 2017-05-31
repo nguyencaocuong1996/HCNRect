@@ -6,12 +6,12 @@ import assets.images.dishs.DishImageResources;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import restaurant.MainFrame;
-import restaurant.panel.PanelFactory;
 
 public class JPanelOrderDishItem extends javax.swing.JPanel{
     String dishName;
@@ -33,9 +33,11 @@ public class JPanelOrderDishItem extends javax.swing.JPanel{
         this.dishPrice = dishPrice;
         this.urlImage = urlImage;
         customInit();
-        jLabelDishImage.setIcon(new ImageIcon(DishImageResources.class.getResource(urlImage)));
+        ImageIcon img = new ImageIcon(new ImageIcon(DishImageResources.class.getResource(urlImage)).getImage().getScaledInstance(80, 60, Image.SCALE_DEFAULT));
+        jLabelDishImage.setIcon(img);
         
-        jLabelDishName.setText("<html><p style='overflow: hidden;'>"+dishName+"</p><html>");
+//        jLabelDishName.setText("<html><p>"+dishName+"</p><html>");
+        jLabelDishName.setText(dishName);
         CFont.setStyleFont(jLabelDishName, 14, Color.BLACK);
         
         jLabelDishPrice.setText(dishPrice + " VNĐ");
@@ -88,8 +90,15 @@ public class JPanelOrderDishItem extends javax.swing.JPanel{
         jLabelDishName = new javax.swing.JLabel();
         jLabelDishPrice = new javax.swing.JLabel();
 
+        setMaximumSize(new java.awt.Dimension(200, 80));
+        setMinimumSize(new java.awt.Dimension(200, 80));
         setPreferredSize(new java.awt.Dimension(200, 80));
 
+        jLabelDishImage.setMaximumSize(new java.awt.Dimension(60, 60));
+        jLabelDishImage.setMinimumSize(new java.awt.Dimension(60, 60));
+        jLabelDishImage.setPreferredSize(new java.awt.Dimension(60, 60));
+
+        jLabelDishName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabelDishName.setText("jLabel1");
 
         jLabelDishPrice.setText("jLabel2");
@@ -101,9 +110,9 @@ public class JPanelOrderDishItem extends javax.swing.JPanel{
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabelDishImage, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelDishName, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelDishPrice))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabelDishName, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                    .addComponent(jLabelDishPrice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

@@ -3,8 +3,6 @@ package restaurant.panel.order;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import javax.swing.JFrame;
 import view.VDish;
@@ -43,6 +41,8 @@ public class JPanelOrderDish extends javax.swing.JPanel {
                 Long dishIdL = (Long) t.get("MaMA");
                 jPanelListOrderDish.add(listOrderDishItem.get(dishIdL.intValue()));
             });
+            int width = jPanelListOrderDish.getPreferredSize().width;
+            jPanelListOrderDish.setPreferredSize(new Dimension(430, 85 * (listDish.getFilterData().size() / 2+1)));
         }
     }
     @SuppressWarnings("unchecked")

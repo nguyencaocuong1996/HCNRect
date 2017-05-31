@@ -28,7 +28,13 @@ public class MStaff extends Model{
         this.id = id;
     }
 
-    
+    public MStaff(ModalData md){
+        this.id = ((Long) md.get("MaNV")).intValue();
+        this.name = (String) md.get("HoTenNV");
+        this.address = (String) md.get("DiaChiNV");
+        this.departmentId = (Integer) md.get("MaPB");
+        this.phone = (String) md.get("SDTNV");
+    }
     public MStaff(String name, String phone, String address, int departmentId) {
         this.name = name;
         this.phone = phone;
@@ -36,6 +42,10 @@ public class MStaff extends Model{
         this.departmentId = departmentId;
     }
 
+    public static MStaff get(int id) throws SQLException{
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE MaNV = " + id;
+        return new MStaff(database.Database.modalSelect(sql));
+    }
     
     public int getId() {
         return id;

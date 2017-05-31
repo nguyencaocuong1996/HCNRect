@@ -156,10 +156,10 @@
                   <Color blue="0" green="ff" id="yellow" palette="1" red="ff" type="palette"/>
                 </Property>
                 <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[290, 1000]"/>
+                  <Dimension value="[290, 0]"/>
                 </Property>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[290, 1000]"/>
+                  <Dimension value="[290, 0]"/>
                 </Property>
               </Properties>
 

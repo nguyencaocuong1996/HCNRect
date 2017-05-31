@@ -17,10 +17,11 @@ import restaurant.panel.ppackkage.material.JPanelImportMaterial;
 public class JPanelChooseProviderItem extends javax.swing.JPanel {
 
     protected int providerId;
-
+    protected String providerName;
     public JPanelChooseProviderItem(int providerId, String providerName, String providerPhone) {
         initComponents();
         this.providerId = providerId;
+        this.providerName = providerName;
         this.jLabelProviderId.setText(providerId+"");
         this.jLabelProviderName.setText(providerName);
         this.jLabelProviderPhone.setText(providerPhone);
@@ -33,6 +34,7 @@ public class JPanelChooseProviderItem extends javax.swing.JPanel {
                 JPanelImportMaterial.getInstance().getjLabelProviderName().setText(jLabelProviderName.getText());
                 JPanelImportMaterial.getInstance().getjDialogChooseProvider().setVisible(false);
                 JPanelImportMaterial.getInstance().setProviderId(providerId);
+                JPanelImportMaterial.getInstance().setProviderName(providerName);
             }
             
         });

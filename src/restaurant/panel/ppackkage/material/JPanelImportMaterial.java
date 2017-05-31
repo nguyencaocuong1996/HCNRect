@@ -39,6 +39,7 @@ public class JPanelImportMaterial extends javax.swing.JPanel {
 
     private static JPanelImportMaterial instance;
     protected int providerId;
+    protected String providerName;
     protected VMaterial vMaterial;
     protected HashMap<Integer, JPanelImportMaterialItem> listMaterial = new HashMap<>();
     protected HashMap<Integer, JPanelImportDetailMaterialItem> listImportingMaterial = new HashMap<>();
@@ -137,7 +138,7 @@ public class JPanelImportMaterial extends javax.swing.JPanel {
         jPanelListImportingMaterial = new javax.swing.JPanel();
 
         jDialogChooseProvider.setTitle("Chọn  nhà cung cấp");
-        jDialogChooseProvider.setMinimumSize(new java.awt.Dimension(420, 320));
+        jDialogChooseProvider.setMinimumSize(new java.awt.Dimension(420, 340));
         jDialogChooseProvider.getContentPane().setLayout(new java.awt.FlowLayout());
 
         setMaximumSize(new java.awt.Dimension(780, 540));
@@ -292,6 +293,7 @@ public class JPanelImportMaterial extends javax.swing.JPanel {
             .addComponent(jLabelDoAddReceiptNote, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+        jLabelTotalPriceImport.setForeground(new java.awt.Color(255, 51, 51));
         jLabelTotalPriceImport.setText("0");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -302,6 +304,7 @@ public class JPanelImportMaterial extends javax.swing.JPanel {
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel8.setText("Số tiền đã trả: ");
 
+        jTextFieldPayAmout.setForeground(new java.awt.Color(0, 102, 0));
         jTextFieldPayAmout.setText("0");
         jTextFieldPayAmout.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -312,6 +315,7 @@ public class JPanelImportMaterial extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("Số tiền còn nợ: ");
 
+        jLabelDoubt.setForeground(new java.awt.Color(204, 102, 0));
         jLabelDoubt.setText("0");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -421,7 +425,7 @@ public class JPanelImportMaterial extends javax.swing.JPanel {
                 }
                 Map<String, Object> params = new HashMap<>();
                 params.put("receiptNoteId", mReceiptNote.getId());
-                params.put("providerName", "Công ty TNHH HCN");
+                params.put("providerName", getProviderName());
                 params.put("staffName", "Nguyễn Cao Cường");
                 params.put("totalMoney", new Float(jLabelTotalPriceImport.getText()));
                 params.put("payAmount", new Float(jTextFieldPayAmout.getText()));
@@ -441,6 +445,14 @@ public class JPanelImportMaterial extends javax.swing.JPanel {
         jf.setVisible(true);
     }
 
+    public void setProviderName(String providerName) {
+        this.providerName = providerName;
+    }
+
+    public String getProviderName() {
+        return providerName;
+    }
+
     public int getProviderId() {
         return providerId;
     }
@@ -458,10 +470,12 @@ public class JPanelImportMaterial extends javax.swing.JPanel {
         return totalPriceImport;
     }
     public void setJLabelTotalPriceImport(){
-        jLabelTotalPriceImport.setText(getTotalPriceImport()+"");
+        if(jTextFieldPayAmout.getText().isEmpty()) return;
+        jLabelTotalPriceImport.setText(String.format("%.0f", getTotalPriceImport()));
         try {
-            jLabelDoubt.setText((getTotalPriceImport() - new Float(jTextFieldPayAmout.getText())) + "");
+            jLabelDoubt.setText(String.format("%.0f", (getTotalPriceImport() - new Float(jTextFieldPayAmout.getText()))));
         } catch (NumberFormatException e) {
+            jTextFieldPayAmout.setText("0");
             JOptionPane.showMessageDialog(this, "Chỉ được phép nhập số!");
         }
     }

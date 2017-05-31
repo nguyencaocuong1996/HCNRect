@@ -5,6 +5,7 @@
  */
 package modal;
 
+import core.CEncrypt;
 import java.sql.SQLException;
 
 /**
@@ -15,49 +16,70 @@ public class MUser extends Model{
     protected int staffId;
     protected String userName;
     protected String passWord;
-    protected int type;
 
+    public int getStaffId() {
+        return staffId;
+    }
+
+    public void setStaffId(int staffId) {
+        this.staffId = staffId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassWord() {
+        return passWord;
+    }
+
+    public void setPassWord(String passWord) {
+        this.passWord = passWord;
+    }
+    
     public MUser(ModalData md) {
         this.staffId = ((Long) md.get("MaNV")).intValue();
         this.userName = (String) md.get("TenDangNhap");
         this.passWord = (String) md.get("MatKhau");
-        this.type = ((Integer) md.get("ChucVu"));
     }
     
-    public MUser(int staffId, String userName, String passWord, int type) {
+    public MUser(int staffId, String userName, String passWord) {
         this.staffId = staffId;
         this.userName = userName;
         this.passWord = passWord;
-        this.type = type;
     }
 
     
     public MUser() {
     }
     
-    
-    
     public static MUser get(int id) throws SQLException{
         String sql = "SELECT * FROM tai_khoan WHERE MaNV = " + id;
         try {
-            return new MUser(database.Database.modalSelect(sql));
+            ModalData md = database.Database.modalSelect(sql);
+            if(md.isEmpty()) return null;
+            return new MUser();
         } catch (SQLException e) {
             throw e;
         }
     }
     public static MUser get(String userName, String passWord) throws SQLException{
+        passWord = CEncrypt.md5(passWord);
         String sql = "SELECT * FROM tai_khoan WHERE TenDangNhap = '" + userName + "' AND MatKhau = '" + passWord+"'";
-        try {
-            return new MUser(database.Database.modalSelect(sql));
-        } catch (SQLException e) {
-            throw e;
-        }
+        ModalData md = database.Database.modalSelect(sql);
+        if (md.isEmpty()) return null;
+        return new MUser(md);
     }
-    
-    public static void main(String[] args) throws SQLException {
-        MUser n = new MUser();
-        
-        System.out.println(n.get("nguyentk", "nguyen11").userName);
+    public static void main(String[] args) {
+        try {
+            ModalData md =  database.Database.modalSelect("SELECT * FROM tai_khoan WHERE TenDangNhap = '123123'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
     @Override
     void insert() throws SQLException {

@@ -1,16 +1,13 @@
 
 package restaurant.panel.order;
 
-import com.mysql.jdbc.Connection;
 import core.CDateTime;
 import core.ComboboxItem;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -29,11 +26,10 @@ import restaurant.panel.PanelFactory;
 import restaurant.report.ReportResources;
 import view.VDishOrdering;
 import view.VMenu;
-import view.ViewItem;
 public class JPanelOrder extends javax.swing.JPanel {
     public static JPanelOrder instance;
     private int tableId;
-    private JPanelOrderDish jpOrderDish = new JPanelOrderDish();;
+    private JPanelOrderDish jpOrderDish = new JPanelOrderDish();
     private JPanelOrderDetail jpOrderDetail;
     private HashMap<Integer, JPanelOrderDetail> listJPanelOrderDetail = new HashMap<>();
     public JPanelOrder() {
@@ -45,6 +41,8 @@ public class JPanelOrder extends javax.swing.JPanel {
         try {
             VMenu vMenu = VMenu.getAllMenu();
 //            System.out.println(vMenu.getData());
+            ComboboxItem defaultCi = new ComboboxItem("Tất cả", 0);
+            jComboBoxSearchByMenu.addItem(defaultCi);
             ArrayList<ComboboxItem> ci = new ArrayList<>();
             vMenu.getData().forEach((t) -> {
                 String menuName = (String) t.get("TenTD");
@@ -207,8 +205,8 @@ public class JPanelOrder extends javax.swing.JPanel {
         jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         jPanelOrderDetail.setForeground(java.awt.Color.yellow);
-        jPanelOrderDetail.setMinimumSize(new java.awt.Dimension(290, 1000));
-        jPanelOrderDetail.setPreferredSize(new java.awt.Dimension(290, 1000));
+        jPanelOrderDetail.setMinimumSize(new java.awt.Dimension(290, 0));
+        jPanelOrderDetail.setPreferredSize(new java.awt.Dimension(290, 0));
         jPanelOrderDetail.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 0));
         jScrollPane2.setViewportView(jPanelOrderDetail);
 
