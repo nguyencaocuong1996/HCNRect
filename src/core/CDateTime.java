@@ -116,4 +116,8 @@ public class CDateTime {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         return df.format(d);
     }
+    public static String dateToDMY(java.util.Date d){
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        return df.format(d);
+    }
 }

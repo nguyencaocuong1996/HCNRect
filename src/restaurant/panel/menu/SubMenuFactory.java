@@ -5,17 +5,8 @@
  */
 package restaurant.panel.menu;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.view.JasperViewer;
 import restaurant.panel.PanelFactory;
-import restaurant.report.ReportResources;
 
 /**
  *
@@ -38,6 +29,10 @@ public class SubMenuFactory {
             case "partner":
                 listSubMenuItem.add(new JPanelSubMenuItem("Khách hàng"));
                 listSubMenuItem.add(new JPanelSubMenuItem("Nhà cung cấp"));
+                break;
+            case "transaction":
+                listSubMenuItem.add(new JPanelSubMenuItem("Hóa đơn khách hàng", PanelFactory.ID.TRANS_BILL, PanelFactory.ID.HEADER_TRANS_BILL));
+                listSubMenuItem.add(new JPanelSubMenuItem("Phiếu nhập hàng"));
                 break;
         }
         return new JPanelSubMenu(listSubMenuItem);

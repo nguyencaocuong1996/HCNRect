@@ -21,7 +21,7 @@ public class JPanelMenu extends javax.swing.JPanel {
         JPanelMenuItem jpMIReport = new JPanelMenuItem("Báo cáo", IconResources.REPORT, 4, SubMenuFactory.get("report"));
         JPanelMenuItem jpMIPartner = new JPanelMenuItem("Đối tác", IconResources.PARTNER, 6, SubMenuFactory.get("partner"));
         JPanelMenuItem jpMIStaff = new JPanelMenuItem("Nhân viên", IconResources.STAFF, 7);
-        JPanelMenuItem jpMICoins = new JPanelMenuItem("Giao dịch", IconResources.COINS, 8);
+        JPanelMenuItem jpMICoins = new JPanelMenuItem("Giao dịch", IconResources.COINS, 8,SubMenuFactory.get("transaction"));
         
         //Add mouseListener
         jpMIOrder.addMouseListener(new MouseListenerMenuItem(PanelFactory.ID.ORDER_PICK_TABLE, PanelFactory.ID.HEADER_ORDER_PICK_TABLE));
@@ -30,6 +30,7 @@ public class JPanelMenu extends javax.swing.JPanel {
         jpMIPackage.addMouseListener(new MouseListenerMenuItem());
         jpMIReport.addMouseListener(new MouseListenerMenuItem());
         jpMIPartner.addMouseListener(new MouseListenerMenuItem());
+        jpMICoins.addMouseListener(new MouseListenerMenuItem());
         //add to List
         listJPanelMenuItem.add(jpMIOrder);
         listJPanelMenuItem.add(jpMIBook);

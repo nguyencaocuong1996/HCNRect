@@ -209,7 +209,9 @@ public class JPanelOrder extends javax.swing.JPanel {
         jLabelAmountHaveToPay = new javax.swing.JLabel();
         jPanelOrderDish = new javax.swing.JPanel();
 
+        jDialogChooseCustomer.setMaximumSize(new java.awt.Dimension(410, 340));
         jDialogChooseCustomer.setMinimumSize(new java.awt.Dimension(410, 340));
+        jDialogChooseCustomer.setPreferredSize(new java.awt.Dimension(410, 340));
         jDialogChooseCustomer.getContentPane().setLayout(new java.awt.FlowLayout());
 
         jDialogChooseCoupon.setMinimumSize(new java.awt.Dimension(410, 340));

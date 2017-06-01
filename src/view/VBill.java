@@ -5,19 +5,35 @@
  */
 package view;
 
-import java.util.ArrayList;
-import modal.MCustomer;
-import modal.MDish;
-import modal.MStaff;
+import java.sql.SQLException;
 
 /**
  *
  * @author WINDNCC
  */
-public class VBill {
-    protected int billId;
-    protected MCustomer customer;
-    protected MStaff staff;
-    protected ArrayList<MDish> listDish;
-    protected float invoiceValue;
+public class VBill extends View{
+
+    public VBill(ViewData vd) {
+        data = vd;
+        filterData = (ViewData) data.clone();
+    }
+    
+    public static VBill getByCustomer(int customerId) throws SQLException{
+        String sql = "SELECT * FROM hoa_don WHERE MaKH = " + customerId;
+        ViewData vd = database.Database.viewSelect(sql);
+        System.out.println(sql);
+        return new VBill(vd);
+    }
+    public static VBill getByDate(String date) throws SQLException{
+        String sql = "SELECT * FROM hoa_don WHERE DATE(NgayLapHD) = '" + date +"'";
+        ViewData vd = database.Database.viewSelect(sql);
+        System.out.println(sql);
+        return new VBill(vd);
+    }
+    public static VBill getByCustomerAndDate(int customerId, String date) throws SQLException{
+        String sql = "SELECT * FROM hoa_don WHERE DATE(NgayLapHD) = '" + date +"' AND MaKH = " + customerId;
+        ViewData vd = database.Database.viewSelect(sql);
+        System.out.println(sql);
+        return new VBill(vd);
+    }
 }

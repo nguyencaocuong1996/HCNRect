@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package restaurant.panel.order;
+package restaurant.panel.transaction.bill;
 
 import java.sql.SQLException;
 import restaurant.panel.customer.JPanelChooseCustomer;
@@ -13,17 +13,17 @@ import view.VCustomer;
  *
  * @author WINDNCC
  */
-public class JPanelChooseCustomerForOrder extends JPanelChooseCustomer{
-    private static JPanelChooseCustomerForOrder instance;
+public class JPanelChooseCustomerForTransaction extends JPanelChooseCustomer{
+    public static JPanelChooseCustomerForTransaction instance;
 
-    public static JPanelChooseCustomerForOrder getInstance() {
+    public static JPanelChooseCustomerForTransaction getInstance() {
         if (instance == null) {
-            instance = new JPanelChooseCustomerForOrder();
+            instance = new JPanelChooseCustomerForTransaction();
         }
         return instance;
     }
-    
-    public JPanelChooseCustomerForOrder() {
+
+    public JPanelChooseCustomerForTransaction() {
         try {
             vCustomer = VCustomer.getAllCustomer();
         } catch (SQLException e) {
@@ -35,11 +35,12 @@ public class JPanelChooseCustomerForOrder extends JPanelChooseCustomer{
             String phone = (String) t.get("SDTKH");
             String address = (String) t.get("DiaChiKH");
             int typeId = ((Long) t.get("MaLKH")).intValue();
-            JPanelChooseCustomerForOrderItem newJPCCPOI = new JPanelChooseCustomerForOrderItem(id, name, phone, typeId);
+            JPanelChooseCustomerForTransactionItem newJPCCPOI = new JPanelChooseCustomerForTransactionItem(id, name, phone, typeId);
             listJPCCFOI.put(id, newJPCCPOI);
             
         });
         showView();
     }
+    
     
 }

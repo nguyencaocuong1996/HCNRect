@@ -9,7 +9,6 @@ import assets.images.icons.IconResources;
 import javax.swing.JPanel;
 import restaurant.panel.booktable.JPanelBookTable;
 import restaurant.panel.header.JPanelHeader;
-import restaurant.panel.header.JPanelHeaderOrder;
 import restaurant.panel.main.JPanelWelcome;
 import restaurant.panel.order.JPanelOrderPickTable;
 import restaurant.panel.order.JPanelOrder;
@@ -19,6 +18,7 @@ import restaurant.panel.ppackkage.JPanelManagementTable;
 import restaurant.panel.report.JPanelReportDetails;
 import restaurant.panel.report.JPanelReportEndOfDay;
 import restaurant.panel.staff.JPanelManagementStaff;
+import restaurant.panel.transaction.bill.JPanelListBill;
 /**
  *
  * @author WINDNCC
@@ -34,6 +34,7 @@ public class PanelFactory {
     private static JPanelHeader headerReport;
     private static JPanelHeader headerImportMaterial;
     private static JPanelHeader headerManageStaff;
+    private static JPanelHeader headerListBill;
     private static JPanelWelcome overview;
     private static JPanelSidebar sidebar;
     private static JPanelManagementDish managementDish;
@@ -42,6 +43,7 @@ public class PanelFactory {
     private static JPanelReportEndOfDay reportEndOfDay;
     private static JPanelReportDetails reportDetails;
     private static JPanelManagementStaff manageStaff;
+    private static JPanelListBill listBill;
     public class ID{
             public static final int SIDEBAR = 1;
             //content
@@ -55,6 +57,7 @@ public class PanelFactory {
             public static final int REPORT_END_OF_DAY = 151;
             public static final int REPORT_DETAILS = 152;
             public static final int MANAGE_STAFF = 161;
+            public static final int TRANS_BILL = 171;
             //header
             public static final int HEADER_OVERVIEW = 211;
             public static final int HEADER_ORDER_PICK_TABLE = 221;
@@ -66,6 +69,8 @@ public class PanelFactory {
             public static final int HEADER_PACKAGE_IMPORT_MATERIAL = 254;
             public static final int HEADER_REPORT = 261;
             public static final int HEADER_MANAGE_STAFF = 271;
+            public static final int HEADER_TRANS_BILL = 281;
+            public static final int HEADER_TRANS_RECEIPT_NOTE = 282;
     }
     public static JPanel get(int panelId){
         JPanel jp;
@@ -170,6 +175,18 @@ public class PanelFactory {
                 jp = headerManageStaff;
                 break;   
             //#report
+            //Transaction
+            case ID.HEADER_TRANS_BILL:
+                if (headerListBill == null) {
+                    headerListBill = new JPanelHeader("Lịch sử hóa đơn", IconResources.ORDER);
+                }
+                jp = headerListBill;
+                break;
+            case ID.TRANS_BILL:
+                listBill = JPanelListBill.getInstance();
+                jp = listBill;
+                break;
+            //#Transaction
             default:
                 jp = new JPanel();
                 break;

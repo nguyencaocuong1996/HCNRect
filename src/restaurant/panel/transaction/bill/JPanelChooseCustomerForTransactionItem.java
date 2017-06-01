@@ -3,24 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package restaurant.panel.order;
+package restaurant.panel.transaction.bill;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import modal.MCustomer;
 import restaurant.panel.customer.JPanelChooseCustomerItem;
+import restaurant.panel.order.JPanelOrder;
 
 /**
  *
  * @author WINDNCC
  */
-public class JPanelChooseCustomerForOrderItem extends JPanelChooseCustomerItem{
+public class JPanelChooseCustomerForTransactionItem extends JPanelChooseCustomerItem{
 
-    public JPanelChooseCustomerForOrderItem(int customerId, String customerName, String customerPhone, int customerTypeId) {
+    public JPanelChooseCustomerForTransactionItem(int customerId, String customerName, String customerPhone, int customerTypeId) {
         super(customerId, customerName, customerPhone, customerTypeId);
         customInit();
     }
-    public final void customInit(){
+    
+    public JPanelChooseCustomerForTransactionItem() {
+    }
+    
+        public final void customInit(){
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -29,14 +34,10 @@ public class JPanelChooseCustomerForOrderItem extends JPanelChooseCustomerItem{
                 customer.setPhone(customerPhone);
                 customer.setFullName(customerName);
                 customer.setCustomerTypeId(customerTypeId);
-                JPanelOrder.getInstance().setCustomer(customer);
-                JPanelOrder.getInstance().getjDialogChooseCustomer().setVisible(false);
+                JPanelListBill.getInstance().setCustomer(customer);
+                JPanelListBill.getInstance().getjDialogChooseCustomer().setVisible(false);
             }
             
         });
     }
-    
-    public JPanelChooseCustomerForOrderItem() {
-    }
-    
 }
