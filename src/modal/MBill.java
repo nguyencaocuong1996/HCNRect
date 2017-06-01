@@ -22,7 +22,8 @@ public class MBill extends Model{
     protected int tableId;
     protected String dateTimeBill;
     protected float totalBill;
-
+    protected float realBill;
+    protected String couponCode;
     public MBill() {
     }
 
@@ -35,6 +36,8 @@ public class MBill extends Model{
         Date date = new Date(ts.getTime());
         dateTimeBill = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
         totalBill = (float) md.get("TriGiaHD");
+        realBill = (float) md.get("TriGiaThuc");
+        couponCode = (String) md.get("MaPGG");
     }
     public static MBill getLastBill() throws SQLException{
         String sql = "SELECT * FROM hoa_don WHERE MaHD = (SELECT MAX(MAHD) FROM hoa_don)";
@@ -92,6 +95,22 @@ public class MBill extends Model{
     public void setTotalBill(float totalBill) {
         this.totalBill = totalBill;
     }
+
+    public String getCouponCode() {
+        return couponCode;
+    }
+
+    public void setCouponCode(String couponCode) {
+        this.couponCode = couponCode;
+    }
+
+    public float getRealBill() {
+        return realBill;
+    }
+
+    public void setRealBill(float realBill) {
+        this.realBill = realBill;
+    }
     
     @Override
     public void insert() throws SQLException {
@@ -101,6 +120,8 @@ public class MBill extends Model{
         insertData.put("NgayLapHD", getDateTimeBill());
         insertData.put("TriGiaHD", getTotalBill());
         insertData.put("MaBan", getTableId());
+        insertData.put("MaPGG", couponCode);
+        insertData.put("TriGiaThuc", getRealBill());
         database.Database.insert(TABLE_NAME, insertData);
     }
 
@@ -121,7 +142,7 @@ public class MBill extends Model{
     public static void main(String[] args) {
         try {
             MBill mbill = MBill.getLastBill();
-        System.out.println(mbill.dateTimeBill);
+        System.out.println(mbill.getCouponCode());
         } catch (Exception e) {
             return;
         }

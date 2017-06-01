@@ -5,6 +5,8 @@
  */
 package core;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
@@ -110,5 +112,8 @@ public class CDateTime {
         
         
     }
-    
+    public static String dateToString(java.util.Date d){
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        return df.format(d);
+    }
 }

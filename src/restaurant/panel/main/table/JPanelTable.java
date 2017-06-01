@@ -6,7 +6,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import restaurant.panel.order.JPanelOrderPickTable;
 import view.VTable;
@@ -22,7 +21,7 @@ public class JPanelTable extends javax.swing.JPanel {
         jLabelName.setText(tableName);
         CFont.setStyleFont(jLabelName, 19, Color.black);
         jLabelIcon.setIcon(IconResources.TABLE_BLACK_X50);
-        
+        this.status = status;
         switch (status){
             case 0: this.setBackground(Color.yellow); break;// bàn rãnh
             case 1: this.setBackground(Color.red); break;//bàn bận

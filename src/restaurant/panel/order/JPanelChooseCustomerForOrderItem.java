@@ -21,11 +21,12 @@ public class JPanelChooseCustomerForOrderItem extends javax.swing.JPanel {
     protected String customerAdress;
     protected String customerPhone;
     protected int customerTypeId;
-    public JPanelChooseCustomerForOrderItem(int customerId, String customerName, String customerPhone) {
+    public JPanelChooseCustomerForOrderItem(int customerId, String customerName, String customerPhone, int customerTypeId) {
         initComponents();
         this.customerId = customerId;
         this.customerName = customerName;
         this.customerPhone = customerPhone;
+        this.customerTypeId = customerTypeId;
         this.jLabelCustomerId.setText(customerId+"");
         this.jLabelCustomerName.setText(customerName);
         this.jLabelCustomerPhone.setText(customerPhone);
@@ -39,6 +40,7 @@ public class JPanelChooseCustomerForOrderItem extends javax.swing.JPanel {
                 customer.setId(customerId);
                 customer.setPhone(customerPhone);
                 customer.setFullName(customerName);
+                customer.setCustomerTypeId(customerTypeId);
                 JPanelOrder.getInstance().setCustomer(customer);
                 JPanelOrder.getInstance().getjDialogChooseCustomer().setVisible(false);
             }

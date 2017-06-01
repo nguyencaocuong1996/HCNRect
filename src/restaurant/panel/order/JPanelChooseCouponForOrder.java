@@ -5,44 +5,43 @@
  */
 package restaurant.panel.order;
 
-import restaurant.panel.ppackkage.*;
+import core.CDateTime;
 import java.awt.Dimension;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.HashMap;
 import javax.swing.JFrame;
-import view.VCustomer;
-import view.VProvider;
+import view.VCoupon;
 
 /**
  *
  * @author WINDNCC
  */
-public class JPanelChooseCustomerForOrder extends javax.swing.JPanel {
+public class JPanelChooseCouponForOrder extends javax.swing.JPanel {
 
-    public static JPanelChooseCustomerForOrder instance;
-    public VCustomer vCustomer;
-    public HashMap<Integer, JPanelChooseCustomerForOrderItem> listJPCCFOI = new HashMap<>();
-    public static JPanelChooseCustomerForOrder getInstance() {
+    public static JPanelChooseCouponForOrder instance;
+    public VCoupon vCoupon;
+    public HashMap<String, JPanelChooseCouponForOrderItem> listJPCCFOI = new HashMap<>();
+    public static JPanelChooseCouponForOrder getInstance() {
         if (instance == null) {
-            instance = new JPanelChooseCustomerForOrder();
+            instance = new JPanelChooseCouponForOrder();
         }
         return instance;
     }
     
-    public JPanelChooseCustomerForOrder() {
+    public JPanelChooseCouponForOrder() {
         initComponents();
         try {
-            vCustomer = VCustomer.getAllCustomer();
+            vCoupon = VCoupon.getAvailableCoupon();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        vCustomer.getData().forEach((t) -> {
-            int id = ((Long) t.get("MaKH")).intValue();
-            String name = (String) t.get("HoTenKH");
-            String phone = (String) t.get("SDTKH");
-            String address = (String) t.get("DiaChiKH");
-            int typeId = ((Long) t.get("MaLKH")).intValue();
-            JPanelChooseCustomerForOrderItem newJPCCPOI = new JPanelChooseCustomerForOrderItem(id, name, phone, typeId);
+        vCoupon.getData().forEach((t) -> {
+            String id = (String) t.get("MaPGG");
+            String startDate = (CDateTime.dateToString((Date) t.get("NgayBatDau")));;
+            String endDate = (CDateTime.dateToString((Date) t.get("NgayKetThuc")));
+            float discount = (Float) t.get("PhanTramGiamGia");
+            JPanelChooseCouponForOrderItem newJPCCPOI = new JPanelChooseCouponForOrderItem(id, discount, startDate, endDate);
             listJPCCFOI.put(id, newJPCCPOI);
             
         });
@@ -50,24 +49,24 @@ public class JPanelChooseCustomerForOrder extends javax.swing.JPanel {
     }
     public final void showView(){
         jPanelContent.removeAll();
-        vCustomer.getFilterData().forEach((t) -> {
-            jPanelContent.add(listJPCCFOI.get(((Long) t.get("MaKH")).intValue()));
+        vCoupon.getFilterData().forEach((t) -> {
+            jPanelContent.add(listJPCCFOI.get((String) t.get("MaPGG")));
         });
-        int height = vCustomer.getFilterData().size() * 41;
+        int height = vCoupon.getFilterData().size() * 50;
 //        System.out.println(height);
         jPanelContent.setPreferredSize(new Dimension(400, height));
         jPanelContent.revalidate();
         jPanelContent.repaint();
     }
     public void filter(String kw){
-        vCustomer.filter(kw);
+        vCoupon.filter(kw);
         showView();
     }
     
     public static void main(String[] args) {
         JFrame jf = new JFrame();
         jf.setSize(new Dimension(500,500));
-        jf.add(JPanelChooseCustomerForOrder.getInstance());
+        jf.add(JPanelChooseCouponForOrder.getInstance());
         jf.setVisible(true);
     }
     
@@ -81,8 +80,8 @@ public class JPanelChooseCustomerForOrder extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanelContent = new javax.swing.JPanel();
 
-        setMaximumSize(new java.awt.Dimension(400, 300));
-        setMinimumSize(new java.awt.Dimension(400, 300));
+        setMaximumSize(new java.awt.Dimension(400, 310));
+        setMinimumSize(new java.awt.Dimension(400, 310));
 
         jPanelHeader.setBackground(new java.awt.Color(147, 193, 120));
 

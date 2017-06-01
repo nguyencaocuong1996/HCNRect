@@ -16,18 +16,16 @@ import view.ViewItem;
 import assets.font.CFont;
 import core.RadiusBorder;
 import java.awt.Color;
-import java.awt.Component;
 import java.sql.SQLException;
 import java.util.Calendar;
-import java.util.Locale;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
-import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
 import modal.MBookTable;
 import modal.MCustomer;
+import restaurant.panel.order.JPanelOrderPickTable;
 public class JPanelBookTable extends javax.swing.JPanel {
     private VBookTable viewBookTable;
     private static JPanelBookTable instance;
@@ -696,19 +694,27 @@ public class JPanelBookTable extends javax.swing.JPanel {
         try {
             mBookTable.insert();
             JOptionPane.showMessageDialog(jDialogAddBookTable,  "Lập phiếu thành công!");
-            //set all textfield to empty
-            jTextFieldCustomerName.setText("");
-            jTextFieldCustomerPhone.setText("");
-            jTextAreaCustomerMessage.setText("");
-            mBookTable.reset();
-            jLabelPickTable.setText("Click chọn bàn");
-            //end set textfield
+            
             jDialogAddBookTable.setVisible(false);
             //cap nhat lai list, chuyen list sang ngay vua dat
             viewBookTable = VBookTable.getByDate(dateSql, 1, 15);
             jLabelDateBookTable.setText(date);
             showData();
             //end cap nhat lai list
+            //cập nhật lại trạng thái bàn
+            if(dateSql.equals(CDateTime.getInstance().getDate().toString())){
+                System.out.println("update trang thai thanh 2");
+                JPanelBookTablePickTable.getInstance().updateTableStatus(mBookTable.getTableId(), 2);
+                JPanelOrderPickTable.getInstance().updateTableStatus(mBookTable.getTableId(), 2);
+            }
+            //end cập nhật lại trạng thái bàn
+            mBookTable.reset();
+            //set all textfield to empty
+            jTextFieldCustomerName.setText("");
+            jTextFieldCustomerPhone.setText("");
+            jTextAreaCustomerMessage.setText("");
+            jLabelPickTable.setText("Click chọn bàn");
+            //end set textfield
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(jDialogAddBookTable,  "Lập phiếu thất bại!");
             e.printStackTrace();

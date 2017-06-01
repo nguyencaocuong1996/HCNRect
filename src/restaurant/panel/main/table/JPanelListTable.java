@@ -1,10 +1,9 @@
 package restaurant.panel.main.table;
 
 import core.ComboboxItem;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -75,7 +74,32 @@ public class JPanelListTable extends javax.swing.JPanel {
     public HashMap<Integer, JPanelTable> getListJPanelTable() {
         return listJPanelTable;
     }
-
+    public void refresh(){
+        listTable = VTable.getAllTable();
+        filter();
+    }
+    public void updateTableStatus(int tableId, int status){
+        Color c = Color.yellow;
+        switch(status){
+            case 1:
+                c = Color.red;
+            break;
+            case 2:
+                c = Color.gray;
+            break;
+            default:
+            break;
+        }
+        if (this.getListJPanelTable().get(tableId) != null) {
+            this.getListJPanelTable().get(tableId).setStatus(status);
+            this.getListJPanelTable().get(tableId).setBackground(c);
+        } else {
+            System.out.println(tableId);
+        }
+        
+        this.revalidate();
+        this.repaint();
+    }
     public void filter(){
         ComboboxItem ci = (ComboboxItem) jComboboxFilterByStatus.getSelectedItem();
         int statusId = (Integer) ci.getValue();

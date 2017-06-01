@@ -7,6 +7,7 @@ package restaurant.panel.ppackkage.material;
 
 import assets.font.CFont;
 import core.CDateTime;
+import core.CString;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ItemEvent;
@@ -490,9 +491,9 @@ public class JPanelImportMaterial extends javax.swing.JPanel {
     }
     public void setJLabelTotalPriceImport(){
         if(jTextFieldPayAmout.getText().isEmpty()) return;
-        jLabelTotalPriceImport.setText(String.format("%.0f", getTotalPriceImport()));
+        jLabelTotalPriceImport.setText(CString.floatToString(getTotalPriceImport()));
         try {
-            jLabelDoubt.setText(String.format("%.0f", (getTotalPriceImport() - new Float(jTextFieldPayAmout.getText()))));
+            jLabelDoubt.setText(CString.floatToString(getTotalPriceImport() - new Float(jTextFieldPayAmout.getText())));
         } catch (NumberFormatException e) {
             jTextFieldPayAmout.setText("0");
             JOptionPane.showMessageDialog(this, "Chỉ được phép nhập số!");

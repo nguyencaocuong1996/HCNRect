@@ -25,7 +25,8 @@ public class JPanelTableForBook extends JPanelTable{
         mouseAdapter = new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if(status == 0){
+                System.out.println(getStatus());
+                if(getStatus() == 0){
                     super.mouseClicked(e);
                     System.out.println("Constructor in JPanelTableForBook.java : Mã bàn " + tableId + " vừa được Chọn:");
                     JPanelBookTable.getInstance().getmBookTable().setTableId(tableId);
