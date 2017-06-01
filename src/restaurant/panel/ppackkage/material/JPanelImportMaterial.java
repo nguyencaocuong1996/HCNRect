@@ -9,6 +9,7 @@ import assets.font.CFont;
 import core.CDateTime;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ItemEvent;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -72,8 +73,8 @@ public class JPanelImportMaterial extends javax.swing.JPanel {
     }
     public final void showData(){
         jPanelListImportMaterial.removeAll();
-        int height = vMaterial.getData().size() * 51;
-        jPanelListImportMaterial.setPreferredSize(new Dimension(500, height));
+        int height = vMaterial.getFilterData().size() * 51;
+        jPanelListImportMaterial.setPreferredSize(new Dimension(440, height));
         vMaterial.getFilterData().forEach((t) -> {
             int id = ((Long) t.get("MaNL")).intValue();
             jPanelListImportMaterial.add(listMaterial.get(id));
@@ -81,8 +82,8 @@ public class JPanelImportMaterial extends javax.swing.JPanel {
         jPanelListImportMaterial.revalidate();
         jPanelListImportMaterial.repaint();
     }
-    public void filter(String name){
-        vMaterial.filter(name);
+    public void filter(String name, boolean showLowInStock){
+        vMaterial.filter(name, showLowInStock);
         showData();
         
     }
@@ -122,6 +123,7 @@ public class JPanelImportMaterial extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jTextFieldFilterMaterial = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        jCheckBoxShowLowInStock = new javax.swing.JCheckBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanelListImportMaterial = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -190,6 +192,14 @@ public class JPanelImportMaterial extends javax.swing.JPanel {
 
         jLabel4.setText("Tìm kiếm:");
 
+        jCheckBoxShowLowInStock.setBackground(new java.awt.Color(204, 204, 204));
+        jCheckBoxShowLowInStock.setText("Dưới mức tối thiểu");
+        jCheckBoxShowLowInStock.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jCheckBoxShowLowInStockItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -197,14 +207,16 @@ public class JPanelImportMaterial extends javax.swing.JPanel {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldFilterMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldFilterMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jCheckBoxShowLowInStock)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -212,7 +224,8 @@ public class JPanelImportMaterial extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldFilterMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(jCheckBoxShowLowInStock))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -225,8 +238,9 @@ public class JPanelImportMaterial extends javax.swing.JPanel {
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setOpaque(false);
 
-        jPanelListImportMaterial.setMaximumSize(new java.awt.Dimension(454, 445));
-        jPanelListImportMaterial.setMinimumSize(new java.awt.Dimension(454, 445));
+        jPanelListImportMaterial.setMaximumSize(new java.awt.Dimension(440, 445));
+        jPanelListImportMaterial.setMinimumSize(new java.awt.Dimension(440, 445));
+        jPanelListImportMaterial.setPreferredSize(new java.awt.Dimension(440, 445));
         jPanelListImportMaterial.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING));
         jScrollPane1.setViewportView(jPanelListImportMaterial);
 
@@ -394,7 +408,7 @@ public class JPanelImportMaterial extends javax.swing.JPanel {
 
     private void jTextFieldFilterMaterialKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldFilterMaterialKeyReleased
         String name = jTextFieldFilterMaterial.getText();
-        filter(name);
+        filter(name, jCheckBoxShowLowInStock.isSelected());
     }//GEN-LAST:event_jTextFieldFilterMaterialKeyReleased
 
     private void jTextFieldPayAmoutKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPayAmoutKeyReleased
@@ -438,6 +452,11 @@ public class JPanelImportMaterial extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_jLabelDoAddReceiptNoteMouseClicked
+
+    private void jCheckBoxShowLowInStockItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCheckBoxShowLowInStockItemStateChanged
+        String name = jTextFieldFilterMaterial.getText();
+        filter(name, jCheckBoxShowLowInStock.isSelected());
+    }//GEN-LAST:event_jCheckBoxShowLowInStockItemStateChanged
     public static void main(String[] args) {
         JFrame jf = new JFrame();
         jf.setSize(new Dimension(1024,720));
@@ -482,6 +501,7 @@ public class JPanelImportMaterial extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox jCheckBoxShowLowInStock;
     private javax.swing.JDialog jDialogChooseProvider;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

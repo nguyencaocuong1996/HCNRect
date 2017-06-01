@@ -226,10 +226,11 @@ public class JPanelBookTable extends javax.swing.JPanel {
 
     jDialogAddBookTable.setAlwaysOnTop(true);
     jDialogAddBookTable.setBackground(new java.awt.Color(70, 92, 139));
-    jDialogAddBookTable.setMaximumSize(new java.awt.Dimension(560, 360));
-    jDialogAddBookTable.setMinimumSize(new java.awt.Dimension(560, 360));
+    jDialogAddBookTable.setMaximumSize(new java.awt.Dimension(560, 420));
+    jDialogAddBookTable.setMinimumSize(new java.awt.Dimension(560, 420));
+    jDialogAddBookTable.setPreferredSize(new java.awt.Dimension(560, 420));
     jDialogAddBookTable.setResizable(false);
-    jDialogAddBookTable.setSize(new java.awt.Dimension(560, 360));
+    jDialogAddBookTable.setSize(new java.awt.Dimension(560, 420));
 
     jPanelDialogHeader.setBackground(new java.awt.Color(147, 193, 120));
 

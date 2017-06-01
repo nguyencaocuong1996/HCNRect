@@ -33,15 +33,25 @@ public class VMaterial extends View{
         }
         return new VMaterial();
     }
-    public void filter(String name){
+    public void filter(String name, boolean showLowInStock){
         super.filter(new FilterView(){
             @Override
             public boolean filter(ViewItem o) {
                 String viName = (String) o.get("TenNL");
                 viName = CString.removeAccent(viName).toLowerCase();
-                return viName.contains(CString.removeAccent(name).toLowerCase());
+                float numInStock = (Float) o.get("SoLuongTon");
+                float minInStock = (Float) o.get("MucToiThieu");
+                if (showLowInStock == false) {
+                    return viName.contains(CString.removeAccent(name).toLowerCase());
+                } else {
+                    return viName.contains(CString.removeAccent(name).toLowerCase()) && numInStock <= minInStock;
+                }
+                
             }
             
         });
+    }
+    public void filter(String name){
+        filter(name, false);
     }
 }
