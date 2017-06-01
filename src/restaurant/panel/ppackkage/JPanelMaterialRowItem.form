@@ -83,6 +83,9 @@
           <Image iconType="3" name="/assets/images/icons/icon_edit_green_x24.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelEditMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelDelete">
       <Properties>
@@ -90,6 +93,9 @@
           <Image iconType="3" name="/assets/images/icons/icon_dell_gray_x24.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelDeleteMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelMaterialLimit">
       <Properties>

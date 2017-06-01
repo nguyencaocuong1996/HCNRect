@@ -5,6 +5,7 @@
  */
 package restaurant.panel.ppackkage;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -13,10 +14,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import modal.MMaterial;
 import restaurant.MainFrame;
 import restaurant.panel.PanelFactory;
 import restaurant.panel.ppackkage.material.JPanelImportMaterial;
+import restaurant.panel.staff.JPanelStaffRowItem;
 import view.VMaterial;
 import view.ViewItem;
 
@@ -24,6 +27,9 @@ public class JPanelManagementMaterial extends javax.swing.JPanel {
     protected static JPanelManagementMaterial instance;
     protected VMaterial listMaterial;
     protected HashMap<Integer, JPanelMaterialRowItem> listJPMRI = new HashMap<>();
+    protected JPanelMaterialRowItem currentJPMRI;
+    
+    
     public JPanelManagementMaterial() {
         initComponents();
         jDialogAddMaterial.setLocationRelativeTo(this);
@@ -42,7 +48,11 @@ public class JPanelManagementMaterial extends javax.swing.JPanel {
             jpMRI.getjLabelEdit().addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    
+                    Component jl = (Component) e.getSource();
+                    currentJPMRI = (JPanelMaterialRowItem) jl.getParent();
+                    jTextFieldMaterialNameEdit.setText(""+name);
+                    jTextFieldMinUnitEdit.setText(""+limit);
+                    jDialogEditMaterial.setVisible(true);
                 }
                 
             });
@@ -76,6 +86,9 @@ public class JPanelManagementMaterial extends javax.swing.JPanel {
         }
         return instance;
     }
+    public JPanel getjPanelTableContent() {
+        return jPanelTableContent;
+    }
     
     public static void main(String[] args) {
         JFrame jf = new JFrame("hoho");
@@ -103,16 +116,12 @@ public class JPanelManagementMaterial extends javax.swing.JPanel {
         jPanel5 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
-        jLabel15 = new javax.swing.JLabel();
-        jTextFieldMNameEdit = new javax.swing.JTextField();
-        jLabel16 = new javax.swing.JLabel();
-        jTextFieldMQtyEdit = new javax.swing.JTextField();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
+        jLabelCancel = new javax.swing.JLabel();
+        jLabelEdit = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jTextFieldMaterialNameEdit = new javax.swing.JTextField();
+        jTextFieldMinUnitEdit = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextFieldFilterName = new javax.swing.JTextField();
@@ -252,7 +261,7 @@ public class JPanelManagementMaterial extends javax.swing.JPanel {
 
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_add_folder_white_32px.png"))); // NOI18N
-        jLabel14.setText("Nhập nguyên liệu");
+        jLabel14.setText("Sửa nguyên liệu");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -273,32 +282,39 @@ public class JPanelManagementMaterial extends javax.swing.JPanel {
 
         jPanel6.setBackground(new java.awt.Color(70, 92, 139));
 
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("Giá nhập: ");
+        jLabelCancel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabelCancel.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_close_white_x24.png"))); // NOI18N
+        jLabelCancel.setText("Hủy");
 
-        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel16.setText("Số lượng nhập:");
-
-        jLabel19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_close_white_x24.png"))); // NOI18N
-        jLabel19.setText("Hủy");
-
-        jLabel20.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_add_row_x24.png"))); // NOI18N
-        jLabel20.setText("Nhập");
+        jLabelEdit.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabelEdit.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_add_row_x24.png"))); // NOI18N
+        jLabelEdit.setText("Sửa");
+        jLabelEdit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelEditMouseClicked(evt);
+            }
+        });
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Nhà cung cấp:");
+        jLabel2.setText("Tên Nguyên Liệu: ");
 
         jLabel12.setBackground(new java.awt.Color(255, 255, 255));
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("Nguyên liệu: ");
+        jLabel12.setText("Mức tối thiểu: ");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jTextFieldMaterialNameEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldMaterialNameEditActionPerformed(evt);
+            }
+        });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jTextFieldMinUnitEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldMinUnitEditActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -306,34 +322,22 @@ public class JPanelManagementMaterial extends javax.swing.JPanel {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(jTextFieldMQtyEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGap(125, 125, 125)
-                                .addComponent(jLabel20)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel19))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel12))
-                                .addGap(55, 55, 55)
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldMNameEdit)
-                                    .addGroup(jPanel6Layout.createSequentialGroup()
-                                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 35, Short.MAX_VALUE)))))
-                        .addGap(39, 39, 39)))
-                .addGap(112, 112, 112))
+                        .addGap(125, 125, 125)
+                        .addComponent(jLabelEdit)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
+                        .addComponent(jLabelCancel))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel12))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextFieldMaterialNameEdit)
+                            .addComponent(jTextFieldMinUnitEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(151, 151, 151))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -341,24 +345,16 @@ public class JPanelManagementMaterial extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldMaterialNameEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jTextFieldMinUnitEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(106, 106, 106)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(jTextFieldMNameEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel16)
-                    .addComponent(jTextFieldMQtyEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel20)
-                    .addComponent(jLabel19))
-                .addContainerGap(177, Short.MAX_VALUE))
+                    .addComponent(jLabelEdit)
+                    .addComponent(jLabelCancel))
+                .addContainerGap(183, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jDialogEditMaterialLayout = new javax.swing.GroupLayout(jDialogEditMaterial.getContentPane());
@@ -558,10 +554,38 @@ public class JPanelManagementMaterial extends javax.swing.JPanel {
         MainFrame.getInstance().changeContentPanel(JPanelImportMaterial.getInstance());
     }//GEN-LAST:event_jLabelImportMaterialMouseClicked
 
+    private void jTextFieldMaterialNameEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldMaterialNameEditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldMaterialNameEditActionPerformed
+
+    private void jTextFieldMinUnitEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldMinUnitEditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldMinUnitEditActionPerformed
+
+    private void jLabelEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditMouseClicked
+        // TODO add your handling code here:
+        try {
+           MMaterial mMaterial= MMaterial.get(currentJPMRI.getId()); 
+           mMaterial.setName(jTextFieldMaterialNameEdit.getText());
+           mMaterial.setMinInStock(Float.parseFloat(jTextFieldMinUnitEdit.getText()));
+           mMaterial.update();
+           currentJPMRI.setDishName(jTextFieldMaterialNameEdit.getText());
+           currentJPMRI.setLimit(Float.parseFloat(jTextFieldMinUnitEdit.getText()));
+           currentJPMRI.customInit();
+           jDialogEditMaterial.setVisible(false);
+            JOptionPane.showMessageDialog(this, "Sửa bàn thành công!");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Có lỗi xảy ra, không thể sửa!");
+            ex.printStackTrace();
+        }
+
+       
+         this.revalidate();
+         this.repaint();
+    }//GEN-LAST:event_jLabelEditMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JDialog jDialogAddMaterial;
     private javax.swing.JDialog jDialogEditMaterial;
     private javax.swing.JLabel jLabel1;
@@ -569,11 +593,7 @@ public class JPanelManagementMaterial extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -581,8 +601,10 @@ public class JPanelManagementMaterial extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabelAddMaterial;
+    private javax.swing.JLabel jLabelCancel;
     private javax.swing.JLabel jLabelCloseAdd;
     private javax.swing.JLabel jLabelDoAddMaterial;
+    private javax.swing.JLabel jLabelEdit;
     private javax.swing.JLabel jLabelImportMaterial;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -595,8 +617,8 @@ public class JPanelManagementMaterial extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextFieldFilterName;
     private javax.swing.JTextField jTextFieldLimit;
-    private javax.swing.JTextField jTextFieldMNameEdit;
-    private javax.swing.JTextField jTextFieldMQtyEdit;
+    private javax.swing.JTextField jTextFieldMaterialNameEdit;
+    private javax.swing.JTextField jTextFieldMinUnitEdit;
     private javax.swing.JTextField jTextFieldName;
     private javax.swing.JTextField jTextFieldUnit;
     // End of variables declaration//GEN-END:variables

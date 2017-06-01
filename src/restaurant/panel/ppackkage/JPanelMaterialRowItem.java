@@ -8,6 +8,7 @@ import assets.images.ImageResources;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import modal.MMaterial;
 
 /**
  *
@@ -63,8 +64,18 @@ public class JPanelMaterialRowItem extends javax.swing.JPanel {
         jLabelMaterialQty.setText("120000000");
 
         jLabelEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_edit_green_x24.png"))); // NOI18N
+        jLabelEdit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelEditMouseClicked(evt);
+            }
+        });
 
         jLabelDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_dell_gray_x24.png"))); // NOI18N
+        jLabelDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelDeleteMouseClicked(evt);
+            }
+        });
 
         jLabelMaterialLimit.setText("limit");
 
@@ -102,6 +113,23 @@ public class JPanelMaterialRowItem extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jLabelDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDeleteMouseClicked
+        // TODO add your handling code here:
+        try {
+            MMaterial mMaterial = new MMaterial(id);
+            mMaterial.delete();
+            JPanelManagementMaterial.getInstance().getjPanelTableContent().remove(this);
+            JPanelManagementMaterial.getInstance().getjPanelTableContent().revalidate();
+            JPanelManagementMaterial.getInstance().getjPanelTableContent().repaint();
+        } catch (Exception e) {
+        }
+        
+    }//GEN-LAST:event_jLabelDeleteMouseClicked
+
+    private void jLabelEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabelEditMouseClicked
+
     public String getDishName() {
         return materialName;
     }
@@ -134,6 +162,9 @@ public class JPanelMaterialRowItem extends javax.swing.JPanel {
         this.unit = image;
     }
 
+    public void setLimit(Float limit){
+        this.limit = limit;
+    }
     public JLabel getjLabelDelete() {
         return jLabelDelete;
     }

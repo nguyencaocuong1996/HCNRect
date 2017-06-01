@@ -24,6 +24,9 @@ public class MMaterial extends Model{
     public MMaterial() {
     }
     
+    public MMaterial(int id){
+        this.id = id;
+    }
     
     
     public MMaterial(int id, String Name, float inStock, String unit, float minInStock) {
