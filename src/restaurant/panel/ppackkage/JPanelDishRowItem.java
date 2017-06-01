@@ -7,6 +7,8 @@ package restaurant.panel.ppackkage;
 import assets.images.ImageResources;
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import modal.MDish;
 
 /**
  *
@@ -50,8 +52,8 @@ public class JPanelDishRowItem extends javax.swing.JPanel {
         jLabelDishPrice = new javax.swing.JLabel();
         jLabelDishImage = new javax.swing.JLabel();
         jLabelDishMenu = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        jLabelEdit = new javax.swing.JLabel();
+        jLabelDelete = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(760, 57));
@@ -69,9 +71,14 @@ public class JPanelDishRowItem extends javax.swing.JPanel {
 
         jLabelDishMenu.setText("Món chính");
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_edit_green_x24.png"))); // NOI18N
+        jLabelEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_edit_green_x24.png"))); // NOI18N
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_dell_gray_x24.png"))); // NOI18N
+        jLabelDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_dell_gray_x24.png"))); // NOI18N
+        jLabelDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelDeleteMouseClicked(evt);
+            }
+        });
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_dish_recipe_x24.png"))); // NOI18N
         jLabel8.setText("CT");
@@ -94,9 +101,9 @@ public class JPanelDishRowItem extends javax.swing.JPanel {
                 .addGap(42, 42, 42)
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel6)
+                .addComponent(jLabelEdit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel7)
+                .addComponent(jLabelDelete)
                 .addContainerGap(106, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -118,12 +125,24 @@ public class JPanelDishRowItem extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel6))
+                            .addComponent(jLabelDelete)
+                            .addComponent(jLabelEdit))
                         .addGap(6, 6, 6)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabelDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDeleteMouseClicked
+        // TODO add your handling code here:
+         try {
+             MDish mDish = new MDish(id);
+            mDish.delete();
+            JPanelManagementDish.getInstance().getjPanelTableContent().remove(this);
+            JPanelManagementDish.getInstance().getjPanelTableContent().revalidate();
+            JPanelManagementDish.getInstance().getjPanelTableContent().repaint();
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jLabelDeleteMouseClicked
 
     public String getDishName() {
         return dishName;
@@ -164,15 +183,19 @@ public class JPanelDishRowItem extends javax.swing.JPanel {
     public void setMenuId(int menuId) {
         this.menuId = menuId;
     }
+    
+     public JLabel getjLabelEdit() {
+        return jLabelEdit;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabelDelete;
     private javax.swing.JLabel jLabelDishId;
     private javax.swing.JLabel jLabelDishImage;
     private javax.swing.JLabel jLabelDishMenu;
     private javax.swing.JLabel jLabelDishName;
     private javax.swing.JLabel jLabelDishPrice;
+    private javax.swing.JLabel jLabelEdit;
     // End of variables declaration//GEN-END:variables
 }

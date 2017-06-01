@@ -19,6 +19,10 @@ public class MDish extends Model{
     private Float price;
     private String imageUrl;
 
+    public MDish(int id){
+        this.id = id;
+    }
+    
     public MDish(int id, String name, Float price, String imageUrl) {
         this.id = id;
         this.name = name;
@@ -62,6 +66,22 @@ public class MDish extends Model{
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+    public MDish(ModalData md){
+        this.id = ((Long) md.get("MaMA")).intValue();
+        this.name = (String)md.get("TenMA");
+        this.imageUrl = (String)md.get("DiaChiAnhMA");
+        this.price = (Float) md.get("GiaMA");
+        
+    }
+    
+    public static MDish get(int id) throws SQLException{
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE MaMA = " + id;
+        try {
+            return new MDish(database.Database.modalSelect(sql));
+        } catch (SQLException e) {
+            throw e;
+        }
     }
 
     @Override
