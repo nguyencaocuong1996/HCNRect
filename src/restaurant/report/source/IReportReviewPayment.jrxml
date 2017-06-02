@@ -36,6 +36,9 @@
 	<parameter name="SoTienThoiLai" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
+	<parameter name="NgayLapHD" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT ma.TenMA, cthd.SoLuong, ma.GiaMA, (GiaMA * SoLuong) as ThanhTien FROM hoa_don as hd
 LEFT JOIN chi_tiet_hoa_don as cthd ON hd.MaHD = cthd.MaHD
@@ -86,7 +89,7 @@ WHERE hd.MaHD = $P{MaHD}]]>
 				<text><![CDATA[-------------------------------------------------------------------------------------------------------------------------------------------------------------------]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy h.mm a">
-				<reportElement x="19" y="0" width="181" height="20" uuid="792c6037-3b5f-4aa8-bddc-01ddbc503a13"/>
+				<reportElement x="17" y="0" width="181" height="20" uuid="792c6037-3b5f-4aa8-bddc-01ddbc503a13"/>
 				<textElement>
 					<font fontName="DejaVu Sans" size="12" isBold="true" pdfEncoding="utf-8"/>
 				</textElement>
@@ -174,6 +177,7 @@ WHERE hd.MaHD = $P{MaHD}]]>
 			</textField>
 			<staticText>
 				<reportElement x="17" y="139" width="160" height="20" uuid="1b3890b2-bc4f-4813-a067-ed43642ce46b"/>
+				<box topPadding="0" bottomPadding="4"/>
 				<textElement>
 					<font fontName="DejaVu Sans" isBold="true"/>
 				</textElement>
@@ -185,6 +189,17 @@ WHERE hd.MaHD = $P{MaHD}]]>
 					<font fontName="DejaVu Sans"/>
 				</textElement>
 				<textFieldExpression><![CDATA["NV" + $P{MaNV}.toString() + " - " + $P{HoTenNV}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="17" y="159" width="160" height="21" uuid="fb5bcf2e-9e54-40b0-9fa7-8b2d4cbe4c13"/>
+				<textElement>
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ngày lập hóa đơn:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="179" y="159" width="100" height="20" uuid="6fee3844-cf8e-49cf-97be-6861798f83fc"/>
+				<textFieldExpression><![CDATA[$P{NgayLapHD}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
@@ -349,34 +364,6 @@ WHERE hd.MaHD = $P{MaHD}]]>
 				</textElement>
 				<text><![CDATA[Tổng số món:]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="224" y="95" width="155" height="20" uuid="43b064ba-3e71-4a1d-9807-0f954f6eb2b2"/>
-				<textElement textAlignment="Right">
-					<font fontName="DejaVu Sans" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Khách hàng đưa:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="224" y="115" width="155" height="20" uuid="a5cf6309-c368-4a3c-a537-bd741de91bc0"/>
-				<textElement textAlignment="Right">
-					<font fontName="DejaVu Sans" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Tiền thối:]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="379" y="95" width="176" height="20" uuid="f1f097c4-ac28-4717-9616-ac53c466315f"/>
-				<textElement textAlignment="Right">
-					<font fontName="DejaVu Sans"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{SoTienKhachHangDua}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="379" y="115" width="176" height="20" uuid="f35518c4-474f-4364-87a2-d97ccf224258"/>
-				<textElement textAlignment="Right">
-					<font fontName="DejaVu Sans"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{SoTienThoiLai}]]></textFieldExpression>
-			</textField>
 		</band>
 	</summary>
 </jasperReport>

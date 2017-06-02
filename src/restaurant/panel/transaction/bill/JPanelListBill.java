@@ -13,7 +13,10 @@ import java.util.HashMap;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import modal.MBill;
 import modal.MCustomer;
+import modal.MStaff;
+import modal.MTable;
 import restaurant.MainFrame;
 import view.VBill;
 
@@ -49,12 +52,27 @@ public class JPanelListBill extends javax.swing.JPanel {
             jPanelTableContent.setPreferredSize(new Dimension(780, height));
             jPanelTableContent.removeAll();
             listBill.getData().forEach((t) -> {
-                int id = ((Long) t.get("MaHD")).intValue();
-                String ldate = CDateTime.dateToDMY((java.util.Date) t.get("NgayLapHD"));
-                float totalBill = (Float) t.get("TriGiaHD");
-                float realBill = (Float) t.get("TriGiaThuc");
-                if (listJPBRI.get(id) == null) listJPBRI.put(id, new JPanelBillRowItem(id,ldate, totalBill, realBill, (id % 2 != 0)));
-                jPanelTableContent.add(listJPBRI.get(id));
+                MBill bill = new MBill();
+                bill.setId(((Long) t.get("MaHD")).intValue());
+                bill.setCustomerId(((Long) t.get("MaKH")).intValue());
+                bill.setRealBill((Float) t.get("TriGiaThuc"));
+                bill.setTotalBill((Float) t.get("TriGiaHD"));
+                bill.setDateTimeBill(CDateTime.dateToDMY((java.util.Date) t.get("NgayLapHD")));
+                bill.setStaffId(((Long) t.get("MaNV")).intValue());
+                bill.setTableId(((Integer) t.get("MaBan")));
+                MCustomer mcus = MCustomer.getByID(bill.getCustomerId());
+                MStaff staff;
+                MTable table;
+                try {
+                    staff = MStaff.get(bill.getStaffId());
+                    table = MTable.getById(bill.getTableId());
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    return;
+                }
+                
+                if (listJPBRI.get(bill.getId()) == null) listJPBRI.put(bill.getId(), new JPanelBillRowItem(bill, mcus, staff, table, (bill.getId() % 2 != 0)));
+                jPanelTableContent.add(listJPBRI.get(bill.getId()));
             });
         } catch (SQLException e) {
             e.printStackTrace();
@@ -131,6 +149,7 @@ public class JPanelListBill extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanelTableContent = new javax.swing.JPanel();
 
@@ -213,6 +232,9 @@ public class JPanelListBill extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel7.setText("Thu về");
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel6.setText("Khách hàng");
+
         javax.swing.GroupLayout jPanelTableHeaderLayout = new javax.swing.GroupLayout(jPanelTableHeader);
         jPanelTableHeader.setLayout(jPanelTableHeaderLayout);
         jPanelTableHeaderLayout.setHorizontalGroup(
@@ -220,13 +242,15 @@ public class JPanelListBill extends javax.swing.JPanel {
             .addGroup(jPanelTableHeaderLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(62, 62, 62)
                 .addComponent(jLabel5)
-                .addGap(94, 94, 94)
+                .addGap(74, 74, 74)
                 .addComponent(jLabel7)
-                .addContainerGap(319, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelTableHeaderLayout.setVerticalGroup(
             jPanelTableHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,8 +260,9 @@ public class JPanelListBill extends javax.swing.JPanel {
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel7))
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel6))
+                .addGap(0, 10, Short.MAX_VALUE))
         );
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -264,8 +289,8 @@ public class JPanelListBill extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanelTableHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -309,6 +334,7 @@ public class JPanelListBill extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabelChooseCustomer;
     private javax.swing.JLabel jLabelChooseDate;
