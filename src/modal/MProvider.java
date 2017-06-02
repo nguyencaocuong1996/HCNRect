@@ -5,6 +5,8 @@
  */
 package modal;
 
+import java.sql.SQLException;
+
 /**
  *
  * @author WINDNCC
@@ -16,6 +18,18 @@ public class MProvider {
     protected String address;
     protected String description;
 
+    public MProvider() {
+    }
+
+    public MProvider(ModalData md) {
+        this.id = ((Long) md.get("MaNCC")).intValue();
+        this.name = (String) md.get("TenNCC");
+        this.phone = (String) md.get("SDTNCC");
+        this.address = (String) md.get("DiaChiNCC");
+        this.description = (String) md.get("MoTaNCC");
+    }
+
+    
     public MProvider(int id, String name, String phone, String address, String description) {
         this.id = id;
         this.name = name;
@@ -30,7 +44,11 @@ public class MProvider {
         this.address = address;
         this.description = description;
     }
-
+    public static MProvider get(int id) throws SQLException{
+        String sql = "SELECT * FROM nha_cung_cap WHERE MaNCC = " + id;
+        ModalData md = database.Database.modalSelect(sql);
+        return new MProvider(md);
+    }
     public int getId() {
         return id;
     }

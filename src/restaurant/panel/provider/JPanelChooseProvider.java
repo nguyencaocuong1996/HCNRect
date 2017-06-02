@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package restaurant.panel.ppackkage;
+package restaurant.panel.provider;
 
 import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
 import java.sql.SQLException;
 import java.util.HashMap;
 import javax.swing.JFrame;
@@ -17,33 +18,11 @@ import view.ViewData;
  * @author WINDNCC
  */
 public class JPanelChooseProvider extends javax.swing.JPanel {
-
-    public static JPanelChooseProvider instance;
     public VProvider vProvider;
+    public MouseAdapter mouseAdapter;
     public HashMap<Integer, JPanelChooseProviderItem> listJPChooseProviderItem = new HashMap<>();
-    public static JPanelChooseProvider getInstance() {
-        if (instance == null) {
-            instance = new JPanelChooseProvider();
-        }
-        return instance;
-    }
-    
     public JPanelChooseProvider() {
         initComponents();
-        try {
-            vProvider = VProvider.getAllProvider();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        vProvider.getData().forEach((t) -> {
-            int id = ((Long) t.get("MaNCC")).intValue();
-            String name = (String) t.get("TenNCC");
-            String phone = (String) t.get("SDTNCC");
-            JPanelChooseProviderItem newJPCPI = new JPanelChooseProviderItem(id, name, phone);
-            listJPChooseProviderItem.put(id, newJPCPI);
-            
-        });
-        showView();
     }
     public final void showView(){
         jPanelContent.removeAll();
@@ -62,10 +41,10 @@ public class JPanelChooseProvider extends javax.swing.JPanel {
     }
     
     public static void main(String[] args) {
-        JFrame jf = new JFrame();
-        jf.setSize(new Dimension(500,500));
-        jf.add(JPanelChooseProvider.getInstance());
-        jf.setVisible(true);
+//        JFrame jf = new JFrame();
+//        jf.setSize(new Dimension(500,500));
+//        jf.add(JPanelChooseProvider.getInstance());
+//        jf.setVisible(true);
     }
     
     @SuppressWarnings("unchecked")

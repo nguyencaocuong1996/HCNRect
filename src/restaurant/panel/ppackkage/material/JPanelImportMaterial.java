@@ -29,7 +29,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
-import restaurant.panel.ppackkage.JPanelChooseProvider;
+import restaurant.panel.provider.JPanelChooseProvider;
 import restaurant.report.ReportResources;
 import view.VMaterial;
 
@@ -400,8 +400,8 @@ public class JPanelImportMaterial extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabelProviderNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelProviderNameMouseClicked
-        if (!jDialogChooseProvider.isAncestorOf(JPanelChooseProvider.getInstance())) {
-            jDialogChooseProvider.add(JPanelChooseProvider.getInstance());
+        if (!jDialogChooseProvider.isAncestorOf(JPanelChooseProviderForImportMaterial.getInstance())) {
+            jDialogChooseProvider.add(JPanelChooseProviderForImportMaterial.getInstance());
         }
         
         jDialogChooseProvider.setVisible(true);

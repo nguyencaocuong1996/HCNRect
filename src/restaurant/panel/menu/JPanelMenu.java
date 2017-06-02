@@ -4,6 +4,7 @@ package restaurant.panel.menu;
 import assets.images.icons.IconResources;
 import java.awt.Dimension;
 import java.util.ArrayList;
+import java.util.Comparator;
 import javax.swing.JFrame;
 import modal.MStaff;
 import restaurant.panel.PanelFactory;
@@ -20,9 +21,9 @@ public class JPanelMenu extends javax.swing.JPanel {
         JPanelMenuItem jpMIPackage = new JPanelMenuItem("Hàng hóa", IconResources.PACKAGE, 3, SubMenuFactory.get("package"));
         JPanelMenuItem jpMIReport = new JPanelMenuItem("Báo cáo", IconResources.REPORT, 4, SubMenuFactory.get("report"));
         JPanelMenuItem jpMIPartner = new JPanelMenuItem("Đối tác", IconResources.PARTNER, 6, SubMenuFactory.get("partner"));
-        JPanelMenuItem jpMIStaff = new JPanelMenuItem("Nhân viên", IconResources.STAFF, 7);
-        JPanelMenuItem jpMICoins = new JPanelMenuItem("Giao dịch", IconResources.COINS, 8,SubMenuFactory.get("transaction"));
-        
+        JPanelMenuItem jpMICoins = new JPanelMenuItem("Giao dịch", IconResources.COINS, 7,SubMenuFactory.get("transaction"));
+        JPanelMenuItem jpMIStaff = new JPanelMenuItem("Nhân viên", IconResources.STAFF, 8);
+
         //Add mouseListener
         jpMIOrder.addMouseListener(new MouseListenerMenuItem(PanelFactory.ID.ORDER_PICK_TABLE, PanelFactory.ID.HEADER_ORDER_PICK_TABLE));
         jpMIBook.addMouseListener(new MouseListenerMenuItem(PanelFactory.ID.BOOK_TABLE, PanelFactory.ID.HEADER_BOOK_TABLE));
@@ -37,8 +38,18 @@ public class JPanelMenu extends javax.swing.JPanel {
         listJPanelMenuItem.add(jpMIPackage);
         listJPanelMenuItem.add(jpMIReport);
         listJPanelMenuItem.add(jpMIPartner);
-        listJPanelMenuItem.add(jpMIStaff);
         listJPanelMenuItem.add(jpMICoins);
+        listJPanelMenuItem.add(jpMIStaff);
+        listJPanelMenuItem.sort((JPanelMenuItem o1, JPanelMenuItem o2) -> {
+            if (o1.getOrderInMenu() > o2.getOrderInMenu()){
+                return 1;
+            } else {
+                if(o1.getOrderInMenu() < o2.getOrderInMenu())
+                    return -1;
+            }
+            return 0;
+        });
+        
         //add to Panel
         listJPanelMenuItem.forEach((t) -> {
             jPanelMenuContent.add(t);

@@ -29,11 +29,13 @@ public class MStaff extends Model{
     }
 
     public MStaff(ModalData md){
-        this.id = ((Long) md.get("MaNV")).intValue();
-        this.name = (String) md.get("HoTenNV");
-        this.address = (String) md.get("DiaChiNV");
-        this.departmentId = (Integer) md.get("MaPB");
-        this.phone = (String) md.get("SDTNV");
+        if (!md.isEmpty()) {
+            this.id = ((Long) md.get("MaNV")).intValue();
+            this.name = (String) md.get("HoTenNV");
+            this.address = (String) md.get("DiaChiNV");
+            this.departmentId = (Integer) md.get("MaPB");
+            this.phone = (String) md.get("SDTNV");
+        }
     }
     public MStaff(String name, String phone, String address, int departmentId) {
         this.name = name;

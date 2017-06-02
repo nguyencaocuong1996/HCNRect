@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package restaurant.panel.ppackkage;
+package restaurant.panel.provider;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -25,19 +25,6 @@ public class JPanelChooseProviderItem extends javax.swing.JPanel {
         this.jLabelProviderId.setText(providerId+"");
         this.jLabelProviderName.setText(providerName);
         this.jLabelProviderPhone.setText(providerPhone);
-        customInit();
-    }
-    private void customInit(){
-        addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                JPanelImportMaterial.getInstance().getjLabelProviderName().setText(jLabelProviderName.getText());
-                JPanelImportMaterial.getInstance().getjDialogChooseProvider().setVisible(false);
-                JPanelImportMaterial.getInstance().setProviderId(providerId);
-                JPanelImportMaterial.getInstance().setProviderName(providerName);
-            }
-            
-        });
     }
     public JPanelChooseProviderItem() {
         initComponents();
@@ -89,8 +76,8 @@ public class JPanelChooseProviderItem extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabelProviderId;
-    private javax.swing.JLabel jLabelProviderName;
-    private javax.swing.JLabel jLabelProviderPhone;
+    protected javax.swing.JLabel jLabelProviderId;
+    protected javax.swing.JLabel jLabelProviderName;
+    protected javax.swing.JLabel jLabelProviderPhone;
     // End of variables declaration//GEN-END:variables
 }
