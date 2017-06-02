@@ -19,6 +19,7 @@ import restaurant.panel.report.JPanelReportDetails;
 import restaurant.panel.report.JPanelReportEndOfDay;
 import restaurant.panel.staff.JPanelManagementStaff;
 import restaurant.panel.transaction.bill.JPanelListBill;
+import restaurant.panel.transaction.coupon.JPanelManagementCoupon;
 import restaurant.panel.transaction.receipt.JPanelListReceipt;
 /**
  *
@@ -37,6 +38,7 @@ public class PanelFactory {
     private static JPanelHeader headerManageStaff;
     private static JPanelHeader headerListBill;
     private static JPanelHeader headerListReceipt;
+    private static JPanelHeader headerManagementCoupon;
     private static JPanelWelcome overview;
     private static JPanelSidebar sidebar;
     private static JPanelManagementDish managementDish;
@@ -47,6 +49,7 @@ public class PanelFactory {
     private static JPanelManagementStaff manageStaff;
     private static JPanelListBill listBill;
     private static JPanelListReceipt listReciept;
+    private static JPanelManagementCoupon managementCoupon;
     public class ID{
             public static final int SIDEBAR = 1;
             //content
@@ -62,6 +65,7 @@ public class PanelFactory {
             public static final int MANAGE_STAFF = 161;
             public static final int TRANS_BILL = 171;
             public static final int TRANS_RECEIPT = 172;
+            public static final int TRANS_COUPON = 173;
             //header
             public static final int HEADER_OVERVIEW = 211;
             public static final int HEADER_ORDER_PICK_TABLE = 221;
@@ -75,6 +79,7 @@ public class PanelFactory {
             public static final int HEADER_MANAGE_STAFF = 271;
             public static final int HEADER_TRANS_BILL = 281;
             public static final int HEADER_TRANS_RECEIPT_NOTE = 282;
+            public static final int HEADER_TRANS_COUPON = 283;
     }
     public static JPanel get(int panelId){
         JPanel jp;
@@ -199,6 +204,16 @@ public class PanelFactory {
             case ID.TRANS_RECEIPT:
                 listReciept = JPanelListReceipt.getInstance();
                 jp = listReciept;
+                break;
+            case ID.HEADER_TRANS_COUPON:
+                if (headerManagementCoupon == null) {
+                    headerManagementCoupon = new JPanelHeader("Phiếu khuyến mãi", IconResources.ORDER);
+                }
+                jp = headerManagementCoupon;
+                break;
+            case ID.TRANS_COUPON:
+                managementCoupon = JPanelManagementCoupon.getInstance();
+                jp = managementCoupon;
                 break;
             //#Transaction
             default:

@@ -30,6 +30,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
 import restaurant.MainFrame;
+import restaurant.panel.ppackkage.JPanelManagementMaterial;
 import restaurant.panel.provider.JPanelChooseProvider;
 import restaurant.report.ReportResources;
 import view.VMaterial;
@@ -400,9 +401,11 @@ public class JPanelImportMaterial extends javax.swing.JPanel {
                 Map<String, Object> params = new HashMap<>();
                 params.put("receiptNoteId", mReceiptNote.getId());
                 params.put("providerName", getProviderName());
-                params.put("staffName", "Nguyễn Cao Cường");
+                params.put("staffName", MainFrame.getInstance().getStaff().getName());
                 params.put("totalMoney", new Float(jLabelTotalPriceImport.getText()));
+                params.put("dateImport", CDateTime.getInstance().getDate().toDMY());
                 ReportResources.showReport(ReportResources.RECEIPT_NOTE, params);
+                
             } catch (SQLException e) {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(this, "Có lỗi xảy ra vui lòng thử lại!");

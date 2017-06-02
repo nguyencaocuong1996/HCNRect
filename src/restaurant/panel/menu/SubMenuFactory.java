@@ -33,6 +33,7 @@ public class SubMenuFactory {
             case "transaction":
                 listSubMenuItem.add(new JPanelSubMenuItem("Hóa đơn khách hàng", PanelFactory.ID.TRANS_BILL, PanelFactory.ID.HEADER_TRANS_BILL));
                 listSubMenuItem.add(new JPanelSubMenuItem("Phiếu nhập hàng", PanelFactory.ID.TRANS_RECEIPT, PanelFactory.ID.HEADER_TRANS_RECEIPT_NOTE));
+                listSubMenuItem.add(new JPanelSubMenuItem("Phiếu khuyến mãi", PanelFactory.ID.TRANS_COUPON, PanelFactory.ID.HEADER_TRANS_COUPON));
                 break;
         }
         return new JPanelSubMenu(listSubMenuItem);

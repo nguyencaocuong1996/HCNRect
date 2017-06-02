@@ -8,7 +8,7 @@ import modal.MStaff;
 public class JPanelMenu extends javax.swing.JPanel {
     private static JPanelMenu instance;
     private MStaff staff;
-    private ListMenu listMenu = ListMenu.getInstance();
+    private final ListMenu listMenu = ListMenu.getInstance();
     public JPanelMenu() {
         initComponents();
         //add to Panel

@@ -67,6 +67,10 @@ public class MReceiptNoteDetail extends Model{
         insertData.put("SoLuongNhap", getQty());
         insertData.put("GiaNhap", getPrice());
         database.Database.insert(TABLE_NAME, insertData);
+        MMaterial material = MMaterial.get(getMaterialId());
+        material.setInStock(material.getInStock() + getQty());
+        material.update();
+        
     }
 
     @Override

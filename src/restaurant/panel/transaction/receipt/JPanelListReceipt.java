@@ -38,8 +38,6 @@ public class JPanelListReceipt extends javax.swing.JPanel {
     private void filter(){
         try {
             listReceipt = VReceiptNote.get(date, provider.getId());
-            System.out.println(listReceipt.getData());
-//            System.out.println(listBill.getData());
             int height = listReceipt.getData().size() * 58;
             jPanelTableContent.setPreferredSize(new Dimension(780, height));
             jPanelTableContent.removeAll();

@@ -116,11 +116,16 @@ public class JPanelImportDetailMaterialItem extends javax.swing.JPanel {
 
         jTextFieldQty.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextFieldQty.setText("1");
-        jTextFieldQty.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+        jTextFieldQty.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldQtyFocusLost(evt);
             }
+        });
+        jTextFieldQty.addInputMethodListener(new java.awt.event.InputMethodListener() {
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 jTextFieldQtyInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jTextFieldQty.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -224,13 +229,7 @@ public class JPanelImportDetailMaterialItem extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabelCloseMouseClicked
 
     private void jTextFieldQtyKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldQtyKeyReleased
-        try {
-            if(!jTextFieldQty.getText().isEmpty()){
-                setQuantity(new Integer(jTextFieldQty.getText()));
-            }
-        } catch (NumberFormatException e) {
-            JOptionPane.showConfirmDialog(this, "Chỉ được phép nhập số!");
-        }
+        
         
     }//GEN-LAST:event_jTextFieldQtyKeyReleased
 
@@ -282,6 +281,18 @@ public class JPanelImportDetailMaterialItem extends javax.swing.JPanel {
     private void jTextFieldQtyPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTextFieldQtyPropertyChange
       
     }//GEN-LAST:event_jTextFieldQtyPropertyChange
+
+    private void jTextFieldQtyFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldQtyFocusLost
+        try {
+            if(!jTextFieldQty.getText().isEmpty()){
+                setQuantity(Float.valueOf(jTextFieldQty.getText()));
+            }
+        } catch (NumberFormatException e) {
+            jTextFieldQty.setText("1.0");
+            jTextFieldQty.grabFocus();
+            JOptionPane.showMessageDialog(this, "Chỉ được phép nhập số!");
+        }
+    }//GEN-LAST:event_jTextFieldQtyFocusLost
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
