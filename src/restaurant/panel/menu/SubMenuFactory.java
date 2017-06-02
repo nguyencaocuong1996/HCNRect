@@ -31,6 +31,7 @@ public class SubMenuFactory {
                 listSubMenuItem.add(new JPanelSubMenuItem("Nhà cung cấp"));
                 break;
             case "transaction":
+                listSubMenuItem.add(new JPanelSubMenuItem("Phiếu chi NCC", PanelFactory.ID.TRANS_RVP, PanelFactory.ID.HEADER_TRANS_RVP));
                 listSubMenuItem.add(new JPanelSubMenuItem("Hóa đơn khách hàng", PanelFactory.ID.TRANS_BILL, PanelFactory.ID.HEADER_TRANS_BILL));
                 listSubMenuItem.add(new JPanelSubMenuItem("Phiếu nhập hàng", PanelFactory.ID.TRANS_RECEIPT, PanelFactory.ID.HEADER_TRANS_RECEIPT_NOTE));
                 listSubMenuItem.add(new JPanelSubMenuItem("Phiếu khuyến mãi", PanelFactory.ID.TRANS_COUPON, PanelFactory.ID.HEADER_TRANS_COUPON));

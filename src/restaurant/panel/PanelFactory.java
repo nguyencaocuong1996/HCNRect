@@ -15,6 +15,7 @@ import restaurant.panel.order.JPanelOrder;
 import restaurant.panel.ppackkage.JPanelManagementDish;
 import restaurant.panel.ppackkage.JPanelManagementMaterial;
 import restaurant.panel.ppackkage.JPanelManagementTable;
+import restaurant.panel.provider.debt.JPanelManagementReceiptVoucherProvider;
 import restaurant.panel.report.JPanelReportDetails;
 import restaurant.panel.report.JPanelReportEndOfDay;
 import restaurant.panel.staff.JPanelManagementStaff;
@@ -39,6 +40,7 @@ public class PanelFactory {
     private static JPanelHeader headerListBill;
     private static JPanelHeader headerListReceipt;
     private static JPanelHeader headerManagementCoupon;
+    private static JPanelHeader headerManagementRVP;
     private static JPanelWelcome overview;
     private static JPanelSidebar sidebar;
     private static JPanelManagementDish managementDish;
@@ -46,10 +48,6 @@ public class PanelFactory {
     private static JPanelManagementMaterial managementMaterial;
     private static JPanelReportEndOfDay reportEndOfDay;
     private static JPanelReportDetails reportDetails;
-    private static JPanelManagementStaff manageStaff;
-    private static JPanelListBill listBill;
-    private static JPanelListReceipt listReciept;
-    private static JPanelManagementCoupon managementCoupon;
     public class ID{
             public static final int SIDEBAR = 1;
             //content
@@ -66,6 +64,7 @@ public class PanelFactory {
             public static final int TRANS_BILL = 171;
             public static final int TRANS_RECEIPT = 172;
             public static final int TRANS_COUPON = 173;
+            public static final int TRANS_RVP = 174;
             //header
             public static final int HEADER_OVERVIEW = 211;
             public static final int HEADER_ORDER_PICK_TABLE = 221;
@@ -80,6 +79,7 @@ public class PanelFactory {
             public static final int HEADER_TRANS_BILL = 281;
             public static final int HEADER_TRANS_RECEIPT_NOTE = 282;
             public static final int HEADER_TRANS_COUPON = 283;
+            public static final int HEADER_TRANS_RVP = 284;
     }
     public static JPanel get(int panelId){
         JPanel jp;
@@ -192,8 +192,7 @@ public class PanelFactory {
                 jp = headerListBill;
                 break;
             case ID.TRANS_BILL:
-                listBill = JPanelListBill.getInstance();
-                jp = listBill;
+                jp = JPanelListBill.getInstance();
                 break;
             case ID.HEADER_TRANS_RECEIPT_NOTE:
                 if (headerListReceipt == null) {
@@ -202,8 +201,7 @@ public class PanelFactory {
                 jp = headerListReceipt;
                 break;
             case ID.TRANS_RECEIPT:
-                listReciept = JPanelListReceipt.getInstance();
-                jp = listReciept;
+                jp = JPanelListReceipt.getInstance();
                 break;
             case ID.HEADER_TRANS_COUPON:
                 if (headerManagementCoupon == null) {
@@ -212,8 +210,16 @@ public class PanelFactory {
                 jp = headerManagementCoupon;
                 break;
             case ID.TRANS_COUPON:
-                managementCoupon = JPanelManagementCoupon.getInstance();
-                jp = managementCoupon;
+                jp = JPanelManagementCoupon.getInstance();
+                break;
+            case ID.HEADER_TRANS_RVP:
+                if (headerManagementRVP == null) {
+                    headerManagementRVP = new JPanelHeader("Phiếu chi cho NCC", IconResources.ORDER);
+                }
+                jp = headerManagementRVP;
+                break;
+            case ID.TRANS_RVP:
+                jp = JPanelManagementReceiptVoucherProvider.getInstance();
                 break;
             //#Transaction
             default:

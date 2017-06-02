@@ -2,7 +2,9 @@
 package restaurant.panel.booktable;
 
 import java.awt.Color;
+import java.sql.SQLException;
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 
 
 
@@ -96,20 +98,20 @@ public class JPanelBookTableItem extends javax.swing.JPanel {
         try {
             database.Database.delete("phieu_dat_ban", "MaPDB = " + this.bookTableId);
             System.out.println("----Xóa phiếu thành công!");
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("----Xóa phiếu thất bại!");
         }
     }
     public void dbUpdate(){
         System.out.println("dbUpdate in JPanelBookTableItem.java: Cập nhật phiếu đã chọn!");
         HashMap ud = new HashMap();
-        ud.put("NgayGioDatBan", this.timeOrder);
-        ud.put("TrangThai", this.statusTableBook);
+        ud.put("TrangThai", this.statusId);
         try {
-            database.Database.update("chi_tiet_dat_mon", ud, "MaPDB = " + this.bookTableId);
-            System.out.println("----Sửa món thành công!");
-        } catch (Exception e) {
-            System.out.println("----Sửa món thất bại!");
+            database.Database.update("phieu_dat_ban", ud, "MaPDB = " + this.bookTableId);
+            System.out.println("----Cập nhật phiếu thành công!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("----Cập nhật phiếu thất bại!");
         }
     }
     public void dbAdd(){
@@ -157,12 +159,17 @@ public class JPanelBookTableItem extends javax.swing.JPanel {
         jPanelStatusBook.setPreferredSize(new java.awt.Dimension(120, 14));
         add(jPanelStatusBook);
 
-        jPanelUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_edit_green_x24.png"))); // NOI18N
+        jPanelUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_edit_darkgreen_x24.png"))); // NOI18N
         jPanelUpdate.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jPanelUpdate.setPreferredSize(new java.awt.Dimension(40, 24));
+        jPanelUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanelUpdateMouseClicked(evt);
+            }
+        });
         add(jPanelUpdate);
 
-        jPanelDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_dell_gray_x24.png"))); // NOI18N
+        jPanelDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_delete_dimgray_x32.png"))); // NOI18N
         jPanelDelete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanelDeleteMouseClicked(evt);
@@ -172,12 +179,23 @@ public class JPanelBookTableItem extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jPanelDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelDeleteMouseClicked
-        System.out.println("ahaha");
-        dbDelete();
-        JPanelBookTable.getInstance().getjPanelListBookTableContent().remove(this);
-        JPanelBookTable.getInstance().getjPanelListBookTableContent().revalidate();
-        JPanelBookTable.getInstance().getjPanelListBookTableContent().repaint();
+        int check = JOptionPane.showConfirmDialog(this, "Xác nhận xóa phiếu đặt bàn?");
+        if(check == JOptionPane.YES_OPTION){
+            dbDelete();
+            JPanelBookTable.getInstance().getjPanelListBookTableContent().remove(this);
+            JPanelBookTable.getInstance().getjPanelListBookTableContent().revalidate();
+            JPanelBookTable.getInstance().getjPanelListBookTableContent().repaint();
+        }
     }//GEN-LAST:event_jPanelDeleteMouseClicked
+
+    private void jPanelUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelUpdateMouseClicked
+        int check = JOptionPane.showConfirmDialog(this, "Xác nhận khách đã tới?");
+        if(check == JOptionPane.YES_OPTION){
+            this.statusId = 1;
+            dbUpdate();
+            jPanelStatusBook.setText(status.get(1));
+        }
+    }//GEN-LAST:event_jPanelUpdateMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
