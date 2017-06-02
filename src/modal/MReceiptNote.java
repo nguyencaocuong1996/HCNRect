@@ -19,23 +19,24 @@ public class MReceiptNote extends Model{
     protected int providerId;
     protected String date;
     protected float totalReceipt;
-    protected float payAmount;
+    protected int staffId;
     public static final String TABLE_NAME = "phieu_nhap_hang";
     public MReceiptNote() {
     }
 
-    public MReceiptNote(int providerId, String date, float totalReceipt, float payAmount) {
+    public MReceiptNote(int providerId, String date, float totalReceipt, int staffId) {
         this.providerId = providerId;
         this.date = date;
         this.totalReceipt = totalReceipt;
-        this.payAmount = payAmount;
+        this.staffId = staffId;
     }
 
-    public MReceiptNote(int id, int providerId, String date, float totalReceipt) {
+    public MReceiptNote(int id, int providerId, String date, float totalReceipt, int staffId) {
         this.id = id;
         this.providerId = providerId;
         this.date = date;
         this.totalReceipt = totalReceipt;
+        this.staffId = staffId;
         
     }
     public MReceiptNote(ModalData md) {
@@ -45,10 +46,11 @@ public class MReceiptNote extends Model{
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         date = df.format(dat);
         this.totalReceipt = (Float) md.get("TriGiaPNH");
+        this.staffId = ((Integer) md.get("MaNV"));
     }
 
     public static MReceiptNote getLastReceiptNote() throws SQLException{
-        String sql = "SELECT MaPNH, MaNCC, DATE(NgayNhapHang) as NgayNhapHang, TriGiaPNH, SoTienDaTra FROM phieu_nhap_hang WHERE MaPNH = (SELECT MAX(MaPNH) FROM phieu_nhap_hang)";
+        String sql = "SELECT MaPNH, MaNCC, DATE(NgayNhapHang) as NgayNhapHang, TriGiaPNH, MaNV FROM phieu_nhap_hang WHERE MaPNH = (SELECT MAX(MaPNH) FROM phieu_nhap_hang)";
         try {
             return new MReceiptNote(database.Database.modalSelect(sql));
         } catch (SQLException e) {
@@ -80,20 +82,20 @@ public class MReceiptNote extends Model{
         this.providerId = providerId;
     }
 
-    public float getPayAmount() {
-        return payAmount;
-    }
-
-    public void setPayAmount(float payAmount) {
-        this.payAmount = payAmount;
-    }
-
     public String getDate() {
         return date;
     }
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public int getStaffId() {
+        return staffId;
+    }
+
+    public void setStaffId(int staffId) {
+        this.staffId = staffId;
     }
     
     
@@ -103,7 +105,7 @@ public class MReceiptNote extends Model{
         insertData.put("MaNCC", getProviderId());
         insertData.put("NgayNhapHang", getDate());
         insertData.put("TriGiaPNH", getTotalReceipt());
-        insertData.put("SoTienDaTra", getPayAmount());
+        insertData.put("MaNV", getStaffId());
         database.Database.insert(TABLE_NAME, insertData);
     }
 

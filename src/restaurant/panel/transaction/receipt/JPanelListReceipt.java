@@ -84,7 +84,7 @@ public class JPanelListReceipt extends javax.swing.JPanel {
     }
 
     public void setDate(String date) {
-        if (date != null) {
+        if (!"".equals(date)) {
             this.jLabelChooseDate.setText(CDateTime.dateToDMY(dateChooserDialoListReceipt.getSelectedDate().getTime()));
         } else {
             this.jLabelChooseDate.setText("Click chọn ngày.");
@@ -114,9 +114,15 @@ public class JPanelListReceipt extends javax.swing.JPanel {
     }
 
     public void setProvider(MProvider provider) {
-        this.provider = provider;
-        jLabelChooseProvider.setText(provider.getName());
-        jDialogChooseProvider.setVisible(false);
+        if(provider == null){
+            jLabelChooseProvider.setText("Click chọn NCC");
+            this.provider.setId(0);
+        } else {
+            this.provider = provider;
+            jLabelChooseProvider.setText(provider.getName());   
+            jDialogChooseProvider.setVisible(false);
+        }
+        
         filter();
     }
 
@@ -314,7 +320,8 @@ public class JPanelListReceipt extends javax.swing.JPanel {
     }//GEN-LAST:event_dateChooserDialoListReceiptOnCommit
 
     private void jLabelResetSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelResetSearchMouseClicked
-        setDate(null);
+        setDate("");
+        setProvider(null);
     }//GEN-LAST:event_jLabelResetSearchMouseClicked
 
     private void jLabelChooseProviderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelChooseProviderMouseClicked

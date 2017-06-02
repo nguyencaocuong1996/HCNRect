@@ -114,6 +114,12 @@ public class JPanelHeader extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanelShowUserInfoMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanelShowUserInfoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanelShowUserInfoMouseExited(evt);
+            }
         });
         jPanelShowUserInfo.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 15));
 
@@ -137,12 +143,19 @@ public class JPanelHeader extends javax.swing.JPanel {
                 jPanelUserInfo.remove(jp);
                 repaint();
             }
-            
         }
         
 //        JDialog jd = MainFrame.getInstance().getjDialogUserInfo();
 //        jd.setVisible(!jd.isVisible());
     }//GEN-LAST:event_jPanelShowUserInfoMouseClicked
+
+    private void jPanelShowUserInfoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelShowUserInfoMouseEntered
+        
+    }//GEN-LAST:event_jPanelShowUserInfoMouseEntered
+
+    private void jPanelShowUserInfoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelShowUserInfoMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanelShowUserInfoMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="13bd720a-5689-498b-a92a-43416f57131b">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.x" value="49"/>
+	<property name="ireport.y" value="232"/>
 	<parameter name="receiptNoteId" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -186,15 +186,15 @@ WHERE ctpn.MaPNH = $P{receiptNoteId}]]>
 				<textFieldExpression><![CDATA[$F{GiaNhap}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="362" y="0" width="25" height="20" uuid="4796df63-0f4f-4ee0-ad5b-d35dc0ea90d7"/>
-				<textElement>
+				<reportElement x="310" y="0" width="40" height="20" uuid="4796df63-0f4f-4ee0-ad5b-d35dc0ea90d7"/>
+				<textElement textAlignment="Right">
 					<font fontName="DejaVu Sans"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{SoLuongNhap}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="310" y="0" width="52" height="20" uuid="280363bd-7730-4b15-9171-c8bcec27d8e5"/>
-				<textElement textAlignment="Right">
+				<reportElement x="350" y="0" width="37" height="20" uuid="280363bd-7730-4b15-9171-c8bcec27d8e5"/>
+				<textElement>
 					<font fontName="DejaVu Sans"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{DonVi}]]></textFieldExpression>

@@ -37,7 +37,6 @@ public class InsertData {
         this.data.put("MaNCC", receiptNote.getProviderId());
         this.data.put("NgayNhapHang", receiptNote.getDate());
         this.data.put("TriGiaPNH", receiptNote.getTotalReceipt());
-        this.data.put("SoTienDaTra", receiptNote.getPayAmount());
     }
     public InsertData(MReceiptNoteDetail receiptNoteDetail){
         tableName = "chi_tiet_phieu_nhap";

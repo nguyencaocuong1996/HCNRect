@@ -32,7 +32,7 @@ public class SubMenuFactory {
                 break;
             case "transaction":
                 listSubMenuItem.add(new JPanelSubMenuItem("Hóa đơn khách hàng", PanelFactory.ID.TRANS_BILL, PanelFactory.ID.HEADER_TRANS_BILL));
-                listSubMenuItem.add(new JPanelSubMenuItem("Phiếu nhập hàng"));
+                listSubMenuItem.add(new JPanelSubMenuItem("Phiếu nhập hàng", PanelFactory.ID.TRANS_RECEIPT, PanelFactory.ID.HEADER_TRANS_RECEIPT_NOTE));
                 break;
         }
         return new JPanelSubMenu(listSubMenuItem);

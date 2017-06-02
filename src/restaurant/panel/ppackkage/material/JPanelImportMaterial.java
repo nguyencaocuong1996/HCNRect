@@ -29,6 +29,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
+import restaurant.MainFrame;
 import restaurant.panel.provider.JPanelChooseProvider;
 import restaurant.report.ReportResources;
 import view.VMaterial;
@@ -133,10 +134,6 @@ public class JPanelImportMaterial extends javax.swing.JPanel {
         jLabelDoAddReceiptNote = new javax.swing.JLabel();
         jLabelTotalPriceImport = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jTextFieldPayAmout = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jLabelDoubt = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jPanelListImportingMaterial = new javax.swing.JPanel();
 
@@ -315,60 +312,26 @@ public class JPanelImportMaterial extends javax.swing.JPanel {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Tổng giá trị: ");
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel8.setText("Số tiền đã trả: ");
-
-        jTextFieldPayAmout.setForeground(new java.awt.Color(0, 102, 0));
-        jTextFieldPayAmout.setText("0");
-        jTextFieldPayAmout.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextFieldPayAmoutKeyReleased(evt);
-            }
-        });
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel6.setText("Số tiền còn nợ: ");
-
-        jLabelDoubt.setForeground(new java.awt.Color(204, 102, 0));
-        jLabelDoubt.setText("0");
-
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelTotalPriceImport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextFieldPayAmout, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
-                    .addComponent(jLabelDoubt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(14, 14, 14))
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(140, 140, 140)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelTotalPriceImport, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelTotalPriceImport, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldPayAmout, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabelDoubt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelTotalPriceImport, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -391,7 +354,7 @@ public class JPanelImportMaterial extends javax.swing.JPanel {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -412,10 +375,6 @@ public class JPanelImportMaterial extends javax.swing.JPanel {
         filter(name, jCheckBoxShowLowInStock.isSelected());
     }//GEN-LAST:event_jTextFieldFilterMaterialKeyReleased
 
-    private void jTextFieldPayAmoutKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPayAmoutKeyReleased
-        setJLabelTotalPriceImport();
-    }//GEN-LAST:event_jTextFieldPayAmoutKeyReleased
-
     private void jLabelDoAddReceiptNoteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDoAddReceiptNoteMouseClicked
         if (getProviderId() == 0) {
             JOptionPane.showMessageDialog(this, "Chưa chọn nhà cung cấp!");
@@ -428,7 +387,7 @@ public class JPanelImportMaterial extends javax.swing.JPanel {
         int check = JOptionPane.showConfirmDialog(this, "Hãy kiểm tra lại thông tin trước khi lập phiếu!");
         if (check == JOptionPane.YES_OPTION) {
             String date = CDateTime.getInstance().getDate().toString();
-            MReceiptNote mReceiptNote = new MReceiptNote(this.getProviderId(), date, getTotalPriceImport(), new Float(jTextFieldPayAmout.getText()));
+            MReceiptNote mReceiptNote = new MReceiptNote(this.getProviderId(), date, getTotalPriceImport(), MainFrame.getInstance().getStaff().getId());
             try {
                 mReceiptNote.insert();
                 mReceiptNote = MReceiptNote.getLastReceiptNote();
@@ -443,7 +402,6 @@ public class JPanelImportMaterial extends javax.swing.JPanel {
                 params.put("providerName", getProviderName());
                 params.put("staffName", "Nguyễn Cao Cường");
                 params.put("totalMoney", new Float(jLabelTotalPriceImport.getText()));
-                params.put("payAmount", new Float(jTextFieldPayAmout.getText()));
                 ReportResources.showReport(ReportResources.RECEIPT_NOTE, params);
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -490,14 +448,7 @@ public class JPanelImportMaterial extends javax.swing.JPanel {
         return totalPriceImport;
     }
     public void setJLabelTotalPriceImport(){
-        if(jTextFieldPayAmout.getText().isEmpty()) return;
         jLabelTotalPriceImport.setText(CString.floatToString(getTotalPriceImport()));
-        try {
-            jLabelDoubt.setText(CString.floatToString(getTotalPriceImport() - new Float(jTextFieldPayAmout.getText())));
-        } catch (NumberFormatException e) {
-            jTextFieldPayAmout.setText("0");
-            JOptionPane.showMessageDialog(this, "Chỉ được phép nhập số!");
-        }
     }
 
 
@@ -508,11 +459,8 @@ public class JPanelImportMaterial extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabelDoAddReceiptNote;
-    private javax.swing.JLabel jLabelDoubt;
     private javax.swing.JLabel jLabelProviderName;
     private javax.swing.JLabel jLabelTotalPriceImport;
     private javax.swing.JPanel jPanel1;
@@ -527,6 +475,5 @@ public class JPanelImportMaterial extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextFieldFilterMaterial;
-    private javax.swing.JTextField jTextFieldPayAmout;
     // End of variables declaration//GEN-END:variables
 }

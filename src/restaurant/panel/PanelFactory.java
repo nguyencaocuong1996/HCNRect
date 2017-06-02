@@ -19,6 +19,7 @@ import restaurant.panel.report.JPanelReportDetails;
 import restaurant.panel.report.JPanelReportEndOfDay;
 import restaurant.panel.staff.JPanelManagementStaff;
 import restaurant.panel.transaction.bill.JPanelListBill;
+import restaurant.panel.transaction.receipt.JPanelListReceipt;
 /**
  *
  * @author WINDNCC
@@ -35,6 +36,7 @@ public class PanelFactory {
     private static JPanelHeader headerImportMaterial;
     private static JPanelHeader headerManageStaff;
     private static JPanelHeader headerListBill;
+    private static JPanelHeader headerListReceipt;
     private static JPanelWelcome overview;
     private static JPanelSidebar sidebar;
     private static JPanelManagementDish managementDish;
@@ -44,6 +46,7 @@ public class PanelFactory {
     private static JPanelReportDetails reportDetails;
     private static JPanelManagementStaff manageStaff;
     private static JPanelListBill listBill;
+    private static JPanelListReceipt listReciept;
     public class ID{
             public static final int SIDEBAR = 1;
             //content
@@ -58,6 +61,7 @@ public class PanelFactory {
             public static final int REPORT_DETAILS = 152;
             public static final int MANAGE_STAFF = 161;
             public static final int TRANS_BILL = 171;
+            public static final int TRANS_RECEIPT = 172;
             //header
             public static final int HEADER_OVERVIEW = 211;
             public static final int HEADER_ORDER_PICK_TABLE = 221;
@@ -185,6 +189,16 @@ public class PanelFactory {
             case ID.TRANS_BILL:
                 listBill = JPanelListBill.getInstance();
                 jp = listBill;
+                break;
+            case ID.HEADER_TRANS_RECEIPT_NOTE:
+                if (headerListReceipt == null) {
+                    headerListReceipt = new JPanelHeader("Lịch sử nhập hàng", IconResources.ORDER);
+                }
+                jp = headerListReceipt;
+                break;
+            case ID.TRANS_RECEIPT:
+                listReciept = JPanelListReceipt.getInstance();
+                jp = listReciept;
                 break;
             //#Transaction
             default:
