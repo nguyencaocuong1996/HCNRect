@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d3af1413-5d06-4a1e-bd0c-c84d4fa1990d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="viDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sqlDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="year" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+hd.MaKH, kh.HoTenKH, SUM(TriGiaThuc) as TongChi FROM hoa_don AS hd
+INNER JOIN khach_hang as kh ON kh.MaKH = hd.MaKH
+WHERE YEAR(hd.NgayLapHD) = $P{year}
+GROUP BY MaKH
+ORDER BY TongChi DESC
+LIMIT 0,10]]>
+	</queryString>
+	<field name="MaKH" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="HoTenKH" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TongChi" class="java.lang.Double"/>
+	<variable name="TongChi_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{TongChi}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="21" y="12" width="517" height="44" uuid="f72f2cb1-41b5-4772-9594-649061b9ba0a"/>
+				<textElement>
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Top 10 khách hàng chi tiêu nhiều nhất năm]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="36" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="44" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="b71e7900-b328-422d-b796-f782f5c223ce"/>
+				<text><![CDATA[Mã khách hàng]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="112" y="0" width="220" height="20" uuid="945cf482-c6c8-488c-8983-e530505c6b7b"/>
+				<text><![CDATA[Họ tên khách hàng]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="345" y="2" width="210" height="20" uuid="20cdd14b-f3c1-4e80-b731-6ea9173e05c4"/>
+				<text><![CDATA[Tổng chi]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="e14471f0-43cb-4ee8-86c7-52d8b15f0a70"/>
+				<textFieldExpression><![CDATA[$F{MaKH}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="112" y="0" width="220" height="20" uuid="180f5aa3-6946-4cd7-aff9-e006e88f56a1"/>
+				<textFieldExpression><![CDATA[$F{HoTenKH}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="345" y="0" width="210" height="20" uuid="74a61044-86cd-48f5-92ca-b70e0ab27b9b"/>
+				<textFieldExpression><![CDATA[$F{TongChi}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="234" splitType="Stretch">
+			<pieChart>
+				<chart>
+					<reportElement x="0" y="0" width="555" height="198" uuid="ba9cda6d-221a-4f37-875e-d255798993b5"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<keyExpression><![CDATA[$F{HoTenKH}]]></keyExpression>
+					<valueExpression><![CDATA[$F{TongChi}]]></valueExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+			<staticText>
+				<reportElement x="31" y="214" width="386" height="20" uuid="a64666e4-a02d-406a-851f-3b740e2fae16"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Tổng chi của 10 khách hàng chi tiêu nhiều nhất năm: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="417" y="214" width="138" height="20" uuid="812bfcb6-14c5-4fe4-a72b-06519164e3c8"/>
+				<textFieldExpression><![CDATA[$V{TongChi_1}.longValue()]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

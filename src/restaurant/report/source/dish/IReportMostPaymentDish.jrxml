@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="17c12f5f-c249-469e-b37d-8ea3192fa439">
+	<property name="ireport.zoom" value="0.75"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT ma.MaMA, ma.TenMA, (COUNT(cthd.SoLuong) * ma.GiaMa) AS TongThu 
+FROM chi_tiet_hoa_don as cthd
+INNER JOIN mon_an AS ma ON ma.MaMA = cthd.MaMA
+GROUP BY ma.MaMA
+LIMIT 0,10]]>
+	</queryString>
+	<field name="MaMA" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TenMA" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TongThu" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="36" y="10" width="469" height="40" uuid="95b29979-f2dd-4394-9f63-75085205a6af"/>
+				<textElement textAlignment="Justified">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Top 10 món ăn cho doanh thu cao nhất]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="47" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="e2eaf5ef-3ebc-4d63-a2f4-51fd7fbc95c6"/>
+				<text><![CDATA[MaMA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="117" y="2" width="208" height="20" uuid="24af5efe-b63e-4c05-aa71-995c2a887801"/>
+				<text><![CDATA[TenMA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="396" y="1" width="100" height="20" uuid="1ab5ff0b-5816-444c-91a3-51fc7a2d6aa9"/>
+				<text><![CDATA[TongThu]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="498574cf-4dc8-4814-923e-18c4afc904cb"/>
+				<textFieldExpression><![CDATA[$F{MaMA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="117" y="0" width="208" height="20" uuid="c1c4901a-be12-4e57-858e-31064cc3b6e9"/>
+				<textFieldExpression><![CDATA[$F{TenMA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="396" y="3" width="100" height="20" uuid="1591c6d9-efe1-4db9-a048-9eecd3cb0e93"/>
+				<textFieldExpression><![CDATA[$F{TongThu}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="176" splitType="Stretch">
+			<stackedBarChart>
+				<chart>
+					<reportElement x="0" y="0" width="555" height="158" uuid="01c0d8a7-de84-47b6-b59b-f10a004f8ad5"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Top 10 món ăn có doanh thu cao nhất"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{MaMA}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{TongThu}]]></valueExpression>
+						<labelExpression><![CDATA[$F{TenMA}]]></labelExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</stackedBarChart>
+		</band>
+	</summary>
+</jasperReport>

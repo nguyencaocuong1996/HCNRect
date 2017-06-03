@@ -27,6 +27,8 @@ public class ReportResources {
     public static final String RECEIVE_RANGE = ReportResources.class.getResource("source/details/IReportReceiveRange.jrxml").toString().substring(6);
     public static final String RECEIPT_NOTE = ReportResources.class.getResource("source/IReportReceiptNote.jrxml").toString().substring(6);
     public static final String RP_REVIEW_BILL = ReportResources.class.getResource("source/IReportReviewPayment.jrxml").toString().substring(6);
+    public static final String MOST_PAYMENT_CUSTOMER_MONTH = ReportResources.class.getResource("source/details/customer/IReportMostPaymentCustomer.jrxml").toString().substring(6);
+    public static final String MOST_USUALLY_CUSTOMER_MONTH = ReportResources.class.getResource("source/details/customer/IReportMostUsuallyCustomer.jrxml").toString().substring(6);
 //    public static final String DISH_RANGE = ReportResources.class.getResource("source/eod/IReportDetailDishRange.jrxml").toString().substring(6);
     public static void showReport(String url, Map<String, Object> params) throws JRException
     {
