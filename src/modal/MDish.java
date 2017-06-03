@@ -18,6 +18,7 @@ public class MDish extends Model{
     private String name;
     private Float price;
     private String imageUrl;
+    protected int menuID;
 
     public MDish(int id){
         this.id = id;
@@ -30,6 +31,13 @@ public class MDish extends Model{
         this.imageUrl = imageUrl;
     }
     
+    public MDish(String name, Float price, String imageUrl, int menuID) {
+        this.name = name;
+        this.price = price;
+        this.imageUrl = imageUrl;
+        this.menuID = menuID;                
+    }
+    
     public MDish(String name, Float price, String imageUrl) {
         this.name = name;
         this.price = price;
@@ -38,6 +46,14 @@ public class MDish extends Model{
     
     public int getId() {
         return id;
+    }
+    
+    public int getMenuID(){
+        return menuID;
+    }
+    
+    public void setMenuID(int menuID){
+        this.menuID = menuID;
     }
 
     public void setId(int id) {
@@ -85,11 +101,12 @@ public class MDish extends Model{
     }
 
     @Override
-    void insert() throws SQLException{
+    public void insert() throws SQLException{
         insertData = new ModalData();
         insertData.put("TenMA", this.getName());
         insertData.put("GiaMA", this.getPrice());
         insertData.put("DiaChiAnhMA", this.getImageUrl());
+        insertData.put("MaTD", this.getMenuID());
         Database.insert(getTableName(), insertData);
     }
 

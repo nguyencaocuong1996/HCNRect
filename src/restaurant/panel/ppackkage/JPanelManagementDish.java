@@ -5,15 +5,22 @@
  */
 package restaurant.panel.ppackkage;
 
+import core.ComboboxItem;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -22,17 +29,25 @@ import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import modal.MDish;
 import view.VDish;
+import view.VMenu;
 import view.ViewItem;
 
 public class JPanelManagementDish extends javax.swing.JPanel {
     protected static JPanelManagementDish instance;
     protected VDish listDish;
+    VMenu vMenu;
+    String imageURL = null;
     protected HashMap<Integer, JPanelDishRowItem> listJPDRI = new HashMap<>();
+    protected HashMap<Integer, ComboboxItem> listMenu = new HashMap<>();
     public JPanelDishRowItem currentJPDRI;
     public JPanelManagementDish() {
         initComponents();
         jDialogEditDish.setLocationRelativeTo(this);
         jDialogAddDish.setLocationRelativeTo(this);
+        customInit();
+    }
+    
+    private void customInit(){
         listDish = VDish.getAllDish();
         Iterator i = listDish.getData().iterator();
         int count = 0;
@@ -62,8 +77,24 @@ public class JPanelManagementDish extends javax.swing.JPanel {
         };
         int height = listDish.getData().size() * 58;
         jPanelTableContent.setPreferredSize(new Dimension(780, height));
-        
+        initCustomComponents();
     }
+    
+    private void initCustomComponents(){       
+        ArrayList<ComboboxItem> listCI = new ArrayList<>();
+        try {
+            vMenu = VMenu.getAllMenu();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }      
+        vMenu.getData().forEach((t) -> {
+            String name = (String)t.get("TenTD");
+            int id = ((Long)t.get("MaTD")).intValue();
+            listMenu.put(id, new ComboboxItem(name, id));
+            jComboBoxDishMenu.addItem(listMenu.get(id));           
+        });
+    }
+    
     private void filter(){
         jPanelTableContent.removeAll();
         listDish.filter(0, jTextFieldFilterName.getText());
@@ -128,7 +159,10 @@ public class JPanelManagementDish extends javax.swing.JPanel {
         jLabel16 = new javax.swing.JLabel();
         jLabelDishImageAdd = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jTextFieldDishNoteAdd = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextAreaDishNoteAdd = new javax.swing.JTextArea();
+        jLabel18 = new javax.swing.JLabel();
+        jComboBoxDishMenu = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextFieldFilterName = new javax.swing.JTextField();
@@ -261,8 +295,8 @@ public class JPanelManagementDish extends javax.swing.JPanel {
                 .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jDialogAddDish.setMaximumSize(new java.awt.Dimension(477, 440));
-        jDialogAddDish.setMinimumSize(new java.awt.Dimension(477, 440));
+        jDialogAddDish.setMaximumSize(new java.awt.Dimension(495, 525));
+        jDialogAddDish.setMinimumSize(new java.awt.Dimension(495, 525));
 
         jPanel7.setBackground(new java.awt.Color(147, 193, 120));
         jPanel7.setPreferredSize(new java.awt.Dimension(400, 60));
@@ -278,7 +312,7 @@ public class JPanelManagementDish extends javax.swing.JPanel {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addComponent(jLabel15)
-                .addContainerGap(335, Short.MAX_VALUE))
+                .addContainerGap(353, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -343,9 +377,17 @@ public class JPanelManagementDish extends javax.swing.JPanel {
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("Ghi chú:");
 
-        jTextFieldDishNoteAdd.addActionListener(new java.awt.event.ActionListener() {
+        jTextAreaDishNoteAdd.setColumns(20);
+        jTextAreaDishNoteAdd.setRows(5);
+        jScrollPane2.setViewportView(jTextAreaDishNoteAdd);
+
+        jLabel18.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setText("Thực đơn:");
+
+        jComboBoxDishMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldDishNoteAddActionPerformed(evt);
+                jComboBoxDishMenuActionPerformed(evt);
             }
         });
 
@@ -361,19 +403,21 @@ public class JPanelManagementDish extends javax.swing.JPanel {
                             .addComponent(jLabel9)
                             .addComponent(jLabel13)
                             .addComponent(jLabel16)
-                            .addComponent(jLabel17))
+                            .addComponent(jLabel17)
+                            .addComponent(jLabel18))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabelDishImageAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextFieldDishNoteAdd, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldDishNameAdd, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldDishPriceAdd, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)))
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jComboBoxDishMenu, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabelDishImageAdd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextFieldDishNameAdd)
+                            .addComponent(jTextFieldDishPriceAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2)))
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
+                        .addGap(61, 61, 61)
                         .addComponent(jLabelAdd)
-                        .addGap(147, 147, 147)
+                        .addGap(156, 156, 156)
                         .addComponent(jLabelCancel1)))
-                .addContainerGap(166, Short.MAX_VALUE))
+                .addContainerGap(167, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -391,21 +435,25 @@ public class JPanelManagementDish extends javax.swing.JPanel {
                     .addComponent(jLabel16)
                     .addComponent(jLabelDishImageAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel17)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldDishNoteAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel17))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                    .addComponent(jLabel18)
+                    .addComponent(jComboBoxDishMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelAdd)
                     .addComponent(jLabelCancel1))
-                .addGap(22, 22, 22))
+                .addGap(63, 63, 63))
         );
 
         javax.swing.GroupLayout jDialogAddDishLayout = new javax.swing.GroupLayout(jDialogAddDish.getContentPane());
         jDialogAddDish.getContentPane().setLayout(jDialogAddDishLayout);
         jDialogAddDishLayout.setHorizontalGroup(
             jDialogAddDishLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
+            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE)
             .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jDialogAddDishLayout.setVerticalGroup(
@@ -585,6 +633,31 @@ public class JPanelManagementDish extends javax.swing.JPanel {
 
     private void jLabelAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAddMouseClicked
         // TODO add your handling code here:
+        try {
+            String dishName = jTextFieldDishNameAdd.getText();
+            int menuID = (int)((ComboboxItem)(jComboBoxDishMenu.getSelectedItem())).getValue();
+            Float price = Float.parseFloat(jTextFieldDishPriceAdd.getText());
+            //String dishURLImage = jLabelDishImageAdd.getIcon().toString();
+            System.out.println(imageURL);
+            MDish mDish = new MDish(dishName, price , imageURL, menuID);
+            mDish.insert();
+            jDialogAddDish.setVisible(false);
+
+        } catch (NumberFormatException e) {
+           // JOptionPane.showMessageDialog(this, "Có lỗi xảy ra! Vui lòng kiểm tra lại kiểu dữ liệu!");
+            e.printStackTrace();
+        } catch (SQLException ex) {
+            //JOptionPane.showMessageDialog(this, "Có lỗi xảy ra! Lỗi database!");
+            ex.printStackTrace();
+        }
+
+        jPanelTableContent.removeAll();
+        
+        int height = vMenu.getFilterData().size() * 58 + 58;
+        jPanelTableContent.setPreferredSize(new Dimension(780, height));
+        customInit();
+        this.revalidate();
+        this.repaint();
     }//GEN-LAST:event_jLabelAddMouseClicked
 
     private void jTextFieldDishNameAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDishNameAddActionPerformed
@@ -595,10 +668,6 @@ public class JPanelManagementDish extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldDishPriceAddActionPerformed
 
-    private void jTextFieldDishNoteAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDishNoteAddActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldDishNoteAddActionPerformed
-
     public ImageIcon ResizeImage(String filePath){
         ImageIcon imgIcon = new ImageIcon(filePath);
         Image img = imgIcon.getImage();
@@ -606,6 +675,15 @@ public class JPanelManagementDish extends javax.swing.JPanel {
         ImageIcon image = new ImageIcon(newImg);
         return image;
     }
+    
+    public ImageIcon ResizeImageToSave(String filePath){
+        ImageIcon imgIcon = new ImageIcon(filePath);
+        Image img = imgIcon.getImage();
+        Image newImg = img.getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+        ImageIcon image = new ImageIcon(newImg);
+        return image;
+    }
+    
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         // TODO add your handling code here:
         jDialogAddDish.setVisible(true);
@@ -613,6 +691,7 @@ public class JPanelManagementDish extends javax.swing.JPanel {
 
     private void jLabelDishImageAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDishImageAddMouseClicked
         // TODO add your handling code here:
+        BufferedImage image = null;
         JFileChooser file = new JFileChooser();
         file.setCurrentDirectory(new File(System.getProperty("user.home")));
         FileNameExtensionFilter filter = new FileNameExtensionFilter("*.Images", "jpg","png","jpeg","gif");
@@ -620,14 +699,35 @@ public class JPanelManagementDish extends javax.swing.JPanel {
         int result = file.showSaveDialog(null);
         if(result == JFileChooser.APPROVE_OPTION){
             File selectedFile = file.getSelectedFile();
+            imageURL = selectedFile.getName();
+            image = new BufferedImage(120, 120, BufferedImage.TYPE_INT_ARGB);
+            try {
+                image = ImageIO.read(selectedFile);
+            } catch (IOException ex) {
+                Logger.getLogger(JPanelManagementDish.class.getName()).log(Level.SEVERE, null, ex);
+            }
             String path = selectedFile.getAbsolutePath();
             jLabelDishImageAdd.setIcon(ResizeImage(path));
             jLabelDishImageAdd.setText("");
         }
+        try{
+            File f = new File("src/assets/images/dishs/"+imageURL);  //output file path
+            System.out.println(imageURL);
+            ImageIO.write(image, "jpg", f);
+            System.out.println("Writing complete.");
+        }catch(IOException e){
+            System.out.println("Error: "+e);
+        }
     }//GEN-LAST:event_jLabelDishImageAddMouseClicked
 
+    private void jComboBoxDishMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDishMenuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxDishMenuActionPerformed
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<ComboboxItem> jComboBoxDishMenu;
     private javax.swing.JDialog jDialogAddDish;
     private javax.swing.JDialog jDialogEditDish;
     private javax.swing.JLabel jLabel1;
@@ -637,6 +737,7 @@ public class JPanelManagementDish extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -658,9 +759,10 @@ public class JPanelManagementDish extends javax.swing.JPanel {
     private javax.swing.JPanel jPanelTableContent;
     private javax.swing.JPanel jPanelTableHeader;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextAreaDishNoteAdd;
     private javax.swing.JTextField jTextFieldDishNameAdd;
     private javax.swing.JTextField jTextFieldDishNameEdit;
-    private javax.swing.JTextField jTextFieldDishNoteAdd;
     private javax.swing.JTextField jTextFieldDishPriceAdd;
     private javax.swing.JTextField jTextFieldDishPriceEdit;
     private javax.swing.JTextField jTextFieldFilterName;
