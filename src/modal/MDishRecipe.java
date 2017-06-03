@@ -20,6 +20,9 @@ public class MDishRecipe extends Model{
     protected float qty;
     protected String note;
 
+    public MDishRecipe() {
+    }
+    
     public MDishRecipe(int dishId, int materialId, float qty, String note) {
         this.dishId = dishId;
         this.materialId = materialId;
@@ -80,14 +83,25 @@ public class MDishRecipe extends Model{
     public void setNote(String note) {
         this.note = note;
     }
-
+    public boolean isExist(){
+        String sql = "SELECT MaNL, MaMA FROM cong_thuc WHERE MaNL = "+ this.materialId + " AND MaMA = " + this.dishId;
+        try {
+            ModalData md = database.Database.modalSelect(sql);
+            if (!md.isEmpty()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            return false;
+        }
+        
+        return false;
+    }
     @Override
-    void insert() throws SQLException{
+    public void insert() throws SQLException{
         insertData = new ModalData();
         insertData.put("MaMA", this.getDishId());
         insertData.put("MaNL", this.getMaterialId());
         insertData.put("LuongCan", this.getQty());
-        insertData.put("GhiChu", this.getNote());
         Database.insert(getTableName(), insertData);
     }
 
@@ -95,7 +109,6 @@ public class MDishRecipe extends Model{
     public void update() throws SQLException{
         updateData = new ModalData();
         updateData.put("LuongCan", this.getQty());
-        updateData.put("GhiChu", this.getNote());
         try {
             Database.update(getTableName(), updateData, "MaNL = " + this.getMaterialId() + " AND MaMA = " + this.getDishId());
         } catch (SQLException e) {
@@ -105,12 +118,7 @@ public class MDishRecipe extends Model{
     }
     @Override
     public void delete() throws SQLException{
-        try {
             Database.delete(getTableName(), "MaMA = " + getDishId() + " AND MaNL = " + getMaterialId());
-        } catch (SQLException e) {
-            throw e;
-        }
-        
     }
     @Override
     String getTableName() {

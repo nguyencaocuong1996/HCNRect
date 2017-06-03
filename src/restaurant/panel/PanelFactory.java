@@ -15,6 +15,7 @@ import restaurant.panel.order.JPanelOrder;
 import restaurant.panel.ppackkage.JPanelManagementDish;
 import restaurant.panel.ppackkage.JPanelManagementMaterial;
 import restaurant.panel.ppackkage.JPanelManagementTable;
+import restaurant.panel.ppackkage.recipe.JPanelManagementRecipe;
 import restaurant.panel.provider.debt.JPanelManagementReceiptVoucherProvider;
 import restaurant.panel.report.JPanelReportDetails;
 import restaurant.panel.report.JPanelReportEndOfDay;
@@ -41,6 +42,7 @@ public class PanelFactory {
     private static JPanelHeader headerListReceipt;
     private static JPanelHeader headerManagementCoupon;
     private static JPanelHeader headerManagementRVP;
+    private static JPanelHeader headerManagementRecipe;
     private static JPanelWelcome overview;
     private static JPanelSidebar sidebar;
     private static JPanelManagementDish managementDish;
@@ -58,6 +60,7 @@ public class PanelFactory {
             public static final int PACKAGE_DISH = 141;
             public static final int PACKAGE_TABLE = 142;
             public static final int PACKAGE_MATERIAL = 143;
+            public static final int PACKAGE_DISH_RECIPE = 144;
             public static final int REPORT_END_OF_DAY = 151;
             public static final int REPORT_DETAILS = 152;
             public static final int MANAGE_STAFF = 161;
@@ -74,6 +77,7 @@ public class PanelFactory {
             public static final int HEADER_PACKAGE_DISH = 252;
             public static final int HEADER_PACKAGE_TABLE = 253;
             public static final int HEADER_PACKAGE_IMPORT_MATERIAL = 254;
+            public static final int HEADER_PACKAGE_DISH_RECIPE = 255;
             public static final int HEADER_REPORT = 261;
             public static final int HEADER_MANAGE_STAFF = 271;
             public static final int HEADER_TRANS_BILL = 281;
@@ -168,6 +172,15 @@ public class PanelFactory {
                     managementTable = JPanelManagementTable.getInstance();
                 }
                 jp = managementTable;
+                break;
+            case ID.HEADER_PACKAGE_DISH_RECIPE:
+                if (headerManagementRecipe == null) {
+                    headerManagementRecipe = new JPanelHeader("Cập nhật công thức", IconResources.ORDER_WHITE_X50,ID.PACKAGE_DISH, ID.HEADER_PACKAGE_DISH);
+                }
+                jp = headerManagementRecipe;
+                break;
+            case ID.PACKAGE_DISH_RECIPE:
+                jp = JPanelManagementRecipe.getInstance();
                 break;
             //end package
             //report

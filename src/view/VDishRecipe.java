@@ -15,6 +15,7 @@ public class VDishRecipe extends View{
 
     public VDishRecipe(ViewData vd) {
         this.data = vd;
+        this.filterData = (ViewData) data.clone();
     }
 
     public VDishRecipe() {

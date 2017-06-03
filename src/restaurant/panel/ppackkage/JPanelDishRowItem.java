@@ -6,9 +6,14 @@
 package restaurant.panel.ppackkage;
 import assets.images.ImageResources;
 import java.awt.Color;
+import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import modal.MDish;
+import restaurant.MainFrame;
+import restaurant.panel.PanelFactory;
+import restaurant.panel.ppackkage.recipe.JPanelManagementRecipe;
 
 /**
  *
@@ -39,7 +44,6 @@ public class JPanelDishRowItem extends javax.swing.JPanel {
     public final void customInit(){
         jLabelDishId.setText(this.id + "");
         jLabelDishName.setText("<html><p>" + this.dishName + "</p></html>");
-        jLabelDishMenu.setText(this.menuId + "");
         jLabelDishPrice.setText(this.price + "");
         jLabelDishImage.setIcon(ImageResources.getDishImage(image));
     }
@@ -51,98 +55,78 @@ public class JPanelDishRowItem extends javax.swing.JPanel {
         jLabelDishName = new javax.swing.JLabel();
         jLabelDishPrice = new javax.swing.JLabel();
         jLabelDishImage = new javax.swing.JLabel();
-        jLabelDishMenu = new javax.swing.JLabel();
         jLabelEdit = new javax.swing.JLabel();
         jLabelDelete = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        jLabelShowRecipe = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(760, 57));
         setMinimumSize(new java.awt.Dimension(760, 57));
         setPreferredSize(new java.awt.Dimension(760, 57));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabelDishId.setText("001");
+        add(jLabelDishId, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 59, 35));
 
         jLabelDishName.setText("Thịt xông khói");
+        add(jLabelDishName, new org.netbeans.lib.awtextra.AbsoluteConstraints(79, 11, 198, 35));
 
         jLabelDishPrice.setText("120000000");
+        add(jLabelDishPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 21, 100, -1));
 
         jLabelDishImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/dishs/Mint-drink.jpeg"))); // NOI18N
         jLabelDishImage.setText("jLabel4");
+        jLabelDishImage.setMaximumSize(new java.awt.Dimension(57, 57));
+        jLabelDishImage.setMinimumSize(new java.awt.Dimension(57, 57));
+        jLabelDishImage.setPreferredSize(new java.awt.Dimension(57, 57));
+        add(jLabelDishImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(433, 0, 63, -1));
 
-        jLabelDishMenu.setText("Món chính");
+        jLabelEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_edit_darkgreen_x24.png"))); // NOI18N
+        add(jLabelEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(622, 0, -1, 46));
 
-        jLabelEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_edit_green_x24.png"))); // NOI18N
-
-        jLabelDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_dell_gray_x24.png"))); // NOI18N
+        jLabelDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_delete_dimgray_x32.png"))); // NOI18N
         jLabelDelete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelDeleteMouseClicked(evt);
             }
         });
+        add(jLabelDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(656, 0, -1, 46));
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_dish_recipe_x24.png"))); // NOI18N
-        jLabel8.setText("CT");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelDishId, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(jLabelDishName, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelDishPrice)
-                .addGap(44, 44, 44)
-                .addComponent(jLabelDishImage, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70)
-                .addComponent(jLabelDishMenu)
-                .addGap(42, 42, 42)
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelEdit)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelDelete)
-                .addContainerGap(106, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabelDishImage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(5, 5, 5)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabelDishMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabelDishId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabelDishName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabelDishPrice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelDelete)
-                            .addComponent(jLabelEdit))
-                        .addGap(6, 6, 6)))
-                .addContainerGap())
-        );
+        jLabelShowRecipe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_bill_darkgreen_x32.png"))); // NOI18N
+        jLabelShowRecipe.setText("CT");
+        jLabelShowRecipe.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelShowRecipeMouseClicked(evt);
+            }
+        });
+        add(jLabelShowRecipe, new org.netbeans.lib.awtextra.AbsoluteConstraints(578, 0, 26, 46));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabelDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDeleteMouseClicked
         // TODO add your handling code here:
-         try {
-             MDish mDish = new MDish(id);
+        int check = JOptionPane.showConfirmDialog(this, "Xác nhận xóa món ăn!");
+        if (check == JOptionPane.YES_OPTION) {
+            try {
+            MDish mDish = new MDish(id);
             mDish.delete();
+            JPanelManagementDish.getInstance().getListJPDRI().remove(id);
             JPanelManagementDish.getInstance().getjPanelTableContent().remove(this);
             JPanelManagementDish.getInstance().getjPanelTableContent().revalidate();
             JPanelManagementDish.getInstance().getjPanelTableContent().repaint();
-        } catch (Exception e) {
+            } catch (SQLException e) {
+                e.printStackTrace();
+                 JOptionPane.showMessageDialog(this, "Xóa món ăn thành công!");
+            }
         }
+         
     }//GEN-LAST:event_jLabelDeleteMouseClicked
+
+    private void jLabelShowRecipeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelShowRecipeMouseClicked
+        MDish mDish = new MDish(id);
+        mDish.setName(getDishName());
+        JPanelManagementRecipe.getInstance().setDish(mDish);
+        MainFrame.getInstance().changeContentPanel(PanelFactory.get(PanelFactory.ID.PACKAGE_DISH_RECIPE));
+        MainFrame.getInstance().changeHeaderPanel(PanelFactory.get(PanelFactory.ID.HEADER_PACKAGE_DISH_RECIPE));
+    }//GEN-LAST:event_jLabelShowRecipeMouseClicked
 
     public String getDishName() {
         return dishName;
@@ -189,13 +173,12 @@ public class JPanelDishRowItem extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabelDelete;
     private javax.swing.JLabel jLabelDishId;
     private javax.swing.JLabel jLabelDishImage;
-    private javax.swing.JLabel jLabelDishMenu;
     private javax.swing.JLabel jLabelDishName;
     private javax.swing.JLabel jLabelDishPrice;
     private javax.swing.JLabel jLabelEdit;
+    private javax.swing.JLabel jLabelShowRecipe;
     // End of variables declaration//GEN-END:variables
 }

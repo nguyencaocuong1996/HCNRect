@@ -84,6 +84,10 @@ public class JPanelManagementDish extends javax.swing.JPanel {
     public JPanel getjPanelTableContent() {
         return jPanelTableContent;
     }
+
+    public HashMap<Integer, JPanelDishRowItem> getListJPDRI() {
+        return listJPDRI;
+    }
     
     public static void main(String[] args) {
         JFrame jf = new JFrame("hoho");
@@ -115,11 +119,9 @@ public class JPanelManagementDish extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanelTableContent = new javax.swing.JPanel();
 
-        jDialogEditDish.setMaximumSize(new java.awt.Dimension(477, 300));
         jDialogEditDish.setMinimumSize(new java.awt.Dimension(477, 300));
 
         jPanel5.setBackground(new java.awt.Color(147, 193, 120));
@@ -296,9 +298,6 @@ public class JPanelManagementDish extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel6.setText("Hình ảnh");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel7.setText("Thực đơn");
-
         javax.swing.GroupLayout jPanelTableHeaderLayout = new javax.swing.GroupLayout(jPanelTableHeader);
         jPanelTableHeader.setLayout(jPanelTableHeaderLayout);
         jPanelTableHeaderLayout.setHorizontalGroup(
@@ -308,13 +307,11 @@ public class JPanelManagementDish extends javax.swing.JPanel {
                 .addComponent(jLabel3)
                 .addGap(83, 83, 83)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
+                .addGap(76, 76, 76)
                 .addComponent(jLabel5)
-                .addGap(46, 46, 46)
+                .addGap(116, 116, 116)
                 .addComponent(jLabel6)
-                .addGap(28, 28, 28)
-                .addComponent(jLabel7)
-                .addContainerGap(235, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelTableHeaderLayout.setVerticalGroup(
             jPanelTableHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -324,8 +321,7 @@ public class JPanelManagementDish extends javax.swing.JPanel {
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel6))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -347,7 +343,7 @@ public class JPanelManagementDish extends javax.swing.JPanel {
             .addComponent(jPanelTableHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 10, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -418,7 +414,6 @@ public class JPanelManagementDish extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabelCancel;
     private javax.swing.JLabel jLabelEdit;
