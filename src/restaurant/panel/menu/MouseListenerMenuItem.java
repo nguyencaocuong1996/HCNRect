@@ -30,7 +30,7 @@ public class MouseListenerMenuItem extends MouseAdapter{
             JPanel jpTarget = PanelFactory.get(targetPanelId);
             JPanel jpHeaderTarget = PanelFactory.get(targetHeaderPanelId);
             JPanelMenuItem jpMI = (JPanelMenuItem) e.getSource();
-            if (!jpMI.isActive()) {
+            if (!jpMI.isActive()) {               
                 JPanelMenu.getInstance().getListJPanelMenuItem().forEach((t) -> {
                         if(t.isActive()){
                             t.setActive(false);
