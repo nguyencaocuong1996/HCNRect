@@ -116,6 +116,7 @@ public class JPanelDishRowItem extends javax.swing.JPanel {
                 e.printStackTrace();
                  JOptionPane.showMessageDialog(this, "Xóa món ăn thành công!");
             }
+           
         }
          
     }//GEN-LAST:event_jLabelDeleteMouseClicked
