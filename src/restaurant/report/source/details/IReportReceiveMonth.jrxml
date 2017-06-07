@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b855da41-0d28-43f0-8370-33cf08ea7bab">
 	<property name="ireport.zoom" value="1.3310000000000004"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="144"/>
+	<property name="ireport.y" value="657"/>
 	<subDataset name="dtthang" uuid="2149bc67-0098-4a8a-8b6a-291f6dad0563">
 		<parameter name="nam" class="java.lang.String">
 			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -72,7 +72,7 @@ ORDER BY MONTH(hd.NgayLapHD) ASC]]>
 					<text><![CDATA[Ngày]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="368" y="1" width="177" height="20" uuid="0ffef42d-6a9f-489c-bc1e-a2e3a6e48496"/>
+					<reportElement x="327" y="1" width="218" height="20" uuid="0ffef42d-6a9f-489c-bc1e-a2e3a6e48496"/>
 					<textElement>
 						<font fontName="DejaVu Sans" isBold="true"/>
 					</textElement>
@@ -83,14 +83,14 @@ ORDER BY MONTH(hd.NgayLapHD) ASC]]>
 		<groupFooter>
 			<band height="44">
 				<textField>
-					<reportElement x="368" y="11" width="164" height="20" uuid="102a21dc-9d65-41e1-93c6-0f37ce544b11"/>
+					<reportElement x="327" y="11" width="282" height="20" uuid="102a21dc-9d65-41e1-93c6-0f37ce544b11"/>
 					<textElement>
 						<font fontName="DejaVu Sans" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$V{TongTien_1}.longValue() + " VNĐ"]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="119" y="11" width="249" height="20" uuid="44d611df-e2fe-427c-af9a-1b49ac9ab14c"/>
+					<reportElement x="119" y="11" width="208" height="20" uuid="44d611df-e2fe-427c-af9a-1b49ac9ab14c"/>
 					<textElement textAlignment="Right">
 						<font fontName="DejaVu Sans" size="10" isBold="true"/>
 					</textElement>
@@ -138,14 +138,14 @@ ORDER BY MONTH(hd.NgayLapHD) ASC]]>
 			<staticText>
 				<reportElement x="15" y="32" width="455" height="20" uuid="eb90a47b-77f6-41a1-8914-dacec7a1d45f"/>
 				<textElement>
-					<font fontName="DejaVu Sans" size="14" isBold="true"/>
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Nhà hàng: Rectangle]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="15" y="72" width="225" height="20" uuid="d33eec55-fec5-435a-907c-ba2eb5e72cfc"/>
 				<textElement>
-					<font fontName="DejaVu Sans" size="14" isBold="true"/>
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Điện thoại: 0166696969]]></text>
 			</staticText>
@@ -193,10 +193,10 @@ ORDER BY MONTH(hd.NgayLapHD) ASC]]>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="16" splitType="Stretch"/>
+		<band height="34" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="16" splitType="Stretch"/>
+		<band height="45" splitType="Stretch"/>
 	</columnHeader>
 	<detail>
 		<band height="36" splitType="Stretch">
@@ -208,7 +208,7 @@ ORDER BY MONTH(hd.NgayLapHD) ASC]]>
 				<textFieldExpression><![CDATA[$F{ngay}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="368" y="3" width="177" height="20" uuid="f56d0bf8-8134-4a5b-ab6c-ba01a6a4f467"/>
+				<reportElement x="327" y="3" width="218" height="20" uuid="f56d0bf8-8134-4a5b-ab6c-ba01a6a4f467"/>
 				<textElement>
 					<font fontName="DejaVu Sans"/>
 				</textElement>
