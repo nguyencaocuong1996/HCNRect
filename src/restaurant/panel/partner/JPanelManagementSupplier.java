@@ -54,7 +54,7 @@ public class JPanelManagementSupplier extends javax.swing.JPanel {
         jLabel1.setPreferredSize(new java.awt.Dimension(32, 32));
 
         jLabelAddStaff.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_management_add_x32.png"))); // NOI18N
-        jLabelAddStaff.setText("Thêm Nhân Viên");
+        jLabelAddStaff.setText("Thêm Nhà Cung Cấp");
         jLabelAddStaff.setPreferredSize(new java.awt.Dimension(100, 32));
         jLabelAddStaff.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
