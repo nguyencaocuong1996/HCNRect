@@ -31,9 +31,15 @@ public class MainFrame extends javax.swing.JFrame {
     private MUser user;
     private MStaff staff;
     private MDepartment department;
+    private JPanel currentJPHeader;
+    private JPanel currentJPContent;
+    private JPanel backJPHeader;
+    private JPanel backJPContent;
     public MainFrame() {
         initComponents();
         UIManager.put("OptionPane.okButtonText", "Xác nhận");
+        setCurrentJPContent(PanelFactory.get(PanelFactory.ID.OVERVIEW));
+        setCurrentJPHeader(PanelFactory.get(PanelFactory.ID.HEADER_OVERVIEW));
         jPanelHeader.add(PanelFactory.get(PanelFactory.ID.HEADER_OVERVIEW));
         jPanelContent.add(PanelFactory.get(PanelFactory.ID.OVERVIEW));
         JPanelSideBar.add(sidebar);
@@ -49,7 +55,15 @@ public class MainFrame extends javax.swing.JFrame {
         Timer t = new Timer(1000, updateClockAction);
         t.start();
     }
+    public void back(){
+        if (this.backJPContent != null && this.backJPHeader != null) {
+            changeContentPanel(backJPContent);
+            changeHeaderPanel(backJPHeader);
+        }
+    }
     public void changeContentPanel(JPanel targetPanel){
+        setBackJPContent(currentJPContent);
+        setCurrentJPContent(targetPanel);
         jPanelContent.removeAll();
         targetPanel.setVisible(true);
         jPanelContent.add(targetPanel);
@@ -57,6 +71,8 @@ public class MainFrame extends javax.swing.JFrame {
         jPanelContent.repaint();
     }
     public void changeHeaderPanel(JPanel targetPanel){
+        setBackJPHeader(currentJPHeader);
+        setCurrentJPHeader(targetPanel);
         jPanelHeader.removeAll();
         jPanelHeader.add(targetPanel);
         jPanelHeader.revalidate();
@@ -110,6 +126,38 @@ public class MainFrame extends javax.swing.JFrame {
         jLabelDepartment.setText(department.getName());
         System.out.println(department.getId() + department.getName());
         this.department = department;
+    }
+
+    public JPanel getCurrentJPHeader() {
+        return currentJPHeader;
+    }
+
+    public final void setCurrentJPHeader(JPanel currentJPHeader) {
+        this.currentJPHeader = currentJPHeader;
+    }
+
+    public JPanel getCurrentJPContent() {
+        return currentJPContent;
+    }
+
+    public final void setCurrentJPContent(JPanel currentJPContent) {
+        this.currentJPContent = currentJPContent;
+    }
+
+    public JPanel getBackJPHeader() {
+        return backJPHeader;
+    }
+
+    public void setBackJPHeader(JPanel backJPHeader) {
+        this.backJPHeader = backJPHeader;
+    }
+
+    public JPanel getBackJPContent() {
+        return backJPContent;
+    }
+
+    public void setBackJPContent(JPanel backJPContent) {
+        this.backJPContent = backJPContent;
     }
     
     

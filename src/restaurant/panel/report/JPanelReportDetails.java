@@ -8,11 +8,9 @@ package restaurant.panel.report;
 import core.CDateTime;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.HeadlessException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-import javax.swing.ButtonModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -53,6 +51,9 @@ public class JPanelReportDetails extends javax.swing.JPanel {
         jRadioButtonMostUsuallyCustomer.setActionCommand("mostUsuallyCustomer");
         jRadioButtonDishMostPayment.setActionCommand("mostPaymentDish");
         jRadioButtonDishMostUsually.setActionCommand("mostUsuallyDish");
+        jRadioButtonMostStaffBill.setActionCommand("mostStaffBill");
+        jRadioButtonMostUsuallyMaterial.setActionCommand("mostUsuallyMaterial");
+        jRadioButtonLiabilitiesProvider.setActionCommand("liabitiesProvider");
         jRadioButtonByMoth.setActionCommand("month");
         jRadioButtonByYear.setActionCommand("year");
         jRadioButtonByDateRange.setActionCommand("range");
@@ -104,11 +105,12 @@ public class JPanelReportDetails extends javax.swing.JPanel {
                         url = ReportResources.RECEIVE_RANGE;
                         break;
                 }
-                break;
+            break;
+            
             case "payment": 
                 switch(dateType){
                     case "month":
-                        
+                        url = ReportResources.PAYFOR_MOTH;
                         break;
                     case "year":
                         
@@ -117,7 +119,8 @@ public class JPanelReportDetails extends javax.swing.JPanel {
                         
                         break;
                 }
-                break;
+            break;
+            
             case "mostPaymentCustomer":
                 switch(dateType){
                     case "month":
@@ -130,7 +133,8 @@ public class JPanelReportDetails extends javax.swing.JPanel {
                         
                         break;
                 }
-                break;
+            break;
+            
             case "mostUsuallyCustomer":
                 switch(dateType){
                     case "month":
@@ -143,8 +147,65 @@ public class JPanelReportDetails extends javax.swing.JPanel {
                         
                         break;
                 }
-                break;
+            break;
+            
+            case "mostPaymentDish":
+                switch(dateType){
+                    case "month":
+                        url = ReportResources.MOST_PAYMENT_DISH_MONTH;
+                        break;
+                    case "year":
+                        
+                        break;
+                    case "range":
+                        
+                        break;
+                }
+            break;
+            
+            case "mostUsuallyDish":
+                switch(dateType){
+                    case "month":
+                        url = ReportResources.MOST_USUALLY_DISH_MONTH;
+                        break;
+                    case "year":
+                        
+                        break;
+                    case "range":
+                        
+                        break;
+                }
+            break;
+            
+            case "mostUsuallyMaterial":
+                switch(dateType){
+                    case "month":
+                        url = ReportResources.MOST_USUALLY_MATERIAL_MONTH;
+                        break;
+                    case "year":
+                        
+                        break;
+                    case "range":
+                        
+                        break;
+                }
+            break;
+            
+            case "mostStaffBill":
+                switch(dateType){
+                    case "month":
+                        url = ReportResources.MOST_USUALLY_STAFF_BILL_MONTH;
+                        break;
+                    case "year":
+                        
+                        break;
+                    case "range":
+                        
+                        break;
+                }
+            break;
         }
+        System.out.println(url);
         return url;
     }
     public final HashMap<String, Object> getReportParams(String type){
@@ -196,7 +257,9 @@ public class JPanelReportDetails extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jPanelChooseTypeContent = new javax.swing.JPanel();
         jPanelTypeStaff = new javax.swing.JPanel();
+        jRadioButtonMostStaffBill = new javax.swing.JRadioButton();
         jPanelTypeLiabilities = new javax.swing.JPanel();
+        jRadioButtonLiabilitiesProvider = new javax.swing.JRadioButton();
         jPanelTypeRP = new javax.swing.JPanel();
         jRadioButtonReceive = new javax.swing.JRadioButton();
         jRadioButtonPayment = new javax.swing.JRadioButton();
@@ -206,6 +269,8 @@ public class JPanelReportDetails extends javax.swing.JPanel {
         jPanelTypeDish = new javax.swing.JPanel();
         jRadioButtonDishMostPayment = new javax.swing.JRadioButton();
         jRadioButtonDishMostUsually = new javax.swing.JRadioButton();
+        jPanelTypeStock = new javax.swing.JPanel();
+        jRadioButtonMostUsuallyMaterial = new javax.swing.JRadioButton();
         jPanelChooseDate = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -274,8 +339,18 @@ public class JPanelReportDetails extends javax.swing.JPanel {
         });
 
         jRadioButtonStock.setText("Kho");
+        jRadioButtonStock.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jRadioButtonStockMouseReleased(evt);
+            }
+        });
 
         jRadioButtonStaff.setText("Nhân viên");
+        jRadioButtonStaff.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jRadioButtonStaffMouseReleased(evt);
+            }
+        });
 
         jRadioButtonCustomer.setText("Khách hàng");
         jRadioButtonCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -285,6 +360,11 @@ public class JPanelReportDetails extends javax.swing.JPanel {
         });
 
         jRadioButtonLiabilities.setText("Công nợ");
+        jRadioButtonLiabilities.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jRadioButtonLiabilitiesMouseReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelBtnChooseAboutLayout = new javax.swing.GroupLayout(jPanelBtnChooseAbout);
         jPanelBtnChooseAbout.setLayout(jPanelBtnChooseAboutLayout);
@@ -362,28 +442,44 @@ public class JPanelReportDetails extends javax.swing.JPanel {
 
         jPanelChooseTypeContent.setLayout(new javax.swing.OverlayLayout(jPanelChooseTypeContent));
 
+        jRadioButtonMostStaffBill.setText("Nhân viên lập được nhiều hóa đơn nhất");
+
         javax.swing.GroupLayout jPanelTypeStaffLayout = new javax.swing.GroupLayout(jPanelTypeStaff);
         jPanelTypeStaff.setLayout(jPanelTypeStaffLayout);
         jPanelTypeStaffLayout.setHorizontalGroup(
             jPanelTypeStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGroup(jPanelTypeStaffLayout.createSequentialGroup()
+                .addGap(280, 280, 280)
+                .addComponent(jRadioButtonMostStaffBill, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(292, Short.MAX_VALUE))
         );
         jPanelTypeStaffLayout.setVerticalGroup(
             jPanelTypeStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
+            .addGroup(jPanelTypeStaffLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jRadioButtonMostStaffBill)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         jPanelChooseTypeContent.add(jPanelTypeStaff);
+
+        jRadioButtonLiabilitiesProvider.setText("Công nợ nhà cung cấp");
 
         javax.swing.GroupLayout jPanelTypeLiabilitiesLayout = new javax.swing.GroupLayout(jPanelTypeLiabilities);
         jPanelTypeLiabilities.setLayout(jPanelTypeLiabilitiesLayout);
         jPanelTypeLiabilitiesLayout.setHorizontalGroup(
             jPanelTypeLiabilitiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGroup(jPanelTypeLiabilitiesLayout.createSequentialGroup()
+                .addGap(295, 295, 295)
+                .addComponent(jRadioButtonLiabilitiesProvider)
+                .addContainerGap(421, Short.MAX_VALUE))
         );
         jPanelTypeLiabilitiesLayout.setVerticalGroup(
             jPanelTypeLiabilitiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
+            .addGroup(jPanelTypeLiabilitiesLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jRadioButtonLiabilitiesProvider)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         jPanelChooseTypeContent.add(jPanelTypeLiabilities);
@@ -469,6 +565,27 @@ public class JPanelReportDetails extends javax.swing.JPanel {
 
         jPanelChooseTypeContent.add(jPanelTypeDish);
 
+        jRadioButtonMostUsuallyMaterial.setText("Nguyên liệu được sử dụng nhiều nhất");
+
+        javax.swing.GroupLayout jPanelTypeStockLayout = new javax.swing.GroupLayout(jPanelTypeStock);
+        jPanelTypeStock.setLayout(jPanelTypeStockLayout);
+        jPanelTypeStockLayout.setHorizontalGroup(
+            jPanelTypeStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelTypeStockLayout.createSequentialGroup()
+                .addGap(280, 280, 280)
+                .addComponent(jRadioButtonMostUsuallyMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(292, Short.MAX_VALUE))
+        );
+        jPanelTypeStockLayout.setVerticalGroup(
+            jPanelTypeStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelTypeStockLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jRadioButtonMostUsuallyMaterial)
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+
+        jPanelChooseTypeContent.add(jPanelTypeStock);
+
         javax.swing.GroupLayout jPanelChooseTypeLayout = new javax.swing.GroupLayout(jPanelChooseType);
         jPanelChooseType.setLayout(jPanelChooseTypeLayout);
         jPanelChooseTypeLayout.setHorizontalGroup(
@@ -513,6 +630,7 @@ public class JPanelReportDetails extends javax.swing.JPanel {
                 jLabelPickDateMouseClicked(evt);
             }
         });
+        jLabelPickDateTo.setText(CDateTime.getInstance().getDate().toDMY());
 
         jRadioButtonByMoth.setText("Theo tháng");
 
@@ -561,7 +679,7 @@ public class JPanelReportDetails extends javax.swing.JPanel {
                     .addGroup(jPanel12Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jLabelPickDateTo, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(253, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -579,6 +697,7 @@ public class JPanelReportDetails extends javax.swing.JPanel {
         );
 
         jLabelPickDateTo.setVisible(false);
+        jLabelPickDateTo.setText(CDateTime.getInstance().getDate().toDMY());
 
         javax.swing.GroupLayout jPanelChooseDateLayout = new javax.swing.GroupLayout(jPanelChooseDate);
         jPanelChooseDate.setLayout(jPanelChooseDateLayout);
@@ -700,6 +819,7 @@ public class JPanelReportDetails extends javax.swing.JPanel {
         params.put("year", year);
         params.put("sqlDate", this.dateSql);
         params.put("viDate", date);
+        params.put("staffName", MainFrame.getInstance().getStaff().getName());
         try {
             String rpType = buttonGroupReportType.getSelection().getActionCommand();
             String dateType = buttonGroupReportDate.getSelection().getActionCommand();
@@ -709,9 +829,7 @@ public class JPanelReportDetails extends javax.swing.JPanel {
             }
             String rpUrl = getReportUrl(rpType, dateType);
             try {
-                JasperReport jR = JasperCompileManager.compileReport(rpUrl);
-                JasperPrint jP = JasperFillManager.fillReport(jR, params, database.Database.getConnection());
-                JasperViewer.viewReport(jP,false);
+                ReportResources.showReport(rpUrl, params);
             } catch (JRException e) {
                 JOptionPane.showMessageDialog(this, "Có lỗi xảy ra! không thể tạo report.");
                 e.printStackTrace();
@@ -750,8 +868,20 @@ public class JPanelReportDetails extends javax.swing.JPanel {
         SimpleDateFormat sdfSql = new SimpleDateFormat("yyyy-MM-dd");
         this.dateTo = sdf.format(dateChooserDialogTo.getSelectedDate().getTime());
         this.dateSqlTo = sdfSql.format(dateChooserDialogTo.getSelectedDate().getTime());
-        jLabelPickDateTo.setText(date);
+        jLabelPickDateTo.setText(this.dateTo);
     }//GEN-LAST:event_dateChooserDialogToOnCommit
+
+    private void jRadioButtonLiabilitiesMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButtonLiabilitiesMouseReleased
+        changeTypeContent(jPanelTypeLiabilities);
+    }//GEN-LAST:event_jRadioButtonLiabilitiesMouseReleased
+
+    private void jRadioButtonStockMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButtonStockMouseReleased
+        changeTypeContent(jPanelTypeStock);
+    }//GEN-LAST:event_jRadioButtonStockMouseReleased
+
+    private void jRadioButtonStaffMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRadioButtonStaffMouseReleased
+        changeTypeContent(jPanelTypeStaff);
+    }//GEN-LAST:event_jRadioButtonStaffMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -782,6 +912,7 @@ public class JPanelReportDetails extends javax.swing.JPanel {
     private javax.swing.JPanel jPanelTypeLiabilities;
     private javax.swing.JPanel jPanelTypeRP;
     private javax.swing.JPanel jPanelTypeStaff;
+    private javax.swing.JPanel jPanelTypeStock;
     private javax.swing.JRadioButton jRadioButtonByDateRange;
     private javax.swing.JRadioButton jRadioButtonByMoth;
     private javax.swing.JRadioButton jRadioButtonByYear;
@@ -790,8 +921,11 @@ public class JPanelReportDetails extends javax.swing.JPanel {
     private javax.swing.JRadioButton jRadioButtonDishMostPayment;
     private javax.swing.JRadioButton jRadioButtonDishMostUsually;
     private javax.swing.JRadioButton jRadioButtonLiabilities;
+    private javax.swing.JRadioButton jRadioButtonLiabilitiesProvider;
     private javax.swing.JRadioButton jRadioButtonMostPaymentCustomer;
+    private javax.swing.JRadioButton jRadioButtonMostStaffBill;
     private javax.swing.JRadioButton jRadioButtonMostUsuallyCustomer;
+    private javax.swing.JRadioButton jRadioButtonMostUsuallyMaterial;
     private javax.swing.JRadioButton jRadioButtonPayment;
     private javax.swing.JRadioButton jRadioButtonRP;
     private javax.swing.JRadioButton jRadioButtonReceive;

@@ -25,10 +25,16 @@ public class ReportResources {
     public static final String RECEIVE_MOTH = ReportResources.class.getResource("source/details/IReportReceiveMonth.jrxml").toString().substring(6);
     public static final String RECEIVE_YEAR = ReportResources.class.getResource("source/details/IReportReceiveYear.jrxml").toString().substring(6);
     public static final String RECEIVE_RANGE = ReportResources.class.getResource("source/details/IReportReceiveRange.jrxml").toString().substring(6);
+    public static final String PAYFOR_MOTH = ReportResources.class.getResource("source/details/IReportPayForMonth.jrxml").toString().substring(6);
     public static final String RECEIPT_NOTE = ReportResources.class.getResource("source/IReportReceiptNote.jrxml").toString().substring(6);
     public static final String RP_REVIEW_BILL = ReportResources.class.getResource("source/IReportReviewPayment.jrxml").toString().substring(6);
     public static final String MOST_PAYMENT_CUSTOMER_MONTH = ReportResources.class.getResource("source/details/customer/IReportMostPaymentCustomer.jrxml").toString().substring(6);
     public static final String MOST_USUALLY_CUSTOMER_MONTH = ReportResources.class.getResource("source/details/customer/IReportMostUsuallyCustomer.jrxml").toString().substring(6);
+    public static final String MOST_PAYMENT_DISH_MONTH = ReportResources.class.getResource("source/details/dish/IReportMostPaymentDish.jrxml").toString().substring(6);
+    public static final String MOST_USUALLY_DISH_MONTH = ReportResources.class.getResource("source/details/dish/IReportMostUsuallyDish.jrxml").toString().substring(6);
+    public static final String MOST_USUALLY_MATERIAL_MONTH = ReportResources.class.getResource("source/details/stock/IReportMostUsuallyMaterial.jrxml").toString().substring(6);
+    public static final String MOST_USUALLY_STAFF_BILL_MONTH = ReportResources.class.getResource("source/details/staff/IReportMostStaffBill.jrxml").toString().substring(6);
+
 //    public static final String DISH_RANGE = ReportResources.class.getResource("source/eod/IReportDetailDishRange.jrxml").toString().substring(6);
     public static void showReport(String url, Map<String, Object> params) throws JRException
     {

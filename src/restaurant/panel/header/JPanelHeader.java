@@ -23,6 +23,13 @@ public class JPanelHeader extends javax.swing.JPanel {
         initComponents();
         this.titleHeader = titleHeader;
         this.titleIcon = titleIcon;
+        hasBack = true;
+        this.jLabelBack.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                MainFrame.getInstance().back();
+            }
+        });
         customInit();
     }
     public JPanelHeader(String titleHeader, ImageIcon titleIcon, int jPanelBackTargetId, int jPanelBackHeaderTargetId) {
