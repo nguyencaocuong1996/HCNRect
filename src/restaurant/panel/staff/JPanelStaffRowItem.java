@@ -53,6 +53,7 @@ public class JPanelStaffRowItem extends javax.swing.JPanel {
         jLabelEdit = new javax.swing.JLabel();
         jLabelDelete = new javax.swing.JLabel();
         jLabelStaffAddress = new javax.swing.JLabel();
+        jLabelAddUser = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(760, 57));
         setMinimumSize(new java.awt.Dimension(760, 57));
@@ -80,6 +81,13 @@ public class JPanelStaffRowItem extends javax.swing.JPanel {
 
         jLabelStaffAddress.setText("limit");
 
+        jLabelAddUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_user_darkgreen_x32.png"))); // NOI18N
+        jLabelAddUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelAddUserMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -91,26 +99,29 @@ public class JPanelStaffRowItem extends javax.swing.JPanel {
                 .addComponent(jLabelStaffName, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(60, 60, 60)
                 .addComponent(jLabelStaffPhoneNumber)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
                 .addComponent(jLabelStaffAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelEdit)
                 .addGap(18, 18, 18)
                 .addComponent(jLabelDelete)
-                .addGap(46, 46, 46))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelAddUser)
+                .addGap(24, 24, 24))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelDelete)
-                    .addComponent(jLabelEdit))
-                .addGap(17, 17, 17))
             .addComponent(jLabelStaffAddress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabelStaffPhoneNumber, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabelStaffName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabelStaffId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelAddUser)
+                    .addComponent(jLabelDelete)
+                    .addComponent(jLabelEdit))
+                .addGap(17, 17, 17))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -133,9 +144,17 @@ public class JPanelStaffRowItem extends javax.swing.JPanel {
     public JLabel getjLabelEditStaff() {
         return jLabelEdit;
     }
+    public JLabel getjLabelAddUserStaff(){
+        return jLabelAddUser;
+    }
     private void jLabelEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelEditMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabelEditMouseClicked
+
+    private void jLabelAddUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAddUserMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jLabelAddUserMouseClicked
 
     
 
@@ -187,6 +206,7 @@ public class JPanelStaffRowItem extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabelAddUser;
     private javax.swing.JLabel jLabelDelete;
     private javax.swing.JLabel jLabelEdit;
     private javax.swing.JLabel jLabelStaffAddress;

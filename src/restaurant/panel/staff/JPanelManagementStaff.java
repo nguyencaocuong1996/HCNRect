@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import modal.MStaff;
+import modal.MUser;
 import view.VDepartment;
 import view.VStaff;
 import view.ViewItem;
@@ -42,6 +43,7 @@ public class JPanelManagementStaff extends javax.swing.JPanel {
     private void customInit(){
         jDialogAddStaff.setLocationRelativeTo(this);
         jDialogEditStaff.setLocationRelativeTo(this);
+        jDialogAddUser.setLocationRelativeTo(this);
         listStaff = VStaff.getAllStaff();
         Iterator i = listStaff.getData().iterator();        
         int count = 0;
@@ -66,6 +68,18 @@ public class JPanelManagementStaff extends javax.swing.JPanel {
                     jComboBoxDepartmentEdit.setSelectedItem(listPB.get(maPB));
                 }                
             });
+            
+            jpSRI.getjLabelAddUserStaff().addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    Component jl = (Component) e.getSource();
+                    currentJPSRI = (JPanelStaffRowItem) jl.getParent();
+                    jLabelStaffIdAddUser.setText(""+id);
+                    jLabelStaffNameAddUser.setText(name);                    
+                    jDialogAddUser.setVisible(true);
+                }                
+            });
+            
             listJPSRI.put(id.intValue(), jpSRI);
             jPanelTableContent.add(jpSRI);
             count++;
@@ -164,6 +178,20 @@ public class JPanelManagementStaff extends javax.swing.JPanel {
         jTextFieldPhoneEdit = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jTextFieldAddressEdit = new javax.swing.JTextField();
+        jDialogAddUser = new javax.swing.JDialog();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabelStaffIdAddUser = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabelDoAddUser = new javax.swing.JLabel();
+        jLabelCloseDialogEdit1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jTextFieldUser = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabelStaffNameAddUser = new javax.swing.JLabel();
+        jPasswordFieldPassWord = new javax.swing.JPasswordField();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabelAddStaff = new javax.swing.JLabel();
@@ -451,6 +479,137 @@ public class JPanelManagementStaff extends javax.swing.JPanel {
                 .addContainerGap(52, Short.MAX_VALUE))
         );
 
+        jDialogAddUser.setMaximumSize(new java.awt.Dimension(400, 300));
+        jDialogAddUser.setMinimumSize(new java.awt.Dimension(400, 300));
+
+        jPanel7.setBackground(new java.awt.Color(147, 193, 120));
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_book_table_x24.png"))); // NOI18N
+        jLabel16.setText("Tạo tài khoản");
+
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("Mã nhân viên: ");
+
+        jLabelStaffIdAddUser.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelStaffIdAddUser.setText("1");
+
+        jPanel8.setBackground(new java.awt.Color(70, 92, 139));
+
+        jLabel18.setText("Tên nhân viên:");
+
+        jLabelDoAddUser.setBackground(new java.awt.Color(51, 153, 0));
+        jLabelDoAddUser.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelDoAddUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_plus_border_white_x24.png"))); // NOI18N
+        jLabelDoAddUser.setText("Thêm");
+        jLabelDoAddUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelDoAddUserMouseClicked(evt);
+            }
+        });
+
+        jLabelCloseDialogEdit1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelCloseDialogEdit1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_close_white_x24.png"))); // NOI18N
+        jLabelCloseDialogEdit1.setText("Hủy");
+        jLabelCloseDialogEdit1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelCloseDialogEdit1MouseClicked(evt);
+            }
+        });
+
+        jLabel4.setText("Tên đăng nhập:");
+
+        jLabel5.setText("Mật khẩu:");
+
+        jLabelStaffNameAddUser.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelStaffNameAddUser.setText("1");
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(66, 66, 66)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                                .addComponent(jLabelDoAddUser, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabelCloseDialogEdit1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addGap(37, 37, 37)
+                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabelStaffNameAddUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jTextFieldUser, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                                    .addComponent(jPasswordFieldPassWord)))))
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelStaffNameAddUser))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jTextFieldUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jPasswordFieldPassWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelDoAddUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelCloseDialogEdit1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(51, 51, 51))
+        );
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(74, 74, 74)
+                .addComponent(jLabel17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelStaffIdAddUser, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(57, Short.MAX_VALUE))
+            .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel17)
+                    .addComponent(jLabelStaffIdAddUser))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jDialogAddUserLayout = new javax.swing.GroupLayout(jDialogAddUser.getContentPane());
+        jDialogAddUser.getContentPane().setLayout(jDialogAddUserLayout);
+        jDialogAddUserLayout.setHorizontalGroup(
+            jDialogAddUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jDialogAddUserLayout.setVerticalGroup(
+            jDialogAddUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogAddUserLayout.createSequentialGroup()
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(52, Short.MAX_VALUE))
+        );
+
         setMaximumSize(new java.awt.Dimension(778, 520));
         setMinimumSize(new java.awt.Dimension(778, 520));
         setPreferredSize(new java.awt.Dimension(778, 520));
@@ -584,7 +743,7 @@ public class JPanelManagementStaff extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -657,11 +816,44 @@ public class JPanelManagementStaff extends javax.swing.JPanel {
         jDialogEditStaff.setVisible(false);
     }//GEN-LAST:event_jLabelCloseDialogEditMouseClicked
 
+    private void jLabelCloseDialogEdit1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCloseDialogEdit1MouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jLabelCloseDialogEdit1MouseClicked
+
+    private void jLabelDoAddUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDoAddUserMouseClicked
+        // TODO add your handling code here:
+        try {
+            String userName = jTextFieldUser.getText();
+            int StaffID = Integer.parseInt(jLabelStaffIdAddUser.getText());
+            String password = String.valueOf(jPasswordFieldPassWord.getPassword());
+            MUser mUser = new MUser(StaffID, userName , password);
+            mUser.insert();
+            jDialogAddUser.setVisible(false);
+            JOptionPane.showMessageDialog(this, "Thêm thành công!");
+        } catch (NumberFormatException e) {
+           // JOptionPane.showMessageDialog(this, "Có lỗi xảy ra! Vui lòng kiểm tra lại kiểu dữ liệu!");
+            e.printStackTrace();
+        } catch (SQLException ex) {
+            //JOptionPane.showMessageDialog(this, "Có lỗi xảy ra! Lỗi database!");
+            JOptionPane.showMessageDialog(this, "Có lỗi xảy ra, không thể thêm!");
+            ex.printStackTrace();
+        }
+
+        jPanelTableContent.removeAll();
+        customInit();
+        int height = listStaff.getFilterData().size() * 58 + 58;
+        jPanelTableContent.setPreferredSize(new Dimension(780, height));
+        this.revalidate();
+        this.repaint();
+    }//GEN-LAST:event_jLabelDoAddUserMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<ComboboxItem> jComboBoxDepartment;
     private javax.swing.JComboBox<ComboboxItem> jComboBoxDepartmentEdit;
     private javax.swing.JDialog jDialogAddStaff;
+    private javax.swing.JDialog jDialogAddUser;
     private javax.swing.JDialog jDialogEditStaff;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -670,6 +862,9 @@ public class JPanelManagementStaff extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
@@ -677,23 +872,32 @@ public class JPanelManagementStaff extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelAddStaff;
     private javax.swing.JLabel jLabelCloseAdd;
     private javax.swing.JLabel jLabelCloseDialogEdit;
+    private javax.swing.JLabel jLabelCloseDialogEdit1;
     private javax.swing.JLabel jLabelDoAddStaff;
+    private javax.swing.JLabel jLabelDoAddUser;
     private javax.swing.JLabel jLabelDoEditTable;
+    private javax.swing.JLabel jLabelStaffIdAddUser;
     private javax.swing.JLabel jLabelStaffIdEdit;
+    private javax.swing.JLabel jLabelStaffNameAddUser;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanelTableContent;
     private javax.swing.JPanel jPanelTableHeader4;
+    private javax.swing.JPasswordField jPasswordFieldPassWord;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextFieldAddress;
     private javax.swing.JTextField jTextFieldAddressEdit;
@@ -702,5 +906,6 @@ public class JPanelManagementStaff extends javax.swing.JPanel {
     private javax.swing.JTextField jTextFieldPhone;
     private javax.swing.JTextField jTextFieldPhoneEdit;
     private javax.swing.JTextField jTextFieldStaffNameEdit;
+    private javax.swing.JTextField jTextFieldUser;
     // End of variables declaration//GEN-END:variables
 }

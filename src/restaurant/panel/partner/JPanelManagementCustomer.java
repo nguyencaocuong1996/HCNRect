@@ -180,7 +180,9 @@ public class JPanelManagementCustomer extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanelTableContent = new javax.swing.JPanel();
 
-        jDialogAddCustomer.setMinimumSize(new java.awt.Dimension(614, 286));
+        jDialogAddCustomer.setMaximumSize(new java.awt.Dimension(614, 300));
+        jDialogAddCustomer.setMinimumSize(new java.awt.Dimension(614, 300));
+        jDialogAddCustomer.setPreferredSize(new java.awt.Dimension(614, 300));
 
         jPanel3.setBackground(new java.awt.Color(147, 193, 120));
         jPanel3.setPreferredSize(new java.awt.Dimension(400, 60));
@@ -256,7 +258,7 @@ public class JPanelManagementCustomer extends javax.swing.JPanel {
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jLabelDoAddStaff))
                             .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
                             .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -268,7 +270,7 @@ public class JPanelManagementCustomer extends javax.swing.JPanel {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(109, 109, 109)
                         .addComponent(jLabelCloseAdd)))
-                .addContainerGap(274, Short.MAX_VALUE))
+                .addContainerGap(294, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -293,14 +295,14 @@ public class JPanelManagementCustomer extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelDoAddStaff)
                     .addComponent(jLabelCloseAdd))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(131, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jDialogAddCustomerLayout = new javax.swing.GroupLayout(jDialogAddCustomer.getContentPane());
         jDialogAddCustomer.getContentPane().setLayout(jDialogAddCustomerLayout);
         jDialogAddCustomerLayout.setHorizontalGroup(
             jDialogAddCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 656, Short.MAX_VALUE)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jDialogAddCustomerLayout.setVerticalGroup(
@@ -308,8 +310,7 @@ public class JPanelManagementCustomer extends javax.swing.JPanel {
             .addGroup(jDialogAddCustomerLayout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jDialogEditCustomer.setMinimumSize(new java.awt.Dimension(400, 300));

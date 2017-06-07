@@ -157,8 +157,9 @@ public class JPanelManagementSupplier extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanelTableContent = new javax.swing.JPanel();
 
-        jDialogAddSupplier.setMaximumSize(new java.awt.Dimension(400, 298));
-        jDialogAddSupplier.setMinimumSize(new java.awt.Dimension(400, 298));
+        jDialogAddSupplier.setMaximumSize(new java.awt.Dimension(450, 396));
+        jDialogAddSupplier.setMinimumSize(new java.awt.Dimension(450, 396));
+        jDialogAddSupplier.setPreferredSize(new java.awt.Dimension(450, 396));
 
         jPanel3.setBackground(new java.awt.Color(147, 193, 120));
         jPanel3.setPreferredSize(new java.awt.Dimension(400, 60));
@@ -233,7 +234,7 @@ public class JPanelManagementSupplier extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabelDoAddSupplier))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
                         .addGap(83, 83, 83))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel11)
@@ -248,7 +249,7 @@ public class JPanelManagementSupplier extends javax.swing.JPanel {
                         .addComponent(jTextFieldAddressAdd)
                         .addComponent(jScrollPane2))
                     .addComponent(jLabelCloseAdd))
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -273,14 +274,14 @@ public class JPanelManagementSupplier extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelDoAddSupplier)
                     .addComponent(jLabelCloseAdd))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jDialogAddSupplierLayout = new javax.swing.GroupLayout(jDialogAddSupplier.getContentPane());
         jDialogAddSupplier.getContentPane().setLayout(jDialogAddSupplierLayout);
         jDialogAddSupplierLayout.setHorizontalGroup(
             jDialogAddSupplierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jDialogAddSupplierLayout.setVerticalGroup(
@@ -288,12 +289,13 @@ public class JPanelManagementSupplier extends javax.swing.JPanel {
             .addGroup(jDialogAddSupplierLayout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jDialogEditSupplier.setMaximumSize(new java.awt.Dimension(400, 329));
-        jDialogEditSupplier.setMinimumSize(new java.awt.Dimension(400, 329));
+        jDialogEditSupplier.setLocationByPlatform(true);
+        jDialogEditSupplier.setMaximumSize(new java.awt.Dimension(447, 406));
+        jDialogEditSupplier.setMinimumSize(new java.awt.Dimension(447, 406));
+        jDialogEditSupplier.setPreferredSize(new java.awt.Dimension(447, 406));
 
         jPanel5.setBackground(new java.awt.Color(147, 193, 120));
 
@@ -407,7 +409,7 @@ public class JPanelManagementSupplier extends javax.swing.JPanel {
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelSupplierIdEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(130, Short.MAX_VALUE))
             .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(

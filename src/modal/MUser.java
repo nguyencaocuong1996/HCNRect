@@ -6,6 +6,7 @@
 package modal;
 
 import core.CEncrypt;
+import database.Database;
 import java.sql.SQLException;
 
 /**
@@ -13,6 +14,7 @@ import java.sql.SQLException;
  * @author WINDNCC
  */
 public class MUser extends Model{
+    protected static final String TABLE_NAME = "khach_hang";
     protected int staffId;
     protected String userName;
     protected String passWord;
@@ -81,24 +83,49 @@ public class MUser extends Model{
             e.printStackTrace();
         }
     }
-    @Override
-    void insert() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+   @Override
+    public void insert() throws SQLException {
+        insertData = new ModalData();
+        insertData.put("MaNV", this.getStaffId());
+        insertData.put("TenDangNhap", this.getUserName());
+        insertData.put("MatKhau", CEncrypt.md5(this.getPassWord()));
+        
+        try {
+            Database.insert(getTableName(), insertData);
+        } catch (SQLException e) {
+            throw e;
+        }
+        
     }
 
     @Override
-    void update() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void update() throws SQLException {
+//        updateData = new ModalData();
+//        updateData.put("HoTenNV", this.getName());
+//        updateData.put("SDTNV", this.getPhone());
+//        updateData.put("DiaChiNV", this.getAddress());
+//        updateData.put("MaPB", this.getDepartmentId());
+//        try {
+//            Database.update(getTableName(), updateData, "MaNV = " + getId());
+//        } catch (SQLException e) {
+//            throw e;
+//        }
+        
     }
-
+    
     @Override
-    void delete() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void delete() throws SQLException{
+//        try {
+//            Database.delete(getTableName(), "MaNV = " + getId());
+//        } catch (SQLException e) {
+//            throw e;
+//        }
+        
     }
 
     @Override
     String getTableName() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return TABLE_NAME;
     }
     
 }
