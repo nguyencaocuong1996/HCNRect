@@ -89,6 +89,16 @@ public class JPanelManagementStaff extends javax.swing.JPanel {
         });
     }
     
+    public static JPanelManagementStaff getInstance() {
+        if (instance == null) {
+            instance = new JPanelManagementStaff();
+        }
+        return instance;
+    }
+
+    public JPanel getjPanelTableContent() {
+        return jPanelTableContent;
+    }
     
     private void filter(){
         jPanelTableContent.removeAll();
@@ -106,16 +116,7 @@ public class JPanelManagementStaff extends javax.swing.JPanel {
         this.repaint();
     }
     
-     public static JPanelManagementStaff getInstance() {
-        if (instance == null) {
-            instance = new JPanelManagementStaff();
-        }
-        return instance;
-    }
-
-    public JPanel getjPanelTableContent() {
-        return jPanelTableContent;
-    }
+     
      
      
      public static void main(String[] args) {

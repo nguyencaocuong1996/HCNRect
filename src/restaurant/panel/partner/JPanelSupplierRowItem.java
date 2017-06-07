@@ -5,6 +5,12 @@
  */
 package restaurant.panel.partner;
 
+import java.awt.Color;
+import javax.swing.JLabel;
+import modal.MProvider;
+import modal.MStaff;
+import restaurant.panel.staff.JPanelManagementStaff;
+
 /**
  *
  * @author khanhnguyen
@@ -14,10 +20,35 @@ public class JPanelSupplierRowItem extends javax.swing.JPanel {
     /**
      * Creates new form JPanelSupplierRowItem
      */
+    protected int maNCC;
+    protected String tenNCC;
+    protected String soDienThoai;
+    protected String diaChi;
+    protected static Color oddBackground = new Color(224, 224, 235);
+    
     public JPanelSupplierRowItem() {
         initComponents();
     }
 
+     public JPanelSupplierRowItem(int supplierID, String supplierName, String phonenumber, String address, boolean odd) {
+        initComponents();
+        this.maNCC = supplierID;
+        this.tenNCC = supplierName;
+        this.soDienThoai = phonenumber;
+        this.diaChi = address;
+        
+        if(odd){
+            setBackground(oddBackground);
+        }
+        customInit();
+    }
+     
+     public void customInit(){
+        jLabelStaffId.setText(this.maNCC + "");
+        jLabelSupplierName.setText("<html><p>" + this.tenNCC + "</p></html>");
+        jLabelSupplierPhoneNumber.setText(this.soDienThoai + " ");
+        jLabelSupplierAddress.setText(this.diaChi + " ");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,11 +59,11 @@ public class JPanelSupplierRowItem extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabelStaffId = new javax.swing.JLabel();
-        jLabelStaffName = new javax.swing.JLabel();
-        jLabelStaffPhoneNumber = new javax.swing.JLabel();
+        jLabelSupplierName = new javax.swing.JLabel();
+        jLabelSupplierPhoneNumber = new javax.swing.JLabel();
         jLabelEdit = new javax.swing.JLabel();
         jLabelDelete = new javax.swing.JLabel();
-        jLabelStaffAddress = new javax.swing.JLabel();
+        jLabelSupplierAddress = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(760, 57));
         setMinimumSize(new java.awt.Dimension(760, 57));
@@ -40,9 +71,9 @@ public class JPanelSupplierRowItem extends javax.swing.JPanel {
 
         jLabelStaffId.setText("001");
 
-        jLabelStaffName.setText("Thịt xông khói");
+        jLabelSupplierName.setText("Thịt xông khói");
 
-        jLabelStaffPhoneNumber.setText("120000000");
+        jLabelSupplierPhoneNumber.setText("120000000");
 
         jLabelEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_edit_green_x24.png"))); // NOI18N
         jLabelEdit.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -58,7 +89,7 @@ public class JPanelSupplierRowItem extends javax.swing.JPanel {
             }
         });
 
-        jLabelStaffAddress.setText("limit");
+        jLabelSupplierAddress.setText("limit");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -68,11 +99,11 @@ public class JPanelSupplierRowItem extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabelStaffId, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
-                .addComponent(jLabelStaffName, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelSupplierName, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(60, 60, 60)
-                .addComponent(jLabelStaffPhoneNumber)
+                .addComponent(jLabelSupplierPhoneNumber)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
-                .addComponent(jLabelStaffAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelSupplierAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabelEdit)
                 .addGap(18, 18, 18)
@@ -87,9 +118,9 @@ public class JPanelSupplierRowItem extends javax.swing.JPanel {
                     .addComponent(jLabelDelete)
                     .addComponent(jLabelEdit))
                 .addGap(17, 17, 17))
-            .addComponent(jLabelStaffAddress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabelStaffPhoneNumber, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabelStaffName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabelSupplierAddress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabelSupplierPhoneNumber, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabelSupplierName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabelStaffId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -100,27 +131,67 @@ public class JPanelSupplierRowItem extends javax.swing.JPanel {
 
     private void jLabelDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDeleteMouseClicked
         // TODO add your handling code here:
-        //       MStaff mStaff = new MStaff(tenNV, soDienThoai , diaChi);
-        //       mStaff.delete();
-
-//        try {
-//            MStaff mStaff = new MStaff(maNV);
-//            mStaff.delete();
-//            JPanelManagementStaff.getInstance().getjPanelTableContent().remove(this);
-//            JPanelManagementStaff.getInstance().getjPanelTableContent().revalidate();
-//            JPanelManagementStaff.getInstance().getjPanelTableContent().repaint();
-//        } catch (Exception e) {
-//        }
-
+      try {
+            MProvider mProvider = new MProvider(maNCC);
+            mProvider.delete();
+            JPanelManagementSupplier.getInstance().getjPanelTableContent().remove(this);
+            JPanelManagementSupplier.getInstance().getjPanelTableContent().revalidate();
+            JPanelManagementSupplier.getInstance().getjPanelTableContent().repaint();
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_jLabelDeleteMouseClicked
 
+    public JLabel getjLabelDelete() {
+        return jLabelDelete;
+    }
+
+    public JLabel getjLabelEdit() {
+        return jLabelEdit;
+    }
+
+    
+    public int getMaNCC() {
+        return maNCC;
+    }
+
+    public void setMaNCC(int maNCC) {
+        this.maNCC = maNCC;
+    }
+
+    public String getTenNCC() {
+        return tenNCC;
+    }
+
+    public void setTenNCC(String tenNCC) {
+        this.tenNCC = tenNCC;
+    }
+
+    public String getSoDienThoai() {
+        return soDienThoai;
+    }
+
+    public void setSoDienThoai(String soDienThoai) {
+        this.soDienThoai = soDienThoai;
+    }
+    
+    public void setDiaChi(String diaChi){
+        this.diaChi = diaChi;
+    }
+
+    public static Color getOddBackground() {
+        return oddBackground;
+    }
+
+    public static void setOddBackground(Color oddBackground) {
+        JPanelSupplierRowItem.oddBackground = oddBackground;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabelDelete;
     private javax.swing.JLabel jLabelEdit;
-    private javax.swing.JLabel jLabelStaffAddress;
     private javax.swing.JLabel jLabelStaffId;
-    private javax.swing.JLabel jLabelStaffName;
-    private javax.swing.JLabel jLabelStaffPhoneNumber;
+    private javax.swing.JLabel jLabelSupplierAddress;
+    private javax.swing.JLabel jLabelSupplierName;
+    private javax.swing.JLabel jLabelSupplierPhoneNumber;
     // End of variables declaration//GEN-END:variables
 }

@@ -28,11 +28,11 @@ public class JPanelCustomerRowItem extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabelStaffId = new javax.swing.JLabel();
-        jLabelStaffName = new javax.swing.JLabel();
-        jLabelStaffPhoneNumber = new javax.swing.JLabel();
+        jLabelCustomerName = new javax.swing.JLabel();
+        jLabelCustomerPhoneNumber = new javax.swing.JLabel();
         jLabelEdit = new javax.swing.JLabel();
         jLabelDelete = new javax.swing.JLabel();
-        jLabelStaffAddress = new javax.swing.JLabel();
+        jLabelCustomerAddress = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(760, 57));
         setMinimumSize(new java.awt.Dimension(760, 57));
@@ -40,9 +40,9 @@ public class JPanelCustomerRowItem extends javax.swing.JPanel {
 
         jLabelStaffId.setText("001");
 
-        jLabelStaffName.setText("Thịt xông khói");
+        jLabelCustomerName.setText("Thịt xông khói");
 
-        jLabelStaffPhoneNumber.setText("120000000");
+        jLabelCustomerPhoneNumber.setText("120000000");
 
         jLabelEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_edit_green_x24.png"))); // NOI18N
         jLabelEdit.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -58,7 +58,7 @@ public class JPanelCustomerRowItem extends javax.swing.JPanel {
             }
         });
 
-        jLabelStaffAddress.setText("limit");
+        jLabelCustomerAddress.setText("limit");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -68,11 +68,11 @@ public class JPanelCustomerRowItem extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabelStaffId, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
-                .addComponent(jLabelStaffName, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(60, 60, 60)
-                .addComponent(jLabelStaffPhoneNumber)
+                .addComponent(jLabelCustomerPhoneNumber)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
-                .addComponent(jLabelStaffAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelCustomerAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabelEdit)
                 .addGap(18, 18, 18)
@@ -87,9 +87,9 @@ public class JPanelCustomerRowItem extends javax.swing.JPanel {
                     .addComponent(jLabelDelete)
                     .addComponent(jLabelEdit))
                 .addGap(17, 17, 17))
-            .addComponent(jLabelStaffAddress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabelStaffPhoneNumber, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabelStaffName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabelCustomerAddress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabelCustomerPhoneNumber, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabelCustomerName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabelStaffId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -115,11 +115,11 @@ public class JPanelCustomerRowItem extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabelCustomerAddress;
+    private javax.swing.JLabel jLabelCustomerName;
+    private javax.swing.JLabel jLabelCustomerPhoneNumber;
     private javax.swing.JLabel jLabelDelete;
     private javax.swing.JLabel jLabelEdit;
-    private javax.swing.JLabel jLabelStaffAddress;
     private javax.swing.JLabel jLabelStaffId;
-    private javax.swing.JLabel jLabelStaffName;
-    private javax.swing.JLabel jLabelStaffPhoneNumber;
     // End of variables declaration//GEN-END:variables
 }

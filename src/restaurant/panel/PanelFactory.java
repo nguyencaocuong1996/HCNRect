@@ -6,6 +6,7 @@
 package restaurant.panel;
 
 import assets.images.icons.IconResources;
+import java.sql.SQLException;
 import javax.swing.JPanel;
 import restaurant.panel.booktable.JPanelBookTable;
 import restaurant.panel.header.JPanelHeader;
@@ -95,7 +96,7 @@ public class PanelFactory {
             public static final int HEADER_MANAGE_SUPPLIER = 285;
             public static final int HEADER_MANAGE_CUSTOMER = 286;
     }
-    public static JPanel get(int panelId){
+    public static JPanel get(int panelId) throws SQLException{
         JPanel jp;
         switch(panelId){
             case ID.SIDEBAR:

@@ -31,11 +31,11 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabelStaffId" min="-2" pref="59" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-              <Component id="jLabelStaffName" min="-2" pref="147" max="-2" attributes="0"/>
+              <Component id="jLabelSupplierName" min="-2" pref="147" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
-              <Component id="jLabelStaffPhoneNumber" min="-2" max="-2" attributes="0"/>
+              <Component id="jLabelSupplierPhoneNumber" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="117" max="32767" attributes="0"/>
-              <Component id="jLabelStaffAddress" min="-2" pref="157" max="-2" attributes="0"/>
+              <Component id="jLabelSupplierAddress" min="-2" pref="157" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jLabelEdit" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -54,9 +54,9 @@
               </Group>
               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
           </Group>
-          <Component id="jLabelStaffAddress" alignment="0" max="32767" attributes="0"/>
-          <Component id="jLabelStaffPhoneNumber" alignment="1" max="32767" attributes="0"/>
-          <Component id="jLabelStaffName" alignment="1" max="32767" attributes="0"/>
+          <Component id="jLabelSupplierAddress" alignment="0" max="32767" attributes="0"/>
+          <Component id="jLabelSupplierPhoneNumber" alignment="1" max="32767" attributes="0"/>
+          <Component id="jLabelSupplierName" alignment="1" max="32767" attributes="0"/>
           <Component id="jLabelStaffId" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
@@ -67,12 +67,12 @@
         <Property name="text" type="java.lang.String" value="001"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabelStaffName">
+    <Component class="javax.swing.JLabel" name="jLabelSupplierName">
       <Properties>
         <Property name="text" type="java.lang.String" value="Th&#x1ecb;t x&#xf4;ng kh&#xf3;i"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabelStaffPhoneNumber">
+    <Component class="javax.swing.JLabel" name="jLabelSupplierPhoneNumber">
       <Properties>
         <Property name="text" type="java.lang.String" value="120000000"/>
       </Properties>
@@ -97,7 +97,7 @@
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelDeleteMouseClicked"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabelStaffAddress">
+    <Component class="javax.swing.JLabel" name="jLabelSupplierAddress">
       <Properties>
         <Property name="text" type="java.lang.String" value="limit"/>
       </Properties>

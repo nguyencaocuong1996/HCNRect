@@ -4,6 +4,9 @@ package restaurant.panel.menu;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;
 import restaurant.MainFrame;
@@ -37,10 +40,18 @@ public class JPanelSubMenuItem extends javax.swing.JPanel {
             public void mouseClicked(MouseEvent e) {
                 System.out.println("sub menu is clicked");
                 if(targetPanelId!=0){
-                    MainFrame.getInstance().changeContentPanel(PanelFactory.get(targetPanelId));
+                    try {
+                        MainFrame.getInstance().changeContentPanel(PanelFactory.get(targetPanelId));
+                    } catch (SQLException ex) {
+                        Logger.getLogger(JPanelSubMenuItem.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
                 if(targetPanelHeaderId!=0){
-                    MainFrame.getInstance().changeHeaderPanel(PanelFactory.get(targetPanelHeaderId));
+                    try {
+                        MainFrame.getInstance().changeHeaderPanel(PanelFactory.get(targetPanelHeaderId));
+                    } catch (SQLException ex) {
+                        Logger.getLogger(JPanelSubMenuItem.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
         }});
     }
