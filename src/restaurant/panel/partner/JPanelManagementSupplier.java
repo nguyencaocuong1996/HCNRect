@@ -41,16 +41,20 @@ public class JPanelManagementSupplier extends javax.swing.JPanel {
     protected HashMap<Integer, JPanelSupplierRowItem> listJPSRI = new HashMap<>();
     protected JPanelSupplierRowItem currentJPSRI;
     
-    public JPanelManagementSupplier() throws SQLException {
+    public JPanelManagementSupplier(){
         initComponents();
         customInit();
      
     }
     
-    private void customInit() throws SQLException{
+    private void customInit(){
         jDialogAddSupplier.setLocationRelativeTo(this);
         jDialogEditSupplier.setLocationRelativeTo(this);
-        listSupplier = VProvider.getAllProvider();
+        try {
+            listSupplier = VProvider.getAllProvider();
+        } catch (SQLException e) {
+        }
+        
         Iterator i = listSupplier.getData().iterator();        
         int count = 0;
         while(i.hasNext()){
@@ -599,11 +603,7 @@ public class JPanelManagementSupplier extends javax.swing.JPanel {
         }
 
         jPanelTableContent.removeAll();
-        try {
-            customInit();
-        } catch (SQLException ex) {
-            Logger.getLogger(JPanelManagementSupplier.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        customInit();
         int height = listSupplier.getFilterData().size() * 58 + 58;
         jPanelTableContent.setPreferredSize(new Dimension(780, height));
         this.revalidate();
@@ -639,6 +639,7 @@ public class JPanelManagementSupplier extends javax.swing.JPanel {
         jDialogEditSupplier.setVisible(false);
     }//GEN-LAST:event_jLabelCloseDialogEditMouseClicked
 
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog jDialogAddSupplier;

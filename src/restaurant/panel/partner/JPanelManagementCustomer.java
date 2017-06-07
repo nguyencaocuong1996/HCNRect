@@ -5,18 +5,127 @@
  */
 package restaurant.panel.partner;
 
+import core.ComboboxItem;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import modal.MCustomer;
+import restaurant.panel.staff.JPanelManagementStaff;
+import restaurant.panel.staff.JPanelStaffRowItem;
+import view.VCustomer;
+import view.VCustomerType;
+import view.VDepartment;
+import view.VStaff;
+import view.ViewItem;
+
 /**
  *
  * @author khanhnguyen
  */
 public class JPanelManagementCustomer extends javax.swing.JPanel {
 
-    /**
-     * Creates new form JPanelManagementCustomer
-     */
+    protected static JPanelManagementCustomer instance;
+    public VCustomer listCustomer;
+    public VCustomerType  listCustomerType;
+    protected HashMap<Integer, JPanelCustomerRowItem> listJPCRI = new HashMap<>();
+    protected HashMap<Integer, ComboboxItem> listLKH = new HashMap<>();
+    protected JPanelCustomerRowItem currentJPCRI;
     public JPanelManagementCustomer() {
         initComponents();
+        customInit();
+     
     }
+    
+    private void customInit(){
+        jDialogAddCustomer.setLocationRelativeTo(this);
+        jDialogEditCustomer.setLocationRelativeTo(this);
+        try {
+            listCustomer = VCustomer.getAllCustomer();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        
+        Iterator i = listCustomer.getData().iterator();        
+        int count = 0;
+        while(i.hasNext()){
+            ViewItem t = (ViewItem) i.next();
+            Long id = (Long) t.get("MaKH");
+            String name = (String) t.get("HoTenKH");
+            String sodienthoai = (String) t.get("SDTKH");
+            String diachi = (String) t.get("DiaChiKH");
+            int maLKH = ((Long)t.get("MaLKH")).intValue();
+            JPanelCustomerRowItem jpCRI = new JPanelCustomerRowItem(id.intValue(), name, sodienthoai, diachi,(count % 2 != 0));
+            jpCRI.getjLabelEdit().addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    Component jl = (Component) e.getSource();
+                    currentJPCRI = (JPanelCustomerRowItem) jl.getParent();
+                    jLabelCustomerIdEdit.setText(""+id);
+                    jTextFieldCustomerNameEdit.setText(name);
+                    jTextFieldPhoneEdit.setText(sodienthoai);
+                    jTextFieldAddressEdit.setText(diachi);
+                    jDialogEditCustomer.setVisible(true);
+                    jComboBoxCustomerTypeEdit.setSelectedItem(listLKH.get(maLKH));
+                }                
+            });
+            listJPCRI.put(id.intValue(), jpCRI);
+            jPanelTableContent.add(jpCRI);
+            count++;
+        };
+        int height = listCustomer.getData().size() * 62;
+        jPanelTableContent.setPreferredSize(new Dimension(780, height));
+        
+        ArrayList<ComboboxItem> listCI = new ArrayList<>();
+        try {
+            listCustomerType = VCustomerType.getAllCustomerType();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        listCustomerType.getData().forEach((t) -> {
+            String name = (String)t.get("TenLKH");
+            int id = ((Integer)t.get("MaLKH"));
+            listLKH.put(id, new ComboboxItem(name, id));
+            jComboBoxCustomerType.addItem(listLKH.get(id)); 
+            jComboBoxCustomerTypeEdit.addItem(listLKH.get(id));
+        });
+    }
+    
+    public static JPanelManagementCustomer getInstance() {
+        if (instance == null) {
+            instance = new JPanelManagementCustomer();
+        }
+        return instance;
+    }
+
+    public JPanel getjPanelTableContent() {
+        return jPanelTableContent;
+    }
+    
+    private void filter(){
+        jPanelTableContent.removeAll();
+        listCustomer.filter(jTextFieldFilterName.getText());
+        Iterator i = listCustomer.getFilterData().iterator();
+        int count = 0;
+        while(i.hasNext()){
+            ViewItem t = (ViewItem) i.next();
+            Long id = (Long) t.get("MaKH");
+            jPanelTableContent.add(listJPCRI.get(id.intValue()));
+        }
+        int height = listCustomer.getFilterData().size() * 62;
+        jPanelTableContent.setPreferredSize(new Dimension(780, height));
+        this.revalidate();
+        this.repaint();
+    }
+    
+     
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,6 +136,36 @@ public class JPanelManagementCustomer extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialogAddCustomer = new javax.swing.JDialog();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jTextFieldName = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jTextFieldPhone = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jTextFieldAddress = new javax.swing.JTextField();
+        jLabelCloseAdd = new javax.swing.JLabel();
+        jLabelDoAddStaff = new javax.swing.JLabel();
+        jComboBoxCustomerType = new javax.swing.JComboBox<>();
+        jDialogEditCustomer = new javax.swing.JDialog();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabelCustomerIdEdit = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jTextFieldCustomerNameEdit = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        jLabelDoEditTable = new javax.swing.JLabel();
+        jLabelCloseDialogEdit = new javax.swing.JLabel();
+        jComboBoxCustomerTypeEdit = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jTextFieldPhoneEdit = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jTextFieldAddressEdit = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabelAddStaff = new javax.swing.JLabel();
@@ -40,6 +179,277 @@ public class JPanelManagementCustomer extends javax.swing.JPanel {
         jLabel27 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanelTableContent = new javax.swing.JPanel();
+
+        jDialogAddCustomer.setMinimumSize(new java.awt.Dimension(614, 286));
+
+        jPanel3.setBackground(new java.awt.Color(147, 193, 120));
+        jPanel3.setPreferredSize(new java.awt.Dimension(400, 60));
+
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_add_folder_white_32px.png"))); // NOI18N
+        jLabel6.setText("Thêm Khách Hàng");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jLabel6)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+
+        jPanel4.setBackground(new java.awt.Color(70, 92, 139));
+
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Tên NV:");
+
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Số điện thoại:");
+
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Địa chỉ:");
+
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Phòng ban:");
+
+        jLabelCloseAdd.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabelCloseAdd.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelCloseAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_close_white_x24.png"))); // NOI18N
+        jLabelCloseAdd.setText("Hủy");
+        jLabelCloseAdd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelCloseAddMouseClicked(evt);
+            }
+        });
+
+        jLabelDoAddStaff.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabelDoAddStaff.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelDoAddStaff.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_add_row_x24.png"))); // NOI18N
+        jLabelDoAddStaff.setText("Thêm");
+        jLabelDoAddStaff.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelDoAddStaffMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(89, 89, 89))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabelDoAddStaff))
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jTextFieldName)
+                        .addComponent(jComboBoxCustomerType, 0, 173, Short.MAX_VALUE)
+                        .addComponent(jTextFieldPhone)
+                        .addComponent(jTextFieldAddress))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(109, 109, 109)
+                        .addComponent(jLabelCloseAdd)))
+                .addContainerGap(274, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel11)
+                    .addComponent(jComboBoxCustomerType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(jTextFieldPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jTextFieldAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelDoAddStaff)
+                    .addComponent(jLabelCloseAdd))
+                .addContainerGap(52, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jDialogAddCustomerLayout = new javax.swing.GroupLayout(jDialogAddCustomer.getContentPane());
+        jDialogAddCustomer.getContentPane().setLayout(jDialogAddCustomerLayout);
+        jDialogAddCustomerLayout.setHorizontalGroup(
+            jDialogAddCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jDialogAddCustomerLayout.setVerticalGroup(
+            jDialogAddCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogAddCustomerLayout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
+        );
+
+        jDialogEditCustomer.setMinimumSize(new java.awt.Dimension(400, 300));
+
+        jPanel5.setBackground(new java.awt.Color(147, 193, 120));
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_book_table_x24.png"))); // NOI18N
+        jLabel14.setText("Sửa khách hàng");
+
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Mã KH:");
+
+        jLabelCustomerIdEdit.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelCustomerIdEdit.setText("1");
+
+        jPanel6.setBackground(new java.awt.Color(70, 92, 139));
+
+        jLabel12.setText("Tên KH:");
+
+        jLabel13.setText("Loaij KH:");
+
+        jLabelDoEditTable.setBackground(new java.awt.Color(51, 153, 0));
+        jLabelDoEditTable.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelDoEditTable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_plus_border_white_x24.png"))); // NOI18N
+        jLabelDoEditTable.setText("Sửa");
+        jLabelDoEditTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelDoEditTableMouseClicked(evt);
+            }
+        });
+
+        jLabelCloseDialogEdit.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelCloseDialogEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/images/icons/icon_close_white_x24.png"))); // NOI18N
+        jLabelCloseDialogEdit.setText("Hủy");
+        jLabelCloseDialogEdit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelCloseDialogEditMouseClicked(evt);
+            }
+        });
+
+        jLabel2.setText("Số điện thoại:");
+
+        jLabel3.setText("Địa chỉ:");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addComponent(jTextFieldCustomerNameEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelDoEditTable, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabelCloseDialogEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGap(37, 37, 37)
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextFieldPhoneEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                                    .addComponent(jTextFieldAddressEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                                    .addComponent(jComboBoxCustomerTypeEdit, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                .addContainerGap(191, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldCustomerNameEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(jComboBoxCustomerTypeEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextFieldPhoneEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jTextFieldAddressEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelDoEditTable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelCloseDialogEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(51, 51, 51))
+        );
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(74, 74, 74)
+                .addComponent(jLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelCustomerIdEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(154, Short.MAX_VALUE))
+            .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabelCustomerIdEdit))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jDialogEditCustomerLayout = new javax.swing.GroupLayout(jDialogEditCustomer.getContentPane());
+        jDialogEditCustomer.getContentPane().setLayout(jDialogEditCustomerLayout);
+        jDialogEditCustomerLayout.setHorizontalGroup(
+            jDialogEditCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jDialogEditCustomerLayout.setVerticalGroup(
+            jDialogEditCustomerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogEditCustomerLayout.createSequentialGroup()
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(52, Short.MAX_VALUE))
+        );
 
         setMaximumSize(new java.awt.Dimension(778, 520));
         setMinimumSize(new java.awt.Dimension(778, 520));
@@ -179,28 +589,117 @@ public class JPanelManagementCustomer extends javax.swing.JPanel {
 
     private void jLabelAddStaffMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelAddStaffMouseClicked
         // TODO add your handling code here:
-       // jDialogAddStaff.setVisible(true);
+       jDialogAddCustomer.setVisible(true);
     }//GEN-LAST:event_jLabelAddStaffMouseClicked
 
     private void jTextFieldFilterNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldFilterNameKeyReleased
         // TODO add your handling code here:
-        //filter();
+        filter();
     }//GEN-LAST:event_jTextFieldFilterNameKeyReleased
+
+    private void jLabelCloseAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCloseAddMouseClicked
+        jDialogAddCustomer.setVisible(false);
+    }//GEN-LAST:event_jLabelCloseAddMouseClicked
+
+    private void jLabelDoAddStaffMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDoAddStaffMouseClicked
+        try {
+            String name = jTextFieldName.getText();
+            int customerType = (int)((ComboboxItem)(jComboBoxCustomerType.getSelectedItem())).getValue();
+            String phone = jTextFieldPhone.getText();
+            String address = jTextFieldAddress.getText();
+            MCustomer mCustomer = new MCustomer(name, phone , customerType, address);
+            mCustomer.insert();
+            jDialogAddCustomer.setVisible(false);
+
+        } catch (NumberFormatException e) {
+            // JOptionPane.showMessageDialog(this, "Có lỗi xảy ra! Vui lòng kiểm tra lại kiểu dữ liệu!");
+            e.printStackTrace();
+        } catch (SQLException ex) {
+            //JOptionPane.showMessageDialog(this, "Có lỗi xảy ra! Lỗi database!");
+            ex.printStackTrace();
+        }
+
+        jPanelTableContent.removeAll();
+        customInit();
+        int height = listCustomer.getFilterData().size() * 58 + 58;
+        jPanelTableContent.setPreferredSize(new Dimension(780, height));
+        this.revalidate();
+        this.repaint();
+    }//GEN-LAST:event_jLabelDoAddStaffMouseClicked
+
+    private void jLabelDoEditTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDoEditTableMouseClicked
+        MCustomer mCustomer = new MCustomer();
+        mCustomer.setId(Integer.parseInt(jLabelCustomerIdEdit.getText()));
+        mCustomer.setFullName(jTextFieldCustomerNameEdit.getText());
+        mCustomer.setPhone(jTextFieldPhoneEdit.getText());
+        mCustomer.setAddress(jTextFieldAddressEdit.getText());
+        mCustomer.setCustomerTypeId((int)((ComboboxItem)(jComboBoxCustomerTypeEdit.getSelectedItem())).getValue());
+        try {
+            mCustomer.update();
+            currentJPCRI.setTenKH(jTextFieldCustomerNameEdit.getText());
+            currentJPCRI.setSoDienThoai(jTextFieldPhoneEdit.getText());
+            currentJPCRI.setDiaChi(jTextFieldAddressEdit.getText());
+            currentJPCRI.customInit();
+            jDialogEditCustomer.setVisible(false);
+            JOptionPane.showMessageDialog(this, "Sửa bàn thành công!");
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Có lỗi xảy ra, không thể sửa!");
+            e.printStackTrace();
+        }
+
+        this.revalidate();
+        this.repaint();
+    }//GEN-LAST:event_jLabelDoEditTableMouseClicked
+
+    private void jLabelCloseDialogEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCloseDialogEditMouseClicked
+        jDialogEditCustomer.setVisible(false);
+    }//GEN-LAST:event_jLabelCloseDialogEditMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<ComboboxItem> jComboBoxCustomerType;
+    private javax.swing.JComboBox<ComboboxItem> jComboBoxCustomerTypeEdit;
+    private javax.swing.JDialog jDialogAddCustomer;
+    private javax.swing.JDialog jDialogEditCustomer;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelAddStaff;
+    private javax.swing.JLabel jLabelCloseAdd;
+    private javax.swing.JLabel jLabelCloseDialogEdit;
+    private javax.swing.JLabel jLabelCustomerIdEdit;
+    private javax.swing.JLabel jLabelDoAddStaff;
+    private javax.swing.JLabel jLabelDoEditTable;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanelTableContent;
     private javax.swing.JPanel jPanelTableHeader4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextFieldAddress;
+    private javax.swing.JTextField jTextFieldAddressEdit;
+    private javax.swing.JTextField jTextFieldCustomerNameEdit;
     private javax.swing.JTextField jTextFieldFilterName;
+    private javax.swing.JTextField jTextFieldName;
+    private javax.swing.JTextField jTextFieldPhone;
+    private javax.swing.JTextField jTextFieldPhoneEdit;
     // End of variables declaration//GEN-END:variables
 }

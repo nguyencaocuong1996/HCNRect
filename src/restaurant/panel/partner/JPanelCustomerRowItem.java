@@ -5,18 +5,47 @@
  */
 package restaurant.panel.partner;
 
+import java.awt.Color;
+import javax.swing.JLabel;
+import modal.MCustomer;
+import modal.MStaff;
+
 /**
  *
  * @author khanhnguyen
  */
 public class JPanelCustomerRowItem extends javax.swing.JPanel {
 
-    /**
-     * Creates new form JPanelCustomerRowItem
-     */
+    protected int maKH;
+    protected String tenKH;
+    protected String soDienThoai;
+    protected String diaChi;
+    protected static Color oddBackground = new Color(224, 224, 235);
     public JPanelCustomerRowItem() {
         initComponents();
     }
+    public JPanelCustomerRowItem(int customerID, String customerName, String phonenumber, String address, boolean odd) {
+        initComponents();
+        this.maKH = customerID;
+        this.tenKH = customerName;
+        this.soDienThoai = phonenumber;
+        this.diaChi = address;
+        
+        if(odd){
+            setBackground(oddBackground);
+        }
+        customInit();
+    }
+    public void customInit(){
+        jLabelStaffId.setText(this.maKH + "");
+        jLabelCustomerName.setText("<html><p>" + this.tenKH + "</p></html>");
+        jLabelCustomerPhoneNumber.setText(this.soDienThoai + " ");
+        jLabelCustomerAddress.setText(this.diaChi + " ");
+    }
+    /**
+     * Creates new form JPanelCustomerRowItem
+     */
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -103,17 +132,60 @@ public class JPanelCustomerRowItem extends javax.swing.JPanel {
         //       MStaff mStaff = new MStaff(tenNV, soDienThoai , diaChi);
         //       mStaff.delete();
 
-//        try {
-//            MStaff mStaff = new MStaff(maNV);
-//            mStaff.delete();
-//            JPanelManagementStaff.getInstance().getjPanelTableContent().remove(this);
-//            JPanelManagementStaff.getInstance().getjPanelTableContent().revalidate();
-//            JPanelManagementStaff.getInstance().getjPanelTableContent().repaint();
-//        } catch (Exception e) {
-//        }
+        try {
+            MCustomer mCustomer = new MCustomer(maKH);
+            mCustomer.delete();
+            JPanelManagementCustomer.getInstance().getjPanelTableContent().remove(this);
+            JPanelManagementCustomer.getInstance().getjPanelTableContent().revalidate();
+            JPanelManagementCustomer.getInstance().getjPanelTableContent().repaint();
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_jLabelDeleteMouseClicked
 
+    public JLabel getjLabelDelete() {
+        return jLabelDelete;
+    }
 
+    public JLabel getjLabelEdit() {
+        return jLabelEdit;
+    }
+
+     public int getMaKH() {
+        return maKH;
+    }
+
+    public void setMaKH(int maKH) {
+        this.maKH = maKH;
+    }
+
+    public String getTenKH() {
+        return tenKH;
+    }
+
+    public void setTenKH(String tenKH) {
+        this.tenKH = tenKH;
+    }
+
+    public String getSoDienThoai() {
+        return soDienThoai;
+    }
+
+    public void setSoDienThoai(String soDienThoai) {
+        this.soDienThoai = soDienThoai;
+    }
+    
+    public void setDiaChi(String diaChi){
+        this.diaChi = diaChi;
+    }
+
+    public static Color getOddBackground() {
+        return oddBackground;
+    }
+
+    public static void setOddBackground(Color oddBackground) {
+        JPanelCustomerRowItem.oddBackground = oddBackground;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabelCustomerAddress;
     private javax.swing.JLabel jLabelCustomerName;

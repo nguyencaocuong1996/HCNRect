@@ -96,7 +96,7 @@ public class PanelFactory {
             public static final int HEADER_MANAGE_SUPPLIER = 285;
             public static final int HEADER_MANAGE_CUSTOMER = 286;
     }
-    public static JPanel get(int panelId) throws SQLException{
+    public static JPanel get(int panelId){
         JPanel jp;
         switch(panelId){
             case ID.SIDEBAR:

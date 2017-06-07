@@ -5,6 +5,7 @@
  */
 package modal;
 
+import database.Database;
 import java.sql.SQLException;
 import java.util.HashMap;
 
@@ -23,6 +24,9 @@ public class MCustomer extends Model{
     public MCustomer() {
     }
     
+    public MCustomer(int id) {
+        this.id = id;
+    }
     
     
     public MCustomer(int id, String fullName, String phone, int customerTypeId, String address) {
@@ -102,13 +106,28 @@ public class MCustomer extends Model{
     }
 
     @Override
-    void update() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void update()throws SQLException {
+       updateData = new ModalData();
+        updateData.put("HoTenKH", this.getFullName());
+        updateData.put("SDTKH", this.getPhone());
+        updateData.put("DiaChiKH", this.getAddress());
+        updateData.put("MaLKH", this.getCustomerTypeId());
+        try {
+            Database.update(getTableName(), updateData, "MaKH = " + getId());
+        } catch (SQLException e) {
+            throw e;
+        }
+        
     }
 
     @Override
-    void delete() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void delete() throws SQLException{
+        try {
+            Database.delete(getTableName(), "MaKH = " + getId());
+        } catch (SQLException e) {
+            throw e;
+        }
+        
     }
 
     @Override
