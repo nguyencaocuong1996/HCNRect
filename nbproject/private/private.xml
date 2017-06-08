@@ -2,13 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/User/Desktop/Restaurant/trunk/src/assets/font/CFont.java</file>
-            <file>file:/C:/Users/User/Desktop/Restaurant/trunk/src/restaurant/panel/main/table/JPanelTable.java</file>
-            <file>file:/C:/Users/User/Desktop/Restaurant/trunk/src/restaurant/panel/JPanelSidebar.java</file>
-            <file>file:/C:/Users/User/Desktop/Restaurant/trunk/src/assets/images/icons/IconResources.java</file>
-            <file>file:/C:/Users/User/Desktop/Restaurant/trunk/src/restaurant/panel/main/table/JPanelListTable.java</file>
-        </group>
         <group name="GUI2">
             <file>file:/D:/PROJECT/restaurant/git/trunk/src/modal/MMaterial.java</file>
             <file>file:/D:/PROJECT/restaurant/git/trunk/src/modal/MCustomer.java</file>
@@ -21,5 +14,6 @@
             <file>file:/D:/PROJECT/restaurant/git/trunk/src/modal/MBookTable.java</file>
             <file>file:/D:/PROJECT/restaurant/git/trunk/src/modal/Model.java</file>
         </group>
+        <group/>
     </open-files>
 </project-private>
