@@ -6,6 +6,7 @@
 package restaurant.panel.partner;
 
 import java.awt.Color;
+import java.sql.SQLException;
 import javax.swing.JLabel;
 import modal.MCustomer;
 import modal.MStaff;
@@ -138,7 +139,7 @@ public class JPanelCustomerRowItem extends javax.swing.JPanel {
             JPanelManagementCustomer.getInstance().getjPanelTableContent().remove(this);
             JPanelManagementCustomer.getInstance().getjPanelTableContent().revalidate();
             JPanelManagementCustomer.getInstance().getjPanelTableContent().repaint();
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
     }//GEN-LAST:event_jLabelDeleteMouseClicked
 

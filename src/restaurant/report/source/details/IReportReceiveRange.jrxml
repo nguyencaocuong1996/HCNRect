@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8ec9f712-ee7f-49bf-8910-d226b34e68f4">
-	<property name="ireport.zoom" value="0.8857805000000005"/>
+	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="395"/>
+	<property name="ireport.y" value="1036"/>
 	<parameter name="sqlDateTo" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -40,22 +40,22 @@ ORDER BY hd.NgayLapHD DESC]]>
 		<groupHeader>
 			<band height="23">
 				<textField>
-					<reportElement x="47" y="0" width="100" height="20" uuid="1ddff20e-d72a-4227-9ace-3d3898646fcb"/>
-					<textElement>
-						<font fontName="DejaVu Sans" isBold="true"/>
+					<reportElement x="47" y="0" width="203" height="20" uuid="1ddff20e-d72a-4227-9ace-3d3898646fcb"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="14" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA["Năm " +$F{Nam} + ":"]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="22">
+			<band height="61">
 				<textField>
-					<reportElement x="47" y="0" width="241" height="20" uuid="9805e863-d692-4e15-b861-4cc12e376cd9"/>
+					<reportElement x="47" y="11" width="504" height="20" uuid="9805e863-d692-4e15-b861-4cc12e376cd9"/>
 					<textElement>
-						<font fontName="DejaVu Sans" isBold="true"/>
+						<font fontName="DejaVu Sans" size="11" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA["Doanh thu năm: " + $V{TongTien_2}.longValue() + " VNĐ"]]></textFieldExpression>
+					<textFieldExpression><![CDATA["Doanh thu năm " + $F{Nam} +  ": " + $V{TongTien_2}.longValue() + " VNĐ"]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupFooter>
@@ -66,14 +66,14 @@ ORDER BY hd.NgayLapHD DESC]]>
 			<band height="23">
 				<textField>
 					<reportElement x="147" y="0" width="164" height="20" uuid="75cbef8e-7fee-4dff-8b1a-16bf6723512f"/>
-					<textElement>
+					<textElement verticalAlignment="Middle">
 						<font fontName="DejaVu Sans" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA["Tháng " + $F{Thang} + ":"]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement x="365" y="0" width="100" height="20" uuid="9056580e-3ebe-4ca0-b0aa-428d12f338c0"/>
-					<textElement>
+					<textElement verticalAlignment="Middle">
 						<font fontName="DejaVu Sans" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Doanh thu]]></text>
@@ -81,20 +81,13 @@ ORDER BY hd.NgayLapHD DESC]]>
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="22">
-				<staticText>
-					<reportElement x="74" y="0" width="126" height="20" uuid="f187e43c-5095-43dc-b05e-5b7ba6bb71b2"/>
-					<textElement textAlignment="Right">
-						<font fontName="DejaVu Sans" isBold="true"/>
-					</textElement>
-					<text><![CDATA[Doanh thu tháng: ]]></text>
-				</staticText>
+			<band height="29">
 				<textField>
-					<reportElement x="200" y="0" width="228" height="20" uuid="20e00fa8-5520-48d5-8e42-74e1d1285ffb"/>
-					<textElement>
+					<reportElement x="147" y="0" width="404" height="29" uuid="20e00fa8-5520-48d5-8e42-74e1d1285ffb"/>
+					<textElement verticalAlignment="Middle">
 						<font fontName="DejaVu Sans" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{TongTien_1}.longValue() + " VNĐ"]]></textFieldExpression>
+					<textFieldExpression><![CDATA["Doanh thu tháng " + $F{Thang} + ": " + $V{TongTien_1}.longValue() + " VNĐ"]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupFooter>
@@ -199,30 +192,57 @@ ORDER BY hd.NgayLapHD DESC]]>
 		<band height="37" splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="23" splitType="Stretch">
+		<band height="26" splitType="Stretch">
 			<textField>
-				<reportElement x="200" y="0" width="141" height="20" uuid="62225452-b2ab-4750-8d17-a92cef21a80b"/>
-				<textElement>
+				<reportElement x="200" y="0" width="141" height="26" uuid="62225452-b2ab-4750-8d17-a92cef21a80b"/>
+				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Sans"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Ngày " + $F{Ngay} + ":"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="365" y="0" width="151" height="20" uuid="95c336fc-dcfe-4d8e-a19b-ae79d607d4a2"/>
-				<textElement>
+				<reportElement x="365" y="0" width="151" height="26" uuid="95c336fc-dcfe-4d8e-a19b-ae79d607d4a2"/>
+				<textElement verticalAlignment="Middle">
 					<font fontName="DejaVu Sans"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{TongTien}.longValue() + " VNĐ"]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
+	<lastPageFooter>
+		<band height="50">
+			<break>
+				<reportElement x="0" y="7" width="100" height="1" uuid="b26688ee-a293-47e2-aaac-f547fd3e9a1d"/>
+			</break>
+		</band>
+	</lastPageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="323" splitType="Stretch">
+			<stackedBarChart>
+				<chart>
+					<reportElement x="10" y="24" width="541" height="255" uuid="372b8f23-ef3d-4944-a05c-8ab784b020ee"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Biểu đồ doanh thu theo năm"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{Nam}]]></categoryExpression>
+						<valueExpression><![CDATA[$V{TongTien_2}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</stackedBarChart>
+		</band>
 	</summary>
 </jasperReport>

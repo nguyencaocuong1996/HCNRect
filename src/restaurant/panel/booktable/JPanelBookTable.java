@@ -718,7 +718,6 @@ public class JPanelBookTable extends javax.swing.JPanel {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(jDialogAddBookTable,  "Lập phiếu thất bại!");
             e.printStackTrace();
-            return;
         }
     }//GEN-LAST:event_jLabelDoAddBookTableMouseClicked
 

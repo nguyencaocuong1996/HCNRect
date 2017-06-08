@@ -199,8 +199,21 @@ public class JPanelReportDetails extends javax.swing.JPanel {
                         break;
                 }
             break;
+            case "liabitiesProvider":
+                switch(dateType){
+                    case "month":
+                        url = ReportResources.DEBT_PROVIDER;
+                        break;
+                    case "year":
+                        
+                        break;
+                    case "range":
+                        
+                        break;
+                }
+            break;
         }
-        System.out.println(url);
+//        System.out.println(url);
         return url;
     }
     public final HashMap<String, Object> getReportParams(String type){
@@ -560,7 +573,7 @@ public class JPanelReportDetails extends javax.swing.JPanel {
 
         jPanelChooseTypeContent.add(jPanelTypeDish);
 
-        jRadioButtonMostUsuallyMaterial.setText("Nguyên liệu được sử dụng nhiều nhất");
+        jRadioButtonMostUsuallyMaterial.setText("Nguyên liệu được nhập nhiều nhất");
 
         javax.swing.GroupLayout jPanelTypeStockLayout = new javax.swing.GroupLayout(jPanelTypeStock);
         jPanelTypeStock.setLayout(jPanelTypeStockLayout);

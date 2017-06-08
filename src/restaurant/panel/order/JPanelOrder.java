@@ -481,6 +481,7 @@ public class JPanelOrder extends javax.swing.JPanel {
                 MBill mBill = new MBill(); // Tạo ra một instance hóa đơn mới 
                 if (customer != null) { //Nếu đã chọn khách hàng
                     mBill.setCustomerId(customer.getId()); // thì gán id khách hàng cho hóa đơn
+                    customer.updateCustomerType(jpOD.getTotalBill() - discount); // Thực hiện cập nhật loại khách hàng sau khi thanh toán
                 } else {
                     mBill.setCustomerId(0); //Ngược lại hóa đơn lấy id khách hàng = 0
                 }
@@ -497,7 +498,7 @@ public class JPanelOrder extends javax.swing.JPanel {
                     for(JPanelOrderItem jpOI : jpOD.getListDishOrdering()){ // duyệt mảng chứa các món ăn đang được chọn
                         MBillDetail mBD = new MBillDetail(); // tạo ra 1 instance chi tiết hóa đơn
                         mBD.setBillId(mBill.getId()); // gán mã hóa đơn cho nó
-                        mBD.setDishId(jpOI.getDishId()); // gán tên món ăn
+                        mBD.setDishId(jpOI.getDishId()); // gán mã món ăn
                         mBD.setQuantity(jpOI.getQuantity()); // gán số lượng đặt
                         mBD.insert(); // thêm vào DB
                     }

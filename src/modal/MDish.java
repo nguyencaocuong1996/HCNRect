@@ -8,6 +8,8 @@ package modal;
 import java.util.HashMap;
 import database.Database;
 import java.sql.SQLException;
+import view.VDishRecipe;
+import view.ViewItem;
 /**
  *
  * @author WINDNCC
@@ -90,7 +92,32 @@ public class MDish extends Model{
         this.price = (Float) md.get("GiaMA");
         
     }
-    
+    public static void main(String[] args) {
+        try {
+            MDish d = MDish.get(2);
+            System.out.println(d.checkCanOrder(1));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+    }
+    public boolean checkCanOrder(int qty) throws SQLException{
+        VDishRecipe vDR = VDishRecipe.get(id);
+        for(ViewItem vi : vDR.getData()){
+            int materialId = ((Long) vi.get("MaNL")).intValue();
+            float luongCan = ((float) vi.get("LuongCan") * qty);
+            try {
+                MMaterial mM = MMaterial.get(materialId);
+                if(mM.getInStock() < luongCan){
+                    return false;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            
+        }
+        return true;
+    }
     public static MDish get(int id) throws SQLException{
         String sql = "SELECT * FROM " + TABLE_NAME + " WHERE MaMA = " + id;
         try {

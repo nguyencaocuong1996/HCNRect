@@ -17,12 +17,8 @@ import java.util.Iterator;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import modal.MCustomer;
-import restaurant.panel.staff.JPanelManagementStaff;
-import restaurant.panel.staff.JPanelStaffRowItem;
 import view.VCustomer;
 import view.VCustomerType;
-import view.VDepartment;
-import view.VStaff;
 import view.ViewItem;
 
 /**
@@ -612,13 +608,11 @@ public class JPanelManagementCustomer extends javax.swing.JPanel {
             mCustomer.insert();
             jDialogAddCustomer.setVisible(false);
 
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | SQLException e) {
             // JOptionPane.showMessageDialog(this, "Có lỗi xảy ra! Vui lòng kiểm tra lại kiểu dữ liệu!");
             e.printStackTrace();
-        } catch (SQLException ex) {
-            //JOptionPane.showMessageDialog(this, "Có lỗi xảy ra! Lỗi database!");
-            ex.printStackTrace();
         }
+        //JOptionPane.showMessageDialog(this, "Có lỗi xảy ra! Lỗi database!");
 
         jPanelTableContent.removeAll();
         customInit();

@@ -24,11 +24,7 @@ public class JPanelChooseCustomerForOrderItem extends JPanelChooseCustomerItem{
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                MCustomer customer = new MCustomer();
-                customer.setId(customerId);
-                customer.setPhone(customerPhone);
-                customer.setFullName(customerName);
-                customer.setCustomerTypeId(customerTypeId);
+                MCustomer customer = MCustomer.getByID(customerId);
                 JPanelOrder.getInstance().setCustomer(customer);
                 JPanelOrder.getInstance().getjDialogChooseCustomer().setVisible(false);
             }

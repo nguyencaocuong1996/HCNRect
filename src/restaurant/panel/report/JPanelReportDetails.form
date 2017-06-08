@@ -268,7 +268,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel6" max="32767" attributes="0"/>
-                  <Component id="jPanelChooseTypeContent" alignment="0" pref="849" max="32767" attributes="0"/>
+                  <Component id="jPanelChooseTypeContent" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -525,7 +525,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JRadioButton" name="jRadioButtonMostUsuallyMaterial">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Nguy&#xea;n li&#x1ec7;u &#x111;&#x1b0;&#x1ee3;c s&#x1eed; d&#x1ee5;ng nhi&#x1ec1;u nh&#x1ea5;t"/>
+                        <Property name="text" type="java.lang.String" value="Nguy&#xea;n li&#x1ec7;u &#x111;&#x1b0;&#x1ee3;c nh&#x1ead;p nhi&#x1ec1;u nh&#x1ea5;t"/>
                       </Properties>
                     </Component>
                   </SubComponents>

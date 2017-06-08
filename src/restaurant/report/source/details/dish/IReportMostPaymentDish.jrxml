@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="17c12f5f-c249-469e-b37d-8ea3192fa439">
-	<property name="ireport.zoom" value="0.75"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="26"/>
+	<property name="ireport.zoom" value="1.4265583530550014"/>
+	<property name="ireport.x" value="4"/>
+	<property name="ireport.y" value="6"/>
+	<parameter name="staffName" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT ma.MaMA, ma.TenMA, (COUNT(cthd.SoLuong) * ma.GiaMa) AS TongThu 
 FROM chi_tiet_hoa_don as cthd
@@ -24,14 +27,93 @@ LIMIT 0,10]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="548" splitType="Stretch">
 			<staticText>
-				<reportElement x="36" y="10" width="469" height="40" uuid="95b29979-f2dd-4394-9f63-75085205a6af"/>
-				<textElement textAlignment="Justified">
-					<font size="24" isBold="true"/>
+				<reportElement x="25" y="30" width="534" height="20" uuid="31dc0256-4d6b-439b-86d3-7b6429431287"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Top 10 món ăn cho doanh thu cao nhất]]></text>
+				<text><![CDATA[Địa chỉ: Khu phố 6, Phường Linh Trung, Quận Thủ Đức, TP Hồ Chí Minh]]></text>
 			</staticText>
+			<line>
+				<reportElement x="10" y="98" width="534" height="1" uuid="afad2614-b658-4d21-b793-4dc60e06248a"/>
+			</line>
+			<line>
+				<reportElement x="12" y="311" width="532" height="1" uuid="06eef5cc-8048-415b-80f7-343874629278"/>
+			</line>
+			<staticText>
+				<reportElement x="13" y="130" width="534" height="56" uuid="af63b235-760f-49f7-9060-957e8ee6e4f5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nội dung báo cáo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="372" y="484" width="172" height="20" uuid="66079bed-5eb4-4a37-a892-bdfd0e46134e"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="15" isBold="false"/>
+				</textElement>
+				<text><![CDATA[.......................................]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="200" y="464" width="162" height="20" uuid="6f93cbc6-bc9c-4805-9952-30de780ec4a8"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="14" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="464" width="169" height="21" uuid="ed5cb76d-7ee3-4fe7-b048-da7b82ca6f70"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{staffName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="369" y="441" width="178" height="20" uuid="27865671-b7f7-475f-8240-83a1e454dbdc"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Chữ ký giám đốc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="441" width="162" height="20" uuid="24658480-e294-4b49-9af4-77a599f26d94"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ngày lập báo cáo]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="18" y="186" width="529" height="47" uuid="f07a0729-c0e9-4563-9261-96bd3367e9da"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Top 10 món ăn có doanh thu cao nhất"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="25" y="10" width="455" height="20" uuid="dc216ff1-d93c-4ab7-9e28-bb16a0b3a245"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nhà hàng: Rectangle]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="441" width="169" height="23" uuid="7cdc9df4-3c70-45c0-b1c1-4098cf3aa488"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Người lập báo cáo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="25" y="50" width="225" height="20" uuid="98f10cc7-a76d-4feb-82ef-dc6451557ef5"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Điện thoại: 0166696969]]></text>
+			</staticText>
+			<break>
+				<reportElement x="0" y="532" width="100" height="1" uuid="62cef53a-b6bc-4e3b-b33a-cf47a4d072c3"/>
+			</break>
 		</band>
 	</title>
 	<pageHeader>
@@ -41,14 +123,23 @@ LIMIT 0,10]]>
 		<band height="36" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="0" width="100" height="20" uuid="e2eaf5ef-3ebc-4d63-a2f4-51fd7fbc95c6"/>
+				<textElement>
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
 				<text><![CDATA[Mã món ăn]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="117" y="2" width="208" height="20" uuid="24af5efe-b63e-4c05-aa71-995c2a887801"/>
+				<textElement>
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
 				<text><![CDATA[Tên món ăn]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="396" y="1" width="100" height="20" uuid="1ab5ff0b-5816-444c-91a3-51fc7a2d6aa9"/>
+				<textElement>
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
 				<text><![CDATA[Tổng thu]]></text>
 			</staticText>
 		</band>
@@ -57,14 +148,23 @@ LIMIT 0,10]]>
 		<band height="23" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="0" width="100" height="20" uuid="498574cf-4dc8-4814-923e-18c4afc904cb"/>
+				<textElement>
+					<font fontName="DejaVu Sans"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{MaMA}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="117" y="0" width="208" height="20" uuid="c1c4901a-be12-4e57-858e-31064cc3b6e9"/>
+				<textElement>
+					<font fontName="DejaVu Sans"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{TenMA}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="396" y="3" width="100" height="20" uuid="1591c6d9-efe1-4db9-a048-9eecd3cb0e93"/>
+				<textElement>
+					<font fontName="DejaVu Sans"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{TongThu}.longValue()]]></textFieldExpression>
 			</textField>
 		</band>
@@ -93,14 +193,12 @@ LIMIT 0,10]]>
 					<itemLabel/>
 				</piePlot>
 			</pieChart>
-			<staticText>
-				<reportElement x="59" y="207" width="357" height="20" uuid="c777bdc7-2d91-4950-a34d-b7d7ce05a0c1"/>
-				<textElement textAlignment="Right"/>
-				<text><![CDATA[Tổng thu 10 món ăn có doanh thu cao nhất: ]]></text>
-			</staticText>
 			<textField>
-				<reportElement x="416" y="207" width="140" height="20" uuid="7f0d54f4-9c72-4b8b-be8b-2e4fef301375"/>
-				<textFieldExpression><![CDATA[$V{TongThu_1}.longValue()]]></textFieldExpression>
+				<reportElement x="75" y="207" width="481" height="20" uuid="7f0d54f4-9c72-4b8b-be8b-2e4fef301375"/>
+				<textElement>
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Tổng thu 10 món ăn có doanh thu cao nhất:  " + $V{TongThu_1}.longValue() + " VNĐ"]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

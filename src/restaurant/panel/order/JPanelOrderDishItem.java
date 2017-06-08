@@ -9,8 +9,11 @@ import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import modal.MDish;
 import restaurant.MainFrame;
 
 public class JPanelOrderDishItem extends javax.swing.JPanel{
@@ -49,22 +52,33 @@ public class JPanelOrderDishItem extends javax.swing.JPanel{
             public void mouseClicked(MouseEvent e) {
                 MainFrame.getInstance().changeContentPanel(JPanelOrder.getInstance());
                 int tableId = JPanelOrder.getInstance().getTableId();
-                System.out.println(tableId);
                 JPanelOrderDetail jpOD = JPanelOrder.getInstance().getListJPanelOrderDetail().get(tableId);
                 boolean checkExists = false;
-                for (JPanelOrderItem item : jpOD.getListDishOrdering()) {
+                boolean checkCanOrder = false;
+                try {
+                    MDish dish = MDish.get(dishId);
+                    checkCanOrder = dish.checkCanOrder(1);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+                if (checkCanOrder) {
+                    for (JPanelOrderItem item : jpOD.getListDishOrdering()) {
                     if(item.getDishId() == dishId){
                         item.setQuantity(item.getQuantity() + 1);
                         checkExists = true;
                         break;
                     }
+                    }
+                    if(checkExists == false){
+                        JPanelOrder.getInstance().getJpOrderDetail().addOrderItem(new JPanelOrderItem(dishId, dishName,1,dishPrice));
+                    }
+                    JPanelOrder.getInstance().updateBill();
+                    JPanelOrder.getInstance().revalidate();
+                    JPanelOrder.getInstance().repaint();
+                } else {
+                    JOptionPane.showMessageDialog(MainFrame.getInstance(), "Không thể gọi món này do hết nguyên liệu!");
                 }
-                if(checkExists == false){
-                    JPanelOrder.getInstance().getJpOrderDetail().addOrderItem(new JPanelOrderItem(dishId, dishName,1,dishPrice));
-                }
-                JPanelOrder.getInstance().updateBill();
-                JPanelOrder.getInstance().revalidate();
-                JPanelOrder.getInstance().repaint();
+                
             }
             
         });

@@ -8,6 +8,8 @@ package modal;
 import database.Database;
 import java.sql.SQLException;
 import java.util.HashMap;
+import view.VCustomerType;
+import view.ViewData;
 
 /**
  *
@@ -36,12 +38,43 @@ public class MCustomer extends Model{
         this.customerTypeId = customerTypeId;
         this.address = address;
     }
-
+    
     public MCustomer(String fullName, String phone, int customerTypeId, String address) {
         this.fullName = fullName;
         this.phone = phone;
         this.customerTypeId = customerTypeId;
         this.address = address;
+    }
+    public static void main(String[] args) {
+        MCustomer c = MCustomer.getByID(7);
+        c.updateCustomerType(0);
+    }
+    public void updateCustomerType(float totalBill){
+        String sql = "SELECT SUM(hd.TriGiaThuc) AS TongChi FROM hoa_don AS hd" +
+                        " INNER JOIN khach_hang AS kh ON kh.MaKH = hd.MaKH" +
+                        " WHERE hd.MaKH = " + this.getId() + 
+                        " GROUP BY hd.MaKH";
+        try {
+            ModalData md = database.Database.modalSelect(sql);
+            float TongChi = 0;
+            if(!md.isEmpty()){
+                TongChi = ((Double) md.get("TongChi")).floatValue() + totalBill;
+            } else {
+                TongChi = totalBill;
+            }
+            float TongChi2 = TongChi;
+            System.out.println("updateCustomerType in MCustomer.java Tổng số tiền mà " + this.getFullName() + " đã sử dụng tại nhà hàng " +TongChi2);
+            ViewData vd = VCustomerType.getAllCustomerType().getData();
+            vd.forEach((t) -> {
+                float min = (float) t.get("SoTienToiThieu");
+                int ctypeId = ((Integer) t.get("MaLKH"));
+                if(TongChi2 >= min){
+                    customerTypeId = ctypeId;
+                }
+            });
+            this.update();
+        } catch (SQLException e) {
+        }
     }
     public static MCustomer getByModalData(ModalData md){
             Long id = (Long) md.get("MaKH");

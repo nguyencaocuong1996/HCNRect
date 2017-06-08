@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="841c96d7-1028-4709-9b7a-c04d8359628d">
+	<property name="ireport.zoom" value="0.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="135"/>
+	<parameter name="month" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="year" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="staffName" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT dk.MaNCC, dk.TenNCC, dk.NoDauKi, kc.NoCuoiKi FROM 
+	(SELECT vpn.MaNCC, vpn.TenNCC, (vpn.TongTienNo - vpc.TongTienChi) AS NoCuoiKi FROM 
+		(SELECT ncc.MaNCC, ncc.TenNCC, SUM(pnh.TriGiaPNH) TongTienNo FROM phieu_nhap_hang AS pnh
+		INNER JOIN nha_cung_cap AS ncc ON ncc.MaNCC = pnh.MaNCC
+		WHERE (MONTH(pnh.NgayNhapHang) <= $P{month} AND YEAR(pnh.NgayNhapHang) <= $P{year})
+		GROUP BY pnh.MaNCC) vpn
+	INNER JOIN 
+		(SELECT pc.MaNCC, SUM(pc.SoTienChi) as TongTienChi FROM phieu_chi_ncc AS pc 
+		WHERE (MONTH(pc.NgayChi) <= $P{month} AND YEAR(pc.NgayChi) <= $P{year})
+		GROUP BY pc.MaNCC) AS vpc
+	ON vpn.MaNCC = vpc.MaNCC) AS kc
+INNER JOIN 
+	((SELECT vpn.MaNCC, vpn.TenNCC, (vpn.TongTienNo - vpc.TongTienChi) AS NoDauKi FROM 
+		(SELECT ncc.MaNCC, ncc.TenNCC, SUM(pnh.TriGiaPNH) TongTienNo FROM phieu_nhap_hang AS pnh
+		INNER JOIN nha_cung_cap AS ncc ON ncc.MaNCC = pnh.MaNCC
+		WHERE (MONTH(pnh.NgayNhapHang) <= CAST($P{month} AS SIGNED) - 1 AND YEAR(pnh.NgayNhapHang) <= $P{year})
+		GROUP BY pnh.MaNCC) vpn
+	INNER JOIN 
+		(SELECT pc.MaNCC, SUM(pc.SoTienChi) as TongTienChi FROM phieu_chi_ncc AS pc 
+		WHERE (MONTH(pc.NgayChi) <= CAST($P{month} AS SIGNED) - 1 AND YEAR(pc.NgayChi) <= $P{year})
+		GROUP BY pc.MaNCC) AS vpc
+	ON vpn.MaNCC = vpc.MaNCC)) AS dk
+ON dk.MaNCC = kc.MaNCC
+GROUP BY dk.MaNCC]]>
+	</queryString>
+	<field name="MaNCC" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TenNCC" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="NoDauKi" class="java.lang.Double"/>
+	<field name="NoCuoiKi" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="537" splitType="Stretch">
+			<staticText>
+				<reportElement x="20" y="441" width="169" height="23" uuid="d9e02516-d1b1-4929-8279-4eeb272fc8b5"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Người lập báo cáo]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="20" y="464" width="169" height="21" uuid="e140814e-0a90-4f0f-8f0c-6b257c3f3eeb"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{staffName}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="33" y="311" width="494" height="1" uuid="675f99d5-8892-4ddc-ab07-2e03f8f5b573"/>
+			</line>
+			<staticText>
+				<reportElement x="210" y="441" width="162" height="20" uuid="01a8b0b0-314c-4339-a7d2-53d07693a746"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ngày lập báo cáo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="11" width="455" height="20" uuid="1479a0b0-5ca5-4361-9758-9259f721a9e5"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nhà hàng: Rectangle]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="210" y="464" width="162" height="20" uuid="b094a408-ef25-462c-8da1-0785ac59c924"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="14" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="29" y="219" width="498" height="29" uuid="66378c8f-41db-4c6a-acc5-95f5b7add0bb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="15" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Công nợ nhà cung cấp tháng " + $P{month} + " năm " + $P{year}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="51" width="225" height="20" uuid="f3970969-e029-440b-a6ec-a0524086faeb"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Điện thoại: 0166696969]]></text>
+			</staticText>
+			<break>
+				<reportElement x="0" y="519" width="100" height="1" uuid="27f45a34-ddd9-4090-9277-783f5076c615"/>
+			</break>
+			<line>
+				<reportElement x="33" y="98" width="494" height="1" uuid="a0960d03-d14b-4ce5-9c77-2aec04b71e2e"/>
+			</line>
+			<staticText>
+				<reportElement x="20" y="31" width="534" height="20" uuid="961b1e5f-00d6-4d33-89e3-6c9c04fc1783"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Địa chỉ: Khu phố 6, Phường Linh Trung, Quận Thủ Đức, TP Hồ Chí Minh]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="147" width="500" height="56" uuid="72293190-3ef6-4462-98f7-1a5aaaeac985"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nội dung báo cáo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="379" y="441" width="193" height="20" uuid="20ec4f9c-b766-4918-8240-5dce0874eb52"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Chữ ký giám đốc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="391" y="484" width="164" height="20" uuid="90e77c7f-211a-4f93-b9cb-910b9d07abd2"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="15" isBold="false"/>
+				</textElement>
+				<text><![CDATA[.......................................]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="30" uuid="be1a5c38-8d05-4100-b978-59411b3b225b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mã NCC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="2" width="156" height="28" uuid="38c19480-6714-4623-a218-8480cd13a48b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tên NCC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="2" width="131" height="28" uuid="e34f43fb-1141-47bf-8e7b-51492e7a36d9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nợ đầu kì]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="427" y="2" width="128" height="28" uuid="88edc9a1-5e6d-43f5-9f9b-cd554c1391bf"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nợ cuối kì]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="29" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="1" width="100" height="20" uuid="41d2367f-8dfa-47bf-92af-d9b76aa7a49b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA["NCC" + $F{MaNCC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="110" y="0" width="156" height="20" uuid="ed332f1c-e65d-47ac-81b8-1b5b0a5ceac9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TenNCC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="279" y="0" width="131" height="20" uuid="527e5eee-fce6-4530-83aa-9ffd8d368a7d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NoDauKi}.longValue() + " VNĐ"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="427" y="1" width="100" height="20" uuid="55922100-8b5a-4982-b47b-02475ab8a8e8"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NoCuoiKi}.longValue() + " VNĐ"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="26" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="345" splitType="Stretch">
+			<bar3DChart>
+				<chart>
+					<reportElement x="20" y="15" width="518" height="268" uuid="2483e11d-d72a-4c0b-a079-239bd0bedd8e"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Nợ đầu kì"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{TenNCC}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{NoDauKi}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Nợ cuối kì"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{TenNCC}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{NoCuoiKi}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</bar3DPlot>
+			</bar3DChart>
+			<textField>
+				<reportElement x="27" y="302" width="500" height="20" uuid="bca74de2-e80f-46e9-bb87-6eb809ffd3df"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Biểu đồ so sánh công nợ của các nhà cung cấp tháng " + $P{month}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

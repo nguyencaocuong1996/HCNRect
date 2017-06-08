@@ -1,29 +1,193 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD JasperReport//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
-
-<jasperReport name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-    <background>
-        <band/>
-    </background>
-    <title>
-        <band height="79"/>
-    </title>
-    <pageHeader>
-        <band height="35"/>
-    </pageHeader>
-    <columnHeader>
-        <band height="61"/>
-    </columnHeader>
-    <detail>
-        <band height="125"/>
-    </detail>
-    <columnFooter>
-        <band height="45"/>
-    </columnFooter>
-    <pageFooter>
-        <band height="54"/>
-    </pageFooter>
-    <summary>
-        <band height="42"/>
-    </summary>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e9af0632-2b43-4b5b-b27f-7b477853aa3d">
+	<property name="ireport.zoom" value="1.2100000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="656"/>
+	<parameter name="staffName" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT nv.MaNV, nv.HoTenNV, COUNT(hd.MaHD) AS SoLanLap FROM hoa_don AS hd
+INNER JOIN nhan_vien AS nv ON nv.MaNV = hd.MaNV
+GROUP BY hd.MaNV
+ORDER BY COUNT(hd.MaHD) DESC
+LIMIT 0,10;]]>
+	</queryString>
+	<field name="MaNV" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="HoTenNV" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SoLanLap" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="536" splitType="Stretch">
+			<staticText>
+				<reportElement x="23" y="12" width="455" height="20" uuid="02cbf5e5-53ee-41e8-be71-f7f34a0e57da"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nhà hàng: Rectangle]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="382" y="484" width="172" height="20" uuid="5fc82364-4671-4ccc-98c0-366db0577bef"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="15" isBold="false"/>
+				</textElement>
+				<text><![CDATA[.......................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="23" y="32" width="534" height="20" uuid="7e5e7a31-c52e-472d-b539-5c0daa4aa2b6"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Địa chỉ: Khu phố 6, Phường Linh Trung, Quận Thủ Đức, TP Hồ Chí Minh]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="23" y="52" width="225" height="20" uuid="bffd5eea-8ab9-43b7-a845-ffa4216d162a"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Điện thoại: 0166696969]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="441" width="162" height="20" uuid="81310517-efce-47e3-90b7-b222d7454a19"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ngày lập báo cáo]]></text>
+			</staticText>
+			<break>
+				<reportElement x="0" y="499" width="100" height="1" uuid="d0641618-c365-41f3-adfe-26da6a38702a"/>
+			</break>
+			<textField>
+				<reportElement x="28" y="186" width="529" height="47" uuid="8cda101c-239f-41c8-88aa-d86d0cb899eb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Top 10 nhân viên lập được nhiều hóa đơn nhất"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="22" y="311" width="516" height="1" uuid="b740536a-15a6-446d-b8e9-28b0daa457c1"/>
+			</line>
+			<staticText>
+				<reportElement x="23" y="130" width="534" height="56" uuid="e2cfb643-97be-421a-8faa-4e3bacdd92d2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nội dung báo cáo]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="210" y="464" width="162" height="20" uuid="03611ed2-8795-4297-941f-0c273f7f4234"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="14" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="441" width="169" height="23" uuid="96a46d13-8255-45f9-9366-c544765cd3d1"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Người lập báo cáo]]></text>
+			</staticText>
+			<line>
+				<reportElement x="20" y="99" width="518" height="1" uuid="0680b6b3-c1e6-401b-94af-5fc7fbf87f2f"/>
+			</line>
+			<staticText>
+				<reportElement x="379" y="441" width="178" height="20" uuid="985450bc-8d15-42ef-8bfa-ec81dc572b8d"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Chữ ký giám đốc]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="20" y="464" width="169" height="21" uuid="a986a642-df7b-4f45-9066-c81a05d2ef07"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{staffName}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="25">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="25" uuid="8cd4b5c8-8e24-4327-8f34-b56987e4f53f"/>
+				<textElement>
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mã nhân viên]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="172" y="0" width="186" height="25" uuid="3622d8fc-dd20-4d0d-856b-184bc671d9e7"/>
+				<textElement>
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tên nhân viên]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="411" y="2" width="143" height="23" uuid="339a5951-ccf2-45ce-8377-24ddbb2e7ac9"/>
+				<textElement>
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Số hóa đơn lập được]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="73d81c58-37af-4654-8ca9-bc39aeb1d46e"/>
+				<textElement>
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MaNV}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="172" y="0" width="186" height="20" uuid="6439e94a-9735-4dd8-a695-f870b46635e5"/>
+				<textElement>
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{HoTenNV}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="431" y="0" width="100" height="20" uuid="0690f989-8b74-4706-ab96-27694f5ae031"/>
+				<textElement>
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SoLanLap}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="242" splitType="Stretch">
+			<pieChart>
+				<chart>
+					<reportElement x="0" y="0" width="554" height="198" uuid="a271ce74-d1b5-409b-8356-2521848164b8"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<keyExpression><![CDATA[$F{HoTenNV}]]></keyExpression>
+					<valueExpression><![CDATA[$F{SoLanLap}]]></valueExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+			<staticText>
+				<reportElement x="100" y="209" width="364" height="20" uuid="fe722437-15c6-4901-ab5e-83646fd7544b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Biểu đồ top 10 nhân viên lập được nhiều hóa đơn nhất]]></text>
+			</staticText>
+		</band>
+	</summary>
 </jasperReport>

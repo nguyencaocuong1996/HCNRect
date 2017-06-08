@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1680d083-90f9-4a6f-ae86-465af685c815">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="124"/>
+	<property name="ireport.y" value="581"/>
 	<parameter name="sqlDate" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -15,13 +15,17 @@
 	<parameter name="year" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
+	<parameter name="staffName" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT kh.MaKH, kh.HoTenKH, COUNT(hd.MaKH) AS SoLuot FROM hoa_don as hd
 INNER JOIN khach_hang as kh ON kh.MaKH = hd.MaKH
 WHERE MONTH(hd.NgayLapHD) = $P{month}
  AND YEAR(hd.NgayLapHD) = $P{year}
 
-GROUP BY hd.MaKH]]>
+GROUP BY hd.MaKH
+ORDER BY COUNT(hd.MaKH) DESC]]>
 	</queryString>
 	<field name="MaKH" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -37,14 +41,93 @@ GROUP BY hd.MaKH]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="538" splitType="Stretch">
 			<staticText>
-				<reportElement x="33" y="0" width="478" height="52" uuid="047ea18f-3cce-4736-b8c8-2517f72e2d92"/>
+				<reportElement x="25" y="30" width="534" height="20" uuid="d7e44c0e-6895-4a96-89c1-1bf0f50302a2"/>
 				<textElement>
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Địa chỉ: Khu phố 6, Phường Linh Trung, Quận Thủ Đức, TP Hồ Chí Minh]]></text>
+			</staticText>
+			<line>
+				<reportElement x="10" y="98" width="534" height="1" uuid="a6506cc8-22f8-45d2-aeee-a1f6ae7ad8be"/>
+			</line>
+			<line>
+				<reportElement x="12" y="311" width="532" height="1" uuid="e2661b14-8ee8-450f-864f-1d5e4a253572"/>
+			</line>
+			<staticText>
+				<reportElement x="13" y="130" width="534" height="56" uuid="3583e232-a4ec-40b3-9bee-17492f39c98a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="DejaVu Sans" size="24" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Top 10 khách hàng thường xuyên nhất]]></text>
+				<text><![CDATA[Nội dung báo cáo]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="372" y="484" width="172" height="20" uuid="47f6e06c-0ec1-4fc5-af80-90cb5d7f6854"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="15" isBold="false"/>
+				</textElement>
+				<text><![CDATA[.......................................]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="200" y="464" width="162" height="20" uuid="983b0183-54dc-4135-9364-8026814b9279"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="14" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="464" width="169" height="21" uuid="80ee1e41-43e7-4ba0-95e2-0bf59105da2c"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{staffName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="369" y="441" width="178" height="20" uuid="606592ad-e738-4f64-8cdc-0bbc8dedd42c"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Chữ ký giám đốc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="441" width="162" height="20" uuid="9c8a91e3-d74e-4ef6-a6e2-96ce8a4b3c4a"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ngày lập báo cáo]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="18" y="186" width="529" height="47" uuid="7d6c62de-2ea1-4644-bc66-975490433789"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Top 10 khách hàng thường xuyên nhất tháng " + $P{month} + " năm " + $P{year}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="25" y="10" width="455" height="20" uuid="2d875350-8fa7-4ed1-9c5a-ad5b69cf60a9"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nhà hàng: Rectangle]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="441" width="169" height="23" uuid="55d14e0f-4b9e-47c3-b107-64b4ce5e7f0d"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Người lập báo cáo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="25" y="50" width="225" height="20" uuid="41c19015-7af6-4233-912f-adc08fba575a"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Điện thoại: 0166696969]]></text>
+			</staticText>
+			<break>
+				<reportElement x="0" y="522" width="100" height="1" uuid="07cc33a6-1bc9-48fd-b4ce-50ab0a4da80e"/>
+			</break>
 		</band>
 	</title>
 	<pageHeader>
@@ -100,17 +183,11 @@ GROUP BY hd.MaKH]]>
 			</textField>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
 	<summary>
-		<band height="204" splitType="Stretch">
+		<band height="395" splitType="Stretch">
 			<pieChart>
 				<chart>
-					<reportElement x="21" y="0" width="515" height="156" uuid="26da2a5d-9321-4c82-8053-5e8cfa4e5dd0"/>
+					<reportElement x="18" y="19" width="515" height="311" uuid="26da2a5d-9321-4c82-8053-5e8cfa4e5dd0"/>
 					<chartTitle/>
 					<chartSubtitle/>
 					<chartLegend/>
@@ -124,19 +201,12 @@ GROUP BY hd.MaKH]]>
 					<itemLabel/>
 				</piePlot>
 			</pieChart>
-			<staticText>
-				<reportElement x="0" y="171" width="434" height="20" uuid="b51a52db-e4bf-41ed-8207-dde4a51d1c0d"/>
-				<textElement textAlignment="Right">
+			<textField>
+				<reportElement x="18" y="348" width="501" height="20" uuid="061d4358-30d1-451f-8e0b-1caeb188e05b"/>
+				<textElement>
 					<font fontName="DejaVu Sans" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Tổng lượt ghé thăm của 10 khách hàng thường xuyên nhất: ]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="434" y="171" width="100" height="20" uuid="061d4358-30d1-451f-8e0b-1caeb188e05b"/>
-				<textElement>
-					<font fontName="DejaVu Sans"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{SoLuot_1}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Tổng lượt ghé thăm của 10 khách hàng thường xuyên nhất: " + $V{SoLuot_1} + " lượt"]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

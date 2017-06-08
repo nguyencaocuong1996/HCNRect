@@ -7,7 +7,6 @@ package modal;
 
 import database.Database;
 import java.sql.SQLException;
-import java.util.HashMap;
 
 /**
  *
@@ -43,6 +42,7 @@ public class MDishRecipe extends Model{
             throw e;
         }
     }
+    
     public static void main(String[] args) {
         try {
             MDishRecipe a = MDishRecipe.get(1, 2);

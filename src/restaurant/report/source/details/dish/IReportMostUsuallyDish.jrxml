@@ -1,35 +1,205 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="767c9093-0d0a-41b7-8972-039b199296dc">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.2078825000000004"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="826"/>
+	<parameter name="staffName" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+ma.MaMA,
+ma.TenMA,
+SUM(cthd.SoLuong) AS SoLuong 
+FROM chi_tiet_hoa_don AS cthd
+INNER JOIN mon_an AS ma ON cthd.MaMA = ma.MaMA
+GROUP BY cthd.MaMA
+ORDER BY SUM(cthd.SoLuong) DESC
+LIMIT 0,10]]>
+	</queryString>
+	<field name="MaMA" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TenMA" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="SoLuong" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="SoLuong_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{SoLuong}]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch"/>
+		<band height="512" splitType="Stretch">
+			<staticText>
+				<reportElement x="200" y="441" width="162" height="20" uuid="20860e72-76a9-44ec-bb7b-74504fc7cf97"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ngày lập báo cáo]]></text>
+			</staticText>
+			<line>
+				<reportElement x="12" y="311" width="532" height="1" uuid="1de149a2-5b52-4525-a0d4-e3f06123c67b"/>
+			</line>
+			<staticText>
+				<reportElement x="25" y="50" width="225" height="20" uuid="627d7e52-a05b-4d53-b267-6ab6735feaf0"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Điện thoại: 0166696969]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="18" y="186" width="529" height="47" uuid="6daeee87-38bd-4789-82f7-8382c69d7088"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Top 10 món ăn được gọi nhiều nhất"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="369" y="441" width="178" height="20" uuid="b741577e-0b76-464a-82c4-5590af3ff70e"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Chữ ký giám đốc]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="200" y="464" width="162" height="20" uuid="047e946a-1746-42aa-bee6-a04ecd613cd8"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="14" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="13" y="130" width="534" height="56" uuid="a59dc2a9-5429-4ef4-a749-4064bca367ac"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nội dung báo cáo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="441" width="169" height="23" uuid="dc6804b8-33c3-4a1f-832f-7ef900e9b5f3"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Người lập báo cáo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="25" y="30" width="534" height="20" uuid="9a6246a7-6ad0-40b6-80d9-ffbd39e8115e"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Địa chỉ: Khu phố 6, Phường Linh Trung, Quận Thủ Đức, TP Hồ Chí Minh]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="25" y="10" width="455" height="20" uuid="e2089831-bd29-40ee-9bed-a7a4c9a5ce26"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nhà hàng: Rectangle]]></text>
+			</staticText>
+			<line>
+				<reportElement x="10" y="98" width="534" height="1" uuid="074feb37-197a-40a0-8229-31adacb747c8"/>
+			</line>
+			<staticText>
+				<reportElement x="372" y="484" width="172" height="20" uuid="8d32e625-2370-4916-a0f5-43884e6af9d7"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="15" isBold="false"/>
+				</textElement>
+				<text><![CDATA[.......................................]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="10" y="464" width="169" height="21" uuid="3f0ffe48-ae12-4dd6-8e85-8a6ddab192af"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{staffName}]]></textFieldExpression>
+			</textField>
+			<break>
+				<reportElement x="0" y="499" width="100" height="1" uuid="ce229dc0-743c-41b5-85a0-9355491c007e"/>
+			</break>
+		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch">
-			<staticText>
-				<reportElement x="313" y="15" width="100" height="20" uuid="66558a22-9963-43a7-8943-2e96b613ece0"/>
-				<text><![CDATA[Static text]]></text>
-			</staticText>
-		</band>
+		<band height="35" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="61" splitType="Stretch"/>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="16a67dc1-e423-4927-aadf-ba3f32f2bb24"/>
+				<textElement>
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mã món ăn]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="174" y="1" width="226" height="20" uuid="302db0c1-8a32-4a11-8fd2-ee4625db7810"/>
+				<textElement>
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tên món ăn]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="419" y="0" width="128" height="20" uuid="c09037a3-74d8-4c9a-981a-08f1545038a3"/>
+				<textElement>
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Số lần được gọi]]></text>
+			</staticText>
+		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="eb27db3e-753a-4103-833a-c2d2186f4ec8"/>
+				<textElement>
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MaMA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="174" y="0" width="226" height="20" uuid="65739d59-c34a-4c02-a3f9-c390e763b72e"/>
+				<textElement>
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TenMA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="419" y="0" width="128" height="20" uuid="fc500bf2-4c6d-44c6-acf9-9536cd9f739c"/>
+				<textElement>
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SoLuong}.intValue() + " lượt"]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="377" splitType="Stretch">
+			<pieChart>
+				<chart>
+					<reportElement x="10" y="15" width="537" height="267" uuid="4d41bdbc-dccf-4e68-9ea0-8787e597db14"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<keyExpression><![CDATA[$F{TenMA}]]></keyExpression>
+					<valueExpression><![CDATA[$F{SoLuong}]]></valueExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+			<textField>
+				<reportElement x="100" y="343" width="447" height="20" uuid="7b4bd0c5-682c-4c38-8969-e50f3349e7df"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Tổng số lượt gọi của 10 món phổ biến nhất: " + $V{SoLuong_1}.intValue() + " lượt"]]></textFieldExpression>
+			</textField>
+		</band>
 	</summary>
 </jasperReport>
