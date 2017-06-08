@@ -40,18 +40,10 @@ public class JPanelSubMenuItem extends javax.swing.JPanel {
             public void mouseClicked(MouseEvent e) {
                 System.out.println("sub menu is clicked");
                 if(targetPanelId!=0){
-                    try {
-                        MainFrame.getInstance().changeContentPanel(PanelFactory.get(targetPanelId));
-                    } catch (SQLException ex) {
-                        Logger.getLogger(JPanelSubMenuItem.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                       MainFrame.getInstance().changeContentPanel(PanelFactory.get(targetPanelId));
                 }
                 if(targetPanelHeaderId!=0){
-                    try {
                         MainFrame.getInstance().changeHeaderPanel(PanelFactory.get(targetPanelHeaderId));
-                    } catch (SQLException ex) {
-                        Logger.getLogger(JPanelSubMenuItem.class.getName()).log(Level.SEVERE, null, ex);
-                    }
                 }
         }});
     }
