@@ -14,7 +14,7 @@ import java.sql.SQLException;
  * @author WINDNCC
  */
 public class MUser extends Model{
-    protected static final String TABLE_NAME = "khach_hang";
+    protected static final String TABLE_NAME = "tai_khoan";
     protected int staffId;
     protected String userName;
     protected String passWord;
