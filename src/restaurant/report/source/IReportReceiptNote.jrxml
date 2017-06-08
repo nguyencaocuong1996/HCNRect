@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="13bd720a-5689-498b-a92a-43416f57131b">
-	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="49"/>
-	<property name="ireport.y" value="232"/>
+	<property name="ireport.zoom" value="0.9313819845887326"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="receiptNoteId" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -46,21 +46,38 @@ WHERE ctpn.MaPNH = $P{receiptNoteId}]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="240" splitType="Stretch">
 			<staticText>
-				<reportElement x="166" y="20" width="243" height="41" uuid="a1612de0-3746-48e7-8308-be4932870afc"/>
+				<reportElement x="152" y="131" width="243" height="41" uuid="a1612de0-3746-48e7-8308-be4932870afc"/>
 				<textElement>
 					<font fontName="DejaVu Sans" size="24" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Phiếu nhập hàng]]></text>
 			</staticText>
-			<textField pattern="dd/MM/yyyy">
-				<reportElement x="0" y="0" width="152" height="20" uuid="f8212e66-db21-4870-907f-2c21d7378681"/>
+			<staticText>
+				<reportElement x="12" y="60" width="225" height="20" uuid="a300f266-7c4c-4526-9e0a-bfd82b35c93b"/>
 				<textElement>
-					<font fontName="DejaVu Sans" isBold="true"/>
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
+				<text><![CDATA[Điện thoại: 0166696969]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="20" width="455" height="20" uuid="58ea27ff-e983-4b1d-80cd-7689e3bbe761"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nhà hàng: Rectangle]]></text>
+			</staticText>
+			<line>
+				<reportElement x="10" y="108" width="534" height="1" uuid="ef27b7d9-210f-4db9-b3d7-26c30a038394"/>
+			</line>
+			<staticText>
+				<reportElement x="12" y="40" width="534" height="20" uuid="c9461bc2-7c8f-4df0-b31d-86421e2337dd"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Địa chỉ: Khu phố 6, Phường Linh Trung, Quận Thủ Đức, TP Hồ Chí Minh]]></text>
+			</staticText>
 		</band>
 	</title>
 	<pageHeader>
