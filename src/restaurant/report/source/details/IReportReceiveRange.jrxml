@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8ec9f712-ee7f-49bf-8910-d226b34e68f4">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="0.8857805000000005"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="395"/>
 	<parameter name="sqlDateTo" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="sqlDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="viDate" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="viDateTo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="staffName" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
@@ -29,38 +38,24 @@ ORDER BY hd.NgayLapHD DESC]]>
 	<group name="nam group">
 		<groupExpression><![CDATA[$F{Nam}]]></groupExpression>
 		<groupHeader>
-			<band height="50">
-				<staticText>
-					<reportElement x="0" y="12" width="47" height="20" uuid="7959081f-41f7-4d6e-94c3-ea50d0a179c9"/>
-					<textElement textAlignment="Right">
-						<font fontName="DejaVu Sans" isBold="true"/>
-					</textElement>
-					<text><![CDATA[Năm: ]]></text>
-				</staticText>
+			<band height="23">
 				<textField>
-					<reportElement x="47" y="12" width="100" height="20" uuid="1ddff20e-d72a-4227-9ace-3d3898646fcb"/>
+					<reportElement x="47" y="0" width="100" height="20" uuid="1ddff20e-d72a-4227-9ace-3d3898646fcb"/>
 					<textElement>
 						<font fontName="DejaVu Sans" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{Nam}]]></textFieldExpression>
+					<textFieldExpression><![CDATA["Năm " +$F{Nam} + ":"]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="50">
-				<staticText>
-					<reportElement x="0" y="16" width="100" height="20" uuid="322b6a8a-29c2-44a5-afb0-b18a8cd3b880"/>
-					<textElement textAlignment="Right">
-						<font fontName="DejaVu Sans" isBold="true"/>
-					</textElement>
-					<text><![CDATA[Doanh thu năm: ]]></text>
-				</staticText>
+			<band height="22">
 				<textField>
-					<reportElement x="100" y="16" width="100" height="20" uuid="9805e863-d692-4e15-b861-4cc12e376cd9"/>
+					<reportElement x="47" y="0" width="241" height="20" uuid="9805e863-d692-4e15-b861-4cc12e376cd9"/>
 					<textElement>
 						<font fontName="DejaVu Sans" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{TongTien_2}]]></textFieldExpression>
+					<textFieldExpression><![CDATA["Doanh thu năm: " + $V{TongTien_2}.longValue() + " VNĐ"]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupFooter>
@@ -68,38 +63,38 @@ ORDER BY hd.NgayLapHD DESC]]>
 	<group name="thang group">
 		<groupExpression><![CDATA[$F{Thang}]]></groupExpression>
 		<groupHeader>
-			<band height="50">
-				<staticText>
-					<reportElement x="100" y="12" width="47" height="20" uuid="d79e46dd-279b-4c95-87b4-07d6c90e5d01"/>
-					<textElement textAlignment="Right">
-						<font fontName="DejaVu Sans" isBold="true"/>
-					</textElement>
-					<text><![CDATA[Tháng: ]]></text>
-				</staticText>
+			<band height="23">
 				<textField>
-					<reportElement x="147" y="12" width="100" height="20" uuid="75cbef8e-7fee-4dff-8b1a-16bf6723512f"/>
+					<reportElement x="147" y="0" width="164" height="20" uuid="75cbef8e-7fee-4dff-8b1a-16bf6723512f"/>
 					<textElement>
 						<font fontName="DejaVu Sans" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{Thang}]]></textFieldExpression>
+					<textFieldExpression><![CDATA["Tháng " + $F{Thang} + ":"]]></textFieldExpression>
 				</textField>
+				<staticText>
+					<reportElement x="365" y="0" width="100" height="20" uuid="9056580e-3ebe-4ca0-b0aa-428d12f338c0"/>
+					<textElement>
+						<font fontName="DejaVu Sans" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Doanh thu]]></text>
+				</staticText>
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="50">
+			<band height="22">
 				<staticText>
-					<reportElement x="74" y="19" width="126" height="20" uuid="f187e43c-5095-43dc-b05e-5b7ba6bb71b2"/>
+					<reportElement x="74" y="0" width="126" height="20" uuid="f187e43c-5095-43dc-b05e-5b7ba6bb71b2"/>
 					<textElement textAlignment="Right">
 						<font fontName="DejaVu Sans" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Doanh thu tháng: ]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="200" y="19" width="100" height="20" uuid="20e00fa8-5520-48d5-8e42-74e1d1285ffb"/>
+					<reportElement x="200" y="0" width="228" height="20" uuid="20e00fa8-5520-48d5-8e42-74e1d1285ffb"/>
 					<textElement>
 						<font fontName="DejaVu Sans" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$V{TongTien_1}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$V{TongTien_1}.longValue() + " VNĐ"]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupFooter>
@@ -108,52 +103,116 @@ ORDER BY hd.NgayLapHD DESC]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="533" splitType="Stretch">
+			<textField>
+				<reportElement x="19" y="219" width="532" height="29" uuid="6e9dfc49-2ed2-46b1-a511-f709c8be1992"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="15" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Doanh thu từ " + $P{viDate} + " đến " + $P{viDateTo}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="23" y="98" width="534" height="1" uuid="a5fecb4f-1703-4ae3-aa01-fdf49c4e29ab"/>
+			</line>
 			<staticText>
-				<reportElement x="129" y="26" width="322" height="35" uuid="56e1f929-50bb-4aee-8df5-309b6598369e"/>
+				<reportElement x="25" y="50" width="225" height="20" uuid="2dc3639e-0649-478d-940a-642f2d2f5da2"/>
 				<textElement>
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Điện thoại: 0166696969]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="147" width="534" height="56" uuid="c1ab4cdc-c19e-4b48-9a25-8146b091b3b8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="DejaVu Sans" size="24" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Báo cáo doanh thu]]></text>
+				<text><![CDATA[Nội dung báo cáo]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="369" y="441" width="193" height="20" uuid="b7b33537-2ad9-4f5d-9eb9-2d484fd43870"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Chữ ký giám đốc]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="10" y="464" width="169" height="21" uuid="b1ef47ca-8944-4d9f-ab43-c1c4ee9d5c72"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{staffName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="353" y="484" width="212" height="20" uuid="68291e13-76df-4b7a-a79b-0748789db0eb"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="15" isBold="false"/>
+				</textElement>
+				<text><![CDATA[.......................................]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="441" width="169" height="23" uuid="9eb8880b-53a7-4607-8447-c8acdeeb9910"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Người lập báo cáo]]></text>
+			</staticText>
+			<line>
+				<reportElement x="23" y="311" width="532" height="1" uuid="10d53150-e70f-4fd4-9976-1c5c5cfedbfa"/>
+			</line>
+			<staticText>
+				<reportElement x="200" y="441" width="162" height="20" uuid="ec48f42c-6b57-47ce-b666-b8d38d63da12"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ngày lập báo cáo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="25" y="10" width="455" height="20" uuid="f9e4b5d2-f490-47c5-9c21-1fb88b67dc73"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nhà hàng: Rectangle]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="25" y="30" width="534" height="20" uuid="686d5c19-a366-4537-8bea-a39aaac21132"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Địa chỉ: Khu phố 6, Phường Linh Trung, Quận Thủ Đức, TP Hồ Chí Minh]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="200" y="464" width="162" height="20" uuid="342fe3bc-baf4-4f25-9a87-cb5f1b38de9b"/>
+				<textElement textAlignment="Center">
+					<font fontName="DejaVu Sans" size="14" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<break>
+				<reportElement x="0" y="519" width="100" height="1" uuid="c6f32156-3f5e-477b-830a-4bbd099f580a"/>
+			</break>
 		</band>
 	</title>
 	<pageHeader>
 		<band height="35" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="37" splitType="Stretch">
-			<staticText>
-				<reportElement x="200" y="0" width="100" height="20" uuid="752d741b-cc96-465f-a7c6-4559400708b4"/>
-				<textElement>
-					<font fontName="DejaVu Sans" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Ngay]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="365" y="2" width="100" height="20" uuid="9056580e-3ebe-4ca0-b0aa-428d12f338c0"/>
-				<textElement>
-					<font fontName="DejaVu Sans" isBold="true"/>
-				</textElement>
-				<text><![CDATA[TongTien]]></text>
-			</staticText>
-		</band>
+		<band height="37" splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="28" splitType="Stretch">
+		<band height="23" splitType="Stretch">
 			<textField>
-				<reportElement x="200" y="0" width="100" height="20" uuid="62225452-b2ab-4750-8d17-a92cef21a80b"/>
+				<reportElement x="200" y="0" width="141" height="20" uuid="62225452-b2ab-4750-8d17-a92cef21a80b"/>
 				<textElement>
 					<font fontName="DejaVu Sans"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{Ngay}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Ngày " + $F{Ngay} + ":"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="365" y="0" width="100" height="20" uuid="95c336fc-dcfe-4d8e-a19b-ae79d607d4a2"/>
+				<reportElement x="365" y="0" width="151" height="20" uuid="95c336fc-dcfe-4d8e-a19b-ae79d607d4a2"/>
 				<textElement>
 					<font fontName="DejaVu Sans"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{TongTien}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{TongTien}.longValue() + " VNĐ"]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
