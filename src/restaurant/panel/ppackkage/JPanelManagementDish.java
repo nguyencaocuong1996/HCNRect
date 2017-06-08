@@ -53,7 +53,7 @@ public class JPanelManagementDish extends javax.swing.JPanel {
         int count = 0;
         while(i.hasNext()){
             ViewItem t = (ViewItem) i.next();
-            Long id = (Long) t.get("MaMA");
+            Long id = (Long) t.get("MaMA"); 
             String name = (String) t.get("TenMA");
             Float price = (Float) t.get("GiaMA");
             String image = (String) t.get("DiaChiAnhMA");

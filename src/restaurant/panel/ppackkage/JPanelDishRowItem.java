@@ -23,7 +23,7 @@ public class JPanelDishRowItem extends javax.swing.JPanel {
     protected String dishName;
     protected int id;
     protected float price;
-    protected String image;
+    protected String image; 
     protected int menuId;
     protected static Color oddBackground = new Color(224, 224, 235);
     public JPanelDishRowItem() {
