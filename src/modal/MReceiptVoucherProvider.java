@@ -25,14 +25,23 @@ public class MReceiptVoucherProvider extends Model{
     }
     
     public MReceiptVoucherProvider(ModalData md) {
-        this.id = ((Long) md.get("MaPCNCC")).intValue();
-        this.providerId = ((Long) md.get("MaNCC")).intValue();
+        this.id = ((Integer) md.get("MaPCNCC"));
+        this.providerId = ((Integer) md.get("MaNCC"));
         this.date = CDateTime.dateToString(((java.util.Date) md.get("NgayChi")));
         this.money = (Float) md.get("SoTienChi");
         this.note = (String) md.get("GhiChuPC");
-        this.staffId = ((Long) md.get("MaNV")).intValue();
+        this.staffId = ((Integer) md.get("MaNV"));
     }
-    
+    public static MReceiptVoucherProvider getLast(){
+        String sql = "SELECT * FROM phieu_chi_ncc WHERE MaPCNCC = (SELECT max(MaPCNCC) FROM phieu_chi_ncc)";
+        try {
+            ModalData md = database.Database.modalSelect(sql);
+            return new MReceiptVoucherProvider(md);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return new MReceiptVoucherProvider();
+        }
+    }
     @Override
     public void insert() throws SQLException {
         insertData = new ModalData();

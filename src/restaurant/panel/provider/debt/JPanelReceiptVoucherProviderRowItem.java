@@ -9,10 +9,16 @@ import assets.images.ImageResources;
 import core.CString;
 import java.awt.Color;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import modal.MMaterial;
 import modal.MProvider;
+import net.sf.jasperreports.engine.JRException;
+import restaurant.MainFrame;
+import restaurant.report.ReportResources;
 
 /**
  *
@@ -25,6 +31,7 @@ public class JPanelReceiptVoucherProviderRowItem extends javax.swing.JPanel {
     protected float money;
     protected String note;
     protected static Color oddBackground = new Color(224, 224, 235);
+    protected MProvider provider;
     public JPanelReceiptVoucherProviderRowItem() {
         initComponents();
     }
@@ -42,15 +49,14 @@ public class JPanelReceiptVoucherProviderRowItem extends javax.swing.JPanel {
     }
     public final void customInit(){
         jLabelRVPId.setText(this.RVPId + "");
-        MProvider p = new MProvider();
-        p.setName("Không xác định!");
         try {
-            p = MProvider.get(providerId);
+            provider = MProvider.get(providerId);
         } catch (SQLException e) {
             e.printStackTrace();
+            provider.setName("Không xác định!");
         }
         
-        jLabelProviderName.setText("<html><p>" + p.getName() + "</p></html>");
+        jLabelProviderName.setText("<html><p>" + provider.getName() + "</p></html>");
         jLabelDate.setText(this.date);
         jLabelAmount.setText(CString.toMoney(this.money));
     }
@@ -114,7 +120,14 @@ public class JPanelReceiptVoucherProviderRowItem extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabelShowDetailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelShowDetailMouseClicked
-
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("MaPCNCC", getRVPId());
+        try {
+            ReportResources.showReport(ReportResources.PAY_FOR_PROVIDER_NOTE, params);
+        } catch (JRException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Có lỗi xảy ra không thể mở hóa đơn!", "Lỗi!", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jLabelShowDetailMouseClicked
 
     public int getRVPId() {

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="101cbbea-ef66-43df-9ec9-f759225fa58a">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.2100000000000002"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="124"/>
 	<parameter name="viDate" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -47,49 +47,73 @@ ORDER BY SUM(pcncc.SoTienChi) DESC]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="45" splitType="Stretch">
+		<band height="158" splitType="Stretch">
 			<staticText>
-				<reportElement x="94" y="0" width="400" height="40" uuid="4364d07a-fb96-4584-a58a-0829e9b20efd"/>
+				<reportElement x="75" y="106" width="400" height="40" uuid="4364d07a-fb96-4584-a58a-0829e9b20efd"/>
 				<textElement>
 					<font fontName="DejaVu Sans" size="24" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Báo cáo chi tiêu theo tháng]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="10" y="10" width="455" height="20" uuid="ce825888-1de6-4fd7-a59f-71def8343246"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nhà hàng: Rectangle]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="50" width="225" height="20" uuid="b10405a8-5c1f-4cbc-872d-33fe663d5ddf"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Điện thoại: 0166696969]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="30" width="534" height="20" uuid="b53ce992-3a78-4498-bc03-ee2182490039"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Địa chỉ: Khu phố 6, Phường Linh Trung, Quận Thủ Đức, TP Hồ Chí Minh]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="90" width="555" height="1" uuid="b2c849fa-192c-4c00-a814-f595ba9dbf05"/>
+			</line>
 		</band>
 	</title>
 	<pageHeader>
 		<band height="106" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="51" width="132" height="20" uuid="a779278e-16bf-474a-a6a2-d91e39639bae"/>
+				<reportElement x="10" y="50" width="132" height="20" uuid="a779278e-16bf-474a-a6a2-d91e39639bae"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Ngày lập báo cáo: ]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="132" y="51" width="100" height="20" uuid="2dfc99f6-ae57-44cf-8a50-0b714e322b18"/>
+				<reportElement x="142" y="50" width="100" height="20" uuid="2dfc99f6-ae57-44cf-8a50-0b714e322b18"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="71" width="132" height="20" uuid="2f7d9002-091c-499f-885e-d630c0b495e6"/>
+				<reportElement x="10" y="70" width="132" height="20" uuid="2f7d9002-091c-499f-885e-d630c0b495e6"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Người lập báo cáo: ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="132" y="71" width="100" height="20" uuid="24c70ab8-2faf-47d0-aefb-9f005f4c4afc"/>
+				<reportElement x="142" y="70" width="100" height="20" uuid="24c70ab8-2faf-47d0-aefb-9f005f4c4afc"/>
 				<textFieldExpression><![CDATA[$P{staffName}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="31" width="132" height="20" uuid="78896a04-1700-4028-9695-3feee840e30c"/>
+				<reportElement x="10" y="30" width="132" height="20" uuid="78896a04-1700-4028-9695-3feee840e30c"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Nội dung báo cáo:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="132" y="31" width="333" height="20" uuid="971ea32c-a1d9-454b-8349-f7c0924a4d10"/>
+				<reportElement x="142" y="30" width="333" height="20" uuid="971ea32c-a1d9-454b-8349-f7c0924a4d10"/>
 				<textFieldExpression><![CDATA["Báo cáo chi tiêu tháng " + $P{month} + " năm " + $P{year}]]></textFieldExpression>
 			</textField>
 			<line>

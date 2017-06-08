@@ -5,10 +5,8 @@
  */
 package restaurant.panel.provider.debt;
 
-import restaurant.panel.ppackkage.material.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.SQLException;
 import modal.MProvider;
 import restaurant.panel.provider.JPanelChooseProviderItem;
 

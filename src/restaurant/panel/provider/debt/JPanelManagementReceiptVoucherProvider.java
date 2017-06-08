@@ -7,14 +7,11 @@ package restaurant.panel.provider.debt;
 
 import core.CDateTime;
 import restaurant.panel.ppackkage.*;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -22,11 +19,9 @@ import javax.swing.JPanel;
 import modal.MMaterial;
 import modal.MProvider;
 import modal.MReceiptVoucherProvider;
+import net.sf.jasperreports.engine.JRException;
 import restaurant.MainFrame;
-import restaurant.panel.PanelFactory;
-import restaurant.panel.ppackkage.material.JPanelImportMaterial;
-import restaurant.panel.staff.JPanelStaffRowItem;
-import view.VMaterial;
+import restaurant.report.ReportResources;
 import view.VReceiptVoucherProvider;
 import view.ViewItem;
 
@@ -548,8 +543,18 @@ public class JPanelManagementReceiptVoucherProvider extends javax.swing.JPanel {
             rvp.setStaffId(MainFrame.getInstance().getStaff().getId());
             try {
                 rvp.insert();
+                rvp = MReceiptVoucherProvider.getLast();
+                Map<String, Object> params = new HashMap<>();
+                params.put("MaPCNCC", rvp.getId());
                 jTextFieldAmount.setText("");
                 jTextAreaNote.setText("");
+                JOptionPane.showMessageDialog(this, "Thêm phiếu chi thành công!");
+                try {
+                    ReportResources.showReport(ReportResources.PAY_FOR_PROVIDER_NOTE, params);
+                } catch (JRException e) {
+                    JOptionPane.showMessageDialog(this, "Không thể mở report!");
+                }
+                
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(this, "Có lỗi xảy ra không thể lập phiếu chi!");
             }
