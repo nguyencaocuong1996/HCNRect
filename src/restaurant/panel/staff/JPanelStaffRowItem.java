@@ -9,7 +9,9 @@ import assets.images.ImageResources;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import modal.MStaff;
+import restaurant.panel.partner.JPanelManagementSupplier;
 
 /**
  *
@@ -126,19 +128,17 @@ public class JPanelStaffRowItem extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabelDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDeleteMouseClicked
-        // TODO add your handling code here:
-//       MStaff mStaff = new MStaff(tenNV, soDienThoai , diaChi);
-//       mStaff.delete();
-        
-        try {
+        int check = JOptionPane.showConfirmDialog(JPanelManagementSupplier.getInstance(), "Xác nhận xóa?");
+        if (check == JOptionPane.YES_OPTION) {
+            try {
             MStaff mStaff = new MStaff(maNV);
             mStaff.delete();
             JPanelManagementStaff.getInstance().getjPanelTableContent().remove(this);
             JPanelManagementStaff.getInstance().getjPanelTableContent().revalidate();
             JPanelManagementStaff.getInstance().getjPanelTableContent().repaint();
-        } catch (Exception e) {
+            } catch (Exception e) {
+            }
         }
-        
     }//GEN-LAST:event_jLabelDeleteMouseClicked
 
     public JLabel getjLabelEditStaff() {

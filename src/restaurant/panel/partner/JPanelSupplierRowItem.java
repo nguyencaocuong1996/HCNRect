@@ -8,6 +8,7 @@ package restaurant.panel.partner;
 import java.awt.Color;
 import java.sql.SQLException;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import modal.MProvider;
 import modal.MStaff;
 import restaurant.panel.staff.JPanelManagementStaff;
@@ -131,15 +132,18 @@ public class JPanelSupplierRowItem extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabelEditMouseClicked
 
     private void jLabelDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDeleteMouseClicked
-        // TODO add your handling code here:
-      try {
-            MProvider mProvider = new MProvider(maNCC);
-            mProvider.delete();
-            JPanelManagementSupplier.getInstance().getjPanelTableContent().remove(this);
-            JPanelManagementSupplier.getInstance().getjPanelTableContent().revalidate();
-            JPanelManagementSupplier.getInstance().getjPanelTableContent().repaint();
-        } catch (SQLException e) {
+        int check = JOptionPane.showConfirmDialog(JPanelManagementSupplier.getInstance(), "Xác nhận xóa?");
+        if (check == JOptionPane.YES_OPTION) {
+            try {
+                MProvider mProvider = new MProvider(maNCC);
+                mProvider.delete();
+                JPanelManagementSupplier.getInstance().getjPanelTableContent().remove(this);
+                JPanelManagementSupplier.getInstance().getjPanelTableContent().revalidate();
+                JPanelManagementSupplier.getInstance().getjPanelTableContent().repaint();
+            } catch (SQLException e) {
+            }
         }
+      
     }//GEN-LAST:event_jLabelDeleteMouseClicked
 
     public JLabel getjLabelDelete() {

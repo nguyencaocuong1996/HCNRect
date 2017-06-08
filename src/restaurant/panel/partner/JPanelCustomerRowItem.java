@@ -8,6 +8,7 @@ package restaurant.panel.partner;
 import java.awt.Color;
 import java.sql.SQLException;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import modal.MCustomer;
 import modal.MStaff;
 
@@ -129,18 +130,18 @@ public class JPanelCustomerRowItem extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabelEditMouseClicked
 
     private void jLabelDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelDeleteMouseClicked
-        // TODO add your handling code here:
-        //       MStaff mStaff = new MStaff(tenNV, soDienThoai , diaChi);
-        //       mStaff.delete();
-
-        try {
+        int check = JOptionPane.showConfirmDialog(JPanelManagementSupplier.getInstance(), "Xác nhận xóa?");
+        if (check == JOptionPane.YES_OPTION) {
+            try {
             MCustomer mCustomer = new MCustomer(maKH);
             mCustomer.delete();
             JPanelManagementCustomer.getInstance().getjPanelTableContent().remove(this);
             JPanelManagementCustomer.getInstance().getjPanelTableContent().revalidate();
             JPanelManagementCustomer.getInstance().getjPanelTableContent().repaint();
-        } catch (SQLException e) {
+            } catch (SQLException e) {
+            }
         }
+        
     }//GEN-LAST:event_jLabelDeleteMouseClicked
 
     public JLabel getjLabelDelete() {

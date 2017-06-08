@@ -157,9 +157,7 @@ public class JPanelManagementSupplier extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanelTableContent = new javax.swing.JPanel();
 
-        jDialogAddSupplier.setMaximumSize(new java.awt.Dimension(450, 396));
         jDialogAddSupplier.setMinimumSize(new java.awt.Dimension(450, 396));
-        jDialogAddSupplier.setPreferredSize(new java.awt.Dimension(450, 396));
 
         jPanel3.setBackground(new java.awt.Color(147, 193, 120));
         jPanel3.setPreferredSize(new java.awt.Dimension(400, 60));
@@ -293,9 +291,7 @@ public class JPanelManagementSupplier extends javax.swing.JPanel {
         );
 
         jDialogEditSupplier.setLocationByPlatform(true);
-        jDialogEditSupplier.setMaximumSize(new java.awt.Dimension(447, 406));
         jDialogEditSupplier.setMinimumSize(new java.awt.Dimension(447, 406));
-        jDialogEditSupplier.setPreferredSize(new java.awt.Dimension(447, 406));
 
         jPanel5.setBackground(new java.awt.Color(147, 193, 120));
 
@@ -472,8 +468,8 @@ public class JPanelManagementSupplier extends javax.swing.JPanel {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jTextFieldFilterName, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
-                .addComponent(jLabelAddStaff, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(jLabelAddStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
