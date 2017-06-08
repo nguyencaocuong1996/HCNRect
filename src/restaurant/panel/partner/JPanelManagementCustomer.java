@@ -176,9 +176,7 @@ public class JPanelManagementCustomer extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanelTableContent = new javax.swing.JPanel();
 
-        jDialogAddCustomer.setMaximumSize(new java.awt.Dimension(614, 300));
         jDialogAddCustomer.setMinimumSize(new java.awt.Dimension(614, 300));
-        jDialogAddCustomer.setPreferredSize(new java.awt.Dimension(614, 300));
 
         jPanel3.setBackground(new java.awt.Color(147, 193, 120));
         jPanel3.setPreferredSize(new java.awt.Dimension(400, 60));
@@ -207,7 +205,7 @@ public class JPanelManagementCustomer extends javax.swing.JPanel {
         jPanel4.setBackground(new java.awt.Color(70, 92, 139));
 
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Tên NV:");
+        jLabel8.setText("Tên KH:");
 
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Số điện thoại:");
@@ -216,7 +214,7 @@ public class JPanelManagementCustomer extends javax.swing.JPanel {
         jLabel10.setText("Địa chỉ:");
 
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Phòng ban:");
+        jLabel11.setText("Loại KH:");
 
         jLabelCloseAdd.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelCloseAdd.setForeground(new java.awt.Color(255, 255, 255));
