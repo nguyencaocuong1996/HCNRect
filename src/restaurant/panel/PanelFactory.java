@@ -247,11 +247,11 @@ public class PanelFactory {
                 break;
             //#Transaction
             case ID.MANAGE_CUSTOMER:
-                if(managementCustomer == null) managementCustomer = new JPanelManagementCustomer();
+                if(managementCustomer == null) managementCustomer = JPanelManagementCustomer.getInstance();
                 jp = managementCustomer;
                 break;
             case ID.MANAGE_SUPPLIER:
-                if(managementSupplier == null) managementSupplier = new JPanelManagementSupplier();
+                if(managementSupplier == null) managementSupplier = JPanelManagementSupplier.getInstance();
                 jp = managementSupplier;
                 break;
             case ID.HEADER_MANAGE_CUSTOMER:

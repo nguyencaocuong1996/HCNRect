@@ -90,7 +90,7 @@ public class JPanelManagementSupplier extends javax.swing.JPanel {
    
     }
     
-    public static JPanelManagementSupplier getInstance() throws SQLException {
+    public static JPanelManagementSupplier getInstance() {
         if (instance == null) {
             instance = new JPanelManagementSupplier();
         }
