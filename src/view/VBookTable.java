@@ -57,7 +57,7 @@ public class VBookTable extends View{
                         "LEFT JOIN khach_hang as kh ON kh.MaKH = pdb.MaKH " +
                         "WHERE date(pdb.NgayGioDatBan) = '"+date+"' " +
                         "LIMIT " +startRow+ "," + numRow + ";";
-        System.out.println(query);
+//        System.out.println(query);
         try {
             ViewData viewData = database.Database.viewSelect(query);
             return new VBookTable(viewData);

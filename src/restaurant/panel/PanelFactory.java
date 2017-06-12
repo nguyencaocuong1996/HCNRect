@@ -6,7 +6,6 @@
 package restaurant.panel;
 
 import assets.images.icons.IconResources;
-import java.sql.SQLException;
 import javax.swing.JPanel;
 import restaurant.panel.booktable.JPanelBookTable;
 import restaurant.panel.header.JPanelHeader;
@@ -50,11 +49,6 @@ public class PanelFactory {
     private static JPanelHeader headerManagementRecipe;
     private static JPanelWelcome overview;
     private static JPanelSidebar sidebar;
-    private static JPanelManagementDish managementDish;
-    private static JPanelManagementTable managementTable;
-    private static JPanelManagementMaterial managementMaterial;
-    private static JPanelManagementSupplier managementSupplier;
-    private static JPanelManagementCustomer managementCustomer;
     private static JPanelReportEndOfDay reportEndOfDay;
     private static JPanelReportDetails reportDetails;
     public class ID{
@@ -154,35 +148,28 @@ public class PanelFactory {
                 break;
             case ID.HEADER_REPORT:
                 if (headerReport == null) {
-                    headerReport = new JPanelHeader("Báo cáo", IconResources.PRAWN_WHITE_X50 );
+                    headerReport = new JPanelHeader("Báo cáo", IconResources.REPORT );
                 }
                 jp = headerReport;
                 break;
             case ID.PACKAGE_DISH:
-                if(managementDish == null) managementDish = new JPanelManagementDish();
-                jp = managementDish;
+                jp = JPanelManagementDish.getInstance();
                 break;
             case ID.HEADER_PACKAGE_MATERIAL:
-                if(headerPackageMaterial == null) headerPackageMaterial = new JPanelHeader("Quản lý nguyên liệu", IconResources.COINS);
+                if(headerPackageMaterial == null) headerPackageMaterial = new JPanelHeader("Quản lý nguyên liệu", IconResources.PACKAGE);
                 jp = headerPackageMaterial;
                 break;
             case ID.PACKAGE_MATERIAL:
-                if (managementMaterial == null) {
-                    managementMaterial = JPanelManagementMaterial.getInstance();
-                }
-                jp = managementMaterial;
+                jp = JPanelManagementMaterial.getInstance();
                 break;
             case ID.HEADER_PACKAGE_TABLE:
                 if (headerPackageTable == null) {
-                    headerPackageTable = new JPanelHeader("Quản lý bàn ăn", IconResources.ORDER_WHITE_X50);
+                    headerPackageTable = new JPanelHeader("Quản lý bàn ăn", IconResources.PACKAGE);
                 }
                 jp = headerPackageTable;
                 break;
             case ID.PACKAGE_TABLE:
-                if(managementTable == null){
-                    managementTable = JPanelManagementTable.getInstance();
-                }
-                jp = managementTable;
+                jp = JPanelManagementTable.getInstance();
                 break;
             case ID.HEADER_PACKAGE_DISH_RECIPE:
                 if (headerManagementRecipe == null) {
@@ -204,14 +191,14 @@ public class PanelFactory {
                 jp = reportDetails;
                 break;
             case ID.HEADER_MANAGE_STAFF:
-                if(headerManageStaff == null) headerManageStaff = new JPanelHeader("Quản lý nhân viên", IconResources.COINS);
+                if(headerManageStaff == null) headerManageStaff = new JPanelHeader("Quản lý nhân viên", IconResources.STAFF);
                 jp = headerManageStaff;
                 break;   
             //#report
             //Transaction
             case ID.HEADER_TRANS_BILL:
                 if (headerListBill == null) {
-                    headerListBill = new JPanelHeader("Lịch sử hóa đơn", IconResources.ORDER);
+                    headerListBill = new JPanelHeader("Lịch sử hóa đơn", IconResources.COINS);
                 }
                 jp = headerListBill;
                 break;
@@ -220,7 +207,7 @@ public class PanelFactory {
                 break;
             case ID.HEADER_TRANS_RECEIPT_NOTE:
                 if (headerListReceipt == null) {
-                    headerListReceipt = new JPanelHeader("Lịch sử nhập hàng", IconResources.ORDER);
+                    headerListReceipt = new JPanelHeader("Lịch sử nhập hàng", IconResources.COINS);
                 }
                 jp = headerListReceipt;
                 break;
@@ -229,7 +216,7 @@ public class PanelFactory {
                 break;
             case ID.HEADER_TRANS_COUPON:
                 if (headerManagementCoupon == null) {
-                    headerManagementCoupon = new JPanelHeader("Phiếu khuyến mãi", IconResources.ORDER);
+                    headerManagementCoupon = new JPanelHeader("Phiếu khuyến mãi", IconResources.COINS);
                 }
                 jp = headerManagementCoupon;
                 break;
@@ -238,7 +225,7 @@ public class PanelFactory {
                 break;
             case ID.HEADER_TRANS_RVP:
                 if (headerManagementRVP == null) {
-                    headerManagementRVP = new JPanelHeader("Phiếu chi cho NCC", IconResources.ORDER);
+                    headerManagementRVP = new JPanelHeader("Phiếu chi cho NCC", IconResources.COINS);
                 }
                 jp = headerManagementRVP;
                 break;
@@ -247,22 +234,20 @@ public class PanelFactory {
                 break;
             //#Transaction
             case ID.MANAGE_CUSTOMER:
-                if(managementCustomer == null) managementCustomer = JPanelManagementCustomer.getInstance();
-                jp = managementCustomer;
+                jp = JPanelManagementCustomer.getInstance();
                 break;
             case ID.MANAGE_SUPPLIER:
-                if(managementSupplier == null) managementSupplier = JPanelManagementSupplier.getInstance();
-                jp = managementSupplier;
+                jp = JPanelManagementSupplier.getInstance();
                 break;
             case ID.HEADER_MANAGE_CUSTOMER:
                 if (headerManageCustomer == null) {
-                    headerManageCustomer = new JPanelHeader("Quản lý khách hàng", IconResources.COINS);
+                    headerManageCustomer = new JPanelHeader("Quản lý khách hàng", IconResources.PARTNER);
                 }
                 jp = headerManageCustomer;
                 break;
             case ID.HEADER_MANAGE_SUPPLIER:
                 if (headerManageSupplier == null) {
-                    headerManageSupplier = new JPanelHeader("Quản lý nhà cung cấp", IconResources.COINS);
+                    headerManageSupplier = new JPanelHeader("Quản lý nhà cung cấp", IconResources.PARTNER);
                 }
                 jp = headerManageSupplier;
                 break;

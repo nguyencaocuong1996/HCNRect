@@ -625,7 +625,7 @@ public class JPanelManagementDish extends javax.swing.JPanel {
             int menuID = (int)((ComboboxItem)(jComboBoxDishMenu.getSelectedItem())).getValue();
             Float price = Float.parseFloat(jTextFieldDishPriceAdd.getText());
             //String dishURLImage = jLabelDishImageAdd.getIcon().toString();
-            System.out.println(imageURL);
+//            System.out.println(imageURL);
             MDish mDish = new MDish(dishName, price , imageURL, menuID);
             mDish.insert();
             jDialogAddDish.setVisible(false);

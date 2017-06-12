@@ -8,12 +8,7 @@ package restaurant.panel.booktable;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-import restaurant.MainFrame;
-import restaurant.panel.PanelFactory;
 import restaurant.panel.main.table.JPanelTable;
-import restaurant.panel.order.JPanelOrder;
-import restaurant.panel.order.JPanelOrderPickTable;
 
 /**
  *

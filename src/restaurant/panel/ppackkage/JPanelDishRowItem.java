@@ -45,6 +45,7 @@ public class JPanelDishRowItem extends javax.swing.JPanel {
         jLabelDishId.setText(this.id + "");
         jLabelDishName.setText("<html><p>" + this.dishName + "</p></html>");
         jLabelDishPrice.setText(this.price + "");
+        System.out.println(image);
         jLabelDishImage.setIcon(ImageResources.getDishImage(image));
     }
     @SuppressWarnings("unchecked")
@@ -105,13 +106,14 @@ public class JPanelDishRowItem extends javax.swing.JPanel {
         // TODO add your handling code here:
         int check = JOptionPane.showConfirmDialog(this, "Xác nhận xóa món ăn!");
         if (check == JOptionPane.YES_OPTION) {
-            try {
-            MDish mDish = new MDish(id);
-            mDish.delete();
-            JPanelManagementDish.getInstance().getListJPDRI().remove(id);
-            JPanelManagementDish.getInstance().getjPanelTableContent().remove(this);
-            JPanelManagementDish.getInstance().getjPanelTableContent().revalidate();
-            JPanelManagementDish.getInstance().getjPanelTableContent().repaint();
+            try {  
+                MDish mDish = new MDish(id);
+                mDish.delete();
+                JPanelManagementDish.getInstance().getListJPDRI().remove(id);
+                JPanelManagementDish.getInstance().getjPanelTableContent().remove(this);
+                JPanelManagementDish.getInstance().getjPanelTableContent().revalidate();
+                JPanelManagementDish.getInstance().getjPanelTableContent().repaint();
+            JOptionPane.showMessageDialog(this, "Xóa món ăn thành công!");
             } catch (SQLException e) {
                 e.printStackTrace();
                  JOptionPane.showMessageDialog(this, "Xóa món ăn thành công!");

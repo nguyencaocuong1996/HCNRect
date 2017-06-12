@@ -38,6 +38,9 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         UIManager.put("OptionPane.okButtonText", "Xác nhận");
+        UIManager.put("OptionPane.yesButtonText", "Đồng ý");
+        UIManager.put("OptionPane.noButtonText", "Hủy");
+        UIManager.put("OptionPane.cancelButtonText", "Bỏ qua");
         setCurrentJPContent(PanelFactory.get(PanelFactory.ID.OVERVIEW));
         setCurrentJPHeader(PanelFactory.get(PanelFactory.ID.HEADER_OVERVIEW));
         jPanelHeader.add(PanelFactory.get(PanelFactory.ID.HEADER_OVERVIEW));
@@ -231,7 +234,7 @@ public class MainFrame extends javax.swing.JFrame {
         jPanelFooter.add(jLabelClock);
 
         jLabelOverView.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelOverView.setText("Phần mềm quản lý nhà hàng ---- Th.S Đỗ Thị Minh Phụng  ---- Sinh viên:  Nguyễn Cao Cường, Trần Khánh Nguyên, Võ Quang Huy");
+        jLabelOverView.setText("Phần mềm quản lý nhà hàng ---- Th.S Lê Thanh Trọng  ---- Sinh viên:  Nguyễn Cao Cường, Trần Khánh Nguyên, Võ Quang Huy");
         jLabelOverView.setPreferredSize(new java.awt.Dimension(770, 14));
         jPanelFooter.add(jLabelOverView);
 
