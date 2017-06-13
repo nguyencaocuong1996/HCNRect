@@ -234,7 +234,7 @@ public class MainFrame extends javax.swing.JFrame {
         jPanelFooter.add(jLabelClock);
 
         jLabelOverView.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelOverView.setText("Phần mềm quản lý nhà hàng ---- Th.S Lê Thanh Trọng  ---- Sinh viên:  Nguyễn Cao Cường, Trần Khánh Nguyên, Võ Quang Huy");
+        jLabelOverView.setText("Phần mềm quản lý nhà hàng ---- Th.S Nguyễn Thị Thanh Trúc  ---- Sinh viên:  Nguyễn Cao Cường, Trần Khánh Nguyên, Võ Quang Huy");
         jLabelOverView.setPreferredSize(new java.awt.Dimension(770, 14));
         jPanelFooter.add(jLabelOverView);
 
